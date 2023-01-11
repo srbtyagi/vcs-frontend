@@ -72,7 +72,7 @@ export class JobdetailsComponent implements OnInit {
           //   "hiringOrganization": {
           //     "@type": "Organization",
           //     "name": "Vish Consulting Services",
-          //     "sameAs": "https://vishusa.com/"
+          //     "sameAs": "https://ec2-34-201-117-204.compute-1.amazonaws.com/"
           //   },
           //   "jobLocation": {
           //     "@type": "Place",
