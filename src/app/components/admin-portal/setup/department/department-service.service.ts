@@ -16,7 +16,7 @@ export class DepartmentServiceService {
 
 
   getDepartmentDetails() {
-    return this.http.get('http://3.12.123.49/vcsapi/get/api/department/byCID', {headers: this.header})
+    return this.http.get('http://3.12.123.49:8000/vcsapi/get/api/department/byCID', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -25,7 +25,7 @@ export class DepartmentServiceService {
 
 
   addDepartment(details) {
-    return this.http.post('http://3.12.123.49/vcsapi/add/api/department', details, {headers: this.header})
+    return this.http.post('http://3.12.123.49:8000/vcsapi/add/api/department', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -33,7 +33,7 @@ export class DepartmentServiceService {
   }
 
   updateDepartment(details) {
-    return this.http.post('http://3.12.123.49/vcsapi/update/api/department_name', details, {headers: this.header})
+    return this.http.post('http://3.12.123.49:8000/vcsapi/update/api/department_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -41,7 +41,7 @@ export class DepartmentServiceService {
   }
 
   changeStatusDept(details) {
-    return this.http.post('http://3.12.123.49/vcsapi/edit/api/change_status/department', details, {headers: this.header})
+    return this.http.post('http://3.12.123.49:8000/vcsapi/edit/api/change_status/department', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)

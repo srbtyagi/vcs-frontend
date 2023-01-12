@@ -47,11 +47,11 @@
                                             </div> -->
                                             <a type="button" *ngIf="user_type==='admin'" class="site-button m-b30"
                                                 style="margin-right: 10px;"
-                                                href="http://3.12.123.49/vcsapi/api/generate/excel/pay-rate-change-log-data/{{user_id_by}}/RateFix_ChangeLog"
+                                                href="http://3.12.123.49:8000/vcsapi/api/generate/excel/pay-rate-change-log-data/{{user_id_by}}/RateFix_ChangeLog"
                                                 target="_blank" rel="noopener noreferrer" download>Rate Fixing Change
                                                 Log</a>
                                             <a type="button" *ngIf="user_type==='admin'" class="site-button m-b30"
-                                                href="http://3.12.123.49/vcsapi/api/generate/excel/job/aplications/{{user_id_by}}/{{excelfileName}}"
+                                                href="http://3.12.123.49:8000/vcsapi/api/generate/excel/job/aplications/{{user_id_by}}/{{excelfileName}}"
                                                 target="_blank" rel="noopener noreferrer" download>Report</a>
                                         </div>
                                     </div>

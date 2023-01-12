@@ -46,7 +46,7 @@
                                                 data-target="#processPayroll" (click)="processPayroll()">Process
                                                 Payroll</button>
                                             <a type="button" class="site-button m-b30" style="margin-left: 12px;"
-                                                href="http://3.12.123.49/vcsapi/api/generate/excel/payrollProcess/{{user_id}}/{{excelfileName}}"
+                                                href="http://3.12.123.49:8000/vcsapi/api/generate/excel/payrollProcess/{{user_id}}/{{excelfileName}}"
                                                 target="_blank" rel="noopener noreferrer" download>Report</a>
                                         </div>
                                     </div>
@@ -171,7 +171,7 @@
                                                                 data-toggle="modal" data-target="#processPayrollSecond"
                                                                 *ngIf="a.account_status!=='submitted'">Edit & submit
                                                             </a>
-                                                            <a href="http://3.12.123.49/vcsapi/get/api/approval_status/approved/accountfiledata/download/excelfile/{{user_id}}/{{a.acc_file_id}}/{{excelfileName}}"
+                                                            <a href="http://3.12.123.49:8000/vcsapi/get/api/approval_status/approved/accountfiledata/download/excelfile/{{user_id}}/{{a.acc_file_id}}/{{excelfileName}}"
                                                                 target="_blank" rel="noopener noreferrer"
                                                                 download>Download
                                                             </a>
