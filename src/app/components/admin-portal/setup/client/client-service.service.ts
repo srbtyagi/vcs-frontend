@@ -16,7 +16,7 @@ export class ClientServiceService {
 
 
   getClientsDetails() {
-    return this.http.get('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/all/clients', {headers: this.header})
+    return this.http.get('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/all/clients', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -25,7 +25,7 @@ export class ClientServiceService {
 
 
   addClient(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/add/api/client/client_name', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/add/api/client/client_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -33,7 +33,7 @@ export class ClientServiceService {
   }
 
   updateClient(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/client_name', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/client_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -41,7 +41,7 @@ export class ClientServiceService {
   }
 
   changeStatusClient(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/edit/api/change_status/client', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/edit/api/change_status/client', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)

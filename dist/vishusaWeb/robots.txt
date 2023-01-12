@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ec2-34-201-117-204.compute-1.amazonaws.com/sitemap.xml
+Sitemap: http://ec2-34-201-117-204.compute-1.amazonaws.com/sitemap.xml

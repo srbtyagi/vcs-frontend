@@ -15,7 +15,7 @@ export class CompanyServiceService {
 
 
   getCompanyDetails() {
-    return this.http.get('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/tbl/company/details', {headers: this.header})
+    return this.http.get('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/tbl/company/details', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -23,7 +23,7 @@ export class CompanyServiceService {
   };
 
   updateCompanyDetails(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/tbl/company/details', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/tbl/company/details', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)

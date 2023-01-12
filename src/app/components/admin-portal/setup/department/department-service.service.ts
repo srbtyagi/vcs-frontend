@@ -16,7 +16,7 @@ export class DepartmentServiceService {
 
 
   getDepartmentDetails() {
-    return this.http.get('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/department/byCID', {headers: this.header})
+    return this.http.get('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/department/byCID', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -25,7 +25,7 @@ export class DepartmentServiceService {
 
 
   addDepartment(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/add/api/department', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/add/api/department', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -33,7 +33,7 @@ export class DepartmentServiceService {
   }
 
   updateDepartment(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/department_name', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/update/api/department_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -41,7 +41,7 @@ export class DepartmentServiceService {
   }
 
   changeStatusDept(details) {
-    return this.http.post('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/edit/api/change_status/department', details, {headers: this.header})
+    return this.http.post('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/edit/api/change_status/department', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)

@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('https://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {
@@ -21,7 +21,7 @@ for (var i = 0; i < allArray.length; i++) {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     "title":  details.job_title,
-     "url": "https://ec2-34-201-117-204.compute-1.amazonaws.com/job-details?special="+details.job_id+"",
+     "url": "http://ec2-34-201-117-204.compute-1.amazonaws.com/job-details?special="+details.job_id+"",
     "description": details.job_description,
     "identifier": {
       "@type": "PropertyValue",
@@ -36,7 +36,7 @@ for (var i = 0; i < allArray.length; i++) {
     "hiringOrganization": {
       "@type": "Organization",
       "name": "Vish Consulting Services",
-      "sameAs": "https://ec2-34-201-117-204.compute-1.amazonaws.com"
+      "sameAs": "http://ec2-34-201-117-204.compute-1.amazonaws.com"
     },
     "jobLocation": {
       "@type": "Place",
