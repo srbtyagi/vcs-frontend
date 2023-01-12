@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('http://ec2-34-201-117-204.compute-1.amazonaws.com/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://3.12.123.49/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {
@@ -38,7 +38,7 @@ for (var i = 0; i < allArray.length; i++) {
     "hiringOrganization": {
       "@type": "Organization",
       "name": "Vish Consulting Services",
-      "sameAs": "http://ec2-34-201-117-204.compute-1.amazonaws.com/"
+      "sameAs": "http://3.12.123.49/"
     },
     "jobLocation": {
       "@type": "Place",
