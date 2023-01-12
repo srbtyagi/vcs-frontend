@@ -16,7 +16,7 @@ export class ClientServiceService {
 
 
   getClientsDetails() {
-    return this.http.get('http://3.12.123.49:8000/vcsapi/get/all/clients', {headers: this.header})
+    return this.http.get('http://172.26.4.145:8000/vcsapi/get/all/clients', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -25,7 +25,7 @@ export class ClientServiceService {
 
 
   addClient(details) {
-    return this.http.post('http://3.12.123.49:8000/vcsapi/add/api/client/client_name', details, {headers: this.header})
+    return this.http.post('http://172.26.4.145:8000/vcsapi/add/api/client/client_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -33,7 +33,7 @@ export class ClientServiceService {
   }
 
   updateClient(details) {
-    return this.http.post('http://3.12.123.49:8000/vcsapi/update/api/client_name', details, {headers: this.header})
+    return this.http.post('http://172.26.4.145:8000/vcsapi/update/api/client_name', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -41,7 +41,7 @@ export class ClientServiceService {
   }
 
   changeStatusClient(details) {
-    return this.http.post('http://3.12.123.49:8000/vcsapi/edit/api/change_status/client', details, {headers: this.header})
+    return this.http.post('http://172.26.4.145:8000/vcsapi/edit/api/change_status/client', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
