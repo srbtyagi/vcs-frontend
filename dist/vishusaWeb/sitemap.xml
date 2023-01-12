@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+<<<<<<< HEAD
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/about-us</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/clients</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/healthcare-staffing</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/HS_case_study</loc>
+
+   </url>
+
+    <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/faq</loc>
+
+   </url>
+
+    <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/healthcare-blogs</loc>
+
+   </url>
+
+     <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/skill-checklist</loc>
+
+   </url>
+
+    <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/IT_services</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/IT_case_study</loc>
+
+   </url>
+
+   <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/IT_blogs</loc>
+
+   </url>
+
+    <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/jobs</loc>
+
+   </url>
+
+    <url>
+
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/contact-us</loc>
+
+   </url>
+
+</urlset>
+=======
+      <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/</loc>
+   </url>
+  <url>
+    <loc>https://ec2-34-201-117-204.compute-1.amazonaws.com/jobs</loc>
+  </url>
+</urlset>
+>>>>>>> 8112b39e5ceaa909c0b75f8e764b9a9d6b7b6620
