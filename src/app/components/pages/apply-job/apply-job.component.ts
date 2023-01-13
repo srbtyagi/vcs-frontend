@@ -82,7 +82,7 @@ export class ApplyJobComponent implements OnInit {
       let result: any = res;
       if (result[0].resume_doc_path) {
         this.status = true;
-        this.url = "http://172.26.4.145:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id") + "/" + sessionStorage.getItem('user_name') + "_resume";
+        this.url = "http://18.118.19.190:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id") + "/" + sessionStorage.getItem('user_name') + "_resume";
       }
       else {
         this.status = false;
@@ -170,7 +170,7 @@ export class ApplyJobComponent implements OnInit {
         this.viewfinalErr = false;
         // this.success("Resume Uploaded Successfully.");
         this.status = true;
-        this.url = "http://172.26.4.145:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id") + "/" + sessionStorage.getItem('user_name') + "_resume";
+        this.url = "http://18.118.19.190:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id") + "/" + sessionStorage.getItem('user_name') + "_resume";
       }
       else {
         this.status = false;

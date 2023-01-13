@@ -17,7 +17,7 @@ export class EmployeeServiceService {
 
 
   getAllEmployee() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/all/employee/details', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/all/employee/details', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -25,7 +25,7 @@ export class EmployeeServiceService {
   }
 
   getAllEmployeeDropDown() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/Recruiter/all', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/Recruiter/all', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -34,7 +34,7 @@ export class EmployeeServiceService {
 
 
   dropDownRole() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/all/role', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/all/role', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -42,7 +42,7 @@ export class EmployeeServiceService {
   }
 
   dropDownDepartment() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/all/dept', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/all/dept', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -51,7 +51,7 @@ export class EmployeeServiceService {
 
 
   addEmployeeData(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/add/api/tbl/employee/details', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/add/api/tbl/employee/details', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -59,7 +59,7 @@ export class EmployeeServiceService {
   }
 
   checkUniqueEmail(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/check/email', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/check/email', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -67,7 +67,7 @@ export class EmployeeServiceService {
   }
 
   checkUniqueEmailforEdit(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/check/email/edit', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/check/email/edit', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -75,7 +75,7 @@ export class EmployeeServiceService {
   }
 
   UpdateEmployeeData(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/edit/api/employee', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/edit/api/employee', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -83,7 +83,7 @@ export class EmployeeServiceService {
   }
 
   employeeChangeStatus(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/edit/api/change_status/applicant/recruit_status', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/edit/api/change_status/applicant/recruit_status', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -92,7 +92,7 @@ export class EmployeeServiceService {
 
 
   employeeResetPassword(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/edit/api/change_password', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/edit/api/change_password', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -101,7 +101,7 @@ export class EmployeeServiceService {
 
 
   employeeBlock(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/update/login_block_status', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/update/login_block_status', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -109,7 +109,7 @@ export class EmployeeServiceService {
   }
 
   moduleSubModuleShow() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/api/user/access', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/api/user/access', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -117,7 +117,7 @@ export class EmployeeServiceService {
   }
 
   getDefaultAccessWEbData(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/get/action_id_by_user_id', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/get/action_id_by_user_id', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -126,7 +126,7 @@ export class EmployeeServiceService {
 
 
   postWebAccess(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/post/user_access_insert', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/post/user_access_insert', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -134,7 +134,7 @@ export class EmployeeServiceService {
   }
 
   moduleSubModuleShowApp() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/app_action', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/app_action', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -142,7 +142,7 @@ export class EmployeeServiceService {
   }
 
   supervisorCodeCheckApi(details) {
-    return this.http.post('http://172.26.4.145:8000/vcsapi/check/supervisor_code', details, { headers: this.header })
+    return this.http.post('http://18.118.19.190:8000/vcsapi/check/supervisor_code', details, { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -150,7 +150,7 @@ export class EmployeeServiceService {
   }
 
   getEmpDesignation() {
-    return this.http.get('http://172.26.4.145:8000/vcsapi/get/api/tbl/designation/dropdown/list', { headers: this.header })
+    return this.http.get('http://18.118.19.190:8000/vcsapi/get/api/tbl/designation/dropdown/list', { headers: this.header })
       .pipe(
         retry(1),
         catchError(this.handleError)
