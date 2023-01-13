@@ -15,7 +15,7 @@ export class CompanyServiceService {
 
 
   getCompanyDetails() {
-    return this.http.get('http://18.118.19.190:8000/vcsapi/get/api/tbl/company/details', {headers: this.header})
+    return this.http.get('http://localhost:8000/vcsapi/get/api/tbl/company/details', {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -23,7 +23,7 @@ export class CompanyServiceService {
   };
 
   updateCompanyDetails(details) {
-    return this.http.post('http://18.118.19.190:8000/vcsapi/update/api/tbl/company/details', details, {headers: this.header})
+    return this.http.post('http://localhost:8000/vcsapi/update/api/tbl/company/details', details, {headers: this.header})
       .pipe(
         retry(1),
         catchError(this.handleError)

@@ -1,8 +1,8 @@
-#stage 1
 FROM node:latest as node
-WORKDIR /app
+WORKDIR /front-app
 COPY . .
 RUN npm install
-RUN npm run build --prod
+RUN ng build --prod
 FROM nginx:alpine
 COPY --from=node /app/dist/vishusaWeb /usr/share/nginx/html
+EXPOSE 80
