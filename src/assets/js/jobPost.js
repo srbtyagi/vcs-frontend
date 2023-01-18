@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('http://localhost:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://18.189.186.163:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {
@@ -21,7 +21,7 @@ for (var i = 0; i < allArray.length; i++) {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     "title":  details.job_title,
-     "url": "http://localhost:8000/job-details?special="+details.job_id+"",
+     "url": "http://18.189.186.163:8000/job-details?special="+details.job_id+"",
     "description": details.job_description,
     "identifier": {
       "@type": "PropertyValue",
@@ -36,7 +36,7 @@ for (var i = 0; i < allArray.length; i++) {
     "hiringOrganization": {
       "@type": "Organization",
       "name": "Vish Consulting Services",
-      "sameAs": "http://localhost:8000"
+      "sameAs": "http://18.189.186.163:8000"
     },
     "jobLocation": {
       "@type": "Place",

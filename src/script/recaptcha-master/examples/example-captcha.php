@@ -6,7 +6,7 @@
  *
  * 1. Run the server. For example, under Linux you can probably use:
  * /usr/bin/php -S "localhost:8000" "examples/example-captcha.php"
- * 2. Point your browser at http://localhost:8000
+ * 2. Point your browser at http://18.189.186.163:8000
  * 3. Follow the instructions
  *
  * @copyright Copyright (c) 2015, Google Inc.
