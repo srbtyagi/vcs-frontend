@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('http://18.189.186.163:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://172.26.6.40:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {
@@ -38,7 +38,7 @@ for (var i = 0; i < allArray.length; i++) {
     "hiringOrganization": {
       "@type": "Organization",
       "name": "Vish Consulting Services",
-      "sameAs": "http://18.189.186.163:8000/"
+      "sameAs": "http://172.26.6.40:8000/"
     },
     "jobLocation": {
       "@type": "Place",
