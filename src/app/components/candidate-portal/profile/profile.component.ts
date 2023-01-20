@@ -227,7 +227,7 @@ export class ProfileComponent implements OnInit {
       let result: any = res;
       if (result[0].resume_doc_path) {
         this.status = true;
-        this.url = "http://18.189.186.163:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id")+"/"+sessionStorage.getItem('user_name')+"_resume";
+        this.url = "http://3.142.114.192:8000/vcsapi/get/resume/" + sessionStorage.getItem("user_id")+"/"+sessionStorage.getItem('user_name')+"_resume";
       }
       else {
         this.status = false;
@@ -278,7 +278,7 @@ export class ProfileComponent implements OnInit {
           this.viewShow = "true";
           this.viewfinalErr = false;
           this.status = true;
-          this.url = "http://18.189.186.163:8000/vcsapi/get/resume/" + sessionStorage.getItem('user_id')+"/"+sessionStorage.getItem('user_name')+"_resume";
+          this.url = "http://3.142.114.192:8000/vcsapi/get/resume/" + sessionStorage.getItem('user_id')+"/"+sessionStorage.getItem('user_name')+"_resume";
         }
       }
       else {
