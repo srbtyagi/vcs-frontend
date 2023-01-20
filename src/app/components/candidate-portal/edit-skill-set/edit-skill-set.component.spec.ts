@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditSkillSetComponent } from './edit-skill-set.component';
+import { EditSkillSetComponent } from "./edit-skill-set.component";
 
-describe('EditSkillSetComponent', () => {
+describe("EditSkillSetComponent", () => {
   let component: EditSkillSetComponent;
   let fixture: ComponentFixture<EditSkillSetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditSkillSetComponent ]
-    })
-    .compileComponents();
+      declarations: [EditSkillSetComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('EditSkillSetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { NavigationExtras, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
   user_id: any;
@@ -16,36 +16,38 @@ export class NavbarComponent implements OnInit {
   constructor(public router: Router) {
     this.user_id = sessionStorage.getItem("user_id");
     this.user_name = sessionStorage.getItem("user_name");
-
   }
 
   changeCss() {
-    var classname = document.getElementById('navbarNavDropdown').className;
+    var classname = document.getElementById("navbarNavDropdown").className;
     ////console.log(classname);
-    if (classname === "header-nav navbar-collapse justify-content-start collapse show" && this.navStatus === false) {
+    if (
+      classname ===
+        "header-nav navbar-collapse justify-content-start collapse show" &&
+      this.navStatus === false
+    ) {
       //document.getElementById('navbarNavDropdown').className = "header-nav navbar-collapse justify-content-start collapse";
       this.navStatus = true;
       setTimeout(() => {
-        document.getElementById('navbarNavDropdown').style.display = "none";
+        document.getElementById("navbarNavDropdown").style.display = "none";
       }, 100);
-    }
-    else {
+    } else {
       this.navStatus = false;
       //document.getElementById('navbarNavDropdown').className = "header-nav navbar-collapse justify-content-start collapse";
-      document.getElementById('navbarNavDropdown').style.display = "block";
+      document.getElementById("navbarNavDropdown").style.display = "block";
     }
   }
 
-  hideMenu(){
-   
+  hideMenu() {
     this.navStatus = true;
-    document.getElementById('navbarNavDropdown').style.display = "none";
-    document.getElementById('menuBtn').className = "navbar-toggler collapsed navicon justify-content-end";
+    document.getElementById("navbarNavDropdown").style.display = "none";
+    document.getElementById("menuBtn").className =
+      "navbar-toggler collapsed navicon justify-content-end";
   }
 
   ngOnInit() {
     this.functionassignAccess();
-    if (sessionStorage.getItem("user_type") === 'recruitee') {
+    if (sessionStorage.getItem("user_type") === "recruitee") {
       this.checkUserType = true;
     }
   }
@@ -54,15 +56,20 @@ export class NavbarComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
       //console.log(arr)
-      const ids = arr.map(o => o.module_id);
-      this.moduleArray = arr.filter(({ module_id }, index) => !ids.includes(module_id, index + 1));
-      this.moduleArray.forEach(e => {
+      const ids = arr.map((o) => o.module_id);
+      this.moduleArray = arr.filter(
+        ({ module_id }, index) => !ids.includes(module_id, index + 1)
+      );
+      this.moduleArray.forEach((e) => {
         if (e.module_name === "JOBS") {
           e.module_name_lower = "Jobs";
           //e.route = "/job-dashboard";
           e.route = "/manage-jobs";
         }
-        if (e.module_name === "MY JOBS" && sessionStorage.getItem("user_type") === "recruitee") {
+        if (
+          e.module_name === "MY JOBS" &&
+          sessionStorage.getItem("user_type") === "recruitee"
+        ) {
           e.module_name_lower = "My Jobs";
           //e.route = "/myjobs-dashboard";
           e.route = "/job-applications";
@@ -95,25 +102,24 @@ export class NavbarComponent implements OnInit {
           e.module_name_lower = "Profile";
           e.route = "/company";
         }
-
       });
       //console.log(arr, this.moduleArray)
     }
   }
 
   navigateToRecruitee() {
-    this.router.navigate(['current-assignment'])
+    this.router.navigate(["current-assignment"]);
   }
 
   navigateToProfile() {
-    this.router.navigate(['candi-profile'])
+    this.router.navigate(["candi-profile"]);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.route], navigationExtras);
   }
@@ -125,5 +131,4 @@ export class NavbarComponent implements OnInit {
       window.location.reload();
     }, 200);
   }
-
 }

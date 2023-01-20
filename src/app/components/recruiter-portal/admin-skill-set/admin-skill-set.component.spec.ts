@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AdminSkillSetComponent } from './admin-skill-set.component';
+import { AdminSkillSetComponent } from "./admin-skill-set.component";
 
-describe('AdminSkillSetComponent', () => {
+describe("AdminSkillSetComponent", () => {
   let component: AdminSkillSetComponent;
   let fixture: ComponentFixture<AdminSkillSetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminSkillSetComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminSkillSetComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('AdminSkillSetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

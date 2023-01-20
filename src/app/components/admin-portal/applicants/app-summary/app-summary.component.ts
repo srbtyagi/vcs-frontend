@@ -1,21 +1,28 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IDayCalendarConfig } from 'ng2-date-picker';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import jspdf from "jspdf";
+import html2canvas from "html2canvas";
+import Swal from "sweetalert2";
+import * as moment from "moment";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { IDayCalendarConfig } from "ng2-date-picker";
 
 @Component({
-  selector: 'app-app-summary',
-  templateUrl: './app-summary.component.html',
-  styleUrls: ['./app-summary.component.css']
+  selector: "app-app-summary",
+  templateUrl: "./app-summary.component.html",
+  styleUrls: ["./app-summary.component.css"],
 })
 export class AppSummaryComponent implements OnInit {
-  @ViewChild('closeStatusModal', { static: false }) private closeStatusModal: ElementRef;
-  @ViewChild('onBoardModalClose', { static: false }) private onBoardModalClose: ElementRef;
+  @ViewChild("closeStatusModal", { static: false })
+  private closeStatusModal: ElementRef;
+  @ViewChild("onBoardModalClose", { static: false })
+  private onBoardModalClose: ElementRef;
 
   appSummryList: any = [];
   details: any;
@@ -46,13 +53,16 @@ export class AppSummaryComponent implements OnInit {
   user_id: any;
   application_stage: any;
   datePickerConfig = <IDayCalendarConfig>{
-    drops: 'down',
-    format: 'MM/DD/YYYY'
-  }
+    drops: "down",
+    format: "MM/DD/YYYY",
+  };
 
-  constructor(public http: AdminService, public route: ActivatedRoute, public router: Router, public fb: FormBuilder) {
-
-  }
+  constructor(
+    public http: AdminService,
+    public route: ActivatedRoute,
+    public router: Router,
+    public fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -75,13 +85,22 @@ export class AppSummaryComponent implements OnInit {
       Rpay_rate: new FormControl(null, [Validators.required]),
       OTpay_rate: new FormControl(null, [Validators.required]),
       Hpay_rate: new FormControl(null, [Validators.required]),
-      per_diem: new FormControl(null,),
+      per_diem: new FormControl(null),
       after_hour: new FormControl(null, [Validators.required]),
-      pay_package: new FormControl(null, [Validators.required, Validators.maxLength(1000)]),
+      pay_package: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(1000),
+      ]),
       shift_hour: new FormControl(null, [Validators.required]),
-      shift_details: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      rto: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      contract_duration: new FormControl(null, [Validators.required])
+      shift_details: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      rto: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      contract_duration: new FormControl(null, [Validators.required]),
     });
   }
 
@@ -91,14 +110,15 @@ export class AppSummaryComponent implements OnInit {
 
   getAllSummery() {
     let data = {
-      job_id: this.data
-    }
-    this.http.getjobSummery(data).subscribe((res: any) => {
-      //console.log(res)
-      this.appSummryList = res;
-    }, err => {
-
-    });
+      job_id: this.data,
+    };
+    this.http.getjobSummery(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        this.appSummryList = res;
+      },
+      (err) => {}
+    );
   }
 
   reviewAppl(val) {
@@ -108,8 +128,8 @@ export class AppSummaryComponent implements OnInit {
     this.getAllDocs(this.details.user_id);
     let data = {
       application_id: val.application_id,
-      review_status: "Yes"
-    }
+      review_status: "Yes",
+    };
     this.http.changeReviewStatus(data).subscribe((res: any) => {
       //console.log(res)
     });
@@ -119,13 +139,12 @@ export class AppSummaryComponent implements OnInit {
     this.docs = [];
     this.http.getAllDocs(data).subscribe((res: any) => {
       //console.log(res);
-      res.forEach(e => {
+      res.forEach((e) => {
         if (e.rec_doc_status === "current") {
           this.docs.push(e);
         }
       });
-
-    })
+    });
   }
 
   downloadApplForm() {
@@ -134,43 +153,47 @@ export class AppSummaryComponent implements OnInit {
       let data = document.getElementById("applFormFDiv");
       //console.log(data)
 
-      html2canvas(data).then(canvas => {
+      html2canvas(data).then((canvas) => {
         var imgWidth = 22;
         var pageHeight = 295;
-        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var imgHeight = (canvas.height * imgWidth) / canvas.width;
         var heightLeft = imgHeight;
-        const contentDataURL = canvas.toDataURL('image/png')
+        const contentDataURL = canvas.toDataURL("image/png");
 
         //let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-        var pdf: any = new jspdf('p', 'cm', 'a4'); //Generates PDF in portrait mode
-        const addFooters = pdf => {
-          const pageCount = pdf.internal.getNumberOfPages()
-          pdf.setFont('helvetica', 'italic')
-          pdf.setFontSize(8)
+        var pdf: any = new jspdf("p", "cm", "a4"); //Generates PDF in portrait mode
+        const addFooters = (pdf) => {
+          const pageCount = pdf.internal.getNumberOfPages();
+          pdf.setFont("helvetica", "italic");
+          pdf.setFontSize(8);
           for (var i = 1; i <= pageCount; i++) {
-            pdf.setPage(i)
-            pdf.text('Page ' + String(i) + ' of ' + String(pageCount), pdf.internal.pageSize.width / 2, 287, {
-              align: 'center'
-            })
+            pdf.setPage(i);
+            pdf.text(
+              "Page " + String(i) + " of " + String(pageCount),
+              pdf.internal.pageSize.width / 2,
+              287,
+              {
+                align: "center",
+              }
+            );
           }
-        }
+        };
         var position = 0;
         pdf.setFont("helvetica");
         pdf.setFontSize(20);
         addFooters(pdf);
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-        pdf.save('ApplicationForm.pdf');
+        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.save("ApplicationForm.pdf");
       });
     }, 100);
 
     setTimeout(() => {
       this.showDivPdf = false;
-    }, 100)
+    }, 100);
   }
 
   onChangeStatus(data) {
     this.details = data;
-
   }
 
   changeStatus() {
@@ -180,94 +203,94 @@ export class AppSummaryComponent implements OnInit {
       application_id: this.details["application_id"],
       application_stage: this.job_offer_status,
       recruitee_id: this.details["recruitee_id"],
-      offer_accepted_by: "Recruiter"
-    }
-    this.http.changeJobApplicantStatus(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
+      offer_accepted_by: "Recruiter",
+    };
+    this.http.changeJobApplicantStatus(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.closeStatusModal.nativeElement.click();
+          Swal.fire({
+            title: "Offer accepted successfully.",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getAllSummery();
+            }
+          });
+        } else {
+          this.closeStatusModal.nativeElement.click();
+          Swal.fire({
+            title: "Something went wrong,please try again.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+            }
+          });
+        }
+      },
+      (err) => {
         this.closeStatusModal.nativeElement.click();
         Swal.fire({
-          title: 'Offer accepted successfully.',
-          icon: 'success',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.getAllSummery();
-
-          }
-        })
-      }
-      else {
-        this.closeStatusModal.nativeElement.click();
-        Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
-          allowOutsideClick: false,
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeOutUp",
           },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-    }, err => {
-      this.closeStatusModal.nativeElement.click();
-      Swal.fire({
-        title: 'Something went wrong,please try again.',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonColor: '#4C96D7',
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-
-        }
-      })
-    });
+    );
   }
 
   changepayRate(e) {
-
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault();
+    if (!keyAllowed()) e.preventDefault();
   }
 
   onBoard(val) {
@@ -297,41 +320,45 @@ export class AppSummaryComponent implements OnInit {
 
   updateDetails() {
     let data = {
-      "proposed_start_date": moment(this.onBoardForm.controls.pstart_date.value).format("MM/DD/YYYY"),
-      "proposed_end_date": moment(this.onBoardForm.controls.pend_date.value).format("MM/DD/YYYY"),
-      "onb_regular_bill_rate": this.onBoardForm.controls.Rbill_rate.value,
-      "onb_ot_bill_rate": this.onBoardForm.controls.OTbill_rate.value,
-      "onb_holiday_bill_rate": this.onBoardForm.controls.Hbill_rate.value,
-      "onb_regular_pay_rate": this.onBoardForm.controls.Rpay_rate.value,
-      "onb_ot_pay_rate": this.onBoardForm.controls.OTpay_rate.value,
-      "onb_holiday_pay_rate": this.onBoardForm.controls.Hpay_rate.value,
-      "per_dieum_wk": this.onBoardForm.controls.per_diem.value,
-      "ot_starts_after_wk": this.onBoardForm.controls.after_hour.value,
-      "pay_package_remarks": this.onBoardForm.controls.pay_package.value,
-      "total_shift_hr": this.onBoardForm.controls.shift_hour.value,
-      "shift_details": this.onBoardForm.controls.shift_details.value,
-      "rto": this.onBoardForm.controls.rto.value,
-      "contract_duration_wk": this.onBoardForm.controls.contract_duration.value,
-      "pay_rate_id": this.details.pay_rate_id,
-      "application_id": this.details.application_id,
-      "recruitee_id": this.details.recruitee_id,
-      "changed_by": sessionStorage.getItem("user_id")
-    }
+      proposed_start_date: moment(
+        this.onBoardForm.controls.pstart_date.value
+      ).format("MM/DD/YYYY"),
+      proposed_end_date: moment(
+        this.onBoardForm.controls.pend_date.value
+      ).format("MM/DD/YYYY"),
+      onb_regular_bill_rate: this.onBoardForm.controls.Rbill_rate.value,
+      onb_ot_bill_rate: this.onBoardForm.controls.OTbill_rate.value,
+      onb_holiday_bill_rate: this.onBoardForm.controls.Hbill_rate.value,
+      onb_regular_pay_rate: this.onBoardForm.controls.Rpay_rate.value,
+      onb_ot_pay_rate: this.onBoardForm.controls.OTpay_rate.value,
+      onb_holiday_pay_rate: this.onBoardForm.controls.Hpay_rate.value,
+      per_dieum_wk: this.onBoardForm.controls.per_diem.value,
+      ot_starts_after_wk: this.onBoardForm.controls.after_hour.value,
+      pay_package_remarks: this.onBoardForm.controls.pay_package.value,
+      total_shift_hr: this.onBoardForm.controls.shift_hour.value,
+      shift_details: this.onBoardForm.controls.shift_details.value,
+      rto: this.onBoardForm.controls.rto.value,
+      contract_duration_wk: this.onBoardForm.controls.contract_duration.value,
+      pay_rate_id: this.details.pay_rate_id,
+      application_id: this.details.application_id,
+      recruitee_id: this.details.recruitee_id,
+      changed_by: sessionStorage.getItem("user_id"),
+    };
     //console.log(data)
-    this.http.InsertOnboarding(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Rate fixed successfull.");
-        this.onBoardModalClose.nativeElement.click();
-      }
-      else {
+    this.http.InsertOnboarding(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Rate fixed successfull.");
+          this.onBoardModalClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
-
-
+    );
   }
 
   ////////////////////////////
@@ -339,20 +366,19 @@ export class AppSummaryComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'error',
+      icon: "error",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     });
   }
@@ -360,47 +386,42 @@ export class AppSummaryComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         //window.location.reload();
         this.getAllSummery();
-
       }
-    })
+    });
   }
 
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
-    })
+    });
   }
-
-
-
 }

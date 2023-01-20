@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import Swal from "sweetalert2";
 import { DropdownServiceService } from "./dropdown-service.service";
 
 @Component({
-  selector: 'app-dropdown-list',
-  templateUrl: './dropdown-list.component.html',
-  styleUrls: ['./dropdown-list.component.css']
+  selector: "app-dropdown-list",
+  templateUrl: "./dropdown-list.component.html",
+  styleUrls: ["./dropdown-list.component.css"],
 })
 export class DropdownListComponent implements OnInit {
   allProfessionData: any;
@@ -20,7 +25,6 @@ export class DropdownListComponent implements OnInit {
   allStandardDocumentData: any;
   allGetDesignation: any;
 
- 
   hideShowHeader: boolean = false;
 
   addHeaderShow: any;
@@ -32,16 +36,18 @@ export class DropdownListComponent implements OnInit {
 
   editCommonId: any;
 
-  defaultStatus: any = 'active';
+  defaultStatus: any = "active";
   moduleArray: any = [];
 
-
-  constructor(public service: DropdownServiceService, public fb: FormBuilder, public route: ActivatedRoute,
-    public router: Router, public http: AdminService) {
-  }
+  constructor(
+    public service: DropdownServiceService,
+    public fb: FormBuilder,
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {}
 
   ngOnInit() {
-
     this.route.queryParams.subscribe((r: any) => {
       var data = JSON.parse(r.special);
       this.getAssignaccess(data);
@@ -61,25 +67,30 @@ export class DropdownListComponent implements OnInit {
     this.getDesignationData();
 
     this.addDropDownList = this.fb.group({
-      name: new FormControl(null, [Validators.required, Validators.maxLength(80)]),
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+      ]),
     });
 
     this.editDropDownList = this.fb.group({
-      edit_name: new FormControl(null, [Validators.required, Validators.maxLength(80)]),
+      edit_name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+      ]),
     });
-
-
   }
 
- 
   ///////////////////////
 
   getAssignaccess(val) {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -119,22 +130,20 @@ export class DropdownListComponent implements OnInit {
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive406").className = "active";
-    }, 200)
-
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -153,1537 +162,1446 @@ export class DropdownListComponent implements OnInit {
   }
 
   addsubmitHit() {
-    if (this.addHeaderShow === 'Profession') {
+    if (this.addHeaderShow === "Profession") {
       this.insertProfession();
-    } else if (this.addHeaderShow === 'Speciality') {
+    } else if (this.addHeaderShow === "Speciality") {
       this.insertSpeciality();
-    } else if (this.addHeaderShow === 'Job Sector') {
+    } else if (this.addHeaderShow === "Job Sector") {
       this.insertJobSector();
-    } else if (this.addHeaderShow === 'Position Type') {
+    } else if (this.addHeaderShow === "Position Type") {
       this.insertPositionType();
-    } else if (this.addHeaderShow === 'Job Type') {
+    } else if (this.addHeaderShow === "Job Type") {
       this.insertJobType();
-    } else if (this.addHeaderShow === 'System Name') {
+    } else if (this.addHeaderShow === "System Name") {
       this.insertSystemName();
-    } else if (this.addHeaderShow === 'Standard Document') {
+    } else if (this.addHeaderShow === "Standard Document") {
       this.insertStandardDocument();
-    } else if (this.addHeaderShow === 'Designation') {
+    } else if (this.addHeaderShow === "Designation") {
       this.insertDesignation();
     }
-
   }
-
 
   /// edit  button
 
   editButtonHit(header, value) {
     this.editHeaderShow = header;
-    if (this.editHeaderShow === 'Profession') {
+    if (this.editHeaderShow === "Profession") {
       this.editCommonId = value.profession_id;
       this.defaultStatus = value.profession_status;
       this.editDropDownList.setValue({
         edit_name: value.profession_name,
       });
-    } else if (this.editHeaderShow === 'Speciality') {
+    } else if (this.editHeaderShow === "Speciality") {
       this.editCommonId = value.speciality_id;
       this.defaultStatus = value.speciality_status;
       this.editDropDownList.setValue({
         edit_name: value.speciality_name,
       });
-    } else if (this.editHeaderShow === 'Job Sector') {
+    } else if (this.editHeaderShow === "Job Sector") {
       this.editCommonId = value.job_sector_id;
       this.defaultStatus = value.job_sector_status;
       this.editDropDownList.setValue({
         edit_name: value.job_sector_name,
       });
-    } else if (this.editHeaderShow === 'Position Type') {
+    } else if (this.editHeaderShow === "Position Type") {
       this.editCommonId = value.position_type_id;
       this.defaultStatus = value.position_type_status;
 
       this.editDropDownList.setValue({
         edit_name: value.position_type_name,
       });
-    } else if (this.editHeaderShow === 'Job Type') {
+    } else if (this.editHeaderShow === "Job Type") {
       this.editCommonId = value.job_type_id;
       this.defaultStatus = value.job_type_status;
       this.editDropDownList.setValue({
         edit_name: value.job_type_name,
       });
-    } else if (this.editHeaderShow === 'System Name') {
+    } else if (this.editHeaderShow === "System Name") {
       this.editCommonId = value.system_name_id;
       this.defaultStatus = value.system_name_status;
       this.editDropDownList.setValue({
         edit_name: value.system_name,
       });
-    } else if (this.editHeaderShow === 'Standard Document') {
+    } else if (this.editHeaderShow === "Standard Document") {
       this.editCommonId = value.doc_id;
       this.defaultStatus = value.doc_status;
       this.editDropDownList.setValue({
         edit_name: value.doc_name,
       });
-    } else if (this.editHeaderShow === 'Designation') {
+    } else if (this.editHeaderShow === "Designation") {
       this.editCommonId = value.designation_id;
       this.defaultStatus = value.designation_status;
       this.editDropDownList.setValue({
         edit_name: value.designation_name,
       });
     }
-
   }
 
   editsubmitHit() {
-    if (this.editHeaderShow === 'Profession') {
+    if (this.editHeaderShow === "Profession") {
       this.updateProfession();
-    } else if (this.editHeaderShow === 'Speciality') {
+    } else if (this.editHeaderShow === "Speciality") {
       this.updateSpeciality();
-    } else if (this.editHeaderShow === 'Job Sector') {
+    } else if (this.editHeaderShow === "Job Sector") {
       this.updateJobSector();
-    } else if (this.editHeaderShow === 'Position Type') {
+    } else if (this.editHeaderShow === "Position Type") {
       this.updatePositionType();
-    } else if (this.editHeaderShow === 'Job Type') {
+    } else if (this.editHeaderShow === "Job Type") {
       this.updateJobType();
-    } else if (this.editHeaderShow === 'System Name') {
+    } else if (this.editHeaderShow === "System Name") {
       this.updateSystemName();
-    } else if (this.editHeaderShow === 'Standard Document') {
+    } else if (this.editHeaderShow === "Standard Document") {
       this.updateStandardDocument();
-    } else if (this.editHeaderShow === 'Designation') {
+    } else if (this.editHeaderShow === "Designation") {
       this.updateDesignation();
     }
-
   }
-
 
   /// status button
   statussubmitHit() {
-    if (this.editHeaderShow === 'Profession') {
+    if (this.editHeaderShow === "Profession") {
       this.statusProfession();
-    } else if (this.editHeaderShow === 'Speciality') {
+    } else if (this.editHeaderShow === "Speciality") {
       this.statusSpeciality();
-    } else if (this.editHeaderShow === 'Job Sector') {
+    } else if (this.editHeaderShow === "Job Sector") {
       this.statusJobSector();
-    } else if (this.editHeaderShow === 'Position Type') {
+    } else if (this.editHeaderShow === "Position Type") {
       this.statusPositionType();
-    } else if (this.editHeaderShow === 'Job Type') {
+    } else if (this.editHeaderShow === "Job Type") {
       this.statusJobType();
-    } else if (this.editHeaderShow === 'System Name') {
+    } else if (this.editHeaderShow === "System Name") {
       this.statusSystemName();
-    } else if (this.editHeaderShow === 'Standard Document') {
+    } else if (this.editHeaderShow === "Standard Document") {
       this.statusStandardDocument();
-    } else if (this.editHeaderShow === 'Designation') {
+    } else if (this.editHeaderShow === "Designation") {
       this.statusDesignation();
     }
-
   }
 
-
   getDataProfession() {
-    this.service.getApiProfession().subscribe(r => {
+    this.service.getApiProfession().subscribe((r) => {
       //console.log(r);
       this.allProfessionData = r;
     });
   }
 
   getDataSpeciality() {
-    this.service.getApiSpeciality().subscribe(r => {
+    this.service.getApiSpeciality().subscribe((r) => {
       //console.log(r);
       this.allSpecialityData = r;
     });
   }
 
   getDataJobSector() {
-    this.service.getApiJobSector().subscribe(r => {
+    this.service.getApiJobSector().subscribe((r) => {
       //console.log(r);
       this.allJobSectorData = r;
     });
   }
 
   getDataPositionType() {
-    this.service.getApiPositionType().subscribe(r => {
+    this.service.getApiPositionType().subscribe((r) => {
       //console.log(r);
       this.allPositionTypeData = r;
     });
   }
 
   getDataJobType() {
-    this.service.getApiJobType().subscribe(r => {
+    this.service.getApiJobType().subscribe((r) => {
       //console.log(r);
       this.allJobTypeData = r;
     });
   }
 
   getDataSystemName() {
-    this.service.getApiSystemName().subscribe(r => {
+    this.service.getApiSystemName().subscribe((r) => {
       //console.log(r);
       this.allSystemNameData = r;
     });
   }
 
-
   getDataStandardDocument() {
-    this.service.getApiStandardDocument().subscribe(r => {
+    this.service.getApiStandardDocument().subscribe((r) => {
       //console.log(r);
       this.allStandardDocumentData = r;
     });
   }
 
   getDesignationData() {
-    this.service.getApiDesignation().subscribe(r => {
+    this.service.getApiDesignation().subscribe((r) => {
       //console.log(r);
       this.allGetDesignation = r;
     });
   }
 
-
   /// insert Api work
 
   insertProfession() {
     const data = {
-      profession_name: this.addDropDownList.controls.name.value
+      profession_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiProfession(data).subscribe(r => {
+    this.service.addApiProfession(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Profession Added successfully.',
-          icon: 'success',
+          title: "Profession Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataProfession();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   insertSpeciality() {
     const data = {
-      speciality_name: this.addDropDownList.controls.name.value
+      speciality_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiSpeciality(data).subscribe(r => {
+    this.service.addApiSpeciality(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Speciality Added successfully.',
-          icon: 'success',
+          title: "Speciality Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataSpeciality();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   insertJobType() {
     const data = {
-      job_type_name: this.addDropDownList.controls.name.value
+      job_type_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiJobType(data).subscribe(r => {
+    this.service.addApiJobType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Job Type Added successfully.',
-          icon: 'success',
+          title: "Job Type Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataJobType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   insertJobSector() {
     const data = {
-      job_sector_name: this.addDropDownList.controls.name.value
+      job_sector_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiJobSector(data).subscribe(r => {
+    this.service.addApiJobSector(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Job Sector Added successfully.',
-          icon: 'success',
+          title: "Job Sector Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataJobSector();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   insertPositionType() {
     const data = {
-      position_type_name: this.addDropDownList.controls.name.value
+      position_type_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiPositionType(data).subscribe(r => {
+    this.service.addApiPositionType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Position Type Added successfully.',
-          icon: 'success',
+          title: "Position Type Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataPositionType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
-
   insertSystemName() {
     const data = {
-      system_name: this.addDropDownList.controls.name.value
+      system_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiSystemName(data).subscribe(r => {
+    this.service.addApiSystemName(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'System Name Added successfully.',
-          icon: 'success',
+          title: "System Name Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataSystemName();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   insertStandardDocument() {
     const data = {
-      doc_name: this.addDropDownList.controls.name.value
+      doc_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiDocumentName(data).subscribe(r => {
+    this.service.addApiDocumentName(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Standard Document Added successfully.',
-          icon: 'success',
+          title: "Standard Document Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDataStandardDocument();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   checkUniqueDesignation() {
-    if (this.addHeaderShow === 'Designation') {
-      this.service.checkUniqueDesignation(this.addDropDownList.controls.name.value).subscribe((res: any) => {
-        //console.log(res)
-        if (res === "exist") {
-          Swal.fire({
-            title: 'Designation Name already exist!',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
+    if (this.addHeaderShow === "Designation") {
+      this.service
+        .checkUniqueDesignation(this.addDropDownList.controls.name.value)
+        .subscribe(
+          (res: any) => {
+            //console.log(res)
+            if (res === "exist") {
+              Swal.fire({
+                title: "Designation Name already exist!",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#4C96D7",
+                confirmButtonText: "Ok",
+                allowOutsideClick: false,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.addDropDownList.reset();
+                  this.editDropDownList.reset();
+                }
+              });
+            } else if (res === "do not exist") {
+            } else {
+              Swal.fire({
+                title: "Something went wrong,please try again.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#4C96D7",
+                confirmButtonText: "Ok",
+                allowOutsideClick: false,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              }).then((result) => {
+                if (result.isConfirmed) {
+                }
+              });
             }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.addDropDownList.reset();
-              this.editDropDownList.reset();
-            }
-          });
-        }
-        else if (res === "do not exist") {
-
-        }
-        else {
-          Swal.fire({
-            title: 'Something went wrong,please try again.',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-
-            }
-          })
-        }
-      }, err => {
-
-      });
+          },
+          (err) => {}
+        );
     }
   }
 
   checkUniqueDesignationEdit() {
-    if (this.editHeaderShow === 'Designation') {
-      this.service.checkUniqueDesignation(this.editDropDownList.controls.edit_name.value).subscribe((res: any) => {
-        //console.log(res)
-        if (res === "exist") {
-          Swal.fire({
-            title: 'Designation Name already exist!',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
+    if (this.editHeaderShow === "Designation") {
+      this.service
+        .checkUniqueDesignation(this.editDropDownList.controls.edit_name.value)
+        .subscribe(
+          (res: any) => {
+            //console.log(res)
+            if (res === "exist") {
+              Swal.fire({
+                title: "Designation Name already exist!",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#4C96D7",
+                confirmButtonText: "Ok",
+                allowOutsideClick: false,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.editDropDownList.reset();
+                }
+              });
+            } else if (res === "do not exist") {
+            } else {
+              Swal.fire({
+                title: "Something went wrong,please try again.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#4C96D7",
+                confirmButtonText: "Ok",
+                allowOutsideClick: false,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              }).then((result) => {
+                if (result.isConfirmed) {
+                }
+              });
             }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.editDropDownList.reset();
-            }
-          });
-        }
-        else if (res === "do not exist") {
-
-        }
-        else {
-          Swal.fire({
-            title: 'Something went wrong,please try again.',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-
-            }
-          })
-        }
-      }, err => {
-
-      });
+          },
+          (err) => {}
+        );
     }
   }
 
   insertDesignation() {
     const data = {
-      designation_name: this.addDropDownList.controls.name.value
+      designation_name: this.addDropDownList.controls.name.value,
     };
-    this.service.addApiDesignationName(data).subscribe(r => {
+    this.service.addApiDesignationName(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Designation Added successfully.',
-          icon: 'success',
+          title: "Designation Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDropDownList.reset();
             this.getDesignationData();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
 
   //// update api work
 
   updateProfession() {
     const data = {
       profession_name: this.editDropDownList.controls.edit_name.value,
-      profession_id: this.editCommonId
+      profession_id: this.editCommonId,
     };
-    this.service.editApiProfession(data).subscribe(r => {
+    this.service.editApiProfession(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Profession updated successfully.',
-          icon: 'success',
+          title: "Profession updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataProfession();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateSpeciality() {
     const data = {
       speciality_name: this.editDropDownList.controls.edit_name.value,
-      speciality_id: this.editCommonId
-
+      speciality_id: this.editCommonId,
     };
-    this.service.editApiSpeciality(data).subscribe(r => {
+    this.service.editApiSpeciality(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Speciality Updated successfully.',
-          icon: 'success',
+          title: "Speciality Updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataSpeciality();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateJobType() {
     const data = {
       job_type_name: this.editDropDownList.controls.edit_name.value,
-      job_type_id: this.editCommonId
+      job_type_id: this.editCommonId,
     };
-    this.service.editApiJobType(data).subscribe(r => {
+    this.service.editApiJobType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Job Type updated successfully.',
-          icon: 'success',
+          title: "Job Type updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataJobType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateJobSector() {
     const data = {
       job_sector_name: this.editDropDownList.controls.edit_name.value,
-      job_sector_id: this.editCommonId
+      job_sector_id: this.editCommonId,
     };
-    this.service.editApiJobSector(data).subscribe(r => {
+    this.service.editApiJobSector(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Job Sector Updated successfully.',
-          icon: 'success',
+          title: "Job Sector Updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataJobSector();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updatePositionType() {
     const data = {
       position_type_name: this.editDropDownList.controls.edit_name.value,
-      position_type_id: this.editCommonId
+      position_type_id: this.editCommonId,
     };
-    this.service.editApiPositionType(data).subscribe(r => {
+    this.service.editApiPositionType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Position Type updated successfully.',
-          icon: 'success',
+          title: "Position Type updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataPositionType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateSystemName() {
     const data = {
       system_name: this.editDropDownList.controls.edit_name.value,
-      system_name_id: this.editCommonId
+      system_name_id: this.editCommonId,
     };
-    this.service.editApiSystemName(data).subscribe(r => {
+    this.service.editApiSystemName(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'System Name updated successfully.',
-          icon: 'success',
+          title: "System Name updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataSystemName();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateStandardDocument() {
     const data = {
       doc_name: this.editDropDownList.controls.edit_name.value,
-      doc_id: this.editCommonId
+      doc_id: this.editCommonId,
     };
-    this.service.editApiStandardDocument(data).subscribe(r => {
+    this.service.editApiStandardDocument(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Document updated successfully.',
-          icon: 'success',
+          title: "Document updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDataStandardDocument();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   updateDesignation() {
     const data = {
       designation_name: this.editDropDownList.controls.edit_name.value,
-      designation_id: this.editCommonId
+      designation_id: this.editCommonId,
     };
-    this.service.editApiDesignation(data).subscribe(r => {
+    this.service.editApiDesignation(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Designation updated successfully.',
-          icon: 'success',
+          title: "Designation updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDropDownList.reset();
             this.getDesignationData();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
           }
-        })
+        });
       }
-
     });
   }
 
-
   // status change api work
-
 
   statusProfession() {
     const data = {
       profession_status: this.defaultStatus,
-      profession_id: this.editCommonId
+      profession_id: this.editCommonId,
     };
-    this.service.statusApiProfession(data).subscribe(r => {
+    this.service.statusApiProfession(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status Change successfully.',
-          icon: 'success',
+          title: "Status Change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataProfession();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusSpeciality() {
     const data = {
       speciality_status: this.defaultStatus,
-      speciality_id: this.editCommonId
-
+      speciality_id: this.editCommonId,
     };
-    this.service.statusApiSpeciality(data).subscribe(r => {
+    this.service.statusApiSpeciality(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status Change successfully.',
-          icon: 'success',
+          title: "Status Change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataSpeciality();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusJobType() {
     const data = {
       job_type_status: this.defaultStatus,
-      job_type_id: this.editCommonId
+      job_type_id: this.editCommonId,
     };
-    this.service.statusApiJobType(data).subscribe(r => {
+    this.service.statusApiJobType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataJobType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusJobSector() {
     const data = {
       job_sector_status: this.defaultStatus,
-      job_sector_id: this.editCommonId
+      job_sector_id: this.editCommonId,
     };
-    this.service.statusApiJobSector(data).subscribe(r => {
+    this.service.statusApiJobSector(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataJobSector();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusPositionType() {
     const data = {
       position_type_status: this.defaultStatus,
-      position_type_id: this.editCommonId
+      position_type_id: this.editCommonId,
     };
-    this.service.statusApiPositionType(data).subscribe(r => {
+    this.service.statusApiPositionType(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataPositionType();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
 
   statusSystemName() {
     const data = {
       system_name_status: this.defaultStatus,
-      system_name_id: this.editCommonId
+      system_name_id: this.editCommonId,
     };
-    this.service.statusApiSystemName(data).subscribe(r => {
+    this.service.statusApiSystemName(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataSystemName();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusStandardDocument() {
     const data = {
       doc_status: this.defaultStatus,
-      doc_id: this.editCommonId
+      doc_id: this.editCommonId,
     };
-    this.service.statusApiStandardDocument(data).subscribe(r => {
+    this.service.statusApiStandardDocument(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDataStandardDocument();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
   statusDesignation() {
     const data = {
       designation_status: this.defaultStatus,
-      designation_id: this.editCommonId
+      designation_id: this.editCommonId,
     };
-    this.service.statusApiDesignation(data).subscribe(r => {
+    this.service.statusApiDesignation(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDesignationData();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
-
 }

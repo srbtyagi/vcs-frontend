@@ -1,20 +1,24 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import Swal from "sweetalert2";
+import * as moment from "moment";
 
 @Component({
-  selector: 'app-assign-manager',
-  templateUrl: './assign-manager.component.html',
-  styleUrls: ['./assign-manager.component.css']
+  selector: "app-assign-manager",
+  templateUrl: "./assign-manager.component.html",
+  styleUrls: ["./assign-manager.component.css"],
 })
 export class AssignManagerComponent implements OnInit {
-  @ViewChild('assignRecClose', { static: false }) private assignRecClose: ElementRef;
-  @ViewChild('assignOnClose', { static: false }) private assignOnClose: ElementRef;
-  @ViewChild('assignTeamClose', { static: false }) private assignTeamClose: ElementRef;
-  @ViewChild('assignManagerClose', { static: false }) private assignManagerClose: ElementRef;
+  @ViewChild("assignRecClose", { static: false })
+  private assignRecClose: ElementRef;
+  @ViewChild("assignOnClose", { static: false })
+  private assignOnClose: ElementRef;
+  @ViewChild("assignTeamClose", { static: false })
+  private assignTeamClose: ElementRef;
+  @ViewChild("assignManagerClose", { static: false })
+  private assignManagerClose: ElementRef;
   /*paginate */
   public count: any = 20;
   public page: any;
@@ -46,9 +50,15 @@ export class AssignManagerComponent implements OnInit {
   vcsempListShow: boolean = false;
   assign_vcs_emp_name: any = "";
 
-  constructor(public http: AdminService, public route: ActivatedRoute, public router: Router, public fb: FormBuilder) {
+  constructor(
+    public http: AdminService,
+    public route: ActivatedRoute,
+    public router: Router,
+    public fb: FormBuilder
+  ) {
     this.user_id_by = sessionStorage.getItem("user_id");
-    this.excelfileName = "Assign-Manager-Report(" + moment(new Date).format("MM-DD-YYYY") + ")";
+    this.excelfileName =
+      "Assign-Manager-Report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
   }
 
   ngOnInit() {
@@ -60,7 +70,11 @@ export class AssignManagerComponent implements OnInit {
     this.getEmployee();
     this.getAllApplicant();
     this.getUserRoleDetailsAll();
-    if (this.client_id === "ALL" && this.applicant === "ALL" && this.vcs_person === "ALL") {
+    if (
+      this.client_id === "ALL" &&
+      this.applicant === "ALL" &&
+      this.vcs_person === "ALL"
+    ) {
       this.searchJob();
     }
     /** spinner starts on init */
@@ -79,8 +93,10 @@ export class AssignManagerComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -116,26 +132,24 @@ export class AssignManagerComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
-
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive205").className = "active";
-    }, 200)
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -162,13 +176,16 @@ export class AssignManagerComponent implements OnInit {
   searchClient(ev) {
     //console.log(this.clientName)
     let search_data = this.clientName;
-    this.clientList = search_data ? this.filterListClient(search_data) : this.clientListFilter;
+    this.clientList = search_data
+      ? this.filterListClient(search_data)
+      : this.clientListFilter;
   }
 
   filterListClient(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.clientListFilter.filter((list: any) =>
-      list.client_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.clientListFilter.filter(
+      (list: any) =>
+        list.client_name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
@@ -196,9 +213,14 @@ export class AssignManagerComponent implements OnInit {
   selectApplicantName(val) {
     this.applicant = val.user_id;
     if (val.user_middle_name) {
-      this.applicantName = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.applicantName =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.applicantName = val.user_first_name + ' ' + val.user_last_name;
+      this.applicantName = val.user_first_name + " " + val.user_last_name;
     }
     this.applicantListShow = false;
   }
@@ -206,14 +228,17 @@ export class AssignManagerComponent implements OnInit {
   searchApplicant(ev) {
     //console.log(this.applicantName)
     let search_data = this.applicantName;
-    this.applicantList = search_data ? this.filterListApplicant(search_data) : this.applicantListFilter;
+    this.applicantList = search_data
+      ? this.filterListApplicant(search_data)
+      : this.applicantListFilter;
   }
 
   filterListApplicant(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.applicantListFilter.filter((list: any) =>
-      list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.applicantListFilter.filter(
+      (list: any) =>
+        list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
@@ -224,9 +249,14 @@ export class AssignManagerComponent implements OnInit {
   selectEmpName(val) {
     this.vcs_person = val.user_id;
     if (val.user_middle_name) {
-      this.vcs_person_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.vcs_person_name =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.vcs_person_name = val.user_first_name + ' ' + val.user_last_name;
+      this.vcs_person_name = val.user_first_name + " " + val.user_last_name;
     }
     this.empListShow = false;
   }
@@ -234,14 +264,17 @@ export class AssignManagerComponent implements OnInit {
   searchEmployee(ev) {
     //console.log(this.vcs_person_name)
     let search_data = this.vcs_person_name;
-    this.employeeList = search_data ? this.filterListEmp(search_data) : this.empListFilter;
+    this.employeeList = search_data
+      ? this.filterListEmp(search_data)
+      : this.empListFilter;
   }
 
   filterListEmp(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.empListFilter.filter((list: any) =>
-      list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.empListFilter.filter(
+      (list: any) =>
+        list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
@@ -253,18 +286,16 @@ export class AssignManagerComponent implements OnInit {
     //console.log(val)
     if (this.clientName === "ALL") {
       this.getAllApplicant();
-    }
-    else {
+    } else {
       let data = {
-        client_id: val.client_id
-      }
+        client_id: val.client_id,
+      };
       this.http.getApplicantByClient(data).subscribe((res: any) => {
         //console.log(res)
         this.applicantList = res;
         this.applicantListFilter = res;
       });
     }
-
   }
 
   searchJob() {
@@ -286,51 +317,51 @@ export class AssignManagerComponent implements OnInit {
       let data = {
         client_id: this.client_id,
         user_id: this.applicant,
-        manager_id: this.vcs_person
-      }
-      this.http.getSearchMgrApplication(data).subscribe((res: any) => {
-        //console.log(res)
-        this.applicationList = res;
-        this.http.spinnerHide();
-        if (this.applicationList.length === 0) {
+        manager_id: this.vcs_person,
+      };
+      this.http.getSearchMgrApplication(data).subscribe(
+        (res: any) => {
+          //console.log(res)
+          this.applicationList = res;
           this.http.spinnerHide();
-          this.errorMsg("No search result found!")
-        }
-        else if (res === "clients data not found") {
+          if (this.applicationList.length === 0) {
+            this.http.spinnerHide();
+            this.errorMsg("No search result found!");
+          } else if (res === "clients data not found") {
+            this.http.spinnerHide();
+            this.errorMsg("Something went wrong. Please Try Again.");
+          } else if (res === "err") {
+            this.http.spinnerHide();
+            this.errorMsg("Something went wrong. Please Try Again.");
+          } else {
+            this.http.spinnerHide();
+          }
+        },
+        (err) => {
           this.http.spinnerHide();
           this.errorMsg("Something went wrong. Please Try Again.");
         }
-        else if (res === "err") {
-          this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
-        }
-        else {
-          this.http.spinnerHide();
-        }
-
-      }, err => {
-        this.http.spinnerHide();
-        this.errorMsg("Something went wrong. Please Try Again.");
-      });
-    }
-    else {
+      );
+    } else {
       this.errorMsg("Select both client and applicant");
     }
-
   }
 
   existRoleUser: any = [];
   getRolesByAppl(val) {
     this.existRoleUser = [];
     let data = {
-      application_id: val.application_id
-    }
+      application_id: val.application_id,
+    };
     this.http.getRolesByApplication(data).subscribe((res) => {
       // //console.log(res);
       this.existRoleUser = res;
       for (let i = 0; i < this.allUserRole.length; i++) {
         for (let j = 0; j < this.existRoleUser.length; j++) {
-          if (Number(this.allUserRole[i].role_id) === Number(this.existRoleUser[j].user_role_id)) {
+          if (
+            Number(this.allUserRole[i].role_id) ===
+            Number(this.existRoleUser[j].user_role_id)
+          ) {
             // //console.log(Number(this.allUserRole[i].role_id))
             this.allUserRole[i].selected_emp = this.existRoleUser[j].user_id;
           }
@@ -341,7 +372,6 @@ export class AssignManagerComponent implements OnInit {
   }
 
   openModal(val) {
-
     this.vcsempListShow = false;
     this.assign_vcs_emp_name = "";
     this.details = "";
@@ -362,7 +392,6 @@ export class AssignManagerComponent implements OnInit {
     // }
   }
 
-
   checkBoxSelect(val, index) {
     let id: any = document.getElementById("Day" + index);
     //console.log(id.checked)
@@ -374,15 +403,13 @@ export class AssignManagerComponent implements OnInit {
         }
       }
       val.dropdownShow = true;
-    }
-    else if (id.checked === false) {
+    } else if (id.checked === false) {
       val.employeeArray = [];
       val.dropdownShow = false;
     }
 
     //console.log(this.allUserRole)
   }
-
 
   selectEmployee(val, emp) {
     //console.log(val, emp)
@@ -394,20 +421,16 @@ export class AssignManagerComponent implements OnInit {
     if (Number(val.role_id) === 1) {
       // admin
       this.submitManager(val);
-    }
-    else if (Number(val.role_id) === 5) {
+    } else if (Number(val.role_id) === 5) {
       // recruiter
       this.submitRecruiter(val);
-    }
-    else if (Number(val.role_id) === 9) {
+    } else if (Number(val.role_id) === 9) {
       // on-boarding
       this.submitOnbordMgr(val);
-    }
-    else if (Number(val.role_id) === 10) {
+    } else if (Number(val.role_id) === 10) {
       // team lead
       this.submitOTeamLead(val);
-    }
-    else {
+    } else {
       // others
       this.submitManagerOthers(val);
     }
@@ -421,9 +444,14 @@ export class AssignManagerComponent implements OnInit {
     this.assign_recruiter = val.user_id;
     //console.log(this.assign_recruiter)
     if (val.user_middle_name) {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name = val.user_first_name + " " + val.user_last_name;
     }
     this.vcsempListShow = false;
   }
@@ -432,9 +460,14 @@ export class AssignManagerComponent implements OnInit {
     this.assign_onboardMgr = val.user_id;
     //console.log(this.assign_onboardMgr)
     if (val.user_middle_name) {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name = val.user_first_name + " " + val.user_last_name;
     }
     this.vcsempListShow = false;
   }
@@ -443,9 +476,14 @@ export class AssignManagerComponent implements OnInit {
     this.assign_teamlead = val.user_id;
     //console.log(this.assign_teamlead)
     if (val.user_middle_name) {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name = val.user_first_name + " " + val.user_last_name;
     }
     this.vcsempListShow = false;
   }
@@ -454,9 +492,14 @@ export class AssignManagerComponent implements OnInit {
     this.assign_manager = val.user_id;
     //console.log(this.assign_manager)
     if (val.user_middle_name) {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name =
+        val.user_first_name +
+        " " +
+        val.user_middle_name +
+        " " +
+        val.user_last_name;
     } else {
-      this.assign_vcs_emp_name = val.user_first_name + ' ' + val.user_last_name;
+      this.assign_vcs_emp_name = val.user_first_name + " " + val.user_last_name;
     }
     this.vcsempListShow = false;
   }
@@ -464,14 +507,17 @@ export class AssignManagerComponent implements OnInit {
   searchVCSEmployee(ev) {
     //console.log(this.assign_vcs_emp_name)
     let search_data = this.assign_vcs_emp_name;
-    this.employeeList = search_data ? this.filterListEmpVCS(search_data) : this.empListFilter;
+    this.employeeList = search_data
+      ? this.filterListEmpVCS(search_data)
+      : this.empListFilter;
   }
 
   filterListEmpVCS(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.empListFilter.filter((list: any) =>
-      list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.empListFilter.filter(
+      (list: any) =>
+        list.user_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.user_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
@@ -482,21 +528,23 @@ export class AssignManagerComponent implements OnInit {
       user_id: val.selected_emp,
       role_id: val.role_id,
       incentive_percentage: val.incentive_percentage,
-      recruitee_id: this.details.recruitee_id
-    }
+      recruitee_id: this.details.recruitee_id,
+    };
     // //console.log(data)
-    this.http.assignRecruiter(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Recruiter assigned successfully.");
-        this.assignRecClose.nativeElement.click();
-      }
-      else {
+    this.http.assignRecruiter(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Recruiter assigned successfully.");
+          this.assignRecClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
+    );
   }
 
   submitOnbordMgr(val) {
@@ -506,20 +554,22 @@ export class AssignManagerComponent implements OnInit {
       user_id: val.selected_emp,
       role_id: val.role_id,
       incentive_percentage: val.incentive_percentage,
-      recruitee_id: this.details.recruitee_id
-    }
-    this.http.assignOnboardMgr(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Onboard manager assigned successfully.");
-        this.assignOnClose.nativeElement.click();
-      }
-      else {
+      recruitee_id: this.details.recruitee_id,
+    };
+    this.http.assignOnboardMgr(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Onboard manager assigned successfully.");
+          this.assignOnClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
+    );
   }
 
   submitOTeamLead(val) {
@@ -529,20 +579,22 @@ export class AssignManagerComponent implements OnInit {
       user_id: val.selected_emp,
       role_id: val.role_id,
       incentive_percentage: val.incentive_percentage,
-      recruitee_id: this.details.recruitee_id
-    }
-    this.http.assignTeamLead(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Team-Lead assigned successfully.");
-        this.assignTeamClose.nativeElement.click();
-      }
-      else {
+      recruitee_id: this.details.recruitee_id,
+    };
+    this.http.assignTeamLead(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Team-Lead assigned successfully.");
+          this.assignTeamClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
+    );
   }
 
   submitManager(val) {
@@ -552,20 +604,22 @@ export class AssignManagerComponent implements OnInit {
       user_id: val.selected_emp,
       role_id: val.role_id,
       incentive_percentage: val.incentive_percentage,
-      recruitee_id: this.details.recruitee_id
-    }
-    this.http.assignManager(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Manager assigned successfully.");
-        this.assignManagerClose.nativeElement.click();
-      }
-      else {
+      recruitee_id: this.details.recruitee_id,
+    };
+    this.http.assignManager(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Manager assigned successfully.");
+          this.assignManagerClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
+    );
   }
 
   submitManagerOthers(val) {
@@ -575,20 +629,22 @@ export class AssignManagerComponent implements OnInit {
       user_id: val.selected_emp,
       role_id: val.role_id,
       incentive_percentage: val.incentive_percentage,
-      recruitee_id: this.details.recruitee_id
-    }
-    this.http.assignOthers(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Assigned successfully.");
-        this.assignManagerClose.nativeElement.click();
-      }
-      else {
+      recruitee_id: this.details.recruitee_id,
+    };
+    this.http.assignOthers(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Assigned successfully.");
+          this.assignManagerClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    })
+    );
   }
 
   //**********************************//
@@ -598,14 +654,13 @@ export class AssignManagerComponent implements OnInit {
     this.allUserRole = [];
     this.http.getUserRoleDetails().subscribe((r: any) => {
       // //console.log(r);
-      r.forEach(e => {
+      r.forEach((e) => {
         //console.log(e.role_status)
         if (e.role_status === "active") {
           e.value = false;
           e.employeeArray = [];
           e.dropdownShow = false;
           this.allUserRole.push(e);
-
         }
       });
     });
@@ -616,20 +671,19 @@ export class AssignManagerComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'error',
+      icon: "error",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     });
   }
@@ -637,45 +691,42 @@ export class AssignManagerComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         //window.location.reload();
         this.searchJob();
-
       }
-    })
+    });
   }
 
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
-    })
+    });
   }
-
 }

@@ -1,21 +1,28 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
-import { Country, State, City } from 'country-state-city';
-import { IDayCalendarConfig } from 'ng2-date-picker';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import Swal from "sweetalert2";
+import * as moment from "moment";
+import { Country, State, City } from "country-state-city";
+import { IDayCalendarConfig } from "ng2-date-picker";
 
 @Component({
-  selector: 'app-manage-jobs',
-  templateUrl: './manage-jobs.component.html',
-  styleUrls: ['./manage-jobs.component.css']
+  selector: "app-manage-jobs",
+  templateUrl: "./manage-jobs.component.html",
+  styleUrls: ["./manage-jobs.component.css"],
 })
 export class ManageJobsComponent implements OnInit {
-  @ViewChild('closeEdit', { static: false }) private closeEdit: ElementRef;
-  @ViewChild('closeStatusModal', { static: false }) private closeStatusModal: ElementRef;
-  @ViewChild('closeDeleteModal', { static: false }) private closeDeleteModal: ElementRef;
+  @ViewChild("closeEdit", { static: false }) private closeEdit: ElementRef;
+  @ViewChild("closeStatusModal", { static: false })
+  private closeStatusModal: ElementRef;
+  @ViewChild("closeDeleteModal", { static: false })
+  private closeDeleteModal: ElementRef;
 
   // cities = {
   //   "Alabama": ["ABBEVILLE", "ADAMSVILLE", "ADDISON", "AKRON", "ALABASTER", "ALBERTVILLE",
@@ -933,16 +940,21 @@ export class ManageJobsComponent implements OnInit {
   filterArrayCity: any = [];
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: 'down',
-    format: 'MM/DD/YYYY'
-  }
+    drops: "down",
+    format: "MM/DD/YYYY",
+  };
   delete_date: any;
   user_type: any;
 
-
-  constructor(public http: AdminService, public route: ActivatedRoute, public router: Router, public fb: FormBuilder,) {
+  constructor(
+    public http: AdminService,
+    public route: ActivatedRoute,
+    public router: Router,
+    public fb: FormBuilder
+  ) {
     this.user_id = sessionStorage.getItem("user_id");
-    this.excelfileName = "manage_jobs(" + moment(new Date).format("MM-DD-YYYY") + ")";
+    this.excelfileName =
+      "manage_jobs(" + moment(new Date()).format("MM-DD-YYYY") + ")";
     this.user_type = sessionStorage.getItem("user_type");
   }
 
@@ -955,7 +967,6 @@ export class ManageJobsComponent implements OnInit {
     /** spinner starts on init */
     this.http.spinnerShow();
     setTimeout(() => {
-
       this.http.spinnerHide();
     }, 900);
     this.states = State.getStatesOfCountry("US");
@@ -971,25 +982,45 @@ export class ManageJobsComponent implements OnInit {
     this.getAllSystemNames();
 
     this.EditJobForm = this.fb.group({
-      job_id: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
+      job_id: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(20),
+      ]),
       state: new FormControl(null, [Validators.required]),
       city: new FormControl(null, [Validators.required]),
-      job_title: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      job_desc: new FormControl(null, [Validators.required, Validators.maxLength(1000)]),
+      job_title: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      job_desc: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(1000),
+      ]),
       bill_rate: new FormControl(null, [Validators.required]),
       blended_pay_rate: new FormControl(null, [Validators.required]),
       ot_holiday_rate: new FormControl(null, [Validators.required]),
       regular_pay_rate: new FormControl(null, [Validators.required]),
-      ot_holiday_pay_rate_traveller: new FormControl(null, [Validators.required]),
+      ot_holiday_pay_rate_traveller: new FormControl(null, [
+        Validators.required,
+      ]),
       ot_holiday_pay_rate_local: new FormControl(null, [Validators.required]),
       position: new FormControl(null),
       job_type: new FormControl(null),
       job_sector: new FormControl(null, [Validators.required]),
-      system_name: new FormControl(null, [Validators.required, Validators.maxLength(200)]),
+      system_name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
       client_name: new FormControl(null, [Validators.required]),
       req_info: new FormControl(null, Validators.maxLength(1000)),
-      job_duration: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-      confirmed_hr: new FormControl(null, [Validators.required, Validators.maxLength(100)])
+      job_duration: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      confirmed_hr: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
     });
   }
   /////////////////////////////
@@ -1002,8 +1033,10 @@ export class ManageJobsComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -1019,28 +1052,25 @@ export class ManageJobsComponent implements OnInit {
               break;
             }
 
-
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
-
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive101").className = "active";
-    }, 200)
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -1048,111 +1078,111 @@ export class ManageJobsComponent implements OnInit {
   getAllJob() {
     this.jobList = [];
     let body = {
-      status: this.job_status_select
-    }
-    this.http.getAllJobs(body).subscribe((res: any) => {
-      //console.log(res);
-      if (res.length !== 0) {
-        this.jobList = res;
-        this.filterArray = res;
-      }
-      else {
+      status: this.job_status_select,
+    };
+    this.http.getAllJobs(body).subscribe(
+      (res: any) => {
+        //console.log(res);
+        if (res.length !== 0) {
+          this.jobList = res;
+          this.filterArray = res;
+        } else {
+          Swal.fire({
+            title: "No search result found!",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+            }
+          });
+        }
+      },
+      (err) => {
         Swal.fire({
-          title: 'No search result found!',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-    }, err => {
-      Swal.fire({
-        title: 'Something went wrong,please try again.',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonColor: '#4C96D7',
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-
-        }
-      })
-    });
+    );
   }
 
   onJobSelected(val) {
     this.http.spinnerShow();
     this.jobList = [];
     let body = {
-      status: val
-    }
-    this.http.getAllJobs(body).subscribe((res: any) => {
-      //console.log(res);
-      if (res.length !== 0) {
-        this.http.spinnerHide();
-        this.jobList = res;
-        this.filterArray = res;
-      }
-      else {
+      status: val,
+    };
+    this.http.getAllJobs(body).subscribe(
+      (res: any) => {
+        //console.log(res);
+        if (res.length !== 0) {
+          this.http.spinnerHide();
+          this.jobList = res;
+          this.filterArray = res;
+        } else {
+          this.http.spinnerHide();
+          Swal.fire({
+            title: "No search result found!",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+            }
+          });
+        }
+      },
+      (err) => {
         this.http.spinnerHide();
         Swal.fire({
-          title: 'No search result found!',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-    }, err => {
-      this.http.spinnerHide();
-      Swal.fire({
-        title: 'Something went wrong,please try again.',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonColor: '#4C96D7',
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-
-        }
-      })
-    });
+    );
   }
 
   get searchData() {
@@ -1161,18 +1191,20 @@ export class ManageJobsComponent implements OnInit {
 
   set searchData(value) {
     this.search_data = value;
-    this.jobList = this.search_data ? this.filterList(this.search_data) : this.filterArray;
+    this.jobList = this.search_data
+      ? this.filterList(this.search_data)
+      : this.filterArray;
   }
 
   filterList(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArray.filter((list: any) =>
-      list.job_title.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      //list.job_type_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.state.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.city.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArray.filter(
+      (list: any) =>
+        list.job_title.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        //list.job_type_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.state.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.city.toLocaleLowerCase().indexOf(filterby) !== -1
     );
-
   }
 
   get jobID() {
@@ -1181,15 +1213,16 @@ export class ManageJobsComponent implements OnInit {
 
   set jobID(val) {
     this.jobIDData = val;
-    this.jobList = this.jobIDData ? this.filterListforjobID(this.jobIDData) : this.filterArray;
+    this.jobList = this.jobIDData
+      ? this.filterListforjobID(this.jobIDData)
+      : this.filterArray;
   }
 
   filterListforjobID(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArray.filter((list: any) =>
-      list.job_no.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArray.filter(
+      (list: any) => list.job_no.toLocaleLowerCase().indexOf(filterby) !== -1
     );
-
   }
 
   get job_posted_by() {
@@ -1198,17 +1231,20 @@ export class ManageJobsComponent implements OnInit {
 
   set job_posted_by(val) {
     this.jobPostedByData = val;
-    this.jobList = this.jobPostedByData ? this.filterListforjobPostBy(this.jobPostedByData) : this.filterArray;
+    this.jobList = this.jobPostedByData
+      ? this.filterListforjobPostBy(this.jobPostedByData)
+      : this.filterArray;
     //console.log(this.jobList)
   }
 
   filterListforjobPostBy(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArray.filter((list: any) =>
-      list.job_post_by_first_name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.job_post_by_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArray.filter(
+      (list: any) =>
+        list.job_post_by_first_name.toLocaleLowerCase().indexOf(filterby) !==
+          -1 ||
+        list.job_post_by_last_name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
-
   }
 
   positionTypeData: any;
@@ -1218,17 +1254,19 @@ export class ManageJobsComponent implements OnInit {
 
   set position_type_name(val) {
     this.positionTypeData = val;
-    this.jobList = this.positionTypeData ? this.filterListforPosition(this.positionTypeData) : this.filterArray;
+    this.jobList = this.positionTypeData
+      ? this.filterListforPosition(this.positionTypeData)
+      : this.filterArray;
     // //console.log(this.jobList)
   }
 
   filterListforPosition(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArray.filter((list: any) =>
-      list.position_type_name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArray.filter(
+      (list: any) =>
+        list.position_type_name.toLocaleLowerCase().indexOf(filterby) !== -1
       //list.position_type.toLocaleLowerCase().indexOf(filterby) !== -1
     );
-
   }
 
   viewJob(val) {
@@ -1240,7 +1278,7 @@ export class ManageJobsComponent implements OnInit {
   getJobType() {
     this.jobType = [];
     this.http.getAlljobType().subscribe((res: any) => {
-      res.forEach(e => {
+      res.forEach((e) => {
         if (e.job_type_status === "active") {
           this.jobType.push(e);
         }
@@ -1252,7 +1290,7 @@ export class ManageJobsComponent implements OnInit {
   getPositionType() {
     this.positiontype = [];
     this.http.getAllPositionType().subscribe((res: any) => {
-      res.forEach(e => {
+      res.forEach((e) => {
         if (e.position_type_status === "active") {
           this.positiontype.push(e);
         }
@@ -1264,7 +1302,7 @@ export class ManageJobsComponent implements OnInit {
   getAlljobSector() {
     this.jobSector = [];
     this.http.getAlljobSector().subscribe((res: any) => {
-      res.forEach(e => {
+      res.forEach((e) => {
         if (e.job_sector_status === "active") {
           this.jobSector.push(e);
         }
@@ -1294,10 +1332,10 @@ export class ManageJobsComponent implements OnInit {
     this.filteredCity = [];
     this.filterArrayCity = [];
     this.job_city = "";
-    this.EditJobForm.controls['city'].setValue('');
+    this.EditJobForm.controls["city"].setValue("");
     this.filteredCity = City.getCitiesOfState("US", value);
     this.filterArrayCity = City.getCitiesOfState("US", value);
-    this.EditJobForm.controls['state'].setValue(name);
+    this.EditJobForm.controls["state"].setValue(name);
     this.stateList = false;
     //console.log(this.filteredCity)
     // //console.log(value);
@@ -1315,7 +1353,7 @@ export class ManageJobsComponent implements OnInit {
 
   onOptionsSelectedCity(value: any) {
     //console.log(value);
-    this.EditJobForm.controls['city'].setValue(value);
+    this.EditJobForm.controls["city"].setValue(value);
     this.cityList = false;
   }
 
@@ -1330,71 +1368,88 @@ export class ManageJobsComponent implements OnInit {
   searchState(ev) {
     ////console.log(this.EditJobForm.controls.state.value)
     let search_data = this.EditJobForm.controls.state.value;
-    this.states = search_data ? this.filterListState(search_data) : this.filterArrayState;
+    this.states = search_data
+      ? this.filterListState(search_data)
+      : this.filterArrayState;
   }
 
   filterListState(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArrayState.filter((list: any) =>
-      list.name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
-      list.isoCode.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArrayState.filter(
+      (list: any) =>
+        list.name.toLocaleLowerCase().indexOf(filterby) !== -1 ||
+        list.isoCode.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
   searchCity(ev) {
     ////console.log(this.EditJobForm.controls.city.value)
     let search_data = this.EditJobForm.controls.city.value;
-    this.filteredCity = search_data ? this.filterListCity(search_data) : this.filterArrayCity;
+    this.filteredCity = search_data
+      ? this.filterListCity(search_data)
+      : this.filterArrayCity;
   }
 
   filterListCity(filterby) {
     filterby = filterby.toLocaleLowerCase();
-    return this.filterArrayCity.filter((list: any) =>
-      list.name.toLocaleLowerCase().indexOf(filterby) !== -1
+    return this.filterArrayCity.filter(
+      (list: any) => list.name.toLocaleLowerCase().indexOf(filterby) !== -1
     );
   }
 
   changepayRate(e) {
     //console.log(this.EditJobForm.controls.bill_rate.value)
-    this.blended_pay_rate = (Number(this.EditJobForm.controls.bill_rate.value) / 1.28).toFixed(2);
-    this.regular_pay_rate = (Number(this.EditJobForm.controls.bill_rate.value) / 1.37).toFixed(2);
+    this.blended_pay_rate = (
+      Number(this.EditJobForm.controls.bill_rate.value) / 1.28
+    ).toFixed(2);
+    this.regular_pay_rate = (
+      Number(this.EditJobForm.controls.bill_rate.value) / 1.37
+    ).toFixed(2);
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault();
+    if (!keyAllowed()) e.preventDefault();
   }
 
   changeOTRate(e) {
-    this.ot_holiday_pay_rate_traveller = (Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.28).toFixed(2);
-    this.ot_holiday_pay_rate_local = (Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.37).toFixed(2);
+    this.ot_holiday_pay_rate_traveller = (
+      Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.28
+    ).toFixed(2);
+    this.ot_holiday_pay_rate_local = (
+      Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.37
+    ).toFixed(2);
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault();
+    if (!keyAllowed()) e.preventDefault();
   }
 
   EditJob(val) {
@@ -1407,7 +1462,7 @@ export class ManageJobsComponent implements OnInit {
     this.details = val;
     //console.log(this.details)
     this.job_state = this.details.state;
-    this.states.forEach(e => {
+    this.states.forEach((e) => {
       if (e.name === this.job_state) {
         this.filteredCity = City.getCitiesOfState("US", e.isoCode);
         this.filterArrayCity = City.getCitiesOfState("US", e.isoCode);
@@ -1424,7 +1479,8 @@ export class ManageJobsComponent implements OnInit {
     this.blended_pay_rate = this.details.blended_pay_rate;
     this.at_holiday_rate = this.details.at_holiday_rate;
     this.regular_pay_rate = this.details.regular_pay_rate;
-    this.ot_holiday_pay_rate_traveller = this.details.ot_holiday_pay_rate_traveller;
+    this.ot_holiday_pay_rate_traveller =
+      this.details.ot_holiday_pay_rate_traveller;
     this.ot_holiday_pay_rate_local = this.details.ot_holiday_pay_rate_local;
     this.position_type = this.details.position_type;
     this.job_type = this.details.job_type;
@@ -1434,7 +1490,7 @@ export class ManageJobsComponent implements OnInit {
     this.job_id = this.details.job_id;
     this.job_duration = this.details.duration;
     this.confirmed_hr = this.details.confirm_hr;
-    let array = this.details.shift.split(',');
+    let array = this.details.shift.split(",");
     for (var i in this.shiftArry) {
       this.shiftArry[i].value = false;
       if (array.indexOf(this.shiftArry[i].shift) > -1) {
@@ -1443,15 +1499,13 @@ export class ManageJobsComponent implements OnInit {
       }
     }
     //console.log(this.shit_details, this.shiftArry)
-
   }
 
   checkBoxSelect(value) {
     let index = this.shit_details.indexOf(value);
     if (index > -1) {
       this.shit_details.splice(index, 1);
-    }
-    else {
+    } else {
       this.shit_details.push(value);
     }
     //console.log(this.shit_details)
@@ -1462,189 +1516,188 @@ export class ManageJobsComponent implements OnInit {
     this.http.spinnerShow();
     let data = {
       job_id: this.job_id,
-      job_status: this.job_status
-    }
-    this.http.changeJobStatus(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
+      job_status: this.job_status,
+    };
+    this.http.changeJobStatus(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.http.spinnerHide();
+          this.closeStatusModal.nativeElement.click();
+          Swal.fire({
+            title: "Status changed successfully.",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.getAllJob();
+            }
+          });
+        } else {
+          this.http.spinnerHide();
+          this.closeStatusModal.nativeElement.click();
+          Swal.fire({
+            title: "Something went wrong,please try again.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+            }
+          });
+        }
+      },
+      (err) => {
         this.http.spinnerHide();
         this.closeStatusModal.nativeElement.click();
         Swal.fire({
-          title: 'Status changed successfully.',
-          icon: 'success',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.getAllJob();
-
-          }
-        })
-      }
-      else {
-        this.http.spinnerHide();
-        this.closeStatusModal.nativeElement.click();
-        Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
-          allowOutsideClick: false,
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeOutUp",
           },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-    }, err => {
-      this.http.spinnerHide();
-      this.closeStatusModal.nativeElement.click();
-      Swal.fire({
-        title: 'Something went wrong,please try again.',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonColor: '#4C96D7',
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-
-        }
-      })
-    });
+    );
   }
 
   updateDetails() {
     //console.log(this.job_status)
     let date = new Date();
     let strTime = date.toLocaleString("en-US", {
-      timeZone: "America/Los_Angeles"
+      timeZone: "America/Los_Angeles",
     });
 
     let data = {
-      "job_id": this.job_id,
-      "position_type": this.EditJobForm.controls.position.value,
-      "system_name": this.EditJobForm.controls.system_name.value,
-      "client_id": this.EditJobForm.controls.client_name.value,
-      "job_no": this.EditJobForm.controls.job_id.value,
-      "job_title": this.EditJobForm.controls.job_title.value,
-      "job_type": this.EditJobForm.controls.job_type.value,
-      "country": "USA",
-      "state": this.EditJobForm.controls.state.value,
-      "city": this.EditJobForm.controls.city.value,
-      "bill_rate": this.EditJobForm.controls.bill_rate.value,
-      "blended_pay_rate": this.EditJobForm.controls.blended_pay_rate.value,
-      "at_holiday_rate": this.EditJobForm.controls.ot_holiday_rate.value,
-      "regular_pay_rate": this.EditJobForm.controls.regular_pay_rate.value,
-      "ot_holiday_pay_rate_traveller": this.EditJobForm.controls.ot_holiday_pay_rate_traveller.value,
-      "ot_holiday_pay_rate_local": this.EditJobForm.controls.ot_holiday_pay_rate_local.value,
-      "job_description": this.EditJobForm.controls.job_desc.value,
-      "job_post_edit_by": sessionStorage.getItem("user_id"),
-      "job_post_edit_date": moment(strTime).format("MM/DD/YYYY"),
-      "req_information": this.EditJobForm.controls.req_info.value,
-      "job_sector": this.EditJobForm.controls.job_sector.value,
-      "duration": this.EditJobForm.controls.job_duration.value,
-      "shift": this.shit_details.join(','),
-      "confirm_hr": this.EditJobForm.controls.confirmed_hr.value,
-    }
+      job_id: this.job_id,
+      position_type: this.EditJobForm.controls.position.value,
+      system_name: this.EditJobForm.controls.system_name.value,
+      client_id: this.EditJobForm.controls.client_name.value,
+      job_no: this.EditJobForm.controls.job_id.value,
+      job_title: this.EditJobForm.controls.job_title.value,
+      job_type: this.EditJobForm.controls.job_type.value,
+      country: "USA",
+      state: this.EditJobForm.controls.state.value,
+      city: this.EditJobForm.controls.city.value,
+      bill_rate: this.EditJobForm.controls.bill_rate.value,
+      blended_pay_rate: this.EditJobForm.controls.blended_pay_rate.value,
+      at_holiday_rate: this.EditJobForm.controls.ot_holiday_rate.value,
+      regular_pay_rate: this.EditJobForm.controls.regular_pay_rate.value,
+      ot_holiday_pay_rate_traveller:
+        this.EditJobForm.controls.ot_holiday_pay_rate_traveller.value,
+      ot_holiday_pay_rate_local:
+        this.EditJobForm.controls.ot_holiday_pay_rate_local.value,
+      job_description: this.EditJobForm.controls.job_desc.value,
+      job_post_edit_by: sessionStorage.getItem("user_id"),
+      job_post_edit_date: moment(strTime).format("MM/DD/YYYY"),
+      req_information: this.EditJobForm.controls.req_info.value,
+      job_sector: this.EditJobForm.controls.job_sector.value,
+      duration: this.EditJobForm.controls.job_duration.value,
+      shift: this.shit_details.join(","),
+      confirm_hr: this.EditJobForm.controls.confirmed_hr.value,
+    };
     //console.log(data)
-    this.http.updateJobDetails(data).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-
+    this.http.updateJobDetails(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          Swal.fire({
+            title: "Info updated successfully.",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.closeEdit.nativeElement.click();
+              this.getAllJob();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Something went wrong,please try again.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.closeEdit.nativeElement.click();
+            }
+          });
+        }
+      },
+      (err) => {
         Swal.fire({
-          title: 'Info updated successfully.',
-          icon: 'success',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.closeEdit.nativeElement.click();
-            this.getAllJob();
-
           }
-        })
+        });
       }
-      else {
-
-        Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
-          allowOutsideClick: false,
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.closeEdit.nativeElement.click();
-          }
-        })
-      }
-    }, err => {
-
-      Swal.fire({
-        title: 'Something went wrong,please try again.',
-        icon: 'error',
-        showCancelButton: false,
-        confirmButtonColor: '#4C96D7',
-        confirmButtonText: 'Ok',
-        allowOutsideClick: false,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.closeEdit.nativeElement.click();
-        }
-      })
-    });
+    );
   }
 
   search(event) {
-    const cols = document.querySelectorAll('.itemList');
+    const cols = document.querySelectorAll(".itemList");
     const query = event.target.value.toLowerCase();
     requestAnimationFrame(() => {
       [].forEach.call(cols, (e) => {
         const shouldShow = e.textContent.toLowerCase().indexOf(query) > -1;
-        e.style.display = shouldShow ? 'block' : 'none';
+        e.style.display = shouldShow ? "block" : "none";
       });
     });
   }
@@ -1654,8 +1707,7 @@ export class ManageJobsComponent implements OnInit {
     let index = this.job_id_list.indexOf(value);
     if (index > -1) {
       this.job_id_list.splice(index, 1);
-    }
-    else {
+    } else {
       this.job_id_list.push(value);
     }
     //console.log(this.job_id_list)
@@ -1667,148 +1719,146 @@ export class ManageJobsComponent implements OnInit {
     //this.http.spinnerShow();
     if (this.delete_type === "delete_by_id") {
       let data = {
-        job_id: this.job_id_list
-      }
-      this.http.jobDeleteById(data).subscribe((res: any) => {
-        //console.log(res)
-        //this.http.spinnerHide();
-        if (res === 'success') {
+        job_id: this.job_id_list,
+      };
+      this.http.jobDeleteById(data).subscribe(
+        (res: any) => {
+          //console.log(res)
+          //this.http.spinnerHide();
+          if (res === "success") {
+            Swal.fire({
+              title: "Job deleted successfully.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#4C96D7",
+              confirmButtonText: "Ok",
+              allowOutsideClick: false,
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.closeDeleteModal.nativeElement.click();
+                this.getAllJob();
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Something went wrong,please try again.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#4C96D7",
+              confirmButtonText: "Ok",
+              allowOutsideClick: false,
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.closeDeleteModal.nativeElement.click();
+              }
+            });
+          }
+        },
+        (err) => {
+          //this.http.spinnerHide();
+          //console.log(err)
           Swal.fire({
-            title: 'Job deleted successfully.',
-            icon: 'success',
+            title: "Something went wrong,please try again.",
+            icon: "error",
             showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
             allowOutsideClick: false,
             showClass: {
-              popup: 'animate__animated animate__fadeInDown'
+              popup: "animate__animated animate__fadeInDown",
             },
             hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
+              popup: "animate__animated animate__fadeOutUp",
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               this.closeDeleteModal.nativeElement.click();
-              this.getAllJob();
-
             }
-          })
+          });
         }
-        else {
-          Swal.fire({
-            title: 'Something went wrong,please try again.',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.closeDeleteModal.nativeElement.click();
-            }
-          })
-        }
-      }, err => {
-        //this.http.spinnerHide();
-        //console.log(err)
-        Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
-          allowOutsideClick: false,
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.closeDeleteModal.nativeElement.click();
-          }
-        })
-      })
-    }
-    else if (this.delete_type === "delete_by_date") {
+      );
+    } else if (this.delete_type === "delete_by_date") {
       let data = {
-        job_delete_date: moment(this.delete_date).format("MM/DD/YYYY")
-      }
-      this.http.jobDeleteByDate(data).subscribe((res: any) => {
-        //console.log(res)
-        if (res === 'success') {
+        job_delete_date: moment(this.delete_date).format("MM/DD/YYYY"),
+      };
+      this.http.jobDeleteByDate(data).subscribe(
+        (res: any) => {
+          //console.log(res)
+          if (res === "success") {
+            Swal.fire({
+              title: "Job deleted successfully.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#4C96D7",
+              confirmButtonText: "Ok",
+              allowOutsideClick: false,
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.closeDeleteModal.nativeElement.click();
+                this.getAllJob();
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Something went wrong,please try again.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#4C96D7",
+              confirmButtonText: "Ok",
+              allowOutsideClick: false,
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.closeDeleteModal.nativeElement.click();
+              }
+            });
+          }
+        },
+        (err) => {
+          //console.log(err)
           Swal.fire({
-            title: 'Job deleted successfully.',
-            icon: 'success',
+            title: "Something went wrong,please try again.",
+            icon: "error",
             showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
+            confirmButtonColor: "#4C96D7",
+            confirmButtonText: "Ok",
             allowOutsideClick: false,
             showClass: {
-              popup: 'animate__animated animate__fadeInDown'
+              popup: "animate__animated animate__fadeInDown",
             },
             hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
+              popup: "animate__animated animate__fadeOutUp",
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               this.closeDeleteModal.nativeElement.click();
-              this.getAllJob();
-
             }
-          })
+          });
         }
-        else {
-          Swal.fire({
-            title: 'Something went wrong,please try again.',
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonColor: '#4C96D7',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.closeDeleteModal.nativeElement.click();
-            }
-          })
-        }
-      }, err => {
-        //console.log(err)
-        Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
-          allowOutsideClick: false,
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.closeDeleteModal.nativeElement.click();
-          }
-        })
-      })
+      );
     }
   }
-
-
-
 }

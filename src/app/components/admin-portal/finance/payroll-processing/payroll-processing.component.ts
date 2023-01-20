@@ -1,19 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import Swal from "sweetalert2";
+import * as moment from "moment";
 
 @Component({
-  selector: 'app-payroll-processing',
-  templateUrl: './payroll-processing.component.html',
-  styleUrls: ['./payroll-processing.component.css']
+  selector: "app-payroll-processing",
+  templateUrl: "./payroll-processing.component.html",
+  styleUrls: ["./payroll-processing.component.css"],
 })
 export class PayrollProcessingComponent implements OnInit {
-  @ViewChild('process1Close', { static: false }) private process1Close: ElementRef;
-  @ViewChild('processSecondClose', { static: false }) private processSecondClose: ElementRef;
-  @ViewChild('calculatePayroleClose', { static: false }) private calculatePayroleClose: ElementRef;
-
+  @ViewChild("process1Close", { static: false })
+  private process1Close: ElementRef;
+  @ViewChild("processSecondClose", { static: false })
+  private processSecondClose: ElementRef;
+  @ViewChild("calculatePayroleClose", { static: false })
+  private calculatePayroleClose: ElementRef;
 
   moduleArray: any = [];
   clientList: any = [];
@@ -33,7 +35,6 @@ export class PayrollProcessingComponent implements OnInit {
   clientList1: any;
   monthList2: any = [];
   weekList2: any = [];
-
 
   payrollDataList: any = [];
   showModalBox: boolean = false;
@@ -72,9 +73,14 @@ export class PayrollProcessingComponent implements OnInit {
   public count: any = 20;
   public page: any;
   /**paginate  */
-  constructor(public route: ActivatedRoute, public router: Router, public http: AdminService) {
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {
     this.user_id = sessionStorage.getItem("user_id");
-    this.excelfileName = "payroll_process(" + moment(new Date).format("MM-DD-YYYY") + ")";
+    this.excelfileName =
+      "payroll_process(" + moment(new Date()).format("MM-DD-YYYY") + ")";
   }
 
   ngOnInit() {
@@ -84,7 +90,12 @@ export class PayrollProcessingComponent implements OnInit {
     });
     this.getClients();
     this.getYear();
-    if (this.client_id1 === "ALL" && this.year1 === "ALL" && this.month1 === "ALL" && this.week1 === "ALL") {
+    if (
+      this.client_id1 === "ALL" &&
+      this.year1 === "ALL" &&
+      this.month1 === "ALL" &&
+      this.week1 === "ALL"
+    ) {
       this.searchList();
     }
     /** spinner starts on init */
@@ -92,8 +103,6 @@ export class PayrollProcessingComponent implements OnInit {
     setTimeout(() => {
       this.http.spinnerHide();
     }, 400);
-
-
   }
   /////////////////////////////
   public onPageChanged(event) {
@@ -106,8 +115,10 @@ export class PayrollProcessingComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -148,25 +159,24 @@ export class PayrollProcessingComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive301").className = "active";
-    }, 200)
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -198,10 +208,12 @@ export class PayrollProcessingComponent implements OnInit {
     if (val !== "ALL") {
       this.month1 = "";
       this.week1 = "";
-      this.http.getMonthFromClientIDandYr(this.client_id1, val).subscribe((res: any) => {
-        //console.log(res)
-        this.monthList2 = res;
-      });
+      this.http
+        .getMonthFromClientIDandYr(this.client_id1, val)
+        .subscribe((res: any) => {
+          //console.log(res)
+          this.monthList2 = res;
+        });
     }
   }
 
@@ -222,7 +234,6 @@ export class PayrollProcessingComponent implements OnInit {
       //console.log(res)
       this.yearList = res;
     });
-
   }
 
   onYearSelected(val) {
@@ -265,13 +276,13 @@ export class PayrollProcessingComponent implements OnInit {
       client_id: this.client_id1,
       year: this.year1,
       month: this.month1,
-      week_id: this.week1
-    }
+      week_id: this.week1,
+    };
     this.http.getPayrollAllData(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataListMain = res;
       this.http.spinnerHide();
-    })
+    });
   }
 
   editSubmit(val) {
@@ -283,20 +294,19 @@ export class PayrollProcessingComponent implements OnInit {
       year: val.year,
       month: val.month,
       week_id: val.week_id,
-      acc_file_id: val.acc_file_id
-    }
+      acc_file_id: val.acc_file_id,
+    };
     this.http.getDataByFileID(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataList = res;
-      this.payrollDataList.forEach(el => {
+      this.payrollDataList.forEach((el) => {
         if (el.payroll_status !== "submitted") {
           this.submitErr = "true";
-        }
-        else if (el.payroll_status === "submitted") {
+        } else if (el.payroll_status === "submitted") {
           this.submitErr = "";
         }
       });
-    })
+    });
   }
 
   next() {
@@ -307,35 +317,36 @@ export class PayrollProcessingComponent implements OnInit {
       client_id: this.client_id,
       year: this.year,
       month: this.month,
-      week_id: this.week
-    }
-    this.http.getPayrollDataOfSecondModal(body).subscribe((res: any) => {
-      //console.log(res);
+      week_id: this.week,
+    };
+    this.http.getPayrollDataOfSecondModal(body).subscribe(
+      (res: any) => {
+        //console.log(res);
 
-      if (res === "already exists") {
+        if (res === "already exists") {
+          this.processSecondClose.nativeElement.click();
+          this.errorMsg("File already created!");
+        } else if (res.message === "hiring data is greater than wk_end_date.") {
+          this.processSecondClose.nativeElement.click();
+          this.errorMsg("Hiring date is greater from week end date!");
+          this.deleteIncentiveFile(res.acc_file_id);
+        } else {
+          this.payrollDataList = res;
+          this.acc_file_id = res[0].account_file_id;
+          //this.errorMsg("No search result found!");
+        }
+      },
+      (err) => {
         this.processSecondClose.nativeElement.click();
-        this.errorMsg("File already created!");
+        this.errorMsg("Something went wrong,please try again!");
       }
-      else if (res.message === "hiring data is greater than wk_end_date.") {
-        this.processSecondClose.nativeElement.click();
-        this.errorMsg("Hiring date is greater from week end date!");
-        this.deleteIncentiveFile(res.acc_file_id)
-      }
-      else {
-        this.payrollDataList = res;
-        this.acc_file_id = res[0].account_file_id;
-        //this.errorMsg("No search result found!");
-      }
-    }, err => {
-      this.processSecondClose.nativeElement.click();
-      this.errorMsg("Something went wrong,please try again!");
-    });
+    );
   }
 
   deleteIncentiveFile(accFile_id) {
     let data = {
-      acc_file_id: accFile_id
-    }
+      acc_file_id: accFile_id,
+    };
     this.http.deleteFileIncentive(data).subscribe((res: any) => {
       //console.log(res)
     });
@@ -349,21 +360,20 @@ export class PayrollProcessingComponent implements OnInit {
       year: this.details.year,
       month: this.details.month,
       week_id: this.details.week_id,
-      acc_file_id: this.details.account_file_id
-    }
+      acc_file_id: this.details.account_file_id,
+    };
     this.http.getDataByFileID(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataList = res;
       this.acc_file_id = res[0].account_file_id;
-      this.payrollDataList.forEach(el => {
+      this.payrollDataList.forEach((el) => {
         if (el.payroll_status !== "submitted") {
           this.submitErr = "true";
-        }
-        else if (el.payroll_status === "submitted") {
+        } else if (el.payroll_status === "submitted") {
           this.submitErr = "";
         }
       });
-    })
+    });
   }
 
   openCalculation(val) {
@@ -374,89 +384,119 @@ export class PayrollProcessingComponent implements OnInit {
     let body1 = {
       assignment_id: this.details.assignment_id,
       week_id: this.details.week_id,
-      recruitee_id: this.details.recruitee_id
-    }
+      recruitee_id: this.details.recruitee_id,
+    };
     this.getWorkHour(body1);
     let body = {
       assignment_id: this.details.assignment_id,
       week_id: this.details.week_id,
-      rec_payroll_id: this.details.rec_payroll_id
-    }
-    this.http.getPayrollDataByAssignID(body).subscribe((res: any) => {
-      //console.log(res);
-      this.data = res[0];
-      this.weekly_per_diem = res[0].per_dieum_wk;
-      if (this.workHour.length !== 0 && (res[0].reg_hr === null || res[0].ot_hr === null || res[0].holiday_hr === null || res[0].bonus_amount === null)) {
-        this.regular_hr = this.workHour[0].rec_reg_hr;
-        this.ot_hr = this.workHour[0].rec_ot_hr;
-        this.holiday_hr = this.workHour[0].rec_holiday_hr;
-        this.bonus_amount = 0;
-        this.deduction_rate = 4.5;
-        this.misc_exp_amt = 0;
-        this.rec_work_hr_id = this.workHour[0].rec_work_hr_id;
-      }
-      else if (this.workHour.length === 0 && (res[0].reg_hr === null || res[0].ot_hr === null || res[0].holiday_hr === null || res[0].bonus_amount === null)) {
-        this.regular_hr = 0;
-        this.ot_hr = 0;
-        this.holiday_hr = 0;
-        this.bonus_amount = 0;
-        this.deduction_rate = "4.5";
-        this.misc_exp_amt = 0;
-        this.rec_work_hr_id = 0;
-      }
-      else {
-        this.regular_hr = res[0].reg_hr;
-        this.ot_hr = res[0].ot_hr;
-        this.holiday_hr = res[0].holiday_hr;
-        this.bonus_amount = res[0].bonus_amount;
-        this.deduction_rate = res[0].deducted_perc;
-        this.misc_exp_amt = res[0].misc_exp_amt;
-        this.rec_work_hr_id = this.workHour[0].rec_work_hr_id;
-      }
+      rec_payroll_id: this.details.rec_payroll_id,
+    };
+    this.http.getPayrollDataByAssignID(body).subscribe(
+      (res: any) => {
+        //console.log(res);
+        this.data = res[0];
+        this.weekly_per_diem = res[0].per_dieum_wk;
+        if (
+          this.workHour.length !== 0 &&
+          (res[0].reg_hr === null ||
+            res[0].ot_hr === null ||
+            res[0].holiday_hr === null ||
+            res[0].bonus_amount === null)
+        ) {
+          this.regular_hr = this.workHour[0].rec_reg_hr;
+          this.ot_hr = this.workHour[0].rec_ot_hr;
+          this.holiday_hr = this.workHour[0].rec_holiday_hr;
+          this.bonus_amount = 0;
+          this.deduction_rate = 4.5;
+          this.misc_exp_amt = 0;
+          this.rec_work_hr_id = this.workHour[0].rec_work_hr_id;
+        } else if (
+          this.workHour.length === 0 &&
+          (res[0].reg_hr === null ||
+            res[0].ot_hr === null ||
+            res[0].holiday_hr === null ||
+            res[0].bonus_amount === null)
+        ) {
+          this.regular_hr = 0;
+          this.ot_hr = 0;
+          this.holiday_hr = 0;
+          this.bonus_amount = 0;
+          this.deduction_rate = "4.5";
+          this.misc_exp_amt = 0;
+          this.rec_work_hr_id = 0;
+        } else {
+          this.regular_hr = res[0].reg_hr;
+          this.ot_hr = res[0].ot_hr;
+          this.holiday_hr = res[0].holiday_hr;
+          this.bonus_amount = res[0].bonus_amount;
+          this.deduction_rate = res[0].deducted_perc;
+          this.misc_exp_amt = res[0].misc_exp_amt;
+          this.rec_work_hr_id = this.workHour[0].rec_work_hr_id;
+        }
 
-      this.total_hr_worked = Number(this.regular_hr) + Number(this.ot_hr) + Number(this.holiday_hr);
-      this.taxable_income = res[0].taxable_amt;
-      this.non_taxable_income = res[0].nontaxable_amt;
-      this.total_gross_income = res[0].gross_amt;
-      this.comment = res[0].comments;
-      this.invoice_amount = res[0].invoice_amt;
-      this.invoice_after_deduction = res[0].deducted_invoice_amt;
+        this.total_hr_worked =
+          Number(this.regular_hr) +
+          Number(this.ot_hr) +
+          Number(this.holiday_hr);
+        this.taxable_income = res[0].taxable_amt;
+        this.non_taxable_income = res[0].nontaxable_amt;
+        this.total_gross_income = res[0].gross_amt;
+        this.comment = res[0].comments;
+        this.invoice_amount = res[0].invoice_amt;
+        this.invoice_after_deduction = res[0].deducted_invoice_amt;
 
-      this.profit = res[0].profit_amt;
-    }, err => {
-
-    })
+        this.profit = res[0].profit_amt;
+      },
+      (err) => {}
+    );
   }
 
   getWorkHour(data) {
-    this.http.getWorkHour(data).subscribe((res) => {
-      this.workHour = res;
-      //console.log(this.workHour)
-    }, err => {
-
-    })
+    this.http.getWorkHour(data).subscribe(
+      (res) => {
+        this.workHour = res;
+        //console.log(this.workHour)
+      },
+      (err) => {}
+    );
   }
 
   changetotalHr(e) {
+    this.total_hr_worked =
+      Number(this.regular_hr) + Number(this.ot_hr) + Number(this.holiday_hr);
 
-    this.total_hr_worked = Number(this.regular_hr) + Number(this.ot_hr) + Number(this.holiday_hr);
-
-    this.taxable_income = (((Number(this.regular_hr) * Number(this.data.onb_regular_pay_rate)) +
-      (Number(this.ot_hr) * Number(this.data.onb_ot_pay_rate)) +
-      (Number(this.holiday_hr) * Number(this.data.onb_holiday_pay_rate)) + Number(this.bonus_amount))
-      - Number(this.weekly_per_diem)).toFixed(2);
+    this.taxable_income = (
+      Number(this.regular_hr) * Number(this.data.onb_regular_pay_rate) +
+      Number(this.ot_hr) * Number(this.data.onb_ot_pay_rate) +
+      Number(this.holiday_hr) * Number(this.data.onb_holiday_pay_rate) +
+      Number(this.bonus_amount) -
+      Number(this.weekly_per_diem)
+    ).toFixed(2);
 
     this.non_taxable_income = Number(this.weekly_per_diem);
 
-    this.total_gross_income = (Number(this.taxable_income) + Number(this.non_taxable_income)).toFixed(2);
+    this.total_gross_income = (
+      Number(this.taxable_income) + Number(this.non_taxable_income)
+    ).toFixed(2);
 
-    this.invoice_amount = (((Number(this.regular_hr) * Number(this.data.onb_regular_bill_rate)) +
-      (Number(this.ot_hr) * Number(this.data.onb_ot_bill_rate)) +
-      (Number(this.holiday_hr) * Number(this.data.onb_holiday_bill_rate)))).toFixed(2);
+    this.invoice_amount = (
+      Number(this.regular_hr) * Number(this.data.onb_regular_bill_rate) +
+      Number(this.ot_hr) * Number(this.data.onb_ot_bill_rate) +
+      Number(this.holiday_hr) * Number(this.data.onb_holiday_bill_rate)
+    ).toFixed(2);
 
-    this.invoice_after_deduction = (Number(this.invoice_amount) - ((Number(this.invoice_amount) * Number(this.deduction_rate)) / 100)).toFixed(2);
+    this.invoice_after_deduction = (
+      Number(this.invoice_amount) -
+      (Number(this.invoice_amount) * Number(this.deduction_rate)) / 100
+    ).toFixed(2);
 
-    this.profit = ((Number(this.invoice_after_deduction) - Number(this.total_gross_income) - (Number(this.taxable_income) * 0.12)) - (Number(this.misc_exp_amt))).toFixed(2);
+    this.profit = (
+      Number(this.invoice_after_deduction) -
+      Number(this.total_gross_income) -
+      Number(this.taxable_income) * 0.12 -
+      Number(this.misc_exp_amt)
+    ).toFixed(2);
 
     // var t = e.target.value;
     // e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
@@ -465,23 +505,27 @@ export class PayrollProcessingComponent implements OnInit {
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault();
+    if (!keyAllowed()) e.preventDefault();
   }
 
-
   changeDeduction(e) {
+    this.invoice_after_deduction = (
+      Number(this.invoice_amount) -
+      (Number(this.invoice_amount) * Number(this.deduction_rate)) / 100
+    ).toFixed(2);
 
-    this.invoice_after_deduction = (Number(this.invoice_amount) - ((Number(this.invoice_amount) * Number(this.deduction_rate)) / 100)).toFixed(2);
-
-    this.profit = (Number(this.invoice_after_deduction) - Number(this.total_gross_income) - (Number(this.taxable_income) * 0.12)).toFixed(2);
+    this.profit = (
+      Number(this.invoice_after_deduction) -
+      Number(this.total_gross_income) -
+      Number(this.taxable_income) * 0.12
+    ).toFixed(2);
 
     // var t = e.target.value;
     // e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
@@ -490,104 +534,104 @@ export class PayrollProcessingComponent implements OnInit {
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault();
-
-
+    if (!keyAllowed()) e.preventDefault();
   }
 
   submitPayroll() {
     //console.log(this.data)
     //console.log(this.details)
     let insertJson = {
-      "rec_payroll_id": this.data.rec_payroll_id,
-      "assignment_id": this.details.assignment_id,
-      "week_id": this.details.week_id,
-      "month": this.details.month,
-      "year": this.details.year,
-      "acc_file_id": this.details.account_file_id,
-      "reg_hr": this.regular_hr.toFixed(2),
-      "ot_hr": this.ot_hr.toFixed(2),
-      "holiday_hr": this.holiday_hr.toFixed(2),
-      "per_dieum_amt": this.weekly_per_diem.toFixed(2),
-      "bonus_amount": this.bonus_amount.toFixed(2),
-      "taxable_amt": this.taxable_income,
-      "nontaxable_amt": this.non_taxable_income.toFixed(2),
-      "gross_amt": this.total_gross_income,
-      "invoice_amt": this.invoice_amount,
-      "deducted_invoice_amt": this.invoice_after_deduction,
-      "profit_amt": this.profit,
-      "deducted_perc": this.deduction_rate,
-      "comments": this.comment,
-      "payroll_status": "submitted",
-      "misc_exp_amt": this.misc_exp_amt.toFixed(2),
-      "rec_work_hr_id": this.rec_work_hr_id
-    }
+      rec_payroll_id: this.data.rec_payroll_id,
+      assignment_id: this.details.assignment_id,
+      week_id: this.details.week_id,
+      month: this.details.month,
+      year: this.details.year,
+      acc_file_id: this.details.account_file_id,
+      reg_hr: this.regular_hr.toFixed(2),
+      ot_hr: this.ot_hr.toFixed(2),
+      holiday_hr: this.holiday_hr.toFixed(2),
+      per_dieum_amt: this.weekly_per_diem.toFixed(2),
+      bonus_amount: this.bonus_amount.toFixed(2),
+      taxable_amt: this.taxable_income,
+      nontaxable_amt: this.non_taxable_income.toFixed(2),
+      gross_amt: this.total_gross_income,
+      invoice_amt: this.invoice_amount,
+      deducted_invoice_amt: this.invoice_after_deduction,
+      profit_amt: this.profit,
+      deducted_perc: this.deduction_rate,
+      comments: this.comment,
+      payroll_status: "submitted",
+      misc_exp_amt: this.misc_exp_amt.toFixed(2),
+      rec_work_hr_id: this.rec_work_hr_id,
+    };
     //console.log(insertJson)
 
-    this.http.insertPayrollData(insertJson).subscribe((res: any) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Payroll calculated successfully.")
-      }
-      else {
-
+    this.http.insertPayrollData(insertJson).subscribe(
+      (res: any) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Payroll calculated successfully.");
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-
-    }, err => {
-
-      this.errorMsg("Something went wrong. Please Try Again.");
-    });
+    );
   }
 
   submitFile() {
     //console.log(this.acc_file_id)
     let data = {
       acc_file_id: this.acc_file_id,
-      account_status: "submitted"
-    }
-    this.http.submitFile(data).subscribe((res: any) => {
-      //console.log(res);
-      if (res === "success") {
-        this.successMsg2("Payroll file submitted successfully.");
-        this.processSecondClose.nativeElement.click();
-        this.searchList();
-      }
-      else {
+      account_status: "submitted",
+    };
+    this.http.submitFile(data).subscribe(
+      (res: any) => {
+        //console.log(res);
+        if (res === "success") {
+          this.successMsg2("Payroll file submitted successfully.");
+          this.processSecondClose.nativeElement.click();
+          this.searchList();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    });
+    );
   }
 
   saveFile() {
     //console.log(this.acc_file_id)
     let data = {
       acc_file_id: this.acc_file_id,
-      account_status: "inprocess"
-    }
-    this.http.submitFile(data).subscribe((res: any) => {
-      //console.log(res);
-      if (res === "success") {
-        this.successMsg2("Payroll file saved successfully.");
-        //this.processSecondClose.nativeElement.click();
-        //this.searchList();
-      }
-      else {
+      account_status: "inprocess",
+    };
+    this.http.submitFile(data).subscribe(
+      (res: any) => {
+        //console.log(res);
+        if (res === "success") {
+          this.successMsg2("Payroll file saved successfully.");
+          //this.processSecondClose.nativeElement.click();
+          //this.searchList();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    });
+    );
   }
 
   ////////////////////////////
@@ -595,20 +639,19 @@ export class PayrollProcessingComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'error',
+      icon: "error",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     });
   }
@@ -616,45 +659,42 @@ export class PayrollProcessingComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         this.calculatePayroleClose.nativeElement.click();
         this.refreshSecondModal();
       }
-    })
+    });
   }
 
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
-    })
+    });
   }
-
-
 }

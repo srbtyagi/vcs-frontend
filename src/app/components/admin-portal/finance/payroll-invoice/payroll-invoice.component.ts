@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import jspdf from "jspdf";
+import html2canvas from "html2canvas";
+import Swal from "sweetalert2";
+import * as moment from "moment";
 
 @Component({
-  selector: 'app-payroll-invoice',
-  templateUrl: './payroll-invoice.component.html',
-  styleUrls: ['./payroll-invoice.component.css']
+  selector: "app-payroll-invoice",
+  templateUrl: "./payroll-invoice.component.html",
+  styleUrls: ["./payroll-invoice.component.css"],
 })
 export class PayrollInvoiceComponent implements OnInit {
-
   moduleArray: any = [];
 
   client_id1: any = "ALL";
@@ -33,7 +32,6 @@ export class PayrollInvoiceComponent implements OnInit {
   week: any;
   payrollDataListMain: any = [];
 
-
   payrollDataList: any = [];
   acc_file_id: any;
   showModalBox: boolean = false;
@@ -52,13 +50,18 @@ export class PayrollInvoiceComponent implements OnInit {
   showDivPdf: boolean = false;
   total_work_hr: any;
   excelfileName: any;
- /*paginate */
- public count:any = 20;
- public page: any;
- /**paginate  */
-  constructor(public route: ActivatedRoute, public router: Router, public http: AdminService) {
+  /*paginate */
+  public count: any = 20;
+  public page: any;
+  /**paginate  */
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {
     this.user_id = sessionStorage.getItem("user_id");
-    this.excelfileName = "payroll_invoice(" + moment(new Date).format("MM-DD-YYYY") + ")";
+    this.excelfileName =
+      "payroll_invoice(" + moment(new Date()).format("MM-DD-YYYY") + ")";
   }
 
   ngOnInit() {
@@ -68,7 +71,12 @@ export class PayrollInvoiceComponent implements OnInit {
     });
     this.getClients();
     this.getYear();
-    if (this.client_id1 === "ALL" && this.year1 === "ALL" && this.month1 === "ALL" && this.week1 === "ALL") {
+    if (
+      this.client_id1 === "ALL" &&
+      this.year1 === "ALL" &&
+      this.month1 === "ALL" &&
+      this.week1 === "ALL"
+    ) {
       this.searchList();
     }
     /** spinner starts on init */
@@ -76,13 +84,11 @@ export class PayrollInvoiceComponent implements OnInit {
     setTimeout(() => {
       this.http.spinnerHide();
     }, 400);
-
-
   }
   /////////////////////////////
-  public onPageChanged(event){
-    this.page = event; 
-    window.scrollTo(0,0); 
+  public onPageChanged(event) {
+    this.page = event;
+    window.scrollTo(0, 0);
   }
   /////////////////////////
 
@@ -90,8 +96,10 @@ export class PayrollInvoiceComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -132,25 +140,24 @@ export class PayrollInvoiceComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive303").className = "active";
-    }, 200)
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -178,10 +185,12 @@ export class PayrollInvoiceComponent implements OnInit {
   onYearSelected2(val) {
     //console.log(val)
     if (val !== "ALL") {
-      this.http.getMonthFromClientIDandYr(this.client_id1, val).subscribe((res: any) => {
-        //console.log(res)
-        this.monthList2 = res;
-      });
+      this.http
+        .getMonthFromClientIDandYr(this.client_id1, val)
+        .subscribe((res: any) => {
+          //console.log(res)
+          this.monthList2 = res;
+        });
     }
   }
 
@@ -200,7 +209,6 @@ export class PayrollInvoiceComponent implements OnInit {
       //console.log(res)
       this.yearList = res;
     });
-
   }
 
   onYearSelected(val) {
@@ -230,13 +238,13 @@ export class PayrollInvoiceComponent implements OnInit {
       client_id: this.client_id1,
       year: this.year1,
       month: this.month1,
-      week_id: this.week1
-    }
+      week_id: this.week1,
+    };
     this.http.getPayrollInvoiceData(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataListMain = res;
       this.http.spinnerHide();
-    })
+    });
   }
 
   clickDownload(val) {
@@ -244,51 +252,54 @@ export class PayrollInvoiceComponent implements OnInit {
     this.payrollDataList = [];
     this.acc_file_id = val.acc_file_id;
     let body = {
-      acc_file_id: val.acc_file_id
-    }
+      acc_file_id: val.acc_file_id,
+    };
     this.http.getInvoiceDataByFileID(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataList = res;
-    })
+    });
   }
 
   findrecuiteeCode(ev) {
     //console.log(this.recruitee_name)
     let data = {
-      name: this.recruitee_name
-    }
+      name: this.recruitee_name,
+    };
     this.http.getRecruiteeCodebyName(data).subscribe((res: any) => {
       //console.log(res)
       this.nameList = res;
       if (this.nameList.length !== 0) {
         this.showNameList = true;
-      }
-      else {
+      } else {
         this.showNameList = false;
       }
-    })
+    });
   }
 
   findrecuiteeName(ev) {
     //console.log(this.recruitee_code)
     let data = {
-      code: this.recruitee_code
-    }
+      code: this.recruitee_code,
+    };
     this.http.getRecruiteeNameByCode(data).subscribe((res: any) => {
       //console.log(res)
       this.codeList = res;
       if (this.codeList.length !== 0) {
         this.showCodeList = true;
-      }
-      else {
+      } else {
         this.showCodeList = false;
       }
-    })
+    });
   }
 
   selectName(val) {
     this.recruitee_code = val.recruitee_code;
-    this.recruitee_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+    this.recruitee_name =
+      val.user_first_name +
+      " " +
+      val.user_middle_name +
+      " " +
+      val.user_last_name;
     this.recruitee_id = val.recruitee_id;
     this.showNameList = false;
     this.showCodeList = false;
@@ -297,7 +308,12 @@ export class PayrollInvoiceComponent implements OnInit {
 
   selectCode(val) {
     this.recruitee_code = val.recruitee_code;
-    this.recruitee_name = val.user_first_name + ' ' + val.user_middle_name + ' ' + val.user_last_name;
+    this.recruitee_name =
+      val.user_first_name +
+      " " +
+      val.user_middle_name +
+      " " +
+      val.user_last_name;
     this.recruitee_id = val.recruitee_id;
     this.showNameList = false;
     this.showCodeList = false;
@@ -310,28 +326,32 @@ export class PayrollInvoiceComponent implements OnInit {
       recruitee_id: this.recruitee_id,
       week_id: this.week,
       year: this.year,
-      month: this.month
-    }
-    this.http.seachRecruiteePayroll(data).subscribe((res: any) => {
-      //console.log(res)
-      this.searchPayrollList = res;
-      this.showPayslipModalBox = true;
-      if (this.searchPayrollList.length === 0) {
-        this.errorMsg("No search result found!");
+      month: this.month,
+    };
+    this.http.seachRecruiteePayroll(data).subscribe(
+      (res: any) => {
+        //console.log(res)
+        this.searchPayrollList = res;
+        this.showPayslipModalBox = true;
+        if (this.searchPayrollList.length === 0) {
+          this.errorMsg("No search result found!");
+        } else {
+        }
+      },
+      (err) => {
+        this.errorMsg("Something went wrong,please try again!");
       }
-      else {
-
-      }
-    }, err => {
-      this.errorMsg("Something went wrong,please try again!");
-    })
+    );
   }
 
   viewslip(val) {
     this.details = "";
     this.total_work_hr = "";
     this.details = val;
-    this.total_work_hr = Number(this.details.reg_hr) + Number(this.details.holiday_hr) + Number(this.details.ot_hr);
+    this.total_work_hr =
+      Number(this.details.reg_hr) +
+      Number(this.details.holiday_hr) +
+      Number(this.details.ot_hr);
   }
 
   downloadPayslip() {
@@ -339,47 +359,45 @@ export class PayrollInvoiceComponent implements OnInit {
     setTimeout(() => {
       let data = document.getElementById("payslipDiv");
       //console.log(data)
-      html2canvas(data).then(canvas => {
+      html2canvas(data).then((canvas) => {
         var imgWidth = 22;
         var pageHeight = 295;
-        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var imgHeight = (canvas.height * imgWidth) / canvas.width;
         var heightLeft = imgHeight;
-        const contentDataURL = canvas.toDataURL('image/png')
+        const contentDataURL = canvas.toDataURL("image/png");
         //let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-        let pdf = new jspdf('p', 'cm', 'a4'); //Generates PDF in portrait mode
+        let pdf = new jspdf("p", "cm", "a4"); //Generates PDF in portrait mode
         var position = 0;
         pdf.setFont("helvetica");
         pdf.setFontSize(20);
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-        pdf.save('payslip.pdf');
+        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.save("payslip.pdf");
       });
     }, 100);
 
     setTimeout(() => {
       this.showDivPdf = false;
-    }, 100)
+    }, 100);
   }
-
 
   ////////////////////////////
 
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'error',
+      icon: "error",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     });
   }
@@ -387,24 +405,20 @@ export class PayrollInvoiceComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
-    })
+    });
   }
-
-
-
 }

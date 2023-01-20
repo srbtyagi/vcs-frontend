@@ -4,10 +4,10 @@
 [![Latest Stable Version](https://poser.pugx.org/google/recaptcha/v/stable.svg)](https://packagist.org/packages/google/recaptcha)
 [![Total Downloads](https://poser.pugx.org/google/recaptcha/downloads.svg)](https://packagist.org/packages/google/recaptcha)
 
-* Project page: http://www.google.com/recaptcha/
-* Repository: https://github.com/google/recaptcha
-* Version: 1.1.2
-* License: BSD, see [LICENSE](LICENSE)
+- Project page: http://www.google.com/recaptcha/
+- Repository: https://github.com/google/recaptcha
+- Version: 1.1.2
+- License: BSD, see [LICENSE](LICENSE)
 
 ## Description
 
@@ -29,11 +29,13 @@ documentation.
 
 To add this dependency using the command, run the following from within your
 project directory:
+
 ```
 composer require google/recaptcha "~1.1"
 ```
 
 Alternatively, add the dependency directly to your `composer.json` file:
+
 ```json
 "require": {
     "google/recaptcha": "~1.1"
@@ -68,7 +70,7 @@ its dependencies for you. If you only need the autoloader installed, then you
 can always specify to Composer not to run in development mode, e.g. `composer
 install --no-dev`.
 
-*Note:* These dependencies are only required for development, there's no
+_Note:_ These dependencies are only required for development, there's no
 requirement for them to be included in your production code.
 
 ## Usage
@@ -77,6 +79,7 @@ First, register keys for your site at https://www.google.com/recaptcha/admin
 
 When your app receives a form submission containing the `g-recaptcha-response`
 field, you can verify it using:
+
 ```php
 <?php
 $recaptcha = new \ReCaptcha\ReCaptcha($secret);
@@ -100,10 +103,11 @@ this repo](https://github.com/google/recaptcha/tree/1.0.0) but it is purely for
 reference and will not receive any updates.
 
 The major changes in 1.1.0 are:
-* installation now via Composer;
-* class loading also via Composer;
-* classes now namespaced;
-* old method call was `$rc->verifyResponse($remoteIp, $response)`, new call is
+
+- installation now via Composer;
+- class loading also via Composer;
+- classes now namespaced;
+- old method call was `$rc->verifyResponse($remoteIp, $response)`, new call is
   `$rc->verify($response, $remoteIp)`
 
 ## Contributing

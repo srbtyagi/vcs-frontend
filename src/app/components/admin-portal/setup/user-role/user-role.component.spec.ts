@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserRoleComponent } from './user-role.component';
+import { UserRoleComponent } from "./user-role.component";
 
-describe('UserRoleComponent', () => {
+describe("UserRoleComponent", () => {
   let component: UserRoleComponent;
   let fixture: ComponentFixture<UserRoleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserRoleComponent ]
-    })
-    .compileComponents();
+      declarations: [UserRoleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('UserRoleComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

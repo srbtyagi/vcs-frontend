@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SkillChecklistComponent } from './skill-checklist.component';
+import { SkillChecklistComponent } from "./skill-checklist.component";
 
-describe('SkillChecklistComponent', () => {
+describe("SkillChecklistComponent", () => {
   let component: SkillChecklistComponent;
   let fixture: ComponentFixture<SkillChecklistComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillChecklistComponent ]
-    })
-    .compileComponents();
+      declarations: [SkillChecklistComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SkillChecklistComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

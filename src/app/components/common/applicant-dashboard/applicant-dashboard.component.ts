@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-applicant-dashboard',
-  templateUrl: './applicant-dashboard.component.html',
-  styleUrls: ['./applicant-dashboard.component.css']
+  selector: "app-applicant-dashboard",
+  templateUrl: "./applicant-dashboard.component.html",
+  styleUrls: ["./applicant-dashboard.component.css"],
 })
 export class ApplicantDashboardComponent implements OnInit {
-
   data: any;
   moduleArray: any = [];
 
-  constructor(public route: ActivatedRoute, public router: Router) { }
+  constructor(public route: ActivatedRoute, public router: Router) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -25,8 +24,10 @@ export class ApplicantDashboardComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -62,11 +63,10 @@ export class ApplicantDashboardComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
@@ -79,10 +79,9 @@ export class ApplicantDashboardComponent implements OnInit {
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
-
 }

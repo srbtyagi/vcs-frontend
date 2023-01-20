@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { StoreDataService } from './store-data.service';
+import { StoreDataService } from "./store-data.service";
 
-describe('StoreDataService', () => {
+describe("StoreDataService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
+  it("should be created", () => {
     const service: StoreDataService = TestBed.get(StoreDataService);
     expect(service).toBeTruthy();
   });

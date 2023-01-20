@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { CompanyServiceService } from "./company-service.service";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import Swal from "sweetalert2";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
 
 @Component({
-  selector: 'app-company',
-  templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  selector: "app-company",
+  templateUrl: "./company.component.html",
+  styleUrls: ["./company.component.css"],
 })
 export class CompanyComponent implements OnInit {
   cmpName: any;
@@ -25,9 +30,13 @@ export class CompanyComponent implements OnInit {
   data: any;
   moduleArray: any = [];
 
-  constructor(public service: CompanyServiceService, public fb: FormBuilder, public route: ActivatedRoute,
-    public router: Router, public http: AdminService) {
-  }
+  constructor(
+    public service: CompanyServiceService,
+    public fb: FormBuilder,
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -43,21 +52,38 @@ export class CompanyComponent implements OnInit {
     this.getCompanyAllData();
 
     this.compantDetailsForm = this.fb.group({
-      name: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      address: new FormControl(null, [Validators.required, Validators.maxLength(80)]),
-      phone: new FormControl(null, [Validators.required, Validators.min(10000000), Validators.max(999999999999999)]),
-      email: new FormControl(null, [Validators.required, Validators.maxLength(80), Validators.email, Validators.maxLength(40), Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$')]),
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
+      address: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+      ]),
+      phone: new FormControl(null, [
+        Validators.required,
+        Validators.min(10000000),
+        Validators.max(999999999999999),
+      ]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+        Validators.email,
+        Validators.maxLength(40),
+        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+      ]),
     });
-
   }
-  
+
   ///////////////////////
   getAssignaccess(val) {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -93,26 +119,24 @@ export class CompanyComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive401").className = "active";
-    }, 200)
-
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -128,10 +152,6 @@ export class CompanyComponent implements OnInit {
       this.cmpaddresscopy = r[0].company_addr;
       this.cmpPhonecopy = parseInt(r[0].company_phone);
       this.CmpEmailcopy = r[0].company_email;
-
-
-
-
     });
   }
 
@@ -144,8 +164,6 @@ export class CompanyComponent implements OnInit {
     });
   }
 
-
-
   submitDetails() {
     const data = {
       company_name: this.compantDetailsForm.controls.name.value,
@@ -153,53 +171,47 @@ export class CompanyComponent implements OnInit {
       company_phone: this.compantDetailsForm.controls.phone.value,
       company_email: this.compantDetailsForm.controls.email.value,
     };
-    this.service.updateCompanyDetails(data).subscribe(r => {
+    this.service.updateCompanyDetails(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Company name updated successfully.',
-          icon: 'success',
+          title: "Company name updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.compantDetailsForm.reset();
             this.getCompanyAllData();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
-
     });
   }
-
-
 }

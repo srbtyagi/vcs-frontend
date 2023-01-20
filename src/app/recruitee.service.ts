@@ -164,21 +164,16 @@ export class RecruiteeService {
   token(datas) {
     //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/get_token",
-        datas
-      )
+      .post("http://3.142.114.192:8000/vcsapi/get_token", datas)
       .pipe(retry(1), catchError(this.handleError));
   }
 
   login(datas) {
     //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/api/login/user",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/api/login/user", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -206,21 +201,18 @@ export class RecruiteeService {
   forgotPass(datas) {
     //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/api/forgot/user/password",
-        datas
-      )
+      .post("http://3.142.114.192:8000/vcsapi/api/forgot/user/password", datas)
       .pipe(retry(1), catchError(this.handleError));
   }
 
   uploadFile(datas, user) {
     // //console.log(datas)
     return this.http
-      .post(
-        `http://3.142.114.192:8000/vcsapi/upload/resume/${user}`,
-        datas,
-        { reportProgress: true, observe: "events", headers: this.header }
-      )
+      .post(`http://3.142.114.192:8000/vcsapi/upload/resume/${user}`, datas, {
+        reportProgress: true,
+        observe: "events",
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -248,55 +240,45 @@ export class RecruiteeService {
   check_email(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/email",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/email", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
   check_email_register(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/email/register",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/email/register", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
   check_email_old(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/email/edit",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/email/edit", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
   check_old_password(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/api/new/password",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/api/new/password", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
   check_old_passcode(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/api/new/passcode",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/api/new/passcode", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -323,19 +305,17 @@ export class RecruiteeService {
 
   getAllProfession() {
     return this.http
-      .get(
-        "http://3.142.114.192:8000/vcsapi/get/api/tbl/profession",
-        { headers: this.header }
-      )
+      .get("http://3.142.114.192:8000/vcsapi/get/api/tbl/profession", {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
   getAllSpeciality() {
     return this.http
-      .get(
-        "http://3.142.114.192:8000/vcsapi/get/api/tbl/speciality",
-        { headers: this.header }
-      )
+      .get("http://3.142.114.192:8000/vcsapi/get/api/tbl/speciality", {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -350,11 +330,9 @@ export class RecruiteeService {
 
   getUserById(id) {
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/get/api/users",
-        id,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/get/api/users", id, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -413,11 +391,9 @@ export class RecruiteeService {
   check_resume(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/check/resume",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/check/resume", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -443,10 +419,9 @@ export class RecruiteeService {
 
   getCurrentReqDocs(datas) {
     return this.http
-      .get(
-        `http://3.142.114.192:8000/vcsapi/get/required/doc/${datas}`,
-        { headers: this.header }
-      )
+      .get(`http://3.142.114.192:8000/vcsapi/get/required/doc/${datas}`, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -476,10 +451,9 @@ export class RecruiteeService {
 
   getDocumentType() {
     return this.http
-      .get(
-        "http://3.142.114.192:8000/vcsapi/api/get/standard/document/data",
-        { headers: this.header }
-      )
+      .get("http://3.142.114.192:8000/vcsapi/api/get/standard/document/data", {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -585,11 +559,9 @@ export class RecruiteeService {
   updateReqDocStatus(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/update/req/doc/status",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/update/req/doc/status", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -612,10 +584,9 @@ export class RecruiteeService {
 
   getYearDetails() {
     return this.http
-      .get(
-        "http://3.142.114.192:8000/vcsapi/get/api/tbl/account_file/year",
-        { headers: this.header }
-      )
+      .get("http://3.142.114.192:8000/vcsapi/get/api/tbl/account_file/year", {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -717,11 +688,9 @@ export class RecruiteeService {
   geAllSkillCategoryByuserId(datas) {
     // //console.log(datas)
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/skilldata/by/user_id",
-        datas,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/skilldata/by/user_id", datas, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -787,11 +756,9 @@ export class RecruiteeService {
 
   getJobDetailsById(id) {
     return this.http
-      .post(
-        "http://3.142.114.192:8000/vcsapi/get/api/tbl/job/by/id",
-        id,
-        { headers: this.header }
-      )
+      .post("http://3.142.114.192:8000/vcsapi/get/api/tbl/job/by/id", id, {
+        headers: this.header,
+      })
       .pipe(retry(1), catchError(this.handleError));
   }
 }

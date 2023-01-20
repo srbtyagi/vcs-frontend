@@ -1,33 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import Swal from "sweetalert2";
 import { ClientServiceService } from "./client-service.service";
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  selector: "app-client",
+  templateUrl: "./client.component.html",
+  styleUrls: ["./client.component.css"],
 })
 export class ClientComponent implements OnInit {
   addClientForm: FormGroup;
   editClientForm: FormGroup;
 
-  defaultStatus = 'active';
-/*paginate */
-public count:any = 20;
-public page: any;
-/**paginate  */
+  defaultStatus = "active";
+  /*paginate */
+  public count: any = 20;
+  public page: any;
+  /**paginate  */
 
   allClients: any;
   clientId: any;
   moduleArray: any = [];
 
-
-  constructor(public service: ClientServiceService, public fb: FormBuilder,public route: ActivatedRoute,
-    public router: Router, public http: AdminService) {
-  }
+  constructor(
+    public service: ClientServiceService,
+    public fb: FormBuilder,
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -41,26 +49,34 @@ public page: any;
     }, 900);
     this.getClientDetailsAll();
     this.addClientForm = this.fb.group({
-      client_name: new FormControl(null, [Validators.required, Validators.maxLength(80)]),
+      client_name: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+      ]),
     });
 
     this.editClientForm = this.fb.group({
-      edit_client: new FormControl(null, [Validators.required, Validators.maxLength(80)]),
+      edit_client: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(80),
+      ]),
     });
   }
-/////////////////////////////
-  public onPageChanged(event){
-    this.page = event; 
-    window.scrollTo(0,0); 
+  /////////////////////////////
+  public onPageChanged(event) {
+    this.page = event;
+    window.scrollTo(0, 0);
   }
   ///////////////////////
 
-   getAssignaccess(val) {
+  getAssignaccess(val) {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -96,26 +112,24 @@ public page: any;
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive405").className = "active";
-    }, 200)
-
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -123,7 +137,7 @@ public page: any;
   /////////////
 
   getClientDetailsAll() {
-    this.service.getClientsDetails().subscribe(r => {
+    this.service.getClientsDetails().subscribe((r) => {
       //console.log(r);
       this.allClients = r;
     });
@@ -131,52 +145,49 @@ public page: any;
 
   insertClient() {
     const data = {
-      client_name: this.addClientForm.controls.client_name.value
+      client_name: this.addClientForm.controls.client_name.value,
     };
-    this.service.addClient(data).subscribe(r => {
+    this.service.addClient(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Client Added successfully.',
-          icon: 'success',
+          title: "Client Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addClientForm.reset();
             this.getClientDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
@@ -191,106 +202,98 @@ public page: any;
   updateClient() {
     const data = {
       client_name: this.editClientForm.controls.edit_client.value,
-      client_id: this.clientId
+      client_id: this.clientId,
     };
-    this.service.updateClient(data).subscribe(r => {
+    this.service.updateClient(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Client Updated successfully.',
-          icon: 'success',
+          title: "Client Updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editClientForm.reset();
             this.getClientDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
 
   changeStatusClient() {
     const data = {
       client_status: this.defaultStatus,
-      client_id: this.clientId
+      client_id: this.clientId,
     };
     //console.log(data)
-    this.service.changeStatusClient(data).subscribe(r => {
+    this.service.changeStatusClient(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status change successfully.',
-          icon: 'success',
+          title: "Status change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getClientDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
 }

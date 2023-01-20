@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-myjobs-dashboard',
-  templateUrl: './myjobs-dashboard.component.html',
-  styleUrls: ['./myjobs-dashboard.component.css']
+  selector: "app-myjobs-dashboard",
+  templateUrl: "./myjobs-dashboard.component.html",
+  styleUrls: ["./myjobs-dashboard.component.css"],
 })
 export class MyjobsDashboardComponent implements OnInit {
-
   moduleArray: any = [];
   data: any;
 
-  constructor(public route: ActivatedRoute, public router: Router) { }
+  constructor(public route: ActivatedRoute, public router: Router) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -25,8 +24,10 @@ export class MyjobsDashboardComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -48,11 +49,10 @@ export class MyjobsDashboardComponent implements OnInit {
             }
 
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
@@ -65,10 +65,9 @@ export class MyjobsDashboardComponent implements OnInit {
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
-
 }

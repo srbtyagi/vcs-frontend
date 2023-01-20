@@ -1,18 +1,20 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
-import { IDayCalendarConfig } from 'ng2-date-picker';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import Swal from "sweetalert2";
+import * as moment from "moment";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
+import { IDayCalendarConfig } from "ng2-date-picker";
 
 @Component({
-  selector: 'app-invoice-reconcile',
-  templateUrl: './invoice-reconcile.component.html',
-  styleUrls: ['./invoice-reconcile.component.css']
+  selector: "app-invoice-reconcile",
+  templateUrl: "./invoice-reconcile.component.html",
+  styleUrls: ["./invoice-reconcile.component.css"],
 })
 export class InvoiceReconcileComponent implements OnInit {
-  @ViewChild('processSecondClose', { static: false }) private processSecondClose: ElementRef;
-  @ViewChild('processThirdClose', { static: false }) private processThirdClose: ElementRef;
+  @ViewChild("processSecondClose", { static: false })
+  private processSecondClose: ElementRef;
+  @ViewChild("processThirdClose", { static: false })
+  private processThirdClose: ElementRef;
 
   moduleArray: any = [];
   excelfileName: any;
@@ -43,20 +45,25 @@ export class InvoiceReconcileComponent implements OnInit {
   diffErr: any = "";
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: 'up',
-    format: 'MM-DD-YYYY'
-  }
+    drops: "up",
+    format: "MM-DD-YYYY",
+  };
   client_id: any = "";
   from_date: any = "";
   to_date: any = "";
   acc_file_no: any;
-   /*paginate */
-   public count:any = 20;
-   public page: any;
-   /**paginate  */
-  constructor(public route: ActivatedRoute, public router: Router, public http: AdminService) {
+  /*paginate */
+  public count: any = 20;
+  public page: any;
+  /**paginate  */
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {
     this.user_id = sessionStorage.getItem("user_id");
-    this.excelfileName = "Recon_Report(" + moment(new Date).format("MM-DD-YYYY") + ")";
+    this.excelfileName =
+      "Recon_Report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
   }
 
   ngOnInit() {
@@ -65,7 +72,12 @@ export class InvoiceReconcileComponent implements OnInit {
       this.getAssignaccess(data);
     });
     this.getClients();
-    if (this.client_id1 === "ALL" && this.year1 === "ALL" && this.month1 === "ALL" && this.week1 === "ALL") {
+    if (
+      this.client_id1 === "ALL" &&
+      this.year1 === "ALL" &&
+      this.month1 === "ALL" &&
+      this.week1 === "ALL"
+    ) {
       this.searchList();
     }
     /** spinner starts on init */
@@ -73,13 +85,11 @@ export class InvoiceReconcileComponent implements OnInit {
     setTimeout(() => {
       this.http.spinnerHide();
     }, 400);
-
-
   }
   /////////////////////////////
-  public onPageChanged(event){
-    this.page = event; 
-    window.scrollTo(0,0); 
+  public onPageChanged(event) {
+    this.page = event;
+    window.scrollTo(0, 0);
   }
   /////////////////////////
 
@@ -87,8 +97,10 @@ export class InvoiceReconcileComponent implements OnInit {
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -119,25 +131,24 @@ export class InvoiceReconcileComponent implements OnInit {
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive304").className = "active";
-    }, 200)
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -164,10 +175,12 @@ export class InvoiceReconcileComponent implements OnInit {
   onYearSelected2(val) {
     //console.log(val)
     if (val !== "ALL") {
-      this.http.getMonthFromClientIDandYr(this.client_id1, val).subscribe((res: any) => {
-        //console.log(res)
-        this.monthList2 = res;
-      });
+      this.http
+        .getMonthFromClientIDandYr(this.client_id1, val)
+        .subscribe((res: any) => {
+          //console.log(res)
+          this.monthList2 = res;
+        });
     }
   }
 
@@ -188,14 +201,13 @@ export class InvoiceReconcileComponent implements OnInit {
       client_id: this.client_id1,
       year: this.year1,
       month: this.month1,
-      week_id: this.week1
-    }
+      week_id: this.week1,
+    };
     this.http.getPayrollReconData(body).subscribe((res: any) => {
       //console.log(res)
       this.payrollDataList = res;
       this.http.spinnerHide();
-
-    })
+    });
   }
 
   ReconcileModal(val) {
@@ -203,56 +215,64 @@ export class InvoiceReconcileComponent implements OnInit {
     this.reconcileDataList = [];
     this.finalSubmitArray = [];
     this.reconcileDataList = val.payroll_and_reconcile_data;
-    this.reconcileDataList.forEach(e => {
+    this.reconcileDataList.forEach((e) => {
       //console.log(e)
-      if (e.reg_hr_clt === null && e.ot_hr_clt === null && e.holiday_hr_clt === null && e.inv_recon_id === null) {
+      if (
+        e.reg_hr_clt === null &&
+        e.ot_hr_clt === null &&
+        e.holiday_hr_clt === null &&
+        e.inv_recon_id === null
+      ) {
         e.reg_hr_clt = e.reg_hr;
         e.ot_hr_clt = e.ot_hr;
         e.holiday_hr_clt = e.holiday_hr;
         e.invoice_amt_clt = e.invoice_amt;
-        let total_hr: number = Number(e.reg_hr) + Number(e.ot_hr) + Number(e.holiday_hr);
-        let total_hr_clt: number = Number(e.reg_hr_clt) + Number(e.ot_hr_clt) + Number(e.holiday_hr_clt);
+        let total_hr: number =
+          Number(e.reg_hr) + Number(e.ot_hr) + Number(e.holiday_hr);
+        let total_hr_clt: number =
+          Number(e.reg_hr_clt) + Number(e.ot_hr_clt) + Number(e.holiday_hr_clt);
         e.total_hr = total_hr;
         e.total_hr_clt = total_hr_clt;
         this.calcDiff(total_hr, total_hr_clt, e.rec_payroll_id);
         let data = {
-          "rec_payroll_id": e.rec_payroll_id,
-          "inv_recon_id": e.inv_recon_id,
-          "recruitee_id": e.recruitee_id,
-          "week_id": e.week_id,
-          "assignment_id": e.assignment_id,
-          "month": val.month,
-          "year": val.year,
-          "acc_file_id": e.acc_file_id,
-          "reg_hr_clt": e.reg_hr_clt,
-          "ot_hr_clt": e.ot_hr_clt,
-          "holiday_hr_clt": e.holiday_hr_clt,
-          "invoice_amt_clt": e.invoice_amt_clt,
-          "total_hr": total_hr
-        }
+          rec_payroll_id: e.rec_payroll_id,
+          inv_recon_id: e.inv_recon_id,
+          recruitee_id: e.recruitee_id,
+          week_id: e.week_id,
+          assignment_id: e.assignment_id,
+          month: val.month,
+          year: val.year,
+          acc_file_id: e.acc_file_id,
+          reg_hr_clt: e.reg_hr_clt,
+          ot_hr_clt: e.ot_hr_clt,
+          holiday_hr_clt: e.holiday_hr_clt,
+          invoice_amt_clt: e.invoice_amt_clt,
+          total_hr: total_hr,
+        };
         this.finalSubmitArray.push(data);
-      }
-      else {
-        let total_hr: number = Number(e.reg_hr) + Number(e.ot_hr) + Number(e.holiday_hr);
-        let total_hr_clt: number = Number(e.reg_hr_clt) + Number(e.ot_hr_clt) + Number(e.holiday_hr_clt);
+      } else {
+        let total_hr: number =
+          Number(e.reg_hr) + Number(e.ot_hr) + Number(e.holiday_hr);
+        let total_hr_clt: number =
+          Number(e.reg_hr_clt) + Number(e.ot_hr_clt) + Number(e.holiday_hr_clt);
         e.total_hr = total_hr;
         e.total_hr_clt = total_hr_clt;
         this.calcDiff(total_hr, total_hr_clt, e.rec_payroll_id);
         let data = {
-          "rec_payroll_id": e.rec_payroll_id,
-          "inv_recon_id": e.inv_recon_id,
-          "recruitee_id": e.recruitee_id,
-          "week_id": e.week_id,
-          "assignment_id": e.assignment_id,
-          "month": val.month,
-          "year": val.year,
-          "acc_file_id": e.acc_file_id,
-          "reg_hr_clt": e.reg_hr_clt,
-          "ot_hr_clt": e.ot_hr_clt,
-          "holiday_hr_clt": e.holiday_hr_clt,
-          "invoice_amt_clt": e.invoice_amt_clt,
-          "total_hr": total_hr
-        }
+          rec_payroll_id: e.rec_payroll_id,
+          inv_recon_id: e.inv_recon_id,
+          recruitee_id: e.recruitee_id,
+          week_id: e.week_id,
+          assignment_id: e.assignment_id,
+          month: val.month,
+          year: val.year,
+          acc_file_id: e.acc_file_id,
+          reg_hr_clt: e.reg_hr_clt,
+          ot_hr_clt: e.ot_hr_clt,
+          holiday_hr_clt: e.holiday_hr_clt,
+          invoice_amt_clt: e.invoice_amt_clt,
+          total_hr: total_hr,
+        };
         this.finalSubmitArray.push(data);
       }
     });
@@ -263,7 +283,6 @@ export class InvoiceReconcileComponent implements OnInit {
     this.wk_end_date = val.wk_end_date;
     this.month = val.month;
     this.year = val.year;
-
   }
 
   changepayRateRegHr(e, rec_payroll_id) {
@@ -273,39 +292,46 @@ export class InvoiceReconcileComponent implements OnInit {
         if (Number(a.rec_payroll_id) === Number(rec_payroll_id)) {
           //console.log("here", e.target.value)
           a.reg_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(a.reg_hr_clt) + Number(a.ot_hr_clt) + Number(a.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(a.reg_hr_clt) +
+            Number(a.ot_hr_clt) +
+            Number(a.holiday_hr_clt);
           this.calcDiff(a.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.reconcileDataList.forEach((b, index) => {
         if (Number(b.rec_payroll_id) === Number(rec_payroll_id)) {
           b.reg_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(b.reg_hr_clt) + Number(b.ot_hr_clt) + Number(b.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(b.reg_hr_clt) +
+            Number(b.ot_hr_clt) +
+            Number(b.holiday_hr_clt);
           this.calcDiff(b.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.diffErr = "";
-    }
-    else {
+    } else {
       this.diffErr = "true";
     }
 
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault()
+    if (!keyAllowed()) e.preventDefault();
   }
 
   changepayRateOTHr(e, rec_payroll_id) {
@@ -315,41 +341,48 @@ export class InvoiceReconcileComponent implements OnInit {
         if (Number(a.rec_payroll_id) === Number(rec_payroll_id)) {
           //console.log("here")
           a.ot_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(a.reg_hr_clt) + Number(a.ot_hr_clt) + Number(a.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(a.reg_hr_clt) +
+            Number(a.ot_hr_clt) +
+            Number(a.holiday_hr_clt);
           this.calcDiff(a.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.reconcileDataList.forEach((b, index) => {
         if (Number(b.rec_payroll_id) === Number(rec_payroll_id)) {
           b.ot_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(b.reg_hr_clt) + Number(b.ot_hr_clt) + Number(b.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(b.reg_hr_clt) +
+            Number(b.ot_hr_clt) +
+            Number(b.holiday_hr_clt);
           this.calcDiff(b.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.diffErr = "";
-    }
-    else {
+    } else {
       this.diffErr = "true";
     }
 
     //console.log(this.finalSubmitArray)
 
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault()
+    if (!keyAllowed()) e.preventDefault();
   }
 
   changepayRateHolidayHr(e, rec_payroll_id) {
@@ -359,40 +392,46 @@ export class InvoiceReconcileComponent implements OnInit {
         if (Number(a.rec_payroll_id) === Number(rec_payroll_id)) {
           //console.log("here")
           a.holiday_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(a.reg_hr_clt) + Number(a.ot_hr_clt) + Number(a.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(a.reg_hr_clt) +
+            Number(a.ot_hr_clt) +
+            Number(a.holiday_hr_clt);
           this.calcDiff(a.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.reconcileDataList.forEach((b, index) => {
         if (Number(b.rec_payroll_id) === Number(rec_payroll_id)) {
           b.holiday_hr_clt = e.target.value;
-          let total_hr_clt: number = Number(b.reg_hr_clt) + Number(b.ot_hr_clt) + Number(b.holiday_hr_clt);
+          let total_hr_clt: number =
+            Number(b.reg_hr_clt) +
+            Number(b.ot_hr_clt) +
+            Number(b.holiday_hr_clt);
           this.calcDiff(b.total_hr, total_hr_clt, rec_payroll_id);
         }
       });
       this.diffErr = "";
-    }
-
-    else {
+    } else {
       this.diffErr = "true";
     }
 
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault()
+    if (!keyAllowed()) e.preventDefault();
   }
 
   changepayRateInvoice(e, rec_payroll_id) {
@@ -410,31 +449,32 @@ export class InvoiceReconcileComponent implements OnInit {
         }
       });
       this.diffErr = "";
-    }
-    else {
+    } else {
       this.diffErr = "true";
     }
 
     var t = e.target.value;
-    e.target.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+    e.target.value =
+      t.indexOf(".") >= 0
+        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+        : t;
 
     ///// Restrict negative by typing
 
     var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
     function keyAllowed() {
-      var keys = [8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50,
-        51, 52, 53, 54, 55, 56, 57, 91, 92, 93];
-      if (key && keys.indexOf(key) === -1)
-        return false;
-      else
-        return true;
+      var keys = [
+        8, 9, 13, 16, 17, 18, 19, 20, 27, 46, 48, 49, 50, 51, 52, 53, 54, 55,
+        56, 57, 91, 92, 93,
+      ];
+      if (key && keys.indexOf(key) === -1) return false;
+      else return true;
     }
-    if (!keyAllowed())
-      e.preventDefault()
+    if (!keyAllowed()) e.preventDefault();
   }
 
   calcDiff(total_hr, total_hr_clt, rec_payroll_id) {
-    this.reconcileDataList.forEach(e => {
+    this.reconcileDataList.forEach((e) => {
       if (e.rec_payroll_id === rec_payroll_id) {
         e.difference_amt = Number(total_hr) - Number(total_hr_clt);
       }
@@ -443,48 +483,46 @@ export class InvoiceReconcileComponent implements OnInit {
     //console.log(this.reconcileDataList)
   }
 
- 
-
   submitFile() {
     //console.log(this.finalSubmitArray)
     let arrObj = {
-      data: this.finalSubmitArray
-    }
-    this.http.InsertUpdatePayrollReconData(arrObj).subscribe((res) => {
-      //console.log(res)
-      if (res === "success") {
-        this.successMsg("Reconcilation process completed.");
-        this.processSecondClose.nativeElement.click();
-        this.processThirdClose.nativeElement.click();
-      }
-      else {
+      data: this.finalSubmitArray,
+    };
+    this.http.InsertUpdatePayrollReconData(arrObj).subscribe(
+      (res) => {
+        //console.log(res)
+        if (res === "success") {
+          this.successMsg("Reconcilation process completed.");
+          this.processSecondClose.nativeElement.click();
+          this.processThirdClose.nativeElement.click();
+        } else {
+          this.errorMsg("Something went wrong. Please Try Again.");
+        }
+      },
+      (err) => {
         this.errorMsg("Something went wrong. Please Try Again.");
       }
-    }, err => {
-      this.errorMsg("Something went wrong. Please Try Again.");
-    });
+    );
   }
-
 
   ////////////////////////////
 
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'error',
+      icon: "error",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
     });
   }
@@ -492,45 +530,42 @@ export class InvoiceReconcileComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         //window.location.reload();
         this.searchList();
-
       }
-    })
+    });
   }
 
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: 'success',
+      icon: "success",
       showCancelButton: false,
-      confirmButtonColor: '#4C96D7',
-      confirmButtonText: 'Ok',
+      confirmButtonColor: "#4C96D7",
+      confirmButtonText: "Ok",
       allowOutsideClick: false,
       showClass: {
-        popup: 'animate__animated animate__fadeInDown'
+        popup: "animate__animated animate__fadeInDown",
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+        popup: "animate__animated animate__fadeOutUp",
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-
       }
-    })
+    });
   }
-
 }

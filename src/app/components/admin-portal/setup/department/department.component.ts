@@ -1,32 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { DepartmentServiceService } from "./department-service.service";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import Swal from "sweetalert2";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { AdminService } from "src/app/admin.service";
 
 @Component({
-  selector: 'app-department',
-  templateUrl: './department.component.html',
-  styleUrls: ['./department.component.css']
+  selector: "app-department",
+  templateUrl: "./department.component.html",
+  styleUrls: ["./department.component.css"],
 })
 export class DepartmentComponent implements OnInit {
   addDeptForm: FormGroup;
   editDeptForm: FormGroup;
-/*paginate */
-public count:any = 20;
-public page: any;
-/**paginate  */
-  defaultStatus = 'active';
+  /*paginate */
+  public count: any = 20;
+  public page: any;
+  /**paginate  */
+  defaultStatus = "active";
 
   allDepartment: any;
   deptId: any;
   moduleArray: any = [];
 
-
-  constructor(public service: DepartmentServiceService, public fb: FormBuilder,public route: ActivatedRoute,
-    public router: Router, public http: AdminService) {
-  }
+  constructor(
+    public service: DepartmentServiceService,
+    public fb: FormBuilder,
+    public route: ActivatedRoute,
+    public router: Router,
+    public http: AdminService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((r: any) => {
@@ -41,20 +49,24 @@ public page: any;
     this.getDepartmentDetailsAll();
 
     this.addDeptForm = this.fb.group({
-      dept: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
+      dept: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
     });
 
     this.editDeptForm = this.fb.group({
-      editDept: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
+      editDept: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(100),
+      ]),
     });
-
-
   }
 
   /////////////////////////////
-  public onPageChanged(event){
-    this.page = event; 
-    window.scrollTo(0,0); 
+  public onPageChanged(event) {
+    this.page = event;
+    window.scrollTo(0, 0);
   }
   ///////////////////////
 
@@ -62,8 +74,10 @@ public page: any;
     if (sessionStorage.getItem("user_id")) {
       this.moduleArray = [];
       const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
-      const ids = arr.map(o => o.submodule_id);
-      const arry = arr.filter(({ submodule_id }, index) => !ids.includes(submodule_id, index + 1));
+      const ids = arr.map((o) => o.submodule_id);
+      const arry = arr.filter(
+        ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
+      );
       arry.forEach((e, index) => {
         if (e.module_id === val) {
           this.moduleArray.push(e);
@@ -99,26 +113,24 @@ public page: any;
               break;
             }
             default: {
-              //statements; 
+              //statements;
               break;
             }
           }
-
         }
       });
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
       document.getElementById("clsActive402").className = "active";
-    }, 200)
-
+    }, 200);
   }
 
   navigateTo(val) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        special: JSON.stringify(val.module_id)
-      }
+        special: JSON.stringify(val.module_id),
+      },
     };
     this.router.navigate([val.routing], navigationExtras);
   }
@@ -126,7 +138,7 @@ public page: any;
   /////////////
 
   getDepartmentDetailsAll() {
-    this.service.getDepartmentDetails().subscribe(r => {
+    this.service.getDepartmentDetails().subscribe((r) => {
       //console.log(r);
       this.allDepartment = r;
     });
@@ -134,52 +146,49 @@ public page: any;
 
   insertDept() {
     const data = {
-      dept_name: this.addDeptForm.controls.dept.value
+      dept_name: this.addDeptForm.controls.dept.value,
     };
-    this.service.addDepartment(data).subscribe(r => {
+    this.service.addDepartment(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Department Added successfully.',
-          icon: 'success',
+          title: "Department Added successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.addDeptForm.reset();
             this.getDepartmentDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
 
@@ -194,107 +203,98 @@ public page: any;
   updateDept() {
     const data = {
       dept_name: this.editDeptForm.controls.editDept.value,
-      dept_id: this.deptId
+      dept_id: this.deptId,
     };
-    this.service.updateDepartment(data).subscribe(r => {
+    this.service.updateDepartment(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Department Updated successfully.',
-          icon: 'success',
+          title: "Department Updated successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.editDeptForm.reset();
             this.getDepartmentDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
 
   changeStatusDept() {
     const data = {
       dept_status: this.defaultStatus,
-      dept_id: this.deptId
+      dept_id: this.deptId,
     };
     //console.log(data)
-    this.service.changeStatusDept(data).subscribe(r => {
+    this.service.changeStatusDept(data).subscribe((r) => {
       //console.log(r);
       if (r === "success") {
         Swal.fire({
-          title: 'Status Change successfully.',
-          icon: 'success',
+          title: "Status Change successfully.",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
             this.getDepartmentDetailsAll();
           }
         });
-      }
-      else {
+      } else {
         Swal.fire({
-          title: 'Something went wrong,please try again.',
-          icon: 'error',
+          title: "Something went wrong,please try again.",
+          icon: "error",
           showCancelButton: false,
-          confirmButtonColor: '#4C96D7',
-          confirmButtonText: 'Ok',
+          confirmButtonColor: "#4C96D7",
+          confirmButtonText: "Ok",
           allowOutsideClick: false,
           showClass: {
-            popup: 'animate__animated animate__fadeInDown'
+            popup: "animate__animated animate__fadeInDown",
           },
           hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
+            popup: "animate__animated animate__fadeOutUp",
+          },
         }).then((result) => {
           if (result.isConfirmed) {
-
           }
-        })
+        });
       }
-
     });
   }
-
-
 }
