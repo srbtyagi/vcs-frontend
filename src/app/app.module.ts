@@ -78,6 +78,11 @@ import { TermsOfServiceComponent } from "./components/pages/terms-of-service/ter
 import { PrivacyPolicyComponent } from "./components/pages/privacy-policy/privacy-policy.component";
 import { StoreDataService } from "./store-data.service";
 
+/* NNEW */
+
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatMenuModule } from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -166,6 +171,8 @@ import { StoreDataService } from "./store-data.service";
     }),
     DpDatePickerModule,
     NgxPaginationModule,
+    MatSidenavModule,
+    MatMenuModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [NgxSpinnerService, StoreDataService],

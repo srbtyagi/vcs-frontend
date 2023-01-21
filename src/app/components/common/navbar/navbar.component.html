@@ -1,288 +1,112 @@
-<!-- header -->
-<header class="site-header mo-left header border-bottom fullwidth">
-  <!-- main header -->
-  <div class="sticky-header main-bar-wraper navbar-expand-lg">
-    <div class="main-bar clearfix">
-      <div class="container clearfix">
-        <!-- website logo -->
-        <div class="logo-header mostion">
-          <a href="/"
-            ><img src="../assets/images/logo.png" class="logo" alt=""
-          /></a>
+<nav class="header-1">
+  <div class="page-container">
+    <div class="inner-container">
+      <div class="flex">
+        <div class="mobile-menu-icon">
+          <mat-icon [matMenuTriggerFor]="mobileMenu">menu</mat-icon>
+          <mat-menu #mobileMenu="matMenu" class="mobile-drop-menu">
+            <ng-container *ngFor="let item of navbarItems">
+              <ng-container *ngIf="!item.children">
+                <button
+                  mat-menu-item
+                  [routerLink]="item.link"
+                  class="links"
+                  aria-current="page"
+                >
+                  {{ item.label }}
+                </button>
+              </ng-container>
+              <ng-container *ngIf="item.children">
+                <button
+                  mat-menu-item
+                  [matMenuTriggerFor]="mobileSubMenu"
+                  [routerLink]="item.link"
+                  class="links"
+                  aria-current="page"
+                >
+                  {{ item.label }}
+                </button>
+                <mat-menu
+                  #mobileSubMenu="matMenu"
+                  class="mobile-drop-menu-small"
+                >
+                  <button
+                    mat-menu-item
+                    *ngFor="let child of item.children"
+                    [routerLink]="child.link"
+                  >
+                    {{ child.label }}
+                  </button>
+                </mat-menu>
+              </ng-container>
+            </ng-container>
+          </mat-menu>
         </div>
-        <!-- nav toggle button -->
-        <!-- nav toggle button -->
-        <button
-          class="navbar-toggler collapsed navicon justify-content-end"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          (click)="changeCss()"
-          id="menuBtn"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <!-- extra nav -->
-        <div class="extra-nav" *ngIf="!user_id">
-          <div class="extra-cell">
-            <!-- <a href="" class="site-button" routerLink="/register" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user"></i> Sign Up</a> -->
-
-            <a
-              title="READ MORE"
-              rel="bookmark"
-              class="site-button"
-              routerLink="/login"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              class="site-button text_deco"
-              ><i class="fa fa-lock"></i> Login/Signup</a
-            >
-          </div>
+        <div class="logo" routerLink="/home">
+          <img
+            class="mobile"
+            src="../../assets/images/logos/elite_logo_big.png"
+            alt="Elite Mente"
+          />
+          <img
+            class="desktop"
+            src="../../assets/images/logos/elite_logo_big.png"
+            alt="Elite Mente"
+          />
         </div>
-
-        <div class="extra-nav" *ngIf="user_id" style="display: flex">
-          <div class="canditate-des2 text-center">
-            <a href="javascript:void(0);">
-              <img
-                alt=""
-                src="../assets/images/team/pic2.png"
-                class="imageSize"
-              />
-            </a>
-          </div>
-          <div
-            class="header-nav navbar-collapse collapse"
-            id="navbarNavDropdown"
-          >
-            <ul class="nav navbar-nav">
-              <li style="padding: 0px !important">
-                <a>{{ user_name }} <i class="fa fa-chevron-down"></i></a>
-                <ul class="sub-menu">
-                  <li *ngIf="checkUserType">
-                    <a (click)="navigateToProfile()" class="dez-page"
-                      >My Profile</a
-                    >
-                  </li>
-                  <li *ngFor="let a of moduleArray">
-                    <a (click)="navigateTo(a)" class="dez-page">{{
-                      a.module_name_lower
-                    }}</a>
-                  </li>
-                  <li *ngIf="checkUserType">
-                    <a (click)="navigateToRecruitee()" class="dez-page"
-                      >Assignments</a
-                    >
-                  </li>
-
-                  <li>
-                    <a class="dez-page" (click)="logout()" style="color: red"
-                      >Logout</a
-                    >
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div class="menu-bar">
+          <ng-container *ngFor="let item of navbarItems">
+            <ng-container *ngIf="!item.children">
+              <button
+                mat-button
+                [routerLink]="item.link"
+                class="links"
+                routerLinkActive="selected"
+                aria-current="page"
+              >
+                {{ item.label }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="item.children">
+              <button
+                mat-button
+                [matMenuTriggerFor]="subMenu"
+                class="cursor-pointer links"
+                routerLinkActive="selected"
+                aria-current="page"
+              >
+                {{ item.label }}
+                <mat-icon class="text-base ml-2">keyboard_arrow_down</mat-icon>
+              </button>
+              <mat-menu #subMenu="matMenu" class="mat-top-menu">
+                <button
+                  mat-menu-item
+                  *ngFor="let child of item.children"
+                  [routerLink]="child.link"
+                >
+                  {{ child.label }}
+                </button>
+              </mat-menu>
+            </ng-container>
+          </ng-container>
         </div>
-        <!-- main nav -->
-        <div
-          class="header-nav navbar-collapse collapse justify-content-start"
-          id="navbarNavDropdown"
-        >
-          <ul class="nav navbar-nav">
-            <li>
-              <a
-                routerLink="/"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="text_deco"
-                (click)="hideMenu()"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                class="text_deco"
-                routerLink="/about-us"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="hideMenu()"
-                >About Us</a
-              >
-            </li>
-            <li>
-              <a
-                class="text_deco"
-                routerLink="/clients"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="hideMenu()"
-                >Client & Partners</a
-              >
-            </li>
-            <li>
-              <!-- <a routerLink="/business" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{exact: true}" class="text_deco">Business</a> -->
-
-              <a class="text_deco"
-                >Healthcare Services <i class="fa fa-chevron-down"></i
-              ></a>
-              <ul class="sub-menu">
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/healthcare-staffing"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Our Healthcare Services</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/HS_case_study"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Clinical Studies</a
-                  >
-                </li>
-
-                <li>
-                  <a class="dez-page"
-                    >Resources <i class="fa fa-angle-right"></i
-                  ></a>
-                  <ul class="sub-menu">
-                    <li>
-                      <a
-                        routerLink="/faq"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                        class="dez-page"
-                        (click)="hideMenu()"
-                        >FAQ</a
-                      >
-                    </li>
-                    <!-- <li><a routerLink="/HS_case_study" routerLinkActive="active"
-                                                [routerLinkActiveOptions]="{exact: true}" class="dez-page">Case Study
-                                            </a></li> -->
-                  </ul>
-                </li>
-
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/healthcare-blogs"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Blogs</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/skill-checklist"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Skill Checklist</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a class="text_deco"
-                >IT Services <i class="fa fa-chevron-down"></i
-              ></a>
-              <ul class="sub-menu">
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/IT_services"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Our IT Services</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/IT_case_study"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Case Study</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Resources</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dez-page"
-                    routerLink="/IT_blogs"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    (click)="hideMenu()"
-                    >Blogs</a
-                  >
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a
-                class="text_deco"
-                routerLink="/jobs"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="hideMenu()"
-                >Jobs</a
-              >
-              <!-- <ul class="sub-menu">
-                                <li><a class="dez-page" routerLink="/jobs" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{exact: true}">Nursing Jobs</a></li>
-
-                            </ul> -->
-            </li>
-            <!-- <li>
-                            <a class="text_deco">Our Impact <i class="fa fa-chevron-down"></i></a>
-                            <ul class="sub-menu">
-                                <li><a class="dez-page">Diversity, Equity & Inclusion</a></li>
-                                <li><a class="dez-page">Corporate Responsibility</a></li>
-                                <li><a class="dez-page">Social Responsibility</a></li>
-                            </ul>
-                        </li> -->
-            <li>
-              <a
-                routerLink="/contact-us"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="text_deco"
-                (click)="hideMenu()"
-                >Contact Us</a
-              >
-            </li>
-          </ul>
+      </div>
+      <div class="flex items-center">
+        <div class="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
+          <div class="relative ml-3">
+            <div>
+              <app-buttons
+                label="Sign In"
+                iconLocation="left"
+                [hasIcon]="true"
+                size="normal"
+                buttonType="transparent"
+                iconType="lock"
+              ></app-buttons>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- main header END -->
-</header>
-<!-- header END -->
+</nav>
