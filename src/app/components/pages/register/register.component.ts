@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -17,14 +17,14 @@ import Swal from "sweetalert2";
 export class RegisterComponent implements OnInit {
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute
   ) {}
 
   file_name = "";
   current_date = "";
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   fileData = "";
   emp_preference = ["permanent"];
   professionData = [];
@@ -47,36 +47,36 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      first_name: new FormControl(null, [
+      first_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new FormControl(null, [Validators.maxLength(100)]),
-      last_name: new FormControl(null, [
+      middle_name: new UntypedFormControl(null, [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      password: new FormControl(null, [
+      password: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(8),
         Validators.pattern(this.passwordPatterRegex),
       ]),
-      retype_password: new FormControl(null, [Validators.required]),
-      phone_no: new FormControl(null, [
+      retype_password: new UntypedFormControl(null, [Validators.required]),
+      phone_no: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(10),
         Validators.minLength(10),
         Validators.pattern(this.phonePattern),
       ]),
-      resume: new FormControl(null, []),
-      tc: new FormControl(false, [Validators.requiredTrue]),
+      resume: new UntypedFormControl(null, []),
+      tc: new UntypedFormControl(false, [Validators.requiredTrue]),
     });
 
     //console.log("data2", sessionStorage.getItem('registerModel'))

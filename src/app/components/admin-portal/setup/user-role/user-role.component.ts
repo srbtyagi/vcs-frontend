@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { UserRoleServiceService } from "./user-role-service.service";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import Swal from "sweetalert2";
@@ -17,8 +17,8 @@ import { AdminService } from "src/app/admin.service";
 })
 export class UserRoleComponent implements OnInit {
   allUserRole: any;
-  addUserRoleForm: FormGroup;
-  editUserRoleForm: FormGroup;
+  addUserRoleForm: UntypedFormGroup;
+  editUserRoleForm: UntypedFormGroup;
   defaultStatus = "active";
   /*paginate */
   public count: any = 20;
@@ -47,7 +47,7 @@ export class UserRoleComponent implements OnInit {
 
   constructor(
     public service: UserRoleServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -66,19 +66,19 @@ export class UserRoleComponent implements OnInit {
     this.getUserRoleDetailsAll();
 
     this.addUserRoleForm = this.fb.group({
-      role: new FormControl(null, [
+      role: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      incentive_perc: new FormControl(null, [Validators.required]),
+      incentive_perc: new UntypedFormControl(null, [Validators.required]),
     });
 
     this.editUserRoleForm = this.fb.group({
-      editRole: new FormControl(null, [
+      editRole: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      incentive_perc: new FormControl(null, [Validators.required]),
+      incentive_perc: new UntypedFormControl(null, [Validators.required]),
     });
     this.getAllModuleSubModule();
   }

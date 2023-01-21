@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -881,7 +881,7 @@ export class PostJobComponent implements OnInit {
   // ]
 
   filteredCity: any = [];
-  postJobForm: FormGroup;
+  postJobForm: UntypedFormGroup;
   blended_pay: any;
   regular_pay: any;
   moduleArray: any[];
@@ -900,7 +900,7 @@ export class PostJobComponent implements OnInit {
   filterArrayCity: any = [];
 
   constructor(
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public http: AdminService,
     public router: Router,
     public route: ActivatedRoute
@@ -949,48 +949,48 @@ export class PostJobComponent implements OnInit {
     );
 
     this.postJobForm = this.fb.group({
-      job_id: new FormControl(null, [
+      job_id: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(20),
       ]),
-      state: new FormControl(null, [Validators.required]),
-      city: new FormControl(null, [Validators.required]),
-      job_title: new FormControl(null, [
+      state: new UntypedFormControl(null, [Validators.required]),
+      city: new UntypedFormControl(null, [Validators.required]),
+      job_title: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      job_desc: new FormControl(null, [
+      job_desc: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(1000),
       ]),
-      bill_rate: new FormControl(null, [
+      bill_rate: new UntypedFormControl(null, [
         Validators.required,
         Validators.max(999999999999999999999999999999),
       ]),
-      blended_pay_rate: new FormControl(null, [Validators.required]),
-      ot_holiday_rate: new FormControl(null, [
+      blended_pay_rate: new UntypedFormControl(null, [Validators.required]),
+      ot_holiday_rate: new UntypedFormControl(null, [
         Validators.required,
         Validators.max(999999999999999999999999999999),
       ]),
-      regular_pay_rate: new FormControl(null, [Validators.required]),
-      ot_holiday_pay_rate_traveller: new FormControl(null, [
+      regular_pay_rate: new UntypedFormControl(null, [Validators.required]),
+      ot_holiday_pay_rate_traveller: new UntypedFormControl(null, [
         Validators.required,
       ]),
-      ot_holiday_pay_rate_local: new FormControl(null, [Validators.required]),
-      position: new FormControl(null, [Validators.required]),
-      job_type: new FormControl(null),
-      job_sector: new FormControl(null, [Validators.required]),
-      system_name: new FormControl(null, [
+      ot_holiday_pay_rate_local: new UntypedFormControl(null, [Validators.required]),
+      position: new UntypedFormControl(null, [Validators.required]),
+      job_type: new UntypedFormControl(null),
+      job_sector: new UntypedFormControl(null, [Validators.required]),
+      system_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(200),
       ]),
-      client_name: new FormControl(null, [Validators.required]),
-      req_inf: new FormControl(null, Validators.maxLength(1000)),
-      job_duration: new FormControl(null, [
+      client_name: new UntypedFormControl(null, [Validators.required]),
+      req_inf: new UntypedFormControl(null, Validators.maxLength(1000)),
+      job_duration: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(50),
       ]),
-      confirmed_hr: new FormControl(null, [
+      confirmed_hr: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),

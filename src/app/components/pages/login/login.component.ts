@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -17,27 +17,27 @@ import Swal from "sweetalert2";
 export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService
   ) {}
 
-  loginForm: FormGroup;
-  forgotPassForm: FormGroup;
+  loginForm: UntypedFormGroup;
+  forgotPassForm: UntypedFormGroup;
   title = "Login To You Now";
   titleDetails =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.";
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      password: new FormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required]),
     });
     this.forgotPassForm = this.fb.group({
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -16,8 +16,8 @@ import Swal from "sweetalert2";
 })
 export class PasswordChangeComponent implements OnInit {
   checkUserType: boolean = false;
-  passwordForm: FormGroup;
-  passcodeForm: FormGroup;
+  passwordForm: UntypedFormGroup;
+  passcodeForm: UntypedFormGroup;
   passwordPatterRegex =
     "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
   old_password: boolean = false;
@@ -27,30 +27,30 @@ export class PasswordChangeComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService
   ) {}
 
   ngOnInit() {
     this.passwordForm = this.fb.group({
-      old_password: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [
+      old_password: new UntypedFormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(30),
         Validators.minLength(8),
         Validators.pattern(this.passwordPatterRegex),
       ]),
-      retype_password: new FormControl(null, [Validators.required]),
+      retype_password: new UntypedFormControl(null, [Validators.required]),
     });
     this.passcodeForm = this.fb.group({
-      old_passcode: new FormControl(null, [Validators.required]),
-      passcode: new FormControl(null, [
+      old_passcode: new UntypedFormControl(null, [Validators.required]),
+      passcode: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern(this.passcodePattern),
         Validators.maxLength(4),
         Validators.minLength(4),
       ]),
-      retype_passcode: new FormControl(null, [Validators.required]),
+      retype_passcode: new UntypedFormControl(null, [Validators.required]),
     });
 
     if (sessionStorage.getItem("user_type") === "recruitee") {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -17,12 +17,12 @@ import Swal from "sweetalert2";
 export class ApplyJobComponent implements OnInit {
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute
   ) {}
 
-  applicantForm: FormGroup;
+  applicantForm: UntypedFormGroup;
   details: any = {};
   file_name = "";
   status = false;
@@ -38,13 +38,13 @@ export class ApplyJobComponent implements OnInit {
 
   ngOnInit() {
     this.applicantForm = this.fb.group({
-      phone_no: new FormControl(null, [
+      phone_no: new UntypedFormControl(null, [
         Validators.maxLength(10),
         Validators.pattern(this.phonePattern),
       ]),
-      message: new FormControl(null, [Validators.maxLength(500)]),
-      availability: new FormControl(null, [Validators.maxLength(500)]),
-      resume: new FormControl(null, []),
+      message: new UntypedFormControl(null, [Validators.maxLength(500)]),
+      availability: new UntypedFormControl(null, [Validators.maxLength(500)]),
+      resume: new UntypedFormControl(null, []),
     });
 
     this.route.queryParams.subscribe((r: any) => {

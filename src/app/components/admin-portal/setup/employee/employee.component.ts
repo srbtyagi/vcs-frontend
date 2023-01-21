@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -35,8 +35,8 @@ export class EmployeeComponent implements OnInit {
   showRole: any;
   showDepartment: any;
 
-  employeeAddFrom: FormGroup;
-  employeeEditFrom: FormGroup;
+  employeeAddFrom: UntypedFormGroup;
+  employeeEditFrom: UntypedFormGroup;
 
   formBindDataEdit: any;
   employeeUserId: any;
@@ -82,7 +82,7 @@ export class EmployeeComponent implements OnInit {
 
   constructor(
     public service: EmployeeServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -111,81 +111,81 @@ export class EmployeeComponent implements OnInit {
     this.getempDesignations();
 
     this.employeeAddFrom = this.fb.group({
-      first_name: new FormControl("", [
+      first_name: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new FormControl("", [Validators.maxLength(100)]),
-      last_name: new FormControl("", [
+      middle_name: new UntypedFormControl("", [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      employee_code: new FormControl("", [Validators.maxLength(30)]),
-      role: new FormControl("", [Validators.required]),
-      designation: new FormControl("", [
+      employee_code: new UntypedFormControl("", [Validators.maxLength(30)]),
+      role: new UntypedFormControl("", [Validators.required]),
+      designation: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      department: new FormControl("", [Validators.required]),
-      email: new FormControl("", [
+      department: new UntypedFormControl("", [Validators.required]),
+      email: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.maxLength(40),
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      phoneCode: new FormControl("", [
+      phoneCode: new UntypedFormControl("", [
         Validators.min(1),
         Validators.max(999999),
       ]),
-      phone: new FormControl("", [
+      phone: new UntypedFormControl("", [
         Validators.min(10000000),
         Validators.max(9999999999999),
       ]),
-      joiningDate: new FormControl("", [
+      joiningDate: new UntypedFormControl("", [
         Validators.maxLength(80),
         Validators.required,
       ]),
-      supervisorName: new FormControl("", [
+      supervisorName: new UntypedFormControl("", [
         Validators.maxLength(80),
         Validators.required,
       ]),
     });
 
     this.employeeEditFrom = this.fb.group({
-      first_name: new FormControl("", [
+      first_name: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new FormControl("", [Validators.maxLength(100)]),
-      last_name: new FormControl("", [
+      middle_name: new UntypedFormControl("", [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      employee_code: new FormControl("", [Validators.maxLength(30)]),
-      role: new FormControl("", [Validators.required]),
-      designation: new FormControl("", [Validators.maxLength(100)]),
-      department: new FormControl("", [Validators.required]),
-      email: new FormControl("", [
+      employee_code: new UntypedFormControl("", [Validators.maxLength(30)]),
+      role: new UntypedFormControl("", [Validators.required]),
+      designation: new UntypedFormControl("", [Validators.maxLength(100)]),
+      department: new UntypedFormControl("", [Validators.required]),
+      email: new UntypedFormControl("", [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.maxLength(40),
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      phoneCode: new FormControl("", [
+      phoneCode: new UntypedFormControl("", [
         Validators.min(1),
         Validators.max(999999),
       ]),
-      phone: new FormControl("", [
+      phone: new UntypedFormControl("", [
         Validators.min(10000000),
         Validators.max(9999999999999),
       ]),
-      joiningDate: new FormControl("", [
+      joiningDate: new UntypedFormControl("", [
         Validators.maxLength(80),
         Validators.required,
       ]),
-      supervisorName: new FormControl("", [
+      supervisorName: new UntypedFormControl("", [
         Validators.maxLength(80),
         Validators.required,
       ]),

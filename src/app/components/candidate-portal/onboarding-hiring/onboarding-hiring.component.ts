@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
+  UntypedFormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -25,7 +25,7 @@ export class OnboardingHiringComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute,
     public http: AdminService

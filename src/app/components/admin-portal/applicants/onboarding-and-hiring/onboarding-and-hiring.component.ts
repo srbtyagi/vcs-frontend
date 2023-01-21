@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -42,7 +42,7 @@ export class OnboardingAndHiringComponent implements OnInit {
   details: any;
 
   /// On Boarding Fields ////
-  onBoardForm: FormGroup;
+  onBoardForm: UntypedFormGroup;
   pstart_date: any;
   pend_date: any;
   Rbill_rate: any;
@@ -101,7 +101,7 @@ export class OnboardingAndHiringComponent implements OnInit {
     public http: AdminService,
     public route: ActivatedRoute,
     public router: Router,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {
     this.user_id_by = sessionStorage.getItem("user_id");
     this.excelfileName =
@@ -137,8 +137,8 @@ export class OnboardingAndHiringComponent implements OnInit {
     }, 900);
 
     this.onBoardForm = this.fb.group({
-      due_date: new FormControl(null, [Validators.required]),
-      comment: new FormControl(null),
+      due_date: new UntypedFormControl(null, [Validators.required]),
+      comment: new UntypedFormControl(null),
     });
   }
   /////////////////////////////

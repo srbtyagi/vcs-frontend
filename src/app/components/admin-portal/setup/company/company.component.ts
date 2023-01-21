@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { CompanyServiceService } from "./company-service.service";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import Swal from "sweetalert2";
@@ -25,14 +25,14 @@ export class CompanyComponent implements OnInit {
   cmpaddresscopy: any;
   cmpPhonecopy: any;
   CmpEmailcopy: any;
-  compantDetailsForm: FormGroup;
+  compantDetailsForm: UntypedFormGroup;
 
   data: any;
   moduleArray: any = [];
 
   constructor(
     public service: CompanyServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -52,20 +52,20 @@ export class CompanyComponent implements OnInit {
     this.getCompanyAllData();
 
     this.compantDetailsForm = this.fb.group({
-      name: new FormControl(null, [
+      name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      address: new FormControl(null, [
+      address: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
       ]),
-      phone: new FormControl(null, [
+      phone: new UntypedFormControl(null, [
         Validators.required,
         Validators.min(10000000),
         Validators.max(999999999999999),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
         Validators.email,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { UntypedFormBuilder } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 import { AdminService } from "src/app/admin.service";
 import Swal from "sweetalert2";
@@ -44,7 +44,7 @@ export class AdminSkillSetComponent implements OnInit {
     public http: AdminService,
     public route: ActivatedRoute,
     public router: Router,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {
     this.user_id = sessionStorage.getItem("user_id");
     this.excelfileName =

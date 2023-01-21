@@ -3,10 +3,10 @@ import { Router } from "@angular/router";
 import { RecruiteeService } from "src/app/recruitee.service";
 import * as moment from "moment";
 import {
-  FormBuilder,
+  UntypedFormBuilder,
   Validators,
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
 } from "@angular/forms";
 import Swal from "sweetalert2";
 import html2canvas from "html2canvas";
@@ -43,21 +43,21 @@ export class CurrentAssignmentComponent implements OnInit {
   constructor(
     public router: Router,
     public service: RecruiteeService,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {}
 
-  assignmentForm: FormGroup;
+  assignmentForm: UntypedFormGroup;
   standard_doc: any = [];
   fac_specc_doc: any = [];
   others_doc: any = [];
 
   ngOnInit() {
     this.assignmentForm = this.fb.group({
-      job_id: new FormControl(null, [Validators.required]),
-      client: new FormControl(null, []),
-      week_id: new FormControl(null, [Validators.required]),
-      reg_ot_hr: new FormControl(null, [Validators.required]),
-      holiday_wk_hr: new FormControl(null, [Validators.required]),
+      job_id: new UntypedFormControl(null, [Validators.required]),
+      client: new UntypedFormControl(null, []),
+      week_id: new UntypedFormControl(null, [Validators.required]),
+      reg_ot_hr: new UntypedFormControl(null, [Validators.required]),
+      holiday_wk_hr: new UntypedFormControl(null, [Validators.required]),
     });
     if (sessionStorage.getItem("user_type") === "recruitee") {
       this.checkUserType = true;

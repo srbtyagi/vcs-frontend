@@ -6,9 +6,9 @@ import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
 import * as moment from "moment";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { IDayCalendarConfig } from "ng2-date-picker";
@@ -32,7 +32,7 @@ export class AppSummaryComponent implements OnInit {
   data: any;
 
   /// On Boarding Fields ////
-  onBoardForm: FormGroup;
+  onBoardForm: UntypedFormGroup;
   pstart_date: any;
   pend_date: any;
   Rbill_rate: any;
@@ -61,7 +61,7 @@ export class AppSummaryComponent implements OnInit {
     public http: AdminService,
     public route: ActivatedRoute,
     public router: Router,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {}
 
   ngOnInit() {
@@ -77,30 +77,30 @@ export class AppSummaryComponent implements OnInit {
     }, 900);
 
     this.onBoardForm = this.fb.group({
-      pstart_date: new FormControl(null, [Validators.required]),
-      pend_date: new FormControl(null, [Validators.required]),
-      Rbill_rate: new FormControl(null, [Validators.required]),
-      OTbill_rate: new FormControl(null, [Validators.required]),
-      Hbill_rate: new FormControl(null, [Validators.required]),
-      Rpay_rate: new FormControl(null, [Validators.required]),
-      OTpay_rate: new FormControl(null, [Validators.required]),
-      Hpay_rate: new FormControl(null, [Validators.required]),
-      per_diem: new FormControl(null),
-      after_hour: new FormControl(null, [Validators.required]),
-      pay_package: new FormControl(null, [
+      pstart_date: new UntypedFormControl(null, [Validators.required]),
+      pend_date: new UntypedFormControl(null, [Validators.required]),
+      Rbill_rate: new UntypedFormControl(null, [Validators.required]),
+      OTbill_rate: new UntypedFormControl(null, [Validators.required]),
+      Hbill_rate: new UntypedFormControl(null, [Validators.required]),
+      Rpay_rate: new UntypedFormControl(null, [Validators.required]),
+      OTpay_rate: new UntypedFormControl(null, [Validators.required]),
+      Hpay_rate: new UntypedFormControl(null, [Validators.required]),
+      per_diem: new UntypedFormControl(null),
+      after_hour: new UntypedFormControl(null, [Validators.required]),
+      pay_package: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(1000),
       ]),
-      shift_hour: new FormControl(null, [Validators.required]),
-      shift_details: new FormControl(null, [
+      shift_hour: new UntypedFormControl(null, [Validators.required]),
+      shift_details: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      rto: new FormControl(null, [
+      rto: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      contract_duration: new FormControl(null, [Validators.required]),
+      contract_duration: new UntypedFormControl(null, [Validators.required]),
     });
   }
 

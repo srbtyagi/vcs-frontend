@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -29,8 +29,8 @@ export class DropdownListComponent implements OnInit {
 
   addHeaderShow: any;
 
-  addDropDownList: FormGroup;
-  editDropDownList: FormGroup;
+  addDropDownList: UntypedFormGroup;
+  editDropDownList: UntypedFormGroup;
 
   editHeaderShow: any;
 
@@ -41,7 +41,7 @@ export class DropdownListComponent implements OnInit {
 
   constructor(
     public service: DropdownServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -67,14 +67,14 @@ export class DropdownListComponent implements OnInit {
     this.getDesignationData();
 
     this.addDropDownList = this.fb.group({
-      name: new FormControl(null, [
+      name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
       ]),
     });
 
     this.editDropDownList = this.fb.group({
-      edit_name: new FormControl(null, [
+      edit_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
       ]),

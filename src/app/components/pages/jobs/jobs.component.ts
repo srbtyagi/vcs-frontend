@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -21,7 +21,7 @@ export class JobsComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute,
     private titleService: Title,
@@ -31,7 +31,7 @@ export class JobsComponent implements OnInit {
 
   @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
 
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
   allJobs = [];
   checkLoggedIn = false;
   details: any = {};
@@ -56,12 +56,12 @@ export class JobsComponent implements OnInit {
     });
 
     this.loginForm = this.fb.group({
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      password: new FormControl(null, [Validators.required]),
+      password: new UntypedFormControl(null, [Validators.required]),
     });
 
     this.getAllJobs();

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { RecruiteeService } from "src/app/recruitee.service";
 import * as moment from "moment";
 import {
-  FormBuilder,
+  UntypedFormBuilder,
   Validators,
   FormGroup,
   FormControl,
@@ -42,7 +42,7 @@ export class AssignmentHistoryComponent implements OnInit {
   constructor(
     public router: Router,
     public service: RecruiteeService,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {}
 
   ngOnInit() {

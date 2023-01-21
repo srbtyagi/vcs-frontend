@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -16,8 +16,8 @@ import { ClientServiceService } from "./client-service.service";
   styleUrls: ["./client.component.css"],
 })
 export class ClientComponent implements OnInit {
-  addClientForm: FormGroup;
-  editClientForm: FormGroup;
+  addClientForm: UntypedFormGroup;
+  editClientForm: UntypedFormGroup;
 
   defaultStatus = "active";
   /*paginate */
@@ -31,7 +31,7 @@ export class ClientComponent implements OnInit {
 
   constructor(
     public service: ClientServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -49,14 +49,14 @@ export class ClientComponent implements OnInit {
     }, 900);
     this.getClientDetailsAll();
     this.addClientForm = this.fb.group({
-      client_name: new FormControl(null, [
+      client_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
       ]),
     });
 
     this.editClientForm = this.fb.group({
-      edit_client: new FormControl(null, [
+      edit_client: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(80),
       ]),

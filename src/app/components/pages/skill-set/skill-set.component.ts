@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
-  FormControl,
+  UntypedFormControl,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -27,12 +27,12 @@ export class SkillSetComponent implements OnInit {
     public router: Router,
     public service: RecruiteeService,
     public route: ActivatedRoute,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {}
 
   jobDomain: any = [];
   skillSectorName: any = "";
-  candidateForm: FormGroup;
+  candidateForm: UntypedFormGroup;
   codePattern = "[+]?[0-9]*";
   phonePattern = "[0-9]*";
   checkEmail: boolean = false;
@@ -56,17 +56,17 @@ export class SkillSetComponent implements OnInit {
     this.getJObSkillDomain();
     this.getUser();
     this.candidateForm = this.fb.group({
-      name: new FormControl(null, [
+      name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      edit_date: new FormControl(null, [Validators.required]),
+      edit_date: new UntypedFormControl(null, [Validators.required]),
       // phone_no: new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(this.phonePattern)]),
     });
   }

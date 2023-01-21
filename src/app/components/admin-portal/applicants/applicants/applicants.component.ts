@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -47,7 +47,7 @@ export class ApplicantsComponent implements OnInit {
   dob: any = "";
   profession_id: any;
   speciality_id: any;
-  editApplicant: FormGroup;
+  editApplicant: UntypedFormGroup;
   recruitee_id: any;
   user_status: any;
   apply_status: any;
@@ -122,7 +122,7 @@ export class ApplicantsComponent implements OnInit {
     public http: AdminService,
     public route: ActivatedRoute,
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public storeData: StoreDataService
   ) {
     this.user_id_by = sessionStorage.getItem("user_id");
@@ -168,25 +168,25 @@ export class ApplicantsComponent implements OnInit {
     }
 
     this.editApplicant = this.fb.group({
-      first_name: new FormControl(null, [
+      first_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(100),
       ]),
-      middle_name: new FormControl([Validators.maxLength(100)]),
-      last_name: new FormControl(null, [
+      middle_name: new UntypedFormControl([Validators.maxLength(100)]),
+      last_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(60),
       ]),
-      phone_no: new FormControl(null, [Validators.max(99999999999999)]),
-      dob: new FormControl(null),
-      ssn_4digit: new FormControl(null, [Validators.max(9999)]),
-      profession_id: new FormControl(null),
-      speciality_id: new FormControl(null),
+      phone_no: new UntypedFormControl(null, [Validators.max(99999999999999)]),
+      dob: new UntypedFormControl(null),
+      ssn_4digit: new UntypedFormControl(null, [Validators.max(9999)]),
+      profession_id: new UntypedFormControl(null),
+      speciality_id: new UntypedFormControl(null),
     });
   }
   /////////////////////////////

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -18,7 +18,7 @@ import * as moment from "moment";
 })
 export class AddApplicantAdminComponent implements OnInit {
   data: any;
-  applicantFormAdmin: FormGroup;
+  applicantFormAdmin: UntypedFormGroup;
   details = {};
   status = false;
   url = "";
@@ -37,7 +37,7 @@ export class AddApplicantAdminComponent implements OnInit {
     public http: AdminService,
     public route: ActivatedRoute,
     public router: Router,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {}
 
   ngOnInit() {
@@ -54,29 +54,29 @@ export class AddApplicantAdminComponent implements OnInit {
     }, 900);
 
     this.applicantFormAdmin = this.fb.group({
-      first_name: new FormControl(null, [
+      first_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(100),
       ]),
-      middle_namee: new FormControl(null, [Validators.maxLength(100)]),
-      last_name: new FormControl(null, [
+      middle_namee: new UntypedFormControl(null, [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.required,
         Validators.maxLength(60),
       ]),
-      phone_no: new FormControl(null, [
+      phone_no: new UntypedFormControl(null, [
         Validators.max(99999999999999),
         Validators.required,
       ]),
       //current_loc: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
-      message: new FormControl(null, []),
-      availability: new FormControl(null, []),
-      resume: new FormControl(null),
+      message: new UntypedFormControl(null, []),
+      availability: new UntypedFormControl(null, []),
+      resume: new UntypedFormControl(null),
     });
   }
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -19,7 +19,7 @@ import { IDayCalendarConfig } from "ng2-date-picker";
 export class ProfileComponent implements OnInit {
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute
   ) {}
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   checkUserType: boolean = false;
   file_name = "";
   current_date = "";
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
   fileData = "";
   professionData = [];
   specialityData = [];
@@ -58,35 +58,35 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      first_name: new FormControl(null, [
+      first_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new FormControl(null, [Validators.maxLength(100)]),
-      last_name: new FormControl(null, [
+      middle_name: new UntypedFormControl(null, [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      phone_no: new FormControl(null, [
+      phone_no: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(10),
         Validators.minLength(10),
         Validators.pattern(this.phonePattern),
       ]),
-      dob: new FormControl(null, [Validators.maxLength(50)]),
-      ssn: new FormControl(null, []),
-      profession: new FormControl(null, []),
-      speciality: new FormControl(null, []),
-      current_loc: new FormControl(null, [Validators.maxLength(200)]),
-      desired_loc1: new FormControl(null, [Validators.maxLength(100)]),
-      desired_loc2: new FormControl(null, [Validators.maxLength(100)]),
-      resume: new FormControl(null, []),
+      dob: new UntypedFormControl(null, [Validators.maxLength(50)]),
+      ssn: new UntypedFormControl(null, []),
+      profession: new UntypedFormControl(null, []),
+      speciality: new UntypedFormControl(null, []),
+      current_loc: new UntypedFormControl(null, [Validators.maxLength(200)]),
+      desired_loc1: new UntypedFormControl(null, [Validators.maxLength(100)]),
+      desired_loc2: new UntypedFormControl(null, [Validators.maxLength(100)]),
+      resume: new UntypedFormControl(null, []),
     });
 
     if (sessionStorage.getItem("user_type") === "recruitee") {

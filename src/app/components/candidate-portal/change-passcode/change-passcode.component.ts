@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 })
 export class ChangePasscodeComponent implements OnInit {
   checkUserType: boolean = false;
-  passcodeForm: FormGroup;
+  passcodeForm: UntypedFormGroup;
   passwordPatterRegex =
     "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
   old_password: boolean = false;
@@ -26,7 +26,7 @@ export class ChangePasscodeComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService
   ) {}
 
@@ -35,14 +35,14 @@ export class ChangePasscodeComponent implements OnInit {
       this.checkUserType = true;
     }
     this.passcodeForm = this.fb.group({
-      old_passcode: new FormControl(null, [Validators.required]),
-      passcode: new FormControl(null, [
+      old_passcode: new UntypedFormControl(null, [Validators.required]),
+      passcode: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern(this.passcodePattern),
         Validators.maxLength(4),
         Validators.minLength(4),
       ]),
-      retype_passcode: new FormControl(null, [Validators.required]),
+      retype_passcode: new UntypedFormControl(null, [Validators.required]),
     });
     this.getBadge();
   }

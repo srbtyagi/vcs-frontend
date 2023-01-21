@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
@@ -19,12 +19,12 @@ import { Country, State, City } from "country-state-city";
 export class ApplyJobGuestComponent implements OnInit {
   constructor(
     public router: Router,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public service: RecruiteeService,
     public route: ActivatedRoute
   ) {}
 
-  applicantForm: FormGroup;
+  applicantForm: UntypedFormGroup;
   details: any = {};
   file_name = "";
   status = false;
@@ -58,31 +58,31 @@ export class ApplyJobGuestComponent implements OnInit {
     this.states = State.getStatesOfCountry("US");
     this.filterArrayState = State.getStatesOfCountry("US");
     this.applicantForm = this.fb.group({
-      first_name: new FormControl(null, [
+      first_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
       //middle_name: new FormControl(null, [Validators.maxLength(100)]),
-      last_name: new FormControl(null, [
+      last_name: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
       ]),
-      phone_no: new FormControl(null, [
+      phone_no: new UntypedFormControl(null, [
         Validators.maxLength(10),
         Validators.minLength(10),
         Validators.pattern(this.phonePattern),
       ]),
-      message: new FormControl(null, [Validators.maxLength(500)]),
+      message: new UntypedFormControl(null, [Validators.maxLength(500)]),
       //availability: new FormControl(null, [Validators.maxLength(500)]),
-      resume: new FormControl(null, []),
-      state: new FormControl(null, []),
-      city: new FormControl(null, []),
+      resume: new UntypedFormControl(null, []),
+      state: new UntypedFormControl(null, []),
+      city: new UntypedFormControl(null, []),
     });
 
     this.route.queryParams.subscribe((r: any) => {

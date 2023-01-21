@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { DepartmentServiceService } from "./department-service.service";
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from "@angular/forms";
 import Swal from "sweetalert2";
@@ -16,8 +16,8 @@ import { AdminService } from "src/app/admin.service";
   styleUrls: ["./department.component.css"],
 })
 export class DepartmentComponent implements OnInit {
-  addDeptForm: FormGroup;
-  editDeptForm: FormGroup;
+  addDeptForm: UntypedFormGroup;
+  editDeptForm: UntypedFormGroup;
   /*paginate */
   public count: any = 20;
   public page: any;
@@ -30,7 +30,7 @@ export class DepartmentComponent implements OnInit {
 
   constructor(
     public service: DepartmentServiceService,
-    public fb: FormBuilder,
+    public fb: UntypedFormBuilder,
     public route: ActivatedRoute,
     public router: Router,
     public http: AdminService
@@ -49,14 +49,14 @@ export class DepartmentComponent implements OnInit {
     this.getDepartmentDetailsAll();
 
     this.addDeptForm = this.fb.group({
-      dept: new FormControl(null, [
+      dept: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
     });
 
     this.editDeptForm = this.fb.group({
-      editDept: new FormControl(null, [
+      editDept: new UntypedFormControl(null, [
         Validators.required,
         Validators.maxLength(100),
       ]),
