@@ -81,7 +81,7 @@ import { StoreDataService } from "./store-data.service";
 /* NNEW */
 
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -172,7 +172,7 @@ import { MatMenuModule } from '@angular/material/menu';
     DpDatePickerModule,
     NgxPaginationModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [NgxSpinnerService, StoreDataService],

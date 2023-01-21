@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-<<<<<<< HEAD
 
       <loc>http://3.142.114.192:8000/</loc>
 
@@ -80,11 +79,3 @@
    </url>
 
 </urlset>
-=======
-      <loc>http://3.142.114.192:8000/</loc>
-   </url>
-  <url>
-    <loc>http://3.142.114.192:8000/jobs</loc>
-  </url>
-</urlset>
->>>>>>> 8112b39e5ceaa909c0b75f8e764b9a9d6b7b6620

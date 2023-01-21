@@ -1003,7 +1003,9 @@ export class ManageJobsComponent implements OnInit {
       ot_holiday_pay_rate_traveller: new UntypedFormControl(null, [
         Validators.required,
       ]),
-      ot_holiday_pay_rate_local: new UntypedFormControl(null, [Validators.required]),
+      ot_holiday_pay_rate_local: new UntypedFormControl(null, [
+        Validators.required,
+      ]),
       position: new UntypedFormControl(null),
       job_type: new UntypedFormControl(null),
       job_sector: new UntypedFormControl(null, [Validators.required]),
