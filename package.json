@@ -48,6 +48,7 @@
     "ng2-date-picker": "^15.0.1",
     "ngx-pagination": "^6.0.3",
     "ngx-spinner": "^15.0.1",
+    "owl-carousel": "^1.0.0",
     "pdfmake": "^0.2.7",
     "prettier": "2.8.3",
     "sweetalert2": "^11.4.8",

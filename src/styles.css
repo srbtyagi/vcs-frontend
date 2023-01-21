@@ -335,7 +335,6 @@ dp-date-picker.dp-material .dp-picker-input {
   top: 50%;
   margin-left: -40px;
   margin-top: -40px;
-  background: url() no-repeat;
   cursor: pointer;
   z-index: 1;
   -webkit-backface-visibility: hidden;
