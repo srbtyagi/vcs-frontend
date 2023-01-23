@@ -1,165 +1,133 @@
-<body id="bg">
-  <div class="page-wraper">
-    <!-- Content -->
-    <div class="page-content">
-      <!-- Section Banner -->
-      <div
-        class="dez-bnr-inr dez-bnr-inr-md overlay-black-dark"
-        style="
-          background-image: url(../assets/images/main-slider/vcs_main_image_3.png);
-        "
-      >
-        <div class="container">
-          <div class="dez-bnr-inr-entry align-m text-white">
-            <div class="job-search-form">
-              <h2 class="text-center" style="filter: brightness(200%)">
-                Vish Consulting Services
-              </h2>
-              <h3 style="filter: brightness(200%)">
-                Leading Provider of Staffing and Recruitment Services
-              </h3>
-            </div>
-          </div>
-        </div>
+<main class="bg-white">
+  <section class="section-hero">
+    <div class="image-container">
+      <img
+        class="image"
+        src="../../../../assets/web-images/main/vcs_main_image.jpg"
+        alt="Elite Mente"
+      />
+      <div class="image-tint"></div>
+    </div>
+    <div class="text-container">
+      <h1 class="tyopg_h1">
+        <span class="title">Elite Mente LLC.</span>
+        <span class="subtitle">A Vish Consulting Services Company</span>
+      </h1>
+      <p class="subtitle-2">
+        Leading Provider of Staffing & Recruitment Services
+      </p>
+      <div class="action-button">
+        <app-buttons
+          label="View All Jobs"
+          [hasIcon]="false"
+          buttonType="secondary"
+          routerLink="/jobs"
+          size="lg"
+        ></app-buttons>
       </div>
-      <!-- Section Banner END -->
-      <!-- About Us -->
-      <div
-        class="row"
-        style="
-          margin-top: 60px;
-          margin-bottom: 30px;
-          margin-left: 10px;
-          margin-right: 10px;
-        "
-      >
-        <div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-          <div class="icon-bx-wraper p-a30 center bg-gray radius-sm">
-            <div class="text-primary m-b20">
-              <a
-                routerLink="/healthcare-staffing"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="icon-cell text-primary"
-                ><img
-                  src="../assets/images/our-work/senior-Nursing-Care.jpeg"
-                  title="Happy Registered Nurses"
-              /></a>
-            </div>
-            <div
-              class="icon-content"
-              routerLink="/healthcare-staffing"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <h5 class="dlab-tilte text-uppercase">Our Healthcare Services</h5>
-              <p>
-                We provide best services for healthcare staffing.Our heartfelt
-                gratitude to the healthcare heroes #SupportHealthcareHeroes.
+    </div>
+  </section>
+  <section class="section-container">
+    <div class="relative mx-auto">
+      <div class="cards-grid-3-container">
+        <div class="image-card">
+          <div class="flex-shrink-0">
+            <img
+              class="image"
+              src="../../../../assets/web-images/main/staffing_work_img.jpg"
+              alt=""
+            />
+          </div>
+          <div class="body">
+            <div class="flex-1">
+              <p class="title">Our Expertise</p>
+              <p class="content">
+                Focusing on manufacturing organizations we provide your
+                workforce with the skilled labor and office/administrative roles
+                that are crucial to your business. Navigate through staffing
+                peaks with ease as we connect you with hard to find seasonal
+                workers.
               </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-          <div class="icon-bx-wraper p-a30 center bg-gray radius-sm">
-            <div class="text-primary m-b20">
-              <a
-                routerLink="/clients"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="icon-cell text-primary"
-                ><img src="../assets/images/background/business_main_page.jpg"
-              /></a>
-            </div>
-            <div
-              class="icon-content"
-              routerLink="/clients"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <h5 class="dlab-tilte text-uppercase">CLIENT & PARTNERS</h5>
-              <p>
-                We offer tremendous business advantages to our clients by
-                providing experienced professionals within their budget.
+
+        <div class="image-card">
+          <div class="flex-shrink-0">
+            <img
+              class="image"
+              src="../../../../assets/web-images/main/business_main_page.jpg"
+              alt=""
+            />
+          </div>
+          <div class="body">
+            <div class="flex-1">
+              <p class="title">Clients &amp; Partners</p>
+              <p class="content">
+                By offering an array of services working within our clients
+                budgets, we are able to provide top candidates and incredible
+                business solutions to meet our clients needs.
               </p>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 m-b30">
-          <div class="icon-bx-wraper p-a30 center bg-gray radius-sm">
-            <div class="text-primary m-b20">
-              <a
-                routerLink="/jobs"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                class="icon-cell text-primary"
-                ><img src="../assets/images/background/job-seeker.jpg"
-              /></a>
-            </div>
-            <div
-              class="icon-content"
-              routerLink="/jobs"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <h5 class="dlab-tilte text-uppercase">JOBS</h5>
-              <p>
-                We welcome you to enhance your career with our firm. Our clients
-                all across the country would love to have you onboard.
+
+        <div class="image-card">
+          <div class="flex-shrink-0">
+            <img
+              class="image"
+              src="../../assets/web-images/main/job-seeker.jpg"
+              alt=""
+            />
+          </div>
+          <div class="body">
+            <div class="flex-1">
+              <p class="title">Jobs</p>
+              <p class="content">
+                Enhance your career with Elite Mente!  Check out our latest
+                jobs.
               </p>
             </div>
           </div>
         </div>
       </div>
-      <!-- About Us END -->
-      <!-- Call To Action -->
-      <div
-        class="section-full content-inner-2 call-to-action overlay-black-dark text-white text-center bg-img-fix"
-        style="
-          background-image: url(../assets/images/background/make_difference.jpeg);
-        "
-      >
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="m-b10">Signup to create your profile with us</h2>
-              <p class="m-b0">
-                Creating a profile will help us submit your profile faster and
-                get an offer quicker.
-              </p>
-              <a
-                href="/register"
-                class="site-button m-t20 outline outline-2 radius-xl"
-                >Create an Account</a
-              >
-            </div>
+    </div>
+  </section>
+  <section class="">
+    <div class="relative mx-auto">
+      <div class="container">
+        <div class="d-flex job-title-bx section-head">
+          <div class="mr-auto">
+            <h2 class="typog_h3">Recent Jobs</h2>
+            <h6 class="text-gray-600">20+ recently added jobs</h6>
+          </div>
+          <div class="align-self-end">
+            <app-buttons
+              label="Browser all jobs"
+              iconLocation="right"
+              [hasIcon]="true"
+              size="normal"
+              routerLink="jobs"
+              buttonType="transparent"
+              iconType="chevron_right"
+            ></app-buttons>
           </div>
         </div>
-      </div>
-      <!-- Call To Action END -->
-      <!-- Our Job -->
-      <div class="section-full bg-white content-inner-2">
-        <div class="container">
-          <div class="d-flex job-title-bx section-head">
-            <div class="mr-auto">
-              <h2 class="m-b5">Recent Jobs</h2>
-              <h6 class="fw4 m-b0">20+ Recently Added Jobs</h6>
-            </div>
-            <div class="align-self-end">
-              <a href="/jobs" class="site-button button-sm"
-                >Browse All Jobs <i class="fa fa-long-arrow-right"></i
-              ></a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-9">
+        <div class="row">
+          <ng-container *ngIf="allJobs.length === 0">
+            <div class="relative pb-16 text-gray-500">No jobs are listed currently</div>
+          </ng-container>
+          <ng-container *ngIf="allJobs.length">
+            <div class="w-full">
               <ul class="post-job-bx browse-job">
                 <li *ngFor="let data of allJobs; index as i">
                   <div class="post-bx">
                     <div class="d-flex m-b30">
                       <div class="job-post-company">
                         <span
-                          ><img alt="" src="../assets/images/logo/icon1.png"
+                          ><img
+                            alt=""
+                            src="../../assets/web-images/logo/icon1.png"
                         /></span>
                       </div>
                       <div class="job-post-info">
@@ -207,28 +175,10 @@
                 </li>
               </ul>
             </div>
-
-            <div class="col-lg-3">
-              <div class="sticky-top">
-                <div class="quote-bx">
-                  <div class="quote-info">
-                    <h4>Signup to create your profile with us</h4>
-                    <p>
-                      Creating a profile will help us submit your profile faster
-                      and get an offer quicker.
-                    </p>
-                    <a href="/register" class="site-button"
-                      >Create an Account</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </ng-container>
         </div>
       </div>
-      <!-- Our Job END -->
     </div>
-    <!-- Content End -->
-  </div>
-</body>
+  </section>
+  <app-cta></app-cta>
+</main>

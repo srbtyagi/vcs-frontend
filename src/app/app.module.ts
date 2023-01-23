@@ -81,6 +81,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonsModule } from './components/common/buttons/buttons.module';
+import { CtaComponent } from './components/common/cta/cta.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +150,7 @@ import { ButtonsModule } from './components/common/buttons/buttons.module';
     HsCaseStudyComponent,
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
+    CtaComponent,
   ],
   imports: [
     BrowserModule,

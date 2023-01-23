@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-buttons',
   templateUrl: './buttons.component.html',
   styleUrls: ['./buttons.component.scss'],
 })
-export class ButtonsComponent implements OnInit {
+export class ButtonsComponent {
   @Input() label!: string;
   @Input() hasIcon!: boolean;
   @Input() iconLocation!: string;
@@ -14,6 +14,4 @@ export class ButtonsComponent implements OnInit {
   @Input() size!: string;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
