@@ -93,9 +93,9 @@
       </div>
     </div>
   </section>
-  <section class="">
+  <section>
     <div class="relative mx-auto">
-      <div class="container">
+      <div class="mx-auto md:max-w-[100rem]">
         <div class="d-flex job-title-bx section-head">
           <div class="mr-auto">
             <h2 class="typog_h3">Recent Jobs</h2>
@@ -115,7 +115,9 @@
         </div>
         <div class="row">
           <ng-container *ngIf="allJobs.length === 0">
-            <div class="relative pb-16 text-gray-500">No jobs are listed currently</div>
+            <div class="relative pb-16 text-gray-500">
+              No jobs are listed currently
+            </div>
           </ng-container>
           <ng-container *ngIf="allJobs.length">
             <div class="w-full">

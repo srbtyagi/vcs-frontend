@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   navbarItems: any = [
     {
       label: 'Home',
-      link: '/',
+      link: '/home',
     },
     {
       label: 'About Us',

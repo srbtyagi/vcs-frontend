@@ -64,7 +64,8 @@ import { ManageJobsComponent } from './components/recruiter-portal/manage-jobs/m
 import { PostJobComponent } from './components/recruiter-portal/post-job/post-job.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'candi-profile', component: CandidateProfileComponent },
