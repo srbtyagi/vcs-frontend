@@ -1,0 +1,15 @@
+.page-header-container {
+  @apply relative overflow-hidden bg-sky-600 py-8 sm:py-20;
+
+  .text-container {
+    @apply mx-auto max-w-7xl px-6 md:px-8 relative sm:text-center;
+
+    .title {
+      @apply text-3xl font-bold tracking-tight text-white md:text-5xl;
+    }
+
+    .subtitle {
+      @apply mt-2 md:mt-4 text-lg text-gray-200;
+    }
+  }
+}

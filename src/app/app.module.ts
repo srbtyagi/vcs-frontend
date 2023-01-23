@@ -82,6 +82,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonsModule } from './components/common/buttons/buttons.module';
 import { CtaComponent } from './components/common/cta/cta.component';
+import { PageHeaderComponent } from './components/common/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +152,7 @@ import { CtaComponent } from './components/common/cta/cta.component';
     TermsOfServiceComponent,
     PrivacyPolicyComponent,
     CtaComponent,
+    PageHeaderComponent,
   ],
   imports: [
     BrowserModule,
