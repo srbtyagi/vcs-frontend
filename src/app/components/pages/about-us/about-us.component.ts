@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { AdminService } from 'src/app/services/admin.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
-  title = 'Nursing and IT Staffing';
+  title = 'About Us';
 
   constructor(
     public http: AdminService,
