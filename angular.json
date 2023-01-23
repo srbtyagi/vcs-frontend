@@ -2,6 +2,11 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "vishusaWeb": {
       "projectType": "application",
@@ -29,7 +34,7 @@
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/assets/plugins/bootstrap/css/bootstrap.min.css",
               "src/assets/plugins/bootstrap/css/bootstrap-select.min.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
@@ -112,10 +117,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -131,8 +139,22 @@
               "devServerTarget": "vishusaWeb:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
