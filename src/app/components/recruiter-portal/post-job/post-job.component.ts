@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import * as moment from "moment";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import { Country, State, City } from "country-state-city";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import * as moment from 'moment';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import { Country, State, City } from 'country-state-city';
 
 @Component({
-  selector: "app-post-job",
-  templateUrl: "./post-job.component.html",
-  styleUrls: ["./post-job.component.css"],
+  selector: 'app-post-job',
+  templateUrl: './post-job.component.html',
+  styleUrls: ['./post-job.component.css'],
 })
 export class PostJobComponent implements OnInit {
   // cities = {
@@ -890,7 +890,7 @@ export class PostJobComponent implements OnInit {
   jobSector: any = [];
   clientList: any = [];
   systemList: any = [];
-  shit_details: any = ["Day"];
+  shit_details: any = ['Day'];
   ot_holiday_pay_rate_traveller: any;
   ot_holiday_pay_rate_local: any;
   states: any = [];
@@ -920,29 +920,29 @@ export class PostJobComponent implements OnInit {
     setTimeout(() => {
       this.http.spinnerHide();
     }, 900);
-    this.states = State.getStatesOfCountry("US");
-    this.filterArrayState = State.getStatesOfCountry("US");
+    this.states = State.getStatesOfCountry('US');
+    this.filterArrayState = State.getStatesOfCountry('US');
     this.getJobType();
     this.getPositionType();
     this.getAlljobSector();
     this.getAllClients();
     this.getAllSystemNames();
     ///// Restrict copy and paste negative value
-    var myInput: any = document.getElementById("billRate");
-    var myInput2: any = document.getElementById("OTRate");
+    var myInput: any = document.getElementById('billRate');
+    var myInput2: any = document.getElementById('OTRate');
     myInput.addEventListener(
-      "paste",
+      'paste',
       function (e) {
-        var pasteData = e.clipboardData.getData("text/plain");
+        var pasteData = e.clipboardData.getData('text/plain');
         if (pasteData.match(/[^0-9]/)) e.preventDefault();
       },
       false
     );
 
     myInput2.addEventListener(
-      "paste",
+      'paste',
       function (e) {
-        var pasteData = e.clipboardData.getData("text/plain");
+        var pasteData = e.clipboardData.getData('text/plain');
         if (pasteData.match(/[^0-9]/)) e.preventDefault();
       },
       false
@@ -1000,9 +1000,9 @@ export class PostJobComponent implements OnInit {
   }
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       //console.log(arr)
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
@@ -1012,14 +1012,14 @@ export class PostJobComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "POST JOB": {
-              e.submodule_name_lower = "Post A Job";
-              e.routing = "/post-jobs";
+            case 'POST JOB': {
+              e.submodule_name_lower = 'Post A Job';
+              e.routing = '/post-jobs';
               break;
             }
-            case "MANAGE JOB": {
-              e.submodule_name_lower = "Manage Jobs";
-              e.routing = "/manage-jobs";
+            case 'MANAGE JOB': {
+              e.submodule_name_lower = 'Manage Jobs';
+              e.routing = '/manage-jobs';
               break;
             }
 
@@ -1033,7 +1033,7 @@ export class PostJobComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive102").className = "active";
+      document.getElementById('clsActive102').className = 'active';
     }, 200);
   }
 
@@ -1041,7 +1041,7 @@ export class PostJobComponent implements OnInit {
     this.jobType = [];
     this.http.getAlljobType().subscribe((res: any) => {
       res.forEach((e) => {
-        if (e.job_type_status === "active") {
+        if (e.job_type_status === 'active') {
           this.jobType.push(e);
         }
       });
@@ -1053,7 +1053,7 @@ export class PostJobComponent implements OnInit {
     this.positiontype = [];
     this.http.getAllPositionType().subscribe((res: any) => {
       res.forEach((e) => {
-        if (e.position_type_status === "active") {
+        if (e.position_type_status === 'active') {
           this.positiontype.push(e);
         }
       });
@@ -1065,7 +1065,7 @@ export class PostJobComponent implements OnInit {
     this.jobSector = [];
     this.http.getAlljobSector().subscribe((res: any) => {
       res.forEach((e) => {
-        if (e.job_sector_status === "active") {
+        if (e.job_sector_status === 'active') {
           this.jobSector.push(e);
         }
       });
@@ -1090,15 +1090,15 @@ export class PostJobComponent implements OnInit {
   }
 
   verifyJobId() {
-    this.http.verifyJobId(this.postJobForm.controls.job_id.value).subscribe(
+    this.http.verifyJobId(this.postJobForm.controls['job_id'].value).subscribe(
       (res: any) => {
-        if (res === "already exists") {
-          this.errMsg("This job ID already exists.");
-        } else if (res === "not exists") {
+        if (res === 'already exists') {
+          this.errMsg('This job ID already exists.');
+        } else if (res === 'not exists') {
         }
       },
       (err) => {
-        this.errMsg("Something went wrong,please try again.");
+        this.errMsg('Something went wrong,please try again.');
       }
     );
   }
@@ -1107,9 +1107,9 @@ export class PostJobComponent implements OnInit {
     //console.log(value, name);
     this.filteredCity = [];
     this.filterArrayCity = [];
-    this.filteredCity = City.getCitiesOfState("US", value);
-    this.filterArrayCity = City.getCitiesOfState("US", value);
-    this.postJobForm.controls["state"].setValue(name);
+    this.filteredCity = City.getCitiesOfState('US', value);
+    this.filterArrayCity = City.getCitiesOfState('US', value);
+    this.postJobForm.controls['state'].setValue(name);
     this.stateList = false;
     //console.log(this.filteredCity)
     // for (var key in this.cities) {
@@ -1124,7 +1124,7 @@ export class PostJobComponent implements OnInit {
 
   onOptionsSelectedCity(value: any) {
     //console.log(value);
-    this.postJobForm.controls["city"].setValue(value);
+    this.postJobForm.controls['city'].setValue(value);
     this.cityList = false;
   }
 
@@ -1138,7 +1138,7 @@ export class PostJobComponent implements OnInit {
 
   searchState(ev) {
     //console.log(this.postJobForm.controls.state.value)
-    let search_data = this.postJobForm.controls.state.value;
+    let search_data = this.postJobForm.controls['state'].value;
     this.states = search_data
       ? this.filterListState(search_data)
       : this.filterArrayState;
@@ -1155,7 +1155,7 @@ export class PostJobComponent implements OnInit {
 
   searchCity(ev) {
     //console.log(this.postJobForm.controls.city.value)
-    let search_data = this.postJobForm.controls.city.value;
+    let search_data = this.postJobForm.controls['city'].value;
     this.filteredCity = search_data
       ? this.filterListCity(search_data)
       : this.filterArrayCity;
@@ -1171,15 +1171,15 @@ export class PostJobComponent implements OnInit {
   changepayRate(e) {
     //console.log(this.postJobForm.controls.bill_rate.value)
     this.blended_pay = (
-      Number(this.postJobForm.controls.bill_rate.value) / 1.28
+      Number(this.postJobForm.controls['bill_rate'].value) / 1.28
     ).toFixed(2);
     this.regular_pay = (
-      Number(this.postJobForm.controls.bill_rate.value) / 1.37
+      Number(this.postJobForm.controls['bill_rate'].value) / 1.37
     ).toFixed(2);
     var t = e.target.value;
     e.target.value =
-      t.indexOf(".") >= 0
-        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+      t.indexOf('.') >= 0
+        ? t.substr(0, t.indexOf('.')) + t.substr(t.indexOf('.'), 3)
         : t;
 
     ///// Restrict negative by typing
@@ -1198,15 +1198,15 @@ export class PostJobComponent implements OnInit {
 
   changeOTRate(e) {
     this.ot_holiday_pay_rate_traveller = (
-      Number(this.postJobForm.controls.ot_holiday_rate.value) / 1.28
+      Number(this.postJobForm.controls['ot_holiday_rate'].value) / 1.28
     ).toFixed(2);
     this.ot_holiday_pay_rate_local = (
-      Number(this.postJobForm.controls.ot_holiday_rate.value) / 1.37
+      Number(this.postJobForm.controls['ot_holiday_rate'].value) / 1.37
     ).toFixed(2);
     var t = e.target.value;
     e.target.value =
-      t.indexOf(".") >= 0
-        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+      t.indexOf('.') >= 0
+        ? t.substr(0, t.indexOf('.')) + t.substr(t.indexOf('.'), 3)
         : t;
 
     ///// Restrict negative by typing
@@ -1236,54 +1236,54 @@ export class PostJobComponent implements OnInit {
   submit() {
     this.http.spinnerShow();
     let date = new Date();
-    let strTime = date.toLocaleString("en-US", {
-      timeZone: "America/Los_Angeles",
+    let strTime = date.toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
     });
     let data = {
-      position_type: this.postJobForm.controls.position.value,
-      client_id: this.postJobForm.controls.client_name.value,
-      job_no: this.postJobForm.controls.job_id.value,
-      job_title: this.postJobForm.controls.job_title.value,
-      job_type: this.postJobForm.controls.job_type.value,
-      country: "USA",
-      state: this.postJobForm.controls.state.value,
-      city: this.postJobForm.controls.city.value,
-      bill_rate: this.postJobForm.controls.bill_rate.value,
-      blended_pay_rate: this.postJobForm.controls.blended_pay_rate.value,
-      at_holiday_rate: this.postJobForm.controls.ot_holiday_rate.value,
-      regular_pay_rate: this.postJobForm.controls.regular_pay_rate.value,
+      position_type: this.postJobForm.controls['position'].value,
+      client_id: this.postJobForm.controls['client_name'].value,
+      job_no: this.postJobForm.controls['job_id'].value,
+      job_title: this.postJobForm.controls['job_title'].value,
+      job_type: this.postJobForm.controls['job_type'].value,
+      country: 'USA',
+      state: this.postJobForm.controls['state'].value,
+      city: this.postJobForm.controls['city'].value,
+      bill_rate: this.postJobForm.controls['bill_rate'].value,
+      blended_pay_rate: this.postJobForm.controls['blended_pay_rate'].value,
+      at_holiday_rate: this.postJobForm.controls['ot_holiday_rate'].value,
+      regular_pay_rate: this.postJobForm.controls['regular_pay_rate'].value,
       ot_holiday_pay_rate_traveller:
-        this.postJobForm.controls.ot_holiday_pay_rate_traveller.value,
+        this.postJobForm.controls['ot_holiday_pay_rate_traveller'].value,
       ot_holiday_pay_rate_local:
-        this.postJobForm.controls.ot_holiday_pay_rate_local.value,
-      job_description: this.postJobForm.controls.job_desc.value,
-      job_post_by: sessionStorage.getItem("user_id"),
-      job_post_date: moment(strTime).format("MM/DD/YYYY"),
-      req_information: this.postJobForm.controls.req_inf.value,
-      system_name: this.postJobForm.controls.system_name.value,
-      job_sector: this.postJobForm.controls.job_sector.value,
-      duration: this.postJobForm.controls.job_duration.value,
-      shift: this.shit_details.join(","),
-      confirm_hr: this.postJobForm.controls.confirmed_hr.value,
+        this.postJobForm.controls['ot_holiday_pay_rate_local'].value,
+      job_description: this.postJobForm.controls['job_desc'].value,
+      job_post_by: sessionStorage.getItem('user_id'),
+      job_post_date: moment(strTime).format('MM/DD/YYYY'),
+      req_information: this.postJobForm.controls['req_inf'].value,
+      system_name: this.postJobForm.controls['system_name'].value,
+      job_sector: this.postJobForm.controls['job_sector'].value,
+      duration: this.postJobForm.controls['job_duration'].value,
+      shift: this.shit_details.join(','),
+      confirm_hr: this.postJobForm.controls['confirmed_hr'].value,
     };
     //console.log(data)
     this.http.postJob(data).subscribe(
       (res) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           Swal.fire({
-            title: "Job posted successfully.",
-            icon: "success",
+            title: 'Job posted successfully.',
+            icon: 'success',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
@@ -1293,17 +1293,17 @@ export class PostJobComponent implements OnInit {
         } else {
           this.http.spinnerHide();
           Swal.fire({
-            title: "Something went wrong,please try again.",
-            icon: "error",
+            title: 'Something went wrong,please try again.',
+            icon: 'error',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
@@ -1315,17 +1315,17 @@ export class PostJobComponent implements OnInit {
         this.http.spinnerHide();
         //console.log(err);
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1349,21 +1349,21 @@ export class PostJobComponent implements OnInit {
   errMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         //this.postJobForm.controls.job_id.value.reset();
-        this.postJobForm.get("job_id").reset();
+        this.postJobForm.get('job_id').reset();
       }
     });
   }

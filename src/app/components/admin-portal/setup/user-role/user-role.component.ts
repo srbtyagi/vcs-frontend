@@ -1,25 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { UserRoleServiceService } from "./user-role-service.service";
+import { Component, OnInit } from '@angular/core';
+import { UserRoleServiceService } from './user-role-service.service';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import Swal from "sweetalert2";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
 
 @Component({
-  selector: "app-user-role",
-  templateUrl: "./user-role.component.html",
-  styleUrls: ["./user-role.component.css"],
+  selector: 'app-user-role',
+  templateUrl: './user-role.component.html',
+  styleUrls: ['./user-role.component.css'],
 })
 export class UserRoleComponent implements OnInit {
   allUserRole: any;
   addUserRoleForm: UntypedFormGroup;
   editUserRoleForm: UntypedFormGroup;
-  defaultStatus = "active";
+  defaultStatus = 'active';
   /*paginate */
   public count: any = 20;
   public page: any;
@@ -91,9 +91,9 @@ export class UserRoleComponent implements OnInit {
   ///////////////////////
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -102,34 +102,34 @@ export class UserRoleComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "COMPANY": {
-              e.submodule_name_lower = "Company";
-              e.routing = "/company";
+            case 'COMPANY': {
+              e.submodule_name_lower = 'Company';
+              e.routing = '/company';
               break;
             }
-            case "DEPARTMENT": {
-              e.submodule_name_lower = "Department";
-              e.routing = "/department";
+            case 'DEPARTMENT': {
+              e.submodule_name_lower = 'Department';
+              e.routing = '/department';
               break;
             }
-            case "USER ROLE": {
-              e.submodule_name_lower = "User Role";
-              e.routing = "/user-role";
+            case 'USER ROLE': {
+              e.submodule_name_lower = 'User Role';
+              e.routing = '/user-role';
               break;
             }
-            case "EMPLOYEE": {
-              e.submodule_name_lower = "Employee";
-              e.routing = "/employee";
+            case 'EMPLOYEE': {
+              e.submodule_name_lower = 'Employee';
+              e.routing = '/employee';
               break;
             }
-            case "CLIENT": {
-              e.submodule_name_lower = "Client";
-              e.routing = "/client";
+            case 'CLIENT': {
+              e.submodule_name_lower = 'Client';
+              e.routing = '/client';
               break;
             }
-            case "DROPDOWN LIST": {
-              e.submodule_name_lower = "Dropdown-List";
-              e.routing = "/dropdown-list";
+            case 'DROPDOWN LIST': {
+              e.submodule_name_lower = 'Dropdown-List';
+              e.routing = '/dropdown-list';
               break;
             }
             default: {
@@ -142,7 +142,7 @@ export class UserRoleComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive403").className = "active";
+      document.getElementById('clsActive403').className = 'active';
     }, 200);
   }
 
@@ -166,24 +166,24 @@ export class UserRoleComponent implements OnInit {
 
   insertUserRole() {
     const data = {
-      role_name: this.addUserRoleForm.controls.role.value,
-      incentive_perc: this.addUserRoleForm.controls.incentive_perc.value,
+      role_name: this.addUserRoleForm.controls['role'].value,
+      incentive_perc: this.addUserRoleForm.controls['incentive_perc'].value,
     };
     this.service.addUserRole(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "User Role Added successfully.",
-          icon: "success",
+          title: 'User Role Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -193,17 +193,17 @@ export class UserRoleComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -231,25 +231,25 @@ export class UserRoleComponent implements OnInit {
 
   updateUserRole() {
     const data = {
-      role_name: this.editUserRoleForm.controls.editRole.value,
+      role_name: this.editUserRoleForm.controls['editRole'].value,
       role_id: this.userRoleID,
-      incentive_perc: this.editUserRoleForm.controls.incentive_perc.value,
+      incentive_perc: this.editUserRoleForm.controls['incentive_perc'].value,
     };
     this.service.updateUserRole(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "User Role Updated successfully.",
-          icon: "success",
+          title: 'User Role Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -259,17 +259,17 @@ export class UserRoleComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -287,19 +287,19 @@ export class UserRoleComponent implements OnInit {
     //console.log(data);
     this.service.changeStatusUserRole(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Department Updated successfully.",
-          icon: "success",
+          title: 'Department Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -308,17 +308,17 @@ export class UserRoleComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -481,19 +481,19 @@ export class UserRoleComponent implements OnInit {
     //console.log(data);
     this.service.postAccessRole(data).subscribe((r) => {
       //console.log(r);
-      if (r === "check_value") {
+      if (r === 'check_value') {
         Swal.fire({
-          title: "Assign Access Updated Successfully.",
-          icon: "success",
+          title: 'Assign Access Updated Successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -501,17 +501,17 @@ export class UserRoleComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {

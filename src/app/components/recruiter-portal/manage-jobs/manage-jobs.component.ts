@@ -1369,7 +1369,7 @@ export class ManageJobsComponent implements OnInit {
 
   searchState(ev) {
     ////console.log(this.EditJobForm.controls.state.value)
-    let search_data = this.EditJobForm.controls.state.value;
+    let search_data = this.EditJobForm.controls["state"].value;
     this.states = search_data
       ? this.filterListState(search_data)
       : this.filterArrayState;
@@ -1386,7 +1386,7 @@ export class ManageJobsComponent implements OnInit {
 
   searchCity(ev) {
     ////console.log(this.EditJobForm.controls.city.value)
-    let search_data = this.EditJobForm.controls.city.value;
+    let search_data = this.EditJobForm.controls["city"].value;
     this.filteredCity = search_data
       ? this.filterListCity(search_data)
       : this.filterArrayCity;
@@ -1402,10 +1402,10 @@ export class ManageJobsComponent implements OnInit {
   changepayRate(e) {
     //console.log(this.EditJobForm.controls.bill_rate.value)
     this.blended_pay_rate = (
-      Number(this.EditJobForm.controls.bill_rate.value) / 1.28
+      Number(this.EditJobForm.controls["bill_rate"].value) / 1.28
     ).toFixed(2);
     this.regular_pay_rate = (
-      Number(this.EditJobForm.controls.bill_rate.value) / 1.37
+      Number(this.EditJobForm.controls["bill_rate"].value) / 1.37
     ).toFixed(2);
     var t = e.target.value;
     e.target.value =
@@ -1429,10 +1429,10 @@ export class ManageJobsComponent implements OnInit {
 
   changeOTRate(e) {
     this.ot_holiday_pay_rate_traveller = (
-      Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.28
+      Number(this.EditJobForm.controls["ot_holiday_rate"].value) / 1.28
     ).toFixed(2);
     this.ot_holiday_pay_rate_local = (
-      Number(this.EditJobForm.controls.ot_holiday_rate.value) / 1.37
+      Number(this.EditJobForm.controls["ot_holiday_rate"].value) / 1.37
     ).toFixed(2);
     var t = e.target.value;
     e.target.value =
@@ -1599,31 +1599,31 @@ export class ManageJobsComponent implements OnInit {
 
     let data = {
       job_id: this.job_id,
-      position_type: this.EditJobForm.controls.position.value,
-      system_name: this.EditJobForm.controls.system_name.value,
-      client_id: this.EditJobForm.controls.client_name.value,
-      job_no: this.EditJobForm.controls.job_id.value,
-      job_title: this.EditJobForm.controls.job_title.value,
-      job_type: this.EditJobForm.controls.job_type.value,
+      position_type: this.EditJobForm.controls["position"].value,
+      system_name: this.EditJobForm.controls["system_name"].value,
+      client_id: this.EditJobForm.controls["client_name"].value,
+      job_no: this.EditJobForm.controls["job_id"].value,
+      job_title: this.EditJobForm.controls["job_title"].value,
+      job_type: this.EditJobForm.controls["job_type"].value,
       country: "USA",
-      state: this.EditJobForm.controls.state.value,
-      city: this.EditJobForm.controls.city.value,
-      bill_rate: this.EditJobForm.controls.bill_rate.value,
-      blended_pay_rate: this.EditJobForm.controls.blended_pay_rate.value,
-      at_holiday_rate: this.EditJobForm.controls.ot_holiday_rate.value,
-      regular_pay_rate: this.EditJobForm.controls.regular_pay_rate.value,
+      state: this.EditJobForm.controls["state"].value,
+      city: this.EditJobForm.controls["city"].value,
+      bill_rate: this.EditJobForm.controls["bill_rate"].value,
+      blended_pay_rate: this.EditJobForm.controls["blended_pay_rate"].value,
+      at_holiday_rate: this.EditJobForm.controls["ot_holiday_rate"].value,
+      regular_pay_rate: this.EditJobForm.controls["regular_pay_rate"].value,
       ot_holiday_pay_rate_traveller:
-        this.EditJobForm.controls.ot_holiday_pay_rate_traveller.value,
+        this.EditJobForm.controls["ot_holiday_pay_rate_traveller"].value,
       ot_holiday_pay_rate_local:
-        this.EditJobForm.controls.ot_holiday_pay_rate_local.value,
-      job_description: this.EditJobForm.controls.job_desc.value,
+        this.EditJobForm.controls["ot_holiday_pay_rate_local"].value,
+      job_description: this.EditJobForm.controls["job_desc"].value,
       job_post_edit_by: sessionStorage.getItem("user_id"),
       job_post_edit_date: moment(strTime).format("MM/DD/YYYY"),
-      req_information: this.EditJobForm.controls.req_info.value,
-      job_sector: this.EditJobForm.controls.job_sector.value,
-      duration: this.EditJobForm.controls.job_duration.value,
+      req_information: this.EditJobForm.controls["req_info"].value,
+      job_sector: this.EditJobForm.controls["job_sector"].value,
+      duration: this.EditJobForm.controls["job_duration"].value,
       shift: this.shit_details.join(","),
-      confirm_hr: this.EditJobForm.controls.confirmed_hr.value,
+      confirm_hr: this.EditJobForm.controls["confirmed_hr"].value,
     };
     //console.log(data)
     this.http.updateJobDetails(data).subscribe(

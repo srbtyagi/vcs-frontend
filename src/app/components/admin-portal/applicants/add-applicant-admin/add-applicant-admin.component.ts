@@ -1,36 +1,36 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import { RecruiteeService } from 'src/app/recruitee.service';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
-  selector: "app-add-applicant-admin",
-  templateUrl: "./add-applicant-admin.component.html",
-  styleUrls: ["./add-applicant-admin.component.css"],
+  selector: 'app-add-applicant-admin',
+  templateUrl: './add-applicant-admin.component.html',
+  styleUrls: ['./add-applicant-admin.component.css'],
 })
 export class AddApplicantAdminComponent implements OnInit {
   data: any;
   applicantFormAdmin: UntypedFormGroup;
   details = {};
   status = false;
-  url = "";
-  emp_preference = ["permanent"];
+  url = '';
+  emp_preference = ['permanent'];
   fileToUpload: any | null = null;
-  file_name: any = "";
+  file_name: any = '';
   showForm: boolean = false;
   first_name: any;
   middle_namee: any;
   last_name: any;
   phone_no: any;
-  recruitee_id_exist: any = "";
+  recruitee_id_exist: any = '';
   resumeStatus: boolean = false;
 
   constructor(
@@ -103,29 +103,29 @@ export class AddApplicantAdminComponent implements OnInit {
   }
 
   checkEmail() {
-    this.first_name = "";
-    this.middle_namee = "";
-    this.last_name = "";
-    this.recruitee_id_exist = "";
+    this.first_name = '';
+    this.middle_namee = '';
+    this.last_name = '';
+    this.recruitee_id_exist = '';
     this.resumeStatus = false;
-    this.phone_no = "";
+    this.phone_no = '';
     let data = {
-      email: this.applicantFormAdmin.controls.email.value,
+      email: this.applicantFormAdmin.controls['email'].value,
     };
     //console.log(data)
     this.http.checkEmailApplicant(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "no user found by given email") {
-        } else if (res === "Employee") {
+        if (res === 'no user found by given email') {
+        } else if (res === 'Employee') {
           this.errorMsg(
             "This email cann't be added as it is already used by VCS employee!"
           );
           this.applicantFormAdmin.reset();
           this.resumeStatus = false;
         } else if (
-          res !== "no user found by given email" &&
-          res !== "Employee"
+          res !== 'no user found by given email' &&
+          res !== 'Employee'
         ) {
           this.showForm = true;
           this.first_name = res[0].user_first_name;
@@ -139,11 +139,11 @@ export class AddApplicantAdminComponent implements OnInit {
           }
           this.checkRecruiteeStatus(this.recruitee_id_exist);
         } else {
-          this.errorMsg("Something went wrong,please try again!");
+          this.errorMsg('Something went wrong,please try again!');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong,please try again!");
+        this.errorMsg('Something went wrong,please try again!');
       }
     );
   }
@@ -155,17 +155,17 @@ export class AddApplicantAdminComponent implements OnInit {
     this.http.getRecruiteeStatus(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res[0].apply_status === "regular") {
+        if (res[0].apply_status === 'regular') {
           this.checkApplystatus(user_id_recruitee);
-        } else if (res === "DNH") {
+        } else if (res === 'DNH') {
           //this.errorMsg("This applicant can not be added!");
           this.checkApplystatus(user_id_recruitee);
         } else {
-          this.errorMsg("Something went wrong,please try again!");
+          this.errorMsg('Something went wrong,please try again!');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong,please try again!");
+        this.errorMsg('Something went wrong,please try again!');
       }
     );
   }
@@ -179,16 +179,16 @@ export class AddApplicantAdminComponent implements OnInit {
       (res: any) => {
         //console.log(res)
         if (res.length !== 0) {
-          this.errorMsg("The applicant already applied for this job.");
+          this.errorMsg('The applicant already applied for this job.');
           this.applicantFormAdmin.reset();
           this.resumeStatus = false;
         } else if (res.length === 0) {
         } else {
-          this.errorMsg("Something went wrong,please try again!");
+          this.errorMsg('Something went wrong,please try again!');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong,please try again!");
+        this.errorMsg('Something went wrong,please try again!');
       }
     );
   }
@@ -196,22 +196,22 @@ export class AddApplicantAdminComponent implements OnInit {
   uploadDoc(file, resultval) {
     //console.log("UPLOAD------")
     let formData = new FormData();
-    formData.append("file", file, file.name);
+    formData.append('file', file, file.name);
     //console.log(formData)
     this.http.uploadResumeAppl(formData, resultval).subscribe(
       (res) => {
         let result: any = res;
         //console.log(result)
-        if (result === "success") {
+        if (result === 'success') {
           this.applyJobFunction(resultval);
           //this.success("Registered successfully.");
         } else {
           this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -219,77 +219,78 @@ export class AddApplicantAdminComponent implements OnInit {
   uploadDoc2(file, resultval) {
     //console.log("UPLOAD------")
     let formData = new FormData();
-    formData.append("file", file, file.name);
+    formData.append('file', file, file.name);
     //console.log(formData)
     this.http.uploadResumeAppl(formData, resultval).subscribe(
       (res) => {
         let result: any = res;
         // console.log(result)
-        if (result === "success") {
+        if (result === 'success') {
           this.applyJobFunction(resultval);
           //this.success("Registered successfully.");
         } else {
           this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
 
   applyJobFunction(applicant_id) {
     let applyJobObj = {
-      phone: this.applicantFormAdmin.controls.phone_no.value,
-      email: this.applicantFormAdmin.controls.email.value,
-      message: this.applicantFormAdmin.controls.message.value,
-      availability: this.applicantFormAdmin.controls.availability.value,
+      phone: this.applicantFormAdmin.controls['phone_no'].value,
+      email: this.applicantFormAdmin.controls['email'].value,
+      message: this.applicantFormAdmin.controls['message'].value,
+      availability: this.applicantFormAdmin.controls['availability'].value,
       user_id: applicant_id,
       job_id: this.data.job_id,
-      applied_by: sessionStorage.getItem("user_id"),
-      recruiter_id: sessionStorage.getItem("user_id"),
-      prefered_state: this.data["state"],
-      prefered_city: this.data["city"],
-      job_no: this.data["job_no"],
+      applied_by: sessionStorage.getItem('user_id'),
+      recruiter_id: sessionStorage.getItem('user_id'),
+      prefered_state: this.data['state'],
+      prefered_city: this.data['city'],
+      job_no: this.data['job_no'],
     };
     //console.log(applyJobObj)
     this.http.add_applicant(applyJobObj).subscribe(
       (result: any) => {
         // console.log(result)
-        if (result === "success") {
+        if (result === 'success') {
           this.http.spinnerHide();
-          this.successMsg("Applicant added Successfully.");
+          this.successMsg('Applicant added Successfully.');
         }
-        if (result === "ERROR") {
+        if (result === 'ERROR') {
           this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
         this.http.spinnerHide();
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
 
   addApplicant() {
     this.http.spinnerShow();
-    if (this.recruitee_id_exist === "") {
+    if (this.recruitee_id_exist === '') {
       let regObj = {
-        user_first_name: this.applicantFormAdmin.controls.first_name.value,
-        user_middle_name: this.applicantFormAdmin.controls.middle_namee.value,
-        user_last_name: this.applicantFormAdmin.controls.last_name.value,
-        phone: this.applicantFormAdmin.controls.phone_no.value,
-        email: this.applicantFormAdmin.controls.email.value,
-        password: "1234",
-        user_type: "recruitee",
-        dob: "",
-        ssn_4digit: "",
+        user_first_name: this.applicantFormAdmin.controls['first_name'].value,
+        user_middle_name:
+          this.applicantFormAdmin.controls['middle_namee'].value,
+        user_last_name: this.applicantFormAdmin.controls['last_name'].value,
+        phone: this.applicantFormAdmin.controls['phone_no'].value,
+        email: this.applicantFormAdmin.controls['email'].value,
+        password: '1234',
+        user_type: 'recruitee',
+        dob: '',
+        ssn_4digit: '',
         profession: 0,
         speciality: 0,
-        desired_location_1: "",
-        desired_location_2: "",
+        desired_location_1: '',
+        desired_location_2: '',
       };
 
       //console.log(regObj)
@@ -297,26 +298,27 @@ export class AddApplicantAdminComponent implements OnInit {
       this.http.register(regObj).subscribe(
         (res: any) => {
           //console.log(res);
-          if (res.message === "You are login") {
+          if (res.message === 'You are login') {
             this.uploadDoc(this.fileToUpload, res.user_details.user_id);
-          } else if (res === "user exists") {
+          } else if (res === 'user exists') {
             this.http.spinnerHide();
-            this.errorMsg("Already registered with this email address.");
+            this.errorMsg('Already registered with this email address.');
           }
         },
         (err) => {
           this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       );
-    } else if (this.recruitee_id_exist !== "") {
+    } else if (this.recruitee_id_exist !== '') {
       let regObj = {
         user_id: this.recruitee_id_exist,
-        user_first_name: this.applicantFormAdmin.controls.first_name.value,
-        user_middle_name: this.applicantFormAdmin.controls.middle_namee.value,
-        user_last_name: this.applicantFormAdmin.controls.last_name.value,
-        phone: this.applicantFormAdmin.controls.phone_no.value,
-        email: this.applicantFormAdmin.controls.email.value,
+        user_first_name: this.applicantFormAdmin.controls['first_name'].value,
+        user_middle_name:
+          this.applicantFormAdmin.controls['middle_namee'].value,
+        user_last_name: this.applicantFormAdmin.controls['last_name'].value,
+        phone: this.applicantFormAdmin.controls['phone_no'].value,
+        email: this.applicantFormAdmin.controls['email'].value,
       };
 
       //console.log(regObj)
@@ -324,20 +326,20 @@ export class AddApplicantAdminComponent implements OnInit {
       this.http.updateRecruitee(regObj).subscribe(
         (res: any) => {
           //console.log(res);
-          if (res === "success") {
-            if (this.file_name !== "") {
+          if (res === 'success') {
+            if (this.file_name !== '') {
               this.uploadDoc2(this.fileToUpload, this.recruitee_id_exist);
             } else {
               this.applyJobFunction(this.recruitee_id_exist);
             }
           } else {
             this.http.spinnerHide();
-            this.errorMsg("Something went wrong. Please Try Again.");
+            this.errorMsg('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
           this.http.spinnerHide();
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       );
     }
@@ -348,16 +350,16 @@ export class AddApplicantAdminComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -368,16 +370,16 @@ export class AddApplicantAdminComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -390,16 +392,16 @@ export class AddApplicantAdminComponent implements OnInit {
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

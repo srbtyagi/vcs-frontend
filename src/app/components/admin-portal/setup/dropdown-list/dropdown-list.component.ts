@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import { DropdownServiceService } from "./dropdown-service.service";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import { DropdownServiceService } from './dropdown-service.service';
 
 @Component({
-  selector: "app-dropdown-list",
-  templateUrl: "./dropdown-list.component.html",
-  styleUrls: ["./dropdown-list.component.css"],
+  selector: 'app-dropdown-list',
+  templateUrl: './dropdown-list.component.html',
+  styleUrls: ['./dropdown-list.component.css'],
 })
 export class DropdownListComponent implements OnInit {
   allProfessionData: any;
@@ -36,7 +36,7 @@ export class DropdownListComponent implements OnInit {
 
   editCommonId: any;
 
-  defaultStatus: any = "active";
+  defaultStatus: any = 'active';
   moduleArray: any = [];
 
   constructor(
@@ -84,9 +84,9 @@ export class DropdownListComponent implements OnInit {
   ///////////////////////
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -95,34 +95,34 @@ export class DropdownListComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "COMPANY": {
-              e.submodule_name_lower = "Company";
-              e.routing = "/company";
+            case 'COMPANY': {
+              e.submodule_name_lower = 'Company';
+              e.routing = '/company';
               break;
             }
-            case "DEPARTMENT": {
-              e.submodule_name_lower = "Department";
-              e.routing = "/department";
+            case 'DEPARTMENT': {
+              e.submodule_name_lower = 'Department';
+              e.routing = '/department';
               break;
             }
-            case "USER ROLE": {
-              e.submodule_name_lower = "User Role";
-              e.routing = "/user-role";
+            case 'USER ROLE': {
+              e.submodule_name_lower = 'User Role';
+              e.routing = '/user-role';
               break;
             }
-            case "EMPLOYEE": {
-              e.submodule_name_lower = "Employee";
-              e.routing = "/employee";
+            case 'EMPLOYEE': {
+              e.submodule_name_lower = 'Employee';
+              e.routing = '/employee';
               break;
             }
-            case "CLIENT": {
-              e.submodule_name_lower = "Client";
-              e.routing = "/client";
+            case 'CLIENT': {
+              e.submodule_name_lower = 'Client';
+              e.routing = '/client';
               break;
             }
-            case "DROPDOWN LIST": {
-              e.submodule_name_lower = "Dropdown-List";
-              e.routing = "/dropdown-list";
+            case 'DROPDOWN LIST': {
+              e.submodule_name_lower = 'Dropdown-List';
+              e.routing = '/dropdown-list';
               break;
             }
             default: {
@@ -135,7 +135,7 @@ export class DropdownListComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive406").className = "active";
+      document.getElementById('clsActive406').className = 'active';
     }, 200);
   }
 
@@ -162,21 +162,21 @@ export class DropdownListComponent implements OnInit {
   }
 
   addsubmitHit() {
-    if (this.addHeaderShow === "Profession") {
+    if (this.addHeaderShow === 'Profession') {
       this.insertProfession();
-    } else if (this.addHeaderShow === "Speciality") {
+    } else if (this.addHeaderShow === 'Speciality') {
       this.insertSpeciality();
-    } else if (this.addHeaderShow === "Job Sector") {
+    } else if (this.addHeaderShow === 'Job Sector') {
       this.insertJobSector();
-    } else if (this.addHeaderShow === "Position Type") {
+    } else if (this.addHeaderShow === 'Position Type') {
       this.insertPositionType();
-    } else if (this.addHeaderShow === "Job Type") {
+    } else if (this.addHeaderShow === 'Job Type') {
       this.insertJobType();
-    } else if (this.addHeaderShow === "System Name") {
+    } else if (this.addHeaderShow === 'System Name') {
       this.insertSystemName();
-    } else if (this.addHeaderShow === "Standard Document") {
+    } else if (this.addHeaderShow === 'Standard Document') {
       this.insertStandardDocument();
-    } else if (this.addHeaderShow === "Designation") {
+    } else if (this.addHeaderShow === 'Designation') {
       this.insertDesignation();
     }
   }
@@ -185,50 +185,50 @@ export class DropdownListComponent implements OnInit {
 
   editButtonHit(header, value) {
     this.editHeaderShow = header;
-    if (this.editHeaderShow === "Profession") {
+    if (this.editHeaderShow === 'Profession') {
       this.editCommonId = value.profession_id;
       this.defaultStatus = value.profession_status;
       this.editDropDownList.setValue({
         edit_name: value.profession_name,
       });
-    } else if (this.editHeaderShow === "Speciality") {
+    } else if (this.editHeaderShow === 'Speciality') {
       this.editCommonId = value.speciality_id;
       this.defaultStatus = value.speciality_status;
       this.editDropDownList.setValue({
         edit_name: value.speciality_name,
       });
-    } else if (this.editHeaderShow === "Job Sector") {
+    } else if (this.editHeaderShow === 'Job Sector') {
       this.editCommonId = value.job_sector_id;
       this.defaultStatus = value.job_sector_status;
       this.editDropDownList.setValue({
         edit_name: value.job_sector_name,
       });
-    } else if (this.editHeaderShow === "Position Type") {
+    } else if (this.editHeaderShow === 'Position Type') {
       this.editCommonId = value.position_type_id;
       this.defaultStatus = value.position_type_status;
 
       this.editDropDownList.setValue({
         edit_name: value.position_type_name,
       });
-    } else if (this.editHeaderShow === "Job Type") {
+    } else if (this.editHeaderShow === 'Job Type') {
       this.editCommonId = value.job_type_id;
       this.defaultStatus = value.job_type_status;
       this.editDropDownList.setValue({
         edit_name: value.job_type_name,
       });
-    } else if (this.editHeaderShow === "System Name") {
+    } else if (this.editHeaderShow === 'System Name') {
       this.editCommonId = value.system_name_id;
       this.defaultStatus = value.system_name_status;
       this.editDropDownList.setValue({
         edit_name: value.system_name,
       });
-    } else if (this.editHeaderShow === "Standard Document") {
+    } else if (this.editHeaderShow === 'Standard Document') {
       this.editCommonId = value.doc_id;
       this.defaultStatus = value.doc_status;
       this.editDropDownList.setValue({
         edit_name: value.doc_name,
       });
-    } else if (this.editHeaderShow === "Designation") {
+    } else if (this.editHeaderShow === 'Designation') {
       this.editCommonId = value.designation_id;
       this.defaultStatus = value.designation_status;
       this.editDropDownList.setValue({
@@ -238,42 +238,42 @@ export class DropdownListComponent implements OnInit {
   }
 
   editsubmitHit() {
-    if (this.editHeaderShow === "Profession") {
+    if (this.editHeaderShow === 'Profession') {
       this.updateProfession();
-    } else if (this.editHeaderShow === "Speciality") {
+    } else if (this.editHeaderShow === 'Speciality') {
       this.updateSpeciality();
-    } else if (this.editHeaderShow === "Job Sector") {
+    } else if (this.editHeaderShow === 'Job Sector') {
       this.updateJobSector();
-    } else if (this.editHeaderShow === "Position Type") {
+    } else if (this.editHeaderShow === 'Position Type') {
       this.updatePositionType();
-    } else if (this.editHeaderShow === "Job Type") {
+    } else if (this.editHeaderShow === 'Job Type') {
       this.updateJobType();
-    } else if (this.editHeaderShow === "System Name") {
+    } else if (this.editHeaderShow === 'System Name') {
       this.updateSystemName();
-    } else if (this.editHeaderShow === "Standard Document") {
+    } else if (this.editHeaderShow === 'Standard Document') {
       this.updateStandardDocument();
-    } else if (this.editHeaderShow === "Designation") {
+    } else if (this.editHeaderShow === 'Designation') {
       this.updateDesignation();
     }
   }
 
   /// status button
   statussubmitHit() {
-    if (this.editHeaderShow === "Profession") {
+    if (this.editHeaderShow === 'Profession') {
       this.statusProfession();
-    } else if (this.editHeaderShow === "Speciality") {
+    } else if (this.editHeaderShow === 'Speciality') {
       this.statusSpeciality();
-    } else if (this.editHeaderShow === "Job Sector") {
+    } else if (this.editHeaderShow === 'Job Sector') {
       this.statusJobSector();
-    } else if (this.editHeaderShow === "Position Type") {
+    } else if (this.editHeaderShow === 'Position Type') {
       this.statusPositionType();
-    } else if (this.editHeaderShow === "Job Type") {
+    } else if (this.editHeaderShow === 'Job Type') {
       this.statusJobType();
-    } else if (this.editHeaderShow === "System Name") {
+    } else if (this.editHeaderShow === 'System Name') {
       this.statusSystemName();
-    } else if (this.editHeaderShow === "Standard Document") {
+    } else if (this.editHeaderShow === 'Standard Document') {
       this.statusStandardDocument();
-    } else if (this.editHeaderShow === "Designation") {
+    } else if (this.editHeaderShow === 'Designation') {
       this.statusDesignation();
     }
   }
@@ -338,23 +338,23 @@ export class DropdownListComponent implements OnInit {
 
   insertProfession() {
     const data = {
-      profession_name: this.addDropDownList.controls.name.value,
+      profession_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiProfession(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Profession Added successfully.",
-          icon: "success",
+          title: 'Profession Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -364,17 +364,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -386,23 +386,23 @@ export class DropdownListComponent implements OnInit {
 
   insertSpeciality() {
     const data = {
-      speciality_name: this.addDropDownList.controls.name.value,
+      speciality_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiSpeciality(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Speciality Added successfully.",
-          icon: "success",
+          title: 'Speciality Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -412,17 +412,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -434,23 +434,23 @@ export class DropdownListComponent implements OnInit {
 
   insertJobType() {
     const data = {
-      job_type_name: this.addDropDownList.controls.name.value,
+      job_type_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiJobType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Job Type Added successfully.",
-          icon: "success",
+          title: 'Job Type Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -460,17 +460,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -482,23 +482,23 @@ export class DropdownListComponent implements OnInit {
 
   insertJobSector() {
     const data = {
-      job_sector_name: this.addDropDownList.controls.name.value,
+      job_sector_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiJobSector(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Job Sector Added successfully.",
-          icon: "success",
+          title: 'Job Sector Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -508,17 +508,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -530,23 +530,23 @@ export class DropdownListComponent implements OnInit {
 
   insertPositionType() {
     const data = {
-      position_type_name: this.addDropDownList.controls.name.value,
+      position_type_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiPositionType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Position Type Added successfully.",
-          icon: "success",
+          title: 'Position Type Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -556,17 +556,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -578,23 +578,23 @@ export class DropdownListComponent implements OnInit {
 
   insertSystemName() {
     const data = {
-      system_name: this.addDropDownList.controls.name.value,
+      system_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiSystemName(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "System Name Added successfully.",
-          icon: "success",
+          title: 'System Name Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -604,17 +604,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -626,23 +626,23 @@ export class DropdownListComponent implements OnInit {
 
   insertStandardDocument() {
     const data = {
-      doc_name: this.addDropDownList.controls.name.value,
+      doc_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiDocumentName(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Standard Document Added successfully.",
-          icon: "success",
+          title: 'Standard Document Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -652,17 +652,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -673,25 +673,25 @@ export class DropdownListComponent implements OnInit {
   }
 
   checkUniqueDesignation() {
-    if (this.addHeaderShow === "Designation") {
+    if (this.addHeaderShow === 'Designation') {
       this.service
-        .checkUniqueDesignation(this.addDropDownList.controls.name.value)
+        .checkUniqueDesignation(this.addDropDownList.controls['name'].value)
         .subscribe(
           (res: any) => {
             //console.log(res)
-            if (res === "exist") {
+            if (res === 'exist') {
               Swal.fire({
-                title: "Designation Name already exist!",
-                icon: "error",
+                title: 'Designation Name already exist!',
+                icon: 'error',
                 showCancelButton: false,
-                confirmButtonColor: "#4C96D7",
-                confirmButtonText: "Ok",
+                confirmButtonColor: '#4C96D7',
+                confirmButtonText: 'Ok',
                 allowOutsideClick: false,
                 showClass: {
-                  popup: "animate__animated animate__fadeInDown",
+                  popup: 'animate__animated animate__fadeInDown',
                 },
                 hideClass: {
-                  popup: "animate__animated animate__fadeOutUp",
+                  popup: 'animate__animated animate__fadeOutUp',
                 },
               }).then((result) => {
                 if (result.isConfirmed) {
@@ -699,20 +699,20 @@ export class DropdownListComponent implements OnInit {
                   this.editDropDownList.reset();
                 }
               });
-            } else if (res === "do not exist") {
+            } else if (res === 'do not exist') {
             } else {
               Swal.fire({
-                title: "Something went wrong,please try again.",
-                icon: "error",
+                title: 'Something went wrong,please try again.',
+                icon: 'error',
                 showCancelButton: false,
-                confirmButtonColor: "#4C96D7",
-                confirmButtonText: "Ok",
+                confirmButtonColor: '#4C96D7',
+                confirmButtonText: 'Ok',
                 allowOutsideClick: false,
                 showClass: {
-                  popup: "animate__animated animate__fadeInDown",
+                  popup: 'animate__animated animate__fadeInDown',
                 },
                 hideClass: {
-                  popup: "animate__animated animate__fadeOutUp",
+                  popup: 'animate__animated animate__fadeOutUp',
                 },
               }).then((result) => {
                 if (result.isConfirmed) {
@@ -726,45 +726,47 @@ export class DropdownListComponent implements OnInit {
   }
 
   checkUniqueDesignationEdit() {
-    if (this.editHeaderShow === "Designation") {
+    if (this.editHeaderShow === 'Designation') {
       this.service
-        .checkUniqueDesignation(this.editDropDownList.controls.edit_name.value)
+        .checkUniqueDesignation(
+          this.editDropDownList.controls['edit_name'].value
+        )
         .subscribe(
           (res: any) => {
             //console.log(res)
-            if (res === "exist") {
+            if (res === 'exist') {
               Swal.fire({
-                title: "Designation Name already exist!",
-                icon: "error",
+                title: 'Designation Name already exist!',
+                icon: 'error',
                 showCancelButton: false,
-                confirmButtonColor: "#4C96D7",
-                confirmButtonText: "Ok",
+                confirmButtonColor: '#4C96D7',
+                confirmButtonText: 'Ok',
                 allowOutsideClick: false,
                 showClass: {
-                  popup: "animate__animated animate__fadeInDown",
+                  popup: 'animate__animated animate__fadeInDown',
                 },
                 hideClass: {
-                  popup: "animate__animated animate__fadeOutUp",
+                  popup: 'animate__animated animate__fadeOutUp',
                 },
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.editDropDownList.reset();
                 }
               });
-            } else if (res === "do not exist") {
+            } else if (res === 'do not exist') {
             } else {
               Swal.fire({
-                title: "Something went wrong,please try again.",
-                icon: "error",
+                title: 'Something went wrong,please try again.',
+                icon: 'error',
                 showCancelButton: false,
-                confirmButtonColor: "#4C96D7",
-                confirmButtonText: "Ok",
+                confirmButtonColor: '#4C96D7',
+                confirmButtonText: 'Ok',
                 allowOutsideClick: false,
                 showClass: {
-                  popup: "animate__animated animate__fadeInDown",
+                  popup: 'animate__animated animate__fadeInDown',
                 },
                 hideClass: {
-                  popup: "animate__animated animate__fadeOutUp",
+                  popup: 'animate__animated animate__fadeOutUp',
                 },
               }).then((result) => {
                 if (result.isConfirmed) {
@@ -779,23 +781,23 @@ export class DropdownListComponent implements OnInit {
 
   insertDesignation() {
     const data = {
-      designation_name: this.addDropDownList.controls.name.value,
+      designation_name: this.addDropDownList.controls['name'].value,
     };
     this.service.addApiDesignationName(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Designation Added successfully.",
-          icon: "success",
+          title: 'Designation Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -805,17 +807,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -829,24 +831,24 @@ export class DropdownListComponent implements OnInit {
 
   updateProfession() {
     const data = {
-      profession_name: this.editDropDownList.controls.edit_name.value,
+      profession_name: this.editDropDownList.controls['edit_name'].value,
       profession_id: this.editCommonId,
     };
     this.service.editApiProfession(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Profession updated successfully.",
-          icon: "success",
+          title: 'Profession updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -856,17 +858,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -878,24 +880,24 @@ export class DropdownListComponent implements OnInit {
 
   updateSpeciality() {
     const data = {
-      speciality_name: this.editDropDownList.controls.edit_name.value,
+      speciality_name: this.editDropDownList.controls['edit_name'].value,
       speciality_id: this.editCommonId,
     };
     this.service.editApiSpeciality(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Speciality Updated successfully.",
-          icon: "success",
+          title: 'Speciality Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -905,17 +907,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -927,24 +929,24 @@ export class DropdownListComponent implements OnInit {
 
   updateJobType() {
     const data = {
-      job_type_name: this.editDropDownList.controls.edit_name.value,
+      job_type_name: this.editDropDownList.controls['edit_name'].value,
       job_type_id: this.editCommonId,
     };
     this.service.editApiJobType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Job Type updated successfully.",
-          icon: "success",
+          title: 'Job Type updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -954,17 +956,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -976,24 +978,24 @@ export class DropdownListComponent implements OnInit {
 
   updateJobSector() {
     const data = {
-      job_sector_name: this.editDropDownList.controls.edit_name.value,
+      job_sector_name: this.editDropDownList.controls['edit_name'].value,
       job_sector_id: this.editCommonId,
     };
     this.service.editApiJobSector(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Job Sector Updated successfully.",
-          icon: "success",
+          title: 'Job Sector Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1003,17 +1005,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1025,24 +1027,24 @@ export class DropdownListComponent implements OnInit {
 
   updatePositionType() {
     const data = {
-      position_type_name: this.editDropDownList.controls.edit_name.value,
+      position_type_name: this.editDropDownList.controls['edit_name'].value,
       position_type_id: this.editCommonId,
     };
     this.service.editApiPositionType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Position Type updated successfully.",
-          icon: "success",
+          title: 'Position Type updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1052,17 +1054,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1074,24 +1076,24 @@ export class DropdownListComponent implements OnInit {
 
   updateSystemName() {
     const data = {
-      system_name: this.editDropDownList.controls.edit_name.value,
+      system_name: this.editDropDownList.controls['edit_name'].value,
       system_name_id: this.editCommonId,
     };
     this.service.editApiSystemName(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "System Name updated successfully.",
-          icon: "success",
+          title: 'System Name updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1101,17 +1103,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1123,24 +1125,24 @@ export class DropdownListComponent implements OnInit {
 
   updateStandardDocument() {
     const data = {
-      doc_name: this.editDropDownList.controls.edit_name.value,
+      doc_name: this.editDropDownList.controls['edit_name'].value,
       doc_id: this.editCommonId,
     };
     this.service.editApiStandardDocument(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Document updated successfully.",
-          icon: "success",
+          title: 'Document updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1150,17 +1152,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1172,24 +1174,24 @@ export class DropdownListComponent implements OnInit {
 
   updateDesignation() {
     const data = {
-      designation_name: this.editDropDownList.controls.edit_name.value,
+      designation_name: this.editDropDownList.controls['edit_name'].value,
       designation_id: this.editCommonId,
     };
     this.service.editApiDesignation(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Designation updated successfully.",
-          icon: "success",
+          title: 'Designation updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1199,17 +1201,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1228,19 +1230,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiProfession(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status Change successfully.",
-          icon: "success",
+          title: 'Status Change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1249,17 +1251,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1276,19 +1278,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiSpeciality(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status Change successfully.",
-          icon: "success",
+          title: 'Status Change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1297,17 +1299,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1324,19 +1326,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiJobType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1345,17 +1347,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1372,19 +1374,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiJobSector(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1393,17 +1395,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1420,19 +1422,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiPositionType(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1441,17 +1443,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1468,19 +1470,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiSystemName(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1489,17 +1491,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1516,19 +1518,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiStandardDocument(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1537,17 +1539,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1564,19 +1566,19 @@ export class DropdownListComponent implements OnInit {
     };
     this.service.statusApiDesignation(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -1585,17 +1587,17 @@ export class DropdownListComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {

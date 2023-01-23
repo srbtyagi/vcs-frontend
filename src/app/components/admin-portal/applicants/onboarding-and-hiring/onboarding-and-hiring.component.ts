@@ -1,30 +1,30 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import { Country, State, City } from "country-state-city";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import { Country, State, City } from 'country-state-city';
 
 @Component({
-  selector: "app-onboarding-and-hiring",
-  templateUrl: "./onboarding-and-hiring.component.html",
-  styleUrls: ["./onboarding-and-hiring.component.css"],
+  selector: 'app-onboarding-and-hiring',
+  templateUrl: './onboarding-and-hiring.component.html',
+  styleUrls: ['./onboarding-and-hiring.component.css'],
 })
 export class OnboardingAndHiringComponent implements OnInit {
-  @ViewChild("hireClose", { static: false }) private hireClose: ElementRef;
-  @ViewChild("closeFinish", { static: false }) private closeFinish: ElementRef;
-  @ViewChild("onBoardModalClose", { static: false })
+  @ViewChild('hireClose', { static: false }) private hireClose: ElementRef;
+  @ViewChild('closeFinish', { static: false }) private closeFinish: ElementRef;
+  @ViewChild('onBoardModalClose', { static: false })
   private onBoardModalClose: ElementRef;
-  @ViewChild("ViewonBoardFormModalClose", { static: false })
+  @ViewChild('ViewonBoardFormModalClose', { static: false })
   private ViewonBoardFormModalClose: ElementRef;
-  @ViewChild("cancelOnboardClose", { static: false })
+  @ViewChild('cancelOnboardClose', { static: false })
   private cancelOnboardClose: ElementRef;
 
   moduleArray: any[];
@@ -33,11 +33,11 @@ export class OnboardingAndHiringComponent implements OnInit {
   stateList: any;
   cityList: any;
 
-  client_id: any = "ALL";
-  country: any = "ALL";
-  state: any = "ALL";
-  city: any = "ALL";
-  status: any = "ALL";
+  client_id: any = 'ALL';
+  country: any = 'ALL';
+  state: any = 'ALL';
+  city: any = 'ALL';
+  status: any = 'ALL';
   applicationList: any = [];
   details: any;
 
@@ -75,8 +75,8 @@ export class OnboardingAndHiringComponent implements OnInit {
 
   assign_start_date: any;
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "up",
-    format: "MM/DD/YYYY",
+    drops: 'up',
+    format: 'MM/DD/YYYY',
   };
   doc_exp_dt_id: any = [];
   doc_exp_dt_list: any = [];
@@ -88,7 +88,7 @@ export class OnboardingAndHiringComponent implements OnInit {
   assign_end_date: any;
   clientListFilter: any = [];
   clientListShow: boolean = false;
-  clientName: any = "ALL";
+  clientName: any = 'ALL';
   stateListShow: boolean = false;
   stateListFilter: any = [];
   cityListFilter: any = [];
@@ -103,9 +103,9 @@ export class OnboardingAndHiringComponent implements OnInit {
     public router: Router,
     public fb: UntypedFormBuilder
   ) {
-    this.user_id_by = sessionStorage.getItem("user_id");
+    this.user_id_by = sessionStorage.getItem('user_id');
     this.excelfileName =
-      "onboarding_report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
+      'onboarding_report(' + moment(new Date()).format('MM-DD-YYYY') + ')';
   }
 
   ngOnInit() {
@@ -116,17 +116,17 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.getClients();
     this.getCountry();
     this.getStates();
-    if (this.state === "ALL") {
+    if (this.state === 'ALL') {
       this.getCity(this.state);
     }
 
     this.getDocType();
     if (
-      this.client_id === "ALL" &&
-      this.country === "ALL" &&
-      this.city === "ALL" &&
-      this.state === "ALL" &&
-      this.status === "ALL"
+      this.client_id === 'ALL' &&
+      this.country === 'ALL' &&
+      this.city === 'ALL' &&
+      this.state === 'ALL' &&
+      this.status === 'ALL'
     ) {
       this.searchJob();
     }
@@ -148,9 +148,9 @@ export class OnboardingAndHiringComponent implements OnInit {
   }
   ///////////////////////
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -159,34 +159,34 @@ export class OnboardingAndHiringComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "APPLICANT": {
-              e.submodule_name_lower = "Applicants";
-              e.routing = "/applicants";
+            case 'APPLICANT': {
+              e.submodule_name_lower = 'Applicants';
+              e.routing = '/applicants';
               break;
             }
-            case "JOB APPLICATION": {
-              e.submodule_name_lower = "Job Application";
-              e.routing = "/job-applications_admin";
+            case 'JOB APPLICATION': {
+              e.submodule_name_lower = 'Job Application';
+              e.routing = '/job-applications_admin';
               break;
             }
-            case "ONBOARDING & HIRING": {
-              e.submodule_name_lower = "On Boarding";
-              e.routing = "/onboarding-hiring";
+            case 'ONBOARDING & HIRING': {
+              e.submodule_name_lower = 'On Boarding';
+              e.routing = '/onboarding-hiring';
               break;
             }
-            case "HIRED": {
-              e.submodule_name_lower = "Hired";
-              e.routing = "/hired-applicant";
+            case 'HIRED': {
+              e.submodule_name_lower = 'Hired';
+              e.routing = '/hired-applicant';
               break;
             }
-            case "ASSIGN MANAGERS": {
-              e.submodule_name_lower = "Assign Manager";
-              e.routing = "/assign-Manager";
+            case 'ASSIGN MANAGERS': {
+              e.submodule_name_lower = 'Assign Manager';
+              e.routing = '/assign-Manager';
               break;
             }
-            case "SKILLSET": {
-              e.submodule_name_lower = "Skill Set";
-              e.routing = "/skill-set-admin";
+            case 'SKILLSET': {
+              e.submodule_name_lower = 'Skill Set';
+              e.routing = '/skill-set-admin';
               break;
             }
             default: {
@@ -199,7 +199,7 @@ export class OnboardingAndHiringComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive203").className = "active";
+      document.getElementById('clsActive203').className = 'active';
     }, 200);
   }
 
@@ -284,7 +284,7 @@ export class OnboardingAndHiringComponent implements OnInit {
 
   getCity(val) {
     this.state = val;
-    this.city = "ALL";
+    this.city = 'ALL';
     this.stateListShow = false;
     let body = {
       state: val,
@@ -327,14 +327,14 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.http.spinnerShow();
     this.applicationList = [];
     //console.log(this.client_id, this.country, this.state, this.city, this.status)
-    if (this.clientName.toLowerCase() === "all") {
-      this.client_id = "ALL";
+    if (this.clientName.toLowerCase() === 'all') {
+      this.client_id = 'ALL';
     }
-    if (this.state.toLowerCase() === "all") {
-      this.state = "ALL";
+    if (this.state.toLowerCase() === 'all') {
+      this.state = 'ALL';
     }
-    if (this.city.toLowerCase() === "all") {
-      this.city = "ALL";
+    if (this.city.toLowerCase() === 'all') {
+      this.city = 'ALL';
     }
     let data = {
       client_id: this.client_id,
@@ -342,7 +342,7 @@ export class OnboardingAndHiringComponent implements OnInit {
       city: this.city,
       state: this.state,
       status: this.status,
-      user_id: sessionStorage.getItem("user_id"),
+      user_id: sessionStorage.getItem('user_id'),
     };
     this.http.searchonboardAppl(data).subscribe(
       (res: any) => {
@@ -352,19 +352,19 @@ export class OnboardingAndHiringComponent implements OnInit {
           this.http.spinnerHide();
         } else {
           this.http.spinnerHide();
-          this.errorMsg("No search result found!");
+          this.errorMsg('No search result found!');
         }
       },
       (err) => {
         this.http.spinnerHide();
-        this.errorMsg("Something went wrong,please try again.");
+        this.errorMsg('Something went wrong,please try again.');
       }
     );
   }
 
   onBoard(val) {
     //console.log(val)
-    this.details = "";
+    this.details = '';
     this.doc_exp_dt_list = [];
     this.doc_exp_dt_id = [];
     this.fac_specc_doc = [];
@@ -375,29 +375,29 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.details = val;
     this.user_id = val.user_id;
     if (
-      val.reqd_facility_doc_list === "" ||
+      val.reqd_facility_doc_list === '' ||
       val.reqd_facility_doc_list === null
     ) {
       this.reqd_facility_doc_list = [];
     } else {
-      this.reqd_facility_doc_list = val.reqd_facility_doc_list.split(",");
+      this.reqd_facility_doc_list = val.reqd_facility_doc_list.split(',');
     }
 
-    if (val.reqd_other_doc_list === "" || val.reqd_other_doc_list === null) {
+    if (val.reqd_other_doc_list === '' || val.reqd_other_doc_list === null) {
       this.reqd_other_doc_list = [];
     } else {
-      this.reqd_other_doc_list = val.reqd_other_doc_list.split(",");
+      this.reqd_other_doc_list = val.reqd_other_doc_list.split(',');
     }
 
-    if (val.reqd_std_doc_id_list === "" || val.reqd_std_doc_id_list === null) {
+    if (val.reqd_std_doc_id_list === '' || val.reqd_std_doc_id_list === null) {
       this.reqd_std_doc_id_list = [];
     } else {
-      this.reqd_std_doc_id_list = val.reqd_std_doc_id_list.split(",");
+      this.reqd_std_doc_id_list = val.reqd_std_doc_id_list.split(',');
     }
 
     this.getAllDocs(this.user_id);
-    this.pstart_date = moment(val.proposed_start_date).format("MM/DD/YYYY");
-    this.pend_date = moment(val.proposed_end_date).format("MM/DD/YYYY");
+    this.pstart_date = moment(val.proposed_start_date).format('MM/DD/YYYY');
+    this.pend_date = moment(val.proposed_end_date).format('MM/DD/YYYY');
     this.Rbill_rate = val.onb_regular_bill_rate;
     this.OTbill_rate = val.onb_ot_bill_rate;
     this.Hbill_rate = val.onb_holiday_bill_rate;
@@ -413,13 +413,13 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.contract_duration = val.contract_duration_wk;
     this.comment = val.comments;
     if (val.due_date) {
-      this.due_date = moment(val.due_date).format("MM/DD/YYYY");
+      this.due_date = moment(val.due_date).format('MM/DD/YYYY');
     }
   }
 
   openFinish(val) {
     //console.log(val)
-    this.details = "";
+    this.details = '';
     this.details = val;
     this.user_id = val.user_id;
   }
@@ -435,7 +435,7 @@ export class OnboardingAndHiringComponent implements OnInit {
       //console.log(res);
       this.docs = res;
       this.docType.forEach((e) => {
-        e.availability = "Unavailable";
+        e.availability = 'Unavailable';
         e.value = false;
         for (let b of this.reqd_std_doc_id_list) {
           if (Number(b) === e.doc_id) {
@@ -448,7 +448,7 @@ export class OnboardingAndHiringComponent implements OnInit {
           let data = {
             rec_doc_name: b,
             value: true,
-            availability: "Unavailable",
+            availability: 'Unavailable',
           };
           this.fac_specc_doc.push(data);
           const ids = this.fac_specc_doc.map((o) => o.rec_doc_name);
@@ -462,7 +462,7 @@ export class OnboardingAndHiringComponent implements OnInit {
           let data = {
             rec_doc_name: b,
             value: true,
-            availability: "Unavailable",
+            availability: 'Unavailable',
           };
           this.others_doc.push(data);
           const ids = this.others_doc.map((o) => o.rec_doc_name);
@@ -475,18 +475,18 @@ export class OnboardingAndHiringComponent implements OnInit {
 
         for (let a of this.docs) {
           a.value = false;
-          if (e.doc_id === a.doc_id && a.rec_doc_type === "standard") {
+          if (e.doc_id === a.doc_id && a.rec_doc_type === 'standard') {
             e.value = true;
-            e.availability = "Available";
+            e.availability = 'Available';
             e.rec_doc_id = a.rec_doc_id;
-            e.rec_doc_type = "standard";
+            e.rec_doc_type = 'standard';
             e.expiry_date = a.expiry_date;
             e.rec_doc_status = a.rec_doc_status;
             this.standard_doc_list.push(a.doc_id);
             this.standard_doc_list = [...new Set(this.standard_doc_list)];
-          } else if (a.rec_doc_type === "facility_spec") {
+          } else if (a.rec_doc_type === 'facility_spec') {
             a.value = true;
-            a.availability = "Available";
+            a.availability = 'Available';
             this.fac_specc_doc.push(a);
             const ids = this.fac_specc_doc.map((o) => o.rec_doc_name);
             this.fac_specc_doc = this.fac_specc_doc.filter(
@@ -496,9 +496,9 @@ export class OnboardingAndHiringComponent implements OnInit {
 
             this.specific_doc_list.push(a.rec_doc_name);
             this.specific_doc_list = [...new Set(this.specific_doc_list)];
-          } else if (a.rec_doc_type === "other") {
+          } else if (a.rec_doc_type === 'other') {
             a.value = true;
-            a.availability = "Available";
+            a.availability = 'Available';
             this.others_doc.push(a);
             const ids = this.others_doc.map((o) => o.rec_doc_name);
             this.others_doc = this.others_doc.filter(
@@ -527,8 +527,8 @@ export class OnboardingAndHiringComponent implements OnInit {
   changepayRate(e) {
     var t = e.target.value;
     e.target.value =
-      t.indexOf(".") >= 0
-        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+      t.indexOf('.') >= 0
+        ? t.substr(0, t.indexOf('.')) + t.substr(t.indexOf('.'), 3)
         : t;
 
     ///// Restrict negative by typing
@@ -598,9 +598,9 @@ export class OnboardingAndHiringComponent implements OnInit {
       this.specific_doc_list.push(this.doc_name_spec);
       let val = {
         rec_doc_name: this.doc_name_spec,
-        availability: "Unavailable",
+        availability: 'Unavailable',
         value: true,
-        rec_doc_status: "not_current",
+        rec_doc_status: 'not_current',
       };
       this.fac_specc_doc.push(val);
     }
@@ -617,7 +617,7 @@ export class OnboardingAndHiringComponent implements OnInit {
       this.other_doc_list.push(this.doc_name_Other);
       let val = {
         rec_doc_name: this.doc_name_Other,
-        availability: "Unavailable",
+        availability: 'Unavailable',
         value: true,
       };
       this.others_doc.push(val);
@@ -631,27 +631,27 @@ export class OnboardingAndHiringComponent implements OnInit {
       application_id: this.details.application_id,
       recruitee_id: this.details.recruitee_id,
       onboarding_id: this.details.onboarding_id,
-      reqd_std_doc_id_list: this.standard_doc_list.join(","),
-      reqd_facility_doc_list: this.specific_doc_list.join(","),
-      reqd_other_doc_list: this.other_doc_list.join(","),
-      due_date: moment(this.onBoardForm.controls.due_date.value).format(
-        "MM/DD/YYYY"
+      reqd_std_doc_id_list: this.standard_doc_list.join(','),
+      reqd_facility_doc_list: this.specific_doc_list.join(','),
+      reqd_other_doc_list: this.other_doc_list.join(','),
+      due_date: moment(this.onBoardForm.controls['due_date'].value).format(
+        'MM/DD/YYYY'
       ),
-      comments: this.onBoardForm.controls.comment.value,
+      comments: this.onBoardForm.controls['comment'].value,
     };
     //console.log(data)
     this.http.updateOnboarding(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg("Document requested successfully.");
+        if (res === 'success') {
+          this.successMsg('Document requested successfully.');
           this.onBoardModalClose.nativeElement.click();
         } else {
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -663,26 +663,26 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.http.finishOnboarding(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg("On boarding process completed.");
+        if (res === 'success') {
+          this.successMsg('On boarding process completed.');
           this.closeFinish.nativeElement.click();
         } else {
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
 
   hiring() {
-    let date = moment(new Date()).format("YYYY-MM-DD");
+    let date = moment(new Date()).format('YYYY-MM-DD');
     // let cDate = date.toLocaleString("en-US", {
     //   timeZone: "America/Los_Angeles"
     // });
 
-    let sDate = moment(this.assign_start_date).format("YYYY-MM-DD");
+    let sDate = moment(this.assign_start_date).format('YYYY-MM-DD');
     // let assign_srt_dt = sDate.toLocaleString("en-US", {
     //   timeZone: "America/Los_Angeles"
     // });
@@ -701,10 +701,10 @@ export class OnboardingAndHiringComponent implements OnInit {
         recruitee_id: this.details.recruitee_id,
         onboarding_id: this.details.onboarding_id,
         application_id: this.details.application_id,
-        hiring_date: moment(sDate).format("MM/DD/YYYY"),
+        hiring_date: moment(sDate).format('MM/DD/YYYY'),
         job_id: this.details.job_id,
-        assignment_status: "working",
-        closing_date: moment(this.assign_end_date).format("MM/DD/YYYY"),
+        assignment_status: 'working',
+        closing_date: moment(this.assign_end_date).format('MM/DD/YYYY'),
       };
     } else if (new Date(date).getTime() < new Date(sDate).getTime()) {
       var data = {
@@ -712,25 +712,25 @@ export class OnboardingAndHiringComponent implements OnInit {
         recruitee_id: this.details.recruitee_id,
         onboarding_id: this.details.onboarding_id,
         application_id: this.details.application_id,
-        hiring_date: moment(sDate).format("MM/DD/YYYY"),
+        hiring_date: moment(sDate).format('MM/DD/YYYY'),
         job_id: this.details.job_id,
-        assignment_status: "not_started",
-        closing_date: moment(this.assign_end_date).format("MM/DD/YYYY"),
+        assignment_status: 'not_started',
+        closing_date: moment(this.assign_end_date).format('MM/DD/YYYY'),
       };
     }
 
     this.http.hiring(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg("Hiring process completed.");
+        if (res === 'success') {
+          this.successMsg('Hiring process completed.');
           this.hireClose.nativeElement.click();
         } else {
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -740,22 +740,22 @@ export class OnboardingAndHiringComponent implements OnInit {
     let data = {
       onboarding_id: this.details.onboarding_id,
       onboard_cancel_date: moment(this.onboard_cancel_date).format(
-        "MM/DD/YYYY"
+        'MM/DD/YYYY'
       ),
     };
     //console.log(data)
     this.http.cancelOnboarding(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg("On boarding cancelled successfully.");
+        if (res === 'success') {
+          this.successMsg('On boarding cancelled successfully.');
           this.cancelOnboardClose.nativeElement.click();
         } else {
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -766,7 +766,7 @@ export class OnboardingAndHiringComponent implements OnInit {
     var index = this.doc_exp_dt_id.indexOf(val.rec_doc_id);
     if (index > -1 && ev.date != this.doc_exp_dt_list[index].expiry_date) {
       this.doc_exp_dt_list[index].expiry_date = moment(ev.date).format(
-        "MM/DD/YYYY"
+        'MM/DD/YYYY'
       );
 
       //this.doc_exp_dt_id.splice(index, 1);
@@ -774,7 +774,7 @@ export class OnboardingAndHiringComponent implements OnInit {
     } else {
       let data = {
         rec_doc_id: val.rec_doc_id,
-        expiry_date: moment(ev.date).format("MM/DD/YYYY"),
+        expiry_date: moment(ev.date).format('MM/DD/YYYY'),
       };
       this.doc_exp_dt_list.push(data);
       this.doc_exp_dt_id.push(val.rec_doc_id);
@@ -789,16 +789,16 @@ export class OnboardingAndHiringComponent implements OnInit {
     this.http.updateDocExpDate(dataObj).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg2("Expiry dates updated successfully.");
+        if (res === 'success') {
+          this.successMsg2('Expiry dates updated successfully.');
           this.getAllDocs(this.user_id);
           //this.ViewonBoardFormModalClose.nativeElement.click();
         } else {
-          this.errorMsg("Something went wrong. Please Try Again.");
+          this.errorMsg('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -808,16 +808,16 @@ export class OnboardingAndHiringComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -828,16 +828,16 @@ export class OnboardingAndHiringComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -850,16 +850,16 @@ export class OnboardingAndHiringComponent implements OnInit {
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

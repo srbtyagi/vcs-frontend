@@ -1,25 +1,25 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import { ClientServiceService } from "./client-service.service";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import { ClientServiceService } from './client-service.service';
 
 @Component({
-  selector: "app-client",
-  templateUrl: "./client.component.html",
-  styleUrls: ["./client.component.css"],
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.css'],
 })
 export class ClientComponent implements OnInit {
   addClientForm: UntypedFormGroup;
   editClientForm: UntypedFormGroup;
 
-  defaultStatus = "active";
+  defaultStatus = 'active';
   /*paginate */
   public count: any = 20;
   public page: any;
@@ -70,9 +70,9 @@ export class ClientComponent implements OnInit {
   ///////////////////////
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -81,34 +81,34 @@ export class ClientComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "COMPANY": {
-              e.submodule_name_lower = "Company";
-              e.routing = "/company";
+            case 'COMPANY': {
+              e.submodule_name_lower = 'Company';
+              e.routing = '/company';
               break;
             }
-            case "DEPARTMENT": {
-              e.submodule_name_lower = "Department";
-              e.routing = "/department";
+            case 'DEPARTMENT': {
+              e.submodule_name_lower = 'Department';
+              e.routing = '/department';
               break;
             }
-            case "USER ROLE": {
-              e.submodule_name_lower = "User Role";
-              e.routing = "/user-role";
+            case 'USER ROLE': {
+              e.submodule_name_lower = 'User Role';
+              e.routing = '/user-role';
               break;
             }
-            case "EMPLOYEE": {
-              e.submodule_name_lower = "Employee";
-              e.routing = "/employee";
+            case 'EMPLOYEE': {
+              e.submodule_name_lower = 'Employee';
+              e.routing = '/employee';
               break;
             }
-            case "CLIENT": {
-              e.submodule_name_lower = "Client";
-              e.routing = "/client";
+            case 'CLIENT': {
+              e.submodule_name_lower = 'Client';
+              e.routing = '/client';
               break;
             }
-            case "DROPDOWN LIST": {
-              e.submodule_name_lower = "Dropdown-List";
-              e.routing = "/dropdown-list";
+            case 'DROPDOWN LIST': {
+              e.submodule_name_lower = 'Dropdown-List';
+              e.routing = '/dropdown-list';
               break;
             }
             default: {
@@ -121,7 +121,7 @@ export class ClientComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive405").className = "active";
+      document.getElementById('clsActive405').className = 'active';
     }, 200);
   }
 
@@ -145,23 +145,23 @@ export class ClientComponent implements OnInit {
 
   insertClient() {
     const data = {
-      client_name: this.addClientForm.controls.client_name.value,
+      client_name: this.addClientForm.controls['client_name'].value,
     };
     this.service.addClient(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Client Added successfully.",
-          icon: "success",
+          title: 'Client Added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -171,17 +171,17 @@ export class ClientComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -201,24 +201,24 @@ export class ClientComponent implements OnInit {
 
   updateClient() {
     const data = {
-      client_name: this.editClientForm.controls.edit_client.value,
+      client_name: this.editClientForm.controls['edit_client'].value,
       client_id: this.clientId,
     };
     this.service.updateClient(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Client Updated successfully.",
-          icon: "success",
+          title: 'Client Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -228,17 +228,17 @@ export class ClientComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -256,19 +256,19 @@ export class ClientComponent implements OnInit {
     //console.log(data)
     this.service.changeStatusClient(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status change successfully.",
-          icon: "success",
+          title: 'Status change successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -277,17 +277,17 @@ export class ClientComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {

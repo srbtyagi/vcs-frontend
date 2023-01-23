@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { CompanyServiceService } from "./company-service.service";
+import { Component, OnInit } from '@angular/core';
+import { CompanyServiceService } from './company-service.service';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import Swal from "sweetalert2";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
 
 @Component({
-  selector: "app-company",
-  templateUrl: "./company.component.html",
-  styleUrls: ["./company.component.css"],
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent implements OnInit {
   cmpName: any;
@@ -70,16 +70,16 @@ export class CompanyComponent implements OnInit {
         Validators.maxLength(80),
         Validators.email,
         Validators.maxLength(40),
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
     });
   }
 
   ///////////////////////
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -88,34 +88,34 @@ export class CompanyComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "COMPANY": {
-              e.submodule_name_lower = "Company";
-              e.routing = "/company";
+            case 'COMPANY': {
+              e.submodule_name_lower = 'Company';
+              e.routing = '/company';
               break;
             }
-            case "DEPARTMENT": {
-              e.submodule_name_lower = "Department";
-              e.routing = "/department";
+            case 'DEPARTMENT': {
+              e.submodule_name_lower = 'Department';
+              e.routing = '/department';
               break;
             }
-            case "USER ROLE": {
-              e.submodule_name_lower = "User Role";
-              e.routing = "/user-role";
+            case 'USER ROLE': {
+              e.submodule_name_lower = 'User Role';
+              e.routing = '/user-role';
               break;
             }
-            case "EMPLOYEE": {
-              e.submodule_name_lower = "Employee";
-              e.routing = "/employee";
+            case 'EMPLOYEE': {
+              e.submodule_name_lower = 'Employee';
+              e.routing = '/employee';
               break;
             }
-            case "CLIENT": {
-              e.submodule_name_lower = "Client";
-              e.routing = "/client";
+            case 'CLIENT': {
+              e.submodule_name_lower = 'Client';
+              e.routing = '/client';
               break;
             }
-            case "DROPDOWN LIST": {
-              e.submodule_name_lower = "Dropdown-List";
-              e.routing = "/dropdown-list";
+            case 'DROPDOWN LIST': {
+              e.submodule_name_lower = 'Dropdown-List';
+              e.routing = '/dropdown-list';
               break;
             }
             default: {
@@ -128,7 +128,7 @@ export class CompanyComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive401").className = "active";
+      document.getElementById('clsActive401').className = 'active';
     }, 200);
   }
 
@@ -166,26 +166,26 @@ export class CompanyComponent implements OnInit {
 
   submitDetails() {
     const data = {
-      company_name: this.compantDetailsForm.controls.name.value,
-      company_addr: this.compantDetailsForm.controls.address.value,
-      company_phone: this.compantDetailsForm.controls.phone.value,
-      company_email: this.compantDetailsForm.controls.email.value,
+      company_name: this.compantDetailsForm.controls['name'].value,
+      company_addr: this.compantDetailsForm.controls['address'].value,
+      company_phone: this.compantDetailsForm.controls['phone'].value,
+      company_email: this.compantDetailsForm.controls['email'].value,
     };
     this.service.updateCompanyDetails(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Company name updated successfully.",
-          icon: "success",
+          title: 'Company name updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -195,17 +195,17 @@ export class CompanyComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {

@@ -1,28 +1,28 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import { EmployeeServiceService } from "./employee-service.service";
-import * as moment from "moment";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import { EmployeeServiceService } from './employee-service.service';
+import * as moment from 'moment';
 
 @Component({
-  selector: "app-employee",
-  templateUrl: "./employee.component.html",
-  styleUrls: ["./employee.component.css"],
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
-  defaultStatus = "active";
-  defaultSignatory: any = "no";
-  defaultSignatory2: any = "no";
+  defaultStatus = 'active';
+  defaultSignatory: any = 'no';
+  defaultSignatory2: any = 'no';
 
-  defaultBlockUser = "block";
+  defaultBlockUser = 'block';
   /*paginate */
   public count: any = 20;
   public page: any;
@@ -68,8 +68,8 @@ export class EmployeeComponent implements OnInit {
 
   dropDownEmpList: any;
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "up",
-    format: "MM/DD/YYYY",
+    drops: 'up',
+    format: 'MM/DD/YYYY',
   };
   old_email: any;
   user_id: string;
@@ -77,7 +77,7 @@ export class EmployeeComponent implements OnInit {
   DesignationList: any = [];
   dropDownEmpListFilter: any = [];
   empList: boolean = false;
-  sup_id: any = "";
+  sup_id: any = '';
   empList2: boolean = false;
 
   constructor(
@@ -87,9 +87,9 @@ export class EmployeeComponent implements OnInit {
     public router: Router,
     public http: AdminService
   ) {
-    this.user_id = sessionStorage.getItem("user_id");
+    this.user_id = sessionStorage.getItem('user_id');
     this.excelfileName =
-      "employee_report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
+      'employee_report(' + moment(new Date()).format('MM-DD-YYYY') + ')';
   }
 
   ngOnInit() {
@@ -111,81 +111,81 @@ export class EmployeeComponent implements OnInit {
     this.getempDesignations();
 
     this.employeeAddFrom = this.fb.group({
-      first_name: new UntypedFormControl("", [
+      first_name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new UntypedFormControl("", [Validators.maxLength(100)]),
-      last_name: new UntypedFormControl("", [
+      middle_name: new UntypedFormControl('', [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      employee_code: new UntypedFormControl("", [Validators.maxLength(30)]),
-      role: new UntypedFormControl("", [Validators.required]),
-      designation: new UntypedFormControl("", [
+      employee_code: new UntypedFormControl('', [Validators.maxLength(30)]),
+      role: new UntypedFormControl('', [Validators.required]),
+      designation: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      department: new UntypedFormControl("", [Validators.required]),
-      email: new UntypedFormControl("", [
+      department: new UntypedFormControl('', [Validators.required]),
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.maxLength(40),
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
-      phoneCode: new UntypedFormControl("", [
+      phoneCode: new UntypedFormControl('', [
         Validators.min(1),
         Validators.max(999999),
       ]),
-      phone: new UntypedFormControl("", [
+      phone: new UntypedFormControl('', [
         Validators.min(10000000),
         Validators.max(9999999999999),
       ]),
-      joiningDate: new UntypedFormControl("", [
+      joiningDate: new UntypedFormControl('', [
         Validators.maxLength(80),
         Validators.required,
       ]),
-      supervisorName: new UntypedFormControl("", [
+      supervisorName: new UntypedFormControl('', [
         Validators.maxLength(80),
         Validators.required,
       ]),
     });
 
     this.employeeEditFrom = this.fb.group({
-      first_name: new UntypedFormControl("", [
+      first_name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      middle_name: new UntypedFormControl("", [Validators.maxLength(100)]),
-      last_name: new UntypedFormControl("", [
+      middle_name: new UntypedFormControl('', [Validators.maxLength(100)]),
+      last_name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(100),
       ]),
-      employee_code: new UntypedFormControl("", [Validators.maxLength(30)]),
-      role: new UntypedFormControl("", [Validators.required]),
-      designation: new UntypedFormControl("", [Validators.maxLength(100)]),
-      department: new UntypedFormControl("", [Validators.required]),
-      email: new UntypedFormControl("", [
+      employee_code: new UntypedFormControl('', [Validators.maxLength(30)]),
+      role: new UntypedFormControl('', [Validators.required]),
+      designation: new UntypedFormControl('', [Validators.maxLength(100)]),
+      department: new UntypedFormControl('', [Validators.required]),
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
         Validators.maxLength(40),
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
-      phoneCode: new UntypedFormControl("", [
+      phoneCode: new UntypedFormControl('', [
         Validators.min(1),
         Validators.max(999999),
       ]),
-      phone: new UntypedFormControl("", [
+      phone: new UntypedFormControl('', [
         Validators.min(10000000),
         Validators.max(9999999999999),
       ]),
-      joiningDate: new UntypedFormControl("", [
+      joiningDate: new UntypedFormControl('', [
         Validators.maxLength(80),
         Validators.required,
       ]),
-      supervisorName: new UntypedFormControl("", [
+      supervisorName: new UntypedFormControl('', [
         Validators.maxLength(80),
         Validators.required,
       ]),
@@ -208,9 +208,9 @@ export class EmployeeComponent implements OnInit {
   }
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -219,34 +219,34 @@ export class EmployeeComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "COMPANY": {
-              e.submodule_name_lower = "Company";
-              e.routing = "/company";
+            case 'COMPANY': {
+              e.submodule_name_lower = 'Company';
+              e.routing = '/company';
               break;
             }
-            case "DEPARTMENT": {
-              e.submodule_name_lower = "Department";
-              e.routing = "/department";
+            case 'DEPARTMENT': {
+              e.submodule_name_lower = 'Department';
+              e.routing = '/department';
               break;
             }
-            case "USER ROLE": {
-              e.submodule_name_lower = "User Role";
-              e.routing = "/user-role";
+            case 'USER ROLE': {
+              e.submodule_name_lower = 'User Role';
+              e.routing = '/user-role';
               break;
             }
-            case "EMPLOYEE": {
-              e.submodule_name_lower = "Employee";
-              e.routing = "/employee";
+            case 'EMPLOYEE': {
+              e.submodule_name_lower = 'Employee';
+              e.routing = '/employee';
               break;
             }
-            case "CLIENT": {
-              e.submodule_name_lower = "Client";
-              e.routing = "/client";
+            case 'CLIENT': {
+              e.submodule_name_lower = 'Client';
+              e.routing = '/client';
               break;
             }
-            case "DROPDOWN LIST": {
-              e.submodule_name_lower = "Dropdown-List";
-              e.routing = "/dropdown-list";
+            case 'DROPDOWN LIST': {
+              e.submodule_name_lower = 'Dropdown-List';
+              e.routing = '/dropdown-list';
               break;
             }
             default: {
@@ -259,7 +259,7 @@ export class EmployeeComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive404").className = "active";
+      document.getElementById('clsActive404').className = 'active';
     }, 200);
   }
 
@@ -286,16 +286,16 @@ export class EmployeeComponent implements OnInit {
     //console.log(value);
     this.sup_id = value.user_id;
     if (value.user_middle_name) {
-      this.employeeAddFrom.controls["supervisorName"].setValue(
+      this.employeeAddFrom.controls['supervisorName'].setValue(
         value.user_first_name +
-          " " +
+          ' ' +
           value.user_middle_name +
-          " " +
+          ' ' +
           value.user_last_name
       );
     } else {
-      this.employeeAddFrom.controls["supervisorName"].setValue(
-        value.user_first_name + " " + value.user_last_name
+      this.employeeAddFrom.controls['supervisorName'].setValue(
+        value.user_first_name + ' ' + value.user_last_name
       );
     }
 
@@ -362,47 +362,47 @@ export class EmployeeComponent implements OnInit {
   submitAddEmployee() {
     let PhoneEnter: any;
     let PhoneCodeEnter: any;
-    if (this.employeeAddFrom.controls.phoneCode.value != null) {
-      PhoneCodeEnter = this.employeeAddFrom.controls.phoneCode.value;
+    if (this.employeeAddFrom.controls['phoneCode'].value != null) {
+      PhoneCodeEnter = this.employeeAddFrom.controls['phoneCode'].value;
     } else {
-      PhoneCodeEnter = "";
+      PhoneCodeEnter = '';
     }
-    if (this.employeeAddFrom.controls.phone.value != null) {
-      PhoneEnter = this.employeeAddFrom.controls.phone.value;
+    if (this.employeeAddFrom.controls['phone'].value != null) {
+      PhoneEnter = this.employeeAddFrom.controls['phone'].value;
     } else {
-      PhoneEnter = "";
+      PhoneEnter = '';
     }
 
     const data = {
-      user_first_name: this.employeeAddFrom.controls.first_name.value,
-      user_last_name: this.employeeAddFrom.controls.last_name.value,
-      user_middle_name: this.employeeAddFrom.controls.middle_name.value,
-      phone: "" + PhoneCodeEnter + "-" + PhoneEnter + "",
-      email: this.employeeAddFrom.controls.email.value,
-      designation: this.employeeAddFrom.controls.designation.value,
-      employee_code: this.employeeAddFrom.controls.employee_code.value,
-      role_id: this.employeeAddFrom.controls.role.value,
-      dept_id: this.employeeAddFrom.controls.department.value,
-      date_of_joining: this.employeeAddFrom.controls.joiningDate.value,
+      user_first_name: this.employeeAddFrom.controls['first_name'].value,
+      user_last_name: this.employeeAddFrom.controls['last_name'].value,
+      user_middle_name: this.employeeAddFrom.controls['middle_name'].value,
+      phone: '' + PhoneCodeEnter + '-' + PhoneEnter + '',
+      email: this.employeeAddFrom.controls['email'].value,
+      designation: this.employeeAddFrom.controls['designation'].value,
+      employee_code: this.employeeAddFrom.controls['employee_code'].value,
+      role_id: this.employeeAddFrom.controls['role'].value,
+      dept_id: this.employeeAddFrom.controls['department'].value,
+      date_of_joining: this.employeeAddFrom.controls['joiningDate'].value,
       supervisor_name: this.sup_id,
       signatory_flag: this.defaultSignatory,
     };
     // //console.log(data);
     this.service.addEmployeeData(data).subscribe((r) => {
       //console.log(r);
-      if (r === "200") {
+      if (r === '200') {
         Swal.fire({
-          title: "Employee added successfully.",
-          icon: "success",
+          title: 'Employee added successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -413,17 +413,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -437,28 +437,28 @@ export class EmployeeComponent implements OnInit {
 
   checkEmailUniqueAdd() {
     let data = {
-      email: this.employeeAddFrom.controls.email.value,
+      email: this.employeeAddFrom.controls['email'].value,
     };
     this.service.checkUniqueEmail(data).subscribe(
       (res: any) => {
         //console.log(res)
         if (res.user_id) {
           Swal.fire({
-            title: "Email already exist.",
-            icon: "error",
+            title: 'Email already exist.',
+            icon: 'error',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
-              this.employeeAddFrom.get("email").reset();
+              this.employeeAddFrom.get('email').reset();
             }
           });
         }
@@ -479,16 +479,16 @@ export class EmployeeComponent implements OnInit {
     //console.log(value);
     this.sup_id = value.user_id;
     if (value.user_middle_name) {
-      this.employeeEditFrom.controls["supervisorName"].setValue(
+      this.employeeEditFrom.controls['supervisorName'].setValue(
         value.user_first_name +
-          " " +
+          ' ' +
           value.user_middle_name +
-          " " +
+          ' ' +
           value.user_last_name
       );
     } else {
-      this.employeeEditFrom.controls["supervisorName"].setValue(
-        value.user_first_name + " " + value.user_last_name
+      this.employeeEditFrom.controls['supervisorName'].setValue(
+        value.user_first_name + ' ' + value.user_last_name
       );
     }
 
@@ -501,7 +501,7 @@ export class EmployeeComponent implements OnInit {
 
   modelBindData(value) {
     //console.log(value);
-    this.sup_id = "";
+    this.sup_id = '';
     this.empList2 = false;
     this.tempCode = value.supervisor_code;
     this.employeeUserId = value.user_id;
@@ -514,19 +514,19 @@ export class EmployeeComponent implements OnInit {
     if (value.supervisor_middle_name) {
       var supervisor_name =
         value.supervisor_first_name +
-        " " +
+        ' ' +
         value.supervisor_middle_name +
-        " " +
+        ' ' +
         value.supervisor_last_name;
     } else {
       var supervisor_name =
-        value.supervisor_first_name + " " + value.supervisor_last_name;
+        value.supervisor_first_name + ' ' + value.supervisor_last_name;
     }
     this.sup_id = value.supervisor_name;
 
     if (value.phone !== null) {
-      phoneCodee = value.phone.split("-")[0];
-      phonee = value.phone.split("-")[1];
+      phoneCodee = value.phone.split('-')[0];
+      phonee = value.phone.split('-')[1];
     } else {
       phoneCodee = null;
       phonee = null;
@@ -550,30 +550,30 @@ export class EmployeeComponent implements OnInit {
 
   checkEmailUniqueEdit() {
     let data = {
-      email: this.employeeEditFrom.controls.email.value,
+      email: this.employeeEditFrom.controls['email'].value,
       old_email: this.old_email,
     };
     //console.log(data)
     this.service.checkUniqueEmailforEdit(data).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "exist") {
+        if (res === 'exist') {
           Swal.fire({
-            title: "Email already exist.",
-            icon: "error",
+            title: 'Email already exist.',
+            icon: 'error',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
-              this.employeeEditFrom.get("email").reset();
+              this.employeeEditFrom.get('email').reset();
             }
           });
         }
@@ -585,47 +585,47 @@ export class EmployeeComponent implements OnInit {
   submitUpdateEmployee() {
     let PhoneEnter: any;
     let PhoneCodeEnter: any;
-    if (this.employeeEditFrom.controls.phoneCode.value != null) {
-      PhoneCodeEnter = this.employeeEditFrom.controls.phoneCode.value;
+    if (this.employeeEditFrom.controls['phoneCode'].value != null) {
+      PhoneCodeEnter = this.employeeEditFrom.controls['phoneCode'].value;
     } else {
-      PhoneCodeEnter = "";
+      PhoneCodeEnter = '';
     }
-    if (this.employeeEditFrom.controls.phone.value != null) {
-      PhoneEnter = this.employeeEditFrom.controls.phone.value;
+    if (this.employeeEditFrom.controls['phone'].value != null) {
+      PhoneEnter = this.employeeEditFrom.controls['phone'].value;
     } else {
-      PhoneEnter = "";
+      PhoneEnter = '';
     }
     const data = {
       user_id: this.employeeUserId,
-      user_first_name: this.employeeEditFrom.controls.first_name.value,
-      user_last_name: this.employeeEditFrom.controls.last_name.value,
-      user_middle_name: this.employeeEditFrom.controls.middle_name.value,
-      phone: "" + PhoneCodeEnter + "-" + PhoneEnter + "",
-      email: this.employeeEditFrom.controls.email.value,
-      designation: this.employeeEditFrom.controls.designation.value,
-      employee_code: this.employeeEditFrom.controls.employee_code.value,
-      role_id: this.employeeEditFrom.controls.role.value,
-      dept_id: this.employeeEditFrom.controls.department.value,
-      date_of_joining: this.employeeEditFrom.controls.joiningDate.value,
+      user_first_name: this.employeeEditFrom.controls['first_name'].value,
+      user_last_name: this.employeeEditFrom.controls['last_name'].value,
+      user_middle_name: this.employeeEditFrom.controls['middle_name'].value,
+      phone: '' + PhoneCodeEnter + '-' + PhoneEnter + '',
+      email: this.employeeEditFrom.controls['email'].value,
+      designation: this.employeeEditFrom.controls['designation'].value,
+      employee_code: this.employeeEditFrom.controls['employee_code'].value,
+      role_id: this.employeeEditFrom.controls['role'].value,
+      dept_id: this.employeeEditFrom.controls['department'].value,
+      date_of_joining: this.employeeEditFrom.controls['joiningDate'].value,
       supervisor_name: this.sup_id,
       signatory_flag: this.defaultSignatory2,
     };
     //console.log(data);
     this.service.UpdateEmployeeData(data).subscribe((r: any) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Employee Updated successfully.",
-          icon: "success",
+          title: 'Employee Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -635,17 +635,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -663,19 +663,19 @@ export class EmployeeComponent implements OnInit {
     //console.log(data);
     this.service.employeeChangeStatus(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Status Updated successfully.",
-          icon: "success",
+          title: 'Status Updated successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -684,17 +684,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -710,19 +710,19 @@ export class EmployeeComponent implements OnInit {
     };
     this.service.employeeResetPassword(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "Password reset successfully.",
-          icon: "success",
+          title: 'Password reset successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -731,17 +731,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -758,19 +758,19 @@ export class EmployeeComponent implements OnInit {
     };
     this.service.employeeBlock(data).subscribe((r) => {
       //console.log(r);
-      if (r === "success") {
+      if (r === 'success') {
         Swal.fire({
-          title: "User blocked successfully.",
-          icon: "success",
+          title: 'User blocked successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -779,17 +779,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -901,19 +901,19 @@ export class EmployeeComponent implements OnInit {
     //console.log(data);
     this.service.postWebAccess(data).subscribe((r: any) => {
       //console.log(r);
-      if (r == "check_value") {
+      if (r == 'check_value') {
         Swal.fire({
-          title: "Assign Access(web) Updated Successfully.",
-          icon: "success",
+          title: 'Assign Access(web) Updated Successfully.',
+          icon: 'success',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -921,17 +921,17 @@ export class EmployeeComponent implements OnInit {
         });
       } else {
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -978,16 +978,16 @@ export class EmployeeComponent implements OnInit {
   employeeViewDetails(value) {
     if (value.user_middle_name) {
       this.empName =
-        "" +
+        '' +
         value.user_first_name +
-        " " +
+        ' ' +
         value.user_middle_name +
-        " " +
+        ' ' +
         value.user_last_name +
-        "";
+        '';
     } else {
       this.empName =
-        "" + value.user_first_name + " " + value.user_last_name + "";
+        '' + value.user_first_name + ' ' + value.user_last_name + '';
     }
 
     this.empCode = value.employee_code;
@@ -997,12 +997,12 @@ export class EmployeeComponent implements OnInit {
     this.empEmail = value.email;
     this.empPhone = value.phone;
     this.EmpDataOfJoining = value.date_of_joining;
-    this.supervisorName = "";
+    this.supervisorName = '';
     if (value.supervisor_first_name !== null) {
-      this.supervisorName += value.supervisor_first_name + " ";
+      this.supervisorName += value.supervisor_first_name + ' ';
     }
     if (value.supervisor_middle_name !== null) {
-      this.supervisorName += value.supervisor_middle_name + " ";
+      this.supervisorName += value.supervisor_middle_name + ' ';
     }
     if (value.supervisor_last_name !== null) {
       this.supervisorName += value.supervisor_last_name;
@@ -1024,7 +1024,7 @@ export class EmployeeComponent implements OnInit {
       };
       this.service.supervisorCodeCheckApi(data).subscribe((r: any) => {
         //console.log(r);
-        if (r === "EXIST") {
+        if (r === 'EXIST') {
           this.duplicateCheck = true;
         } else {
           this.duplicateCheck = false;
@@ -1041,7 +1041,7 @@ export class EmployeeComponent implements OnInit {
       };
       this.service.supervisorCodeCheckApi(data).subscribe((r: any) => {
         //console.log(r);
-        if (r === "EXIST" && this.tempCode !== value) {
+        if (r === 'EXIST' && this.tempCode !== value) {
           this.duplicateCheck2 = true;
         } else {
           this.duplicateCheck2 = false;

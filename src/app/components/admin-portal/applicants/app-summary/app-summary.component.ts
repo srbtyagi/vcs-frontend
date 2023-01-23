@@ -321,24 +321,24 @@ export class AppSummaryComponent implements OnInit {
   updateDetails() {
     let data = {
       proposed_start_date: moment(
-        this.onBoardForm.controls.pstart_date.value
+        this.onBoardForm.controls["pstart_date"].value
       ).format("MM/DD/YYYY"),
       proposed_end_date: moment(
-        this.onBoardForm.controls.pend_date.value
+        this.onBoardForm.controls["pend_date"].value
       ).format("MM/DD/YYYY"),
-      onb_regular_bill_rate: this.onBoardForm.controls.Rbill_rate.value,
-      onb_ot_bill_rate: this.onBoardForm.controls.OTbill_rate.value,
-      onb_holiday_bill_rate: this.onBoardForm.controls.Hbill_rate.value,
-      onb_regular_pay_rate: this.onBoardForm.controls.Rpay_rate.value,
-      onb_ot_pay_rate: this.onBoardForm.controls.OTpay_rate.value,
-      onb_holiday_pay_rate: this.onBoardForm.controls.Hpay_rate.value,
-      per_dieum_wk: this.onBoardForm.controls.per_diem.value,
-      ot_starts_after_wk: this.onBoardForm.controls.after_hour.value,
-      pay_package_remarks: this.onBoardForm.controls.pay_package.value,
-      total_shift_hr: this.onBoardForm.controls.shift_hour.value,
-      shift_details: this.onBoardForm.controls.shift_details.value,
-      rto: this.onBoardForm.controls.rto.value,
-      contract_duration_wk: this.onBoardForm.controls.contract_duration.value,
+      onb_regular_bill_rate: this.onBoardForm.controls["Rbill_rate"].value,
+      onb_ot_bill_rate: this.onBoardForm.controls["OTbill_rate"].value,
+      onb_holiday_bill_rate: this.onBoardForm.controls["Hbill_rate"].value,
+      onb_regular_pay_rate: this.onBoardForm.controls["Rpay_rate"].value,
+      onb_ot_pay_rate: this.onBoardForm.controls["OTpay_rate"].value,
+      onb_holiday_pay_rate: this.onBoardForm.controls["Hpay_rate"].value,
+      per_dieum_wk: this.onBoardForm.controls["per_diem"].value,
+      ot_starts_after_wk: this.onBoardForm.controls["after_hour"].value,
+      pay_package_remarks: this.onBoardForm.controls["pay_package"].value,
+      total_shift_hr: this.onBoardForm.controls["shift_hour"].value,
+      shift_details: this.onBoardForm.controls["shift_details"].value,
+      rto: this.onBoardForm.controls["rto"].value,
+      contract_duration_wk: this.onBoardForm.controls["contract_duration"].value,
       pay_rate_id: this.details.pay_rate_id,
       application_id: this.details.application_id,
       recruitee_id: this.details.recruitee_id,

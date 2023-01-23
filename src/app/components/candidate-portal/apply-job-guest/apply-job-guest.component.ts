@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import { Country, State, City } from "country-state-city";
+} from '@angular/forms';
+import { RecruiteeService } from 'src/app/recruitee.service';
+import Swal from 'sweetalert2';
+import { Country, State, City } from 'country-state-city';
 
 @Component({
-  selector: "app-apply-job-guest",
-  templateUrl: "./apply-job-guest.component.html",
-  styleUrls: ["./apply-job-guest.component.css"],
+  selector: 'app-apply-job-guest',
+  templateUrl: './apply-job-guest.component.html',
+  styleUrls: ['./apply-job-guest.component.css'],
   //template: '<div [innerHTML]="jsonLD"></div>'
 })
 export class ApplyJobGuestComponent implements OnInit {
@@ -26,19 +26,19 @@ export class ApplyJobGuestComponent implements OnInit {
 
   applicantForm: UntypedFormGroup;
   details: any = {};
-  file_name = "";
+  file_name = '';
   status = false;
-  url = "";
-  viewShow: any = "no";
+  url = '';
+  viewShow: any = 'no';
   showPercentage: number = 0;
   showProgressBar: boolean = false;
   viewfinalErr: boolean = false;
-  codePattern = "[+]?[0-9]*";
-  phonePattern = "[0-9]*";
-  exist: any = "NO";
+  codePattern = '[+]?[0-9]*';
+  phonePattern = '[0-9]*';
+  exist: any = 'NO';
   fileExistData: number = 0;
   checkEmail: boolean = false;
-  user_existance: any = "";
+  user_existance: any = '';
   states: any = [];
   stateList: boolean = false;
   filterArrayState: any = [];
@@ -55,8 +55,8 @@ export class ApplyJobGuestComponent implements OnInit {
 
     // //console.log(str[1], dtt, mmm, yyy, ccc)
 
-    this.states = State.getStatesOfCountry("US");
-    this.filterArrayState = State.getStatesOfCountry("US");
+    this.states = State.getStatesOfCountry('US');
+    this.filterArrayState = State.getStatesOfCountry('US');
     this.applicantForm = this.fb.group({
       first_name: new UntypedFormControl(null, [
         Validators.required,
@@ -71,7 +71,7 @@ export class ApplyJobGuestComponent implements OnInit {
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       phone_no: new UntypedFormControl(null, [
         Validators.maxLength(10),
@@ -99,9 +99,9 @@ export class ApplyJobGuestComponent implements OnInit {
     //console.log(value, name);
     this.filteredCity = [];
     this.filterArrayCity = [];
-    this.filteredCity = City.getCitiesOfState("US", value);
-    this.filterArrayCity = City.getCitiesOfState("US", value);
-    this.applicantForm.controls["state"].setValue(name);
+    this.filteredCity = City.getCitiesOfState('US', value);
+    this.filterArrayCity = City.getCitiesOfState('US', value);
+    this.applicantForm.controls['state'].setValue(name);
     this.stateList = false;
     //console.log(this.filteredCity)
     // for (var key in this.cities) {
@@ -116,7 +116,7 @@ export class ApplyJobGuestComponent implements OnInit {
 
   onOptionsSelectedCity(value: any) {
     //console.log(value);
-    this.applicantForm.controls["city"].setValue(value);
+    this.applicantForm.controls['city'].setValue(value);
     this.cityList = false;
   }
 
@@ -130,7 +130,7 @@ export class ApplyJobGuestComponent implements OnInit {
 
   searchState(ev) {
     //console.log(this.postJobForm.controls.state.value)
-    let search_data = this.applicantForm.controls.state.value;
+    let search_data = this.applicantForm.controls['state'].value;
     this.states = search_data
       ? this.filterListState(search_data)
       : this.filterArrayState;
@@ -147,7 +147,7 @@ export class ApplyJobGuestComponent implements OnInit {
 
   searchCity(ev) {
     //console.log(this.postJobForm.controls.city.value)
-    let search_data = this.applicantForm.controls.city.value;
+    let search_data = this.applicantForm.controls['city'].value;
     this.filteredCity = search_data
       ? this.filterListCity(search_data)
       : this.filterArrayCity;
@@ -162,7 +162,7 @@ export class ApplyJobGuestComponent implements OnInit {
 
   getUserByID() {
     this.service
-      .getUserById({ user_id: sessionStorage.getItem("user_id") })
+      .getUserById({ user_id: sessionStorage.getItem('user_id') })
       .subscribe(
         (res) => {
           //console.log(res);
@@ -171,39 +171,39 @@ export class ApplyJobGuestComponent implements OnInit {
             this.applicantForm.patchValue({
               name:
                 result[0].user_first_name +
-                " " +
+                ' ' +
                 result[0].user_middle_name +
-                " " +
+                ' ' +
                 result[0].user_last_name,
               email: result[0].email,
               phone_no: result[0].phone,
             });
           } else {
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
   }
 
   checkResume() {
     this.service
-      .check_resume({ user_id: sessionStorage.getItem("user_id") })
+      .check_resume({ user_id: sessionStorage.getItem('user_id') })
       .subscribe((res) => {
         let result: any = res;
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            "http://elitemente.com/vcsapi/get/resume/" +
-            sessionStorage.getItem("user_id") +
-            "/" +
-            sessionStorage.getItem("user_name") +
-            "_resume";
+            'http://elitemente.com/vcsapi/get/resume/' +
+            sessionStorage.getItem('user_id') +
+            '/' +
+            sessionStorage.getItem('user_name') +
+            '_resume';
         } else {
           this.status = false;
-          this.url = "";
+          this.url = '';
         }
       });
   }
@@ -214,7 +214,7 @@ export class ApplyJobGuestComponent implements OnInit {
     //console.log(this.applicantForm.value)
     //if (this.status) {
     if (this.fileExistData) {
-      this.exist = "YES";
+      this.exist = 'YES';
 
       let data = this.applicantForm.value;
 
@@ -237,18 +237,18 @@ export class ApplyJobGuestComponent implements OnInit {
 
       let obj = {
         first_name: data.first_name,
-        middle_name: "",
+        middle_name: '',
         last_name: data.last_name,
         phone: data.phone_no,
         email: data.email,
         message: data.message,
-        availability: "",
+        availability: '',
         user_id: this.fileExistData,
-        job_id: this.details["job_id"],
-        applied_by: "own",
+        job_id: this.details['job_id'],
+        applied_by: 'own',
         recruiter_id: 0,
         user_exist: this.user_existance,
-        job_no: this.details["job_no"],
+        job_no: this.details['job_no'],
         prefered_state: pref_state,
         prefered_city: pref_city,
       };
@@ -257,37 +257,37 @@ export class ApplyJobGuestComponent implements OnInit {
         (res) => {
           // //console.log("res", res);
           let result: any = res;
-          if (result.length && result[0].user_status !== "deleted") {
+          if (result.length && result[0].user_status !== 'deleted') {
             this.service.spinnerHide();
-            this.error1("You have already applied.");
+            this.error1('You have already applied.');
           } else {
             //console.log("else")
             this.service.add_applicant_guest(obj, this.exist).subscribe(
               (res) => {
                 //console.log("resultt", res);
                 let result: any = res;
-                if (result.message === "success") {
+                if (result.message === 'success') {
                   this.service.spinnerHide();
-                  this.exist = "Yes";
-                  this.fileExistData = result.user_details["user_id"];
+                  this.exist = 'Yes';
+                  this.fileExistData = result.user_details['user_id'];
 
-                  this.success2("Applied Successfully.");
+                  this.success2('Applied Successfully.');
                 }
-                if (result === "ERROR") {
+                if (result === 'ERROR') {
                   this.service.spinnerHide();
-                  this.error("Something went wrong. Please Try Again.");
+                  this.error('Something went wrong. Please Try Again.');
                 }
               },
               (err) => {
                 this.service.spinnerHide();
-                this.error("Something went wrong. Please Try Again.");
+                this.error('Something went wrong. Please Try Again.');
               }
             );
           }
         },
         (err) => {
           this.service.spinnerHide();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
     } else {
@@ -313,16 +313,16 @@ export class ApplyJobGuestComponent implements OnInit {
       let obj = {
         first_name: data.first_name,
         last_name: data.last_name,
-        middle_name: "",
+        middle_name: '',
         phone: data.phone_no,
         email: data.email,
         message: data.message,
-        availability: "",
-        job_id: this.details["job_id"],
-        applied_by: "own",
+        availability: '',
+        job_id: this.details['job_id'],
+        applied_by: 'own',
         recruiter_id: 0,
         user_exist: this.user_existance,
-        job_no: this.details["job_no"],
+        job_no: this.details['job_no'],
         prefered_state: pref_state,
         prefered_city: pref_city,
       };
@@ -331,37 +331,37 @@ export class ApplyJobGuestComponent implements OnInit {
         (res) => {
           // //console.log("res", res);
           let result: any = res;
-          if (result.length && result[0].user_status !== "deleted") {
+          if (result.length && result[0].user_status !== 'deleted') {
             this.service.spinnerHide();
-            this.error1("You have already applied.");
+            this.error1('You have already applied.');
           } else {
             //console.log("else")
             this.service.add_applicant_guest_By_email(obj).subscribe(
               (res) => {
                 // //console.log("resultt", res);
                 let result: any = res;
-                if (result.message === "success") {
+                if (result.message === 'success') {
                   this.service.spinnerHide();
-                  this.exist = "Yes";
-                  this.fileExistData = result.user_details["user_id"];
+                  this.exist = 'Yes';
+                  this.fileExistData = result.user_details['user_id'];
 
-                  this.success2("Applied Successfully.");
+                  this.success2('Applied Successfully.');
                 }
-                if (result === "ERROR") {
+                if (result === 'ERROR') {
                   this.service.spinnerHide();
-                  this.error("Something went wrong. Please Try Again.");
+                  this.error('Something went wrong. Please Try Again.');
                 }
               },
               (err) => {
                 this.service.spinnerHide();
-                this.error("Something went wrong. Please Try Again.");
+                this.error('Something went wrong. Please Try Again.');
               }
             );
           }
         },
         (err) => {
           this.service.spinnerHide();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
     }
@@ -376,23 +376,23 @@ export class ApplyJobGuestComponent implements OnInit {
   fileUpload(files: FileList) {
     if (this.applicantForm.value.email) {
       if (this.fileExistData !== 0) {
-        this.exist = "YES";
+        this.exist = 'YES';
       }
       let fileInput: any = <HTMLInputElement>(
-        document.getElementById("customFile")
+        document.getElementById('customFile')
       );
       let fileData = files[0];
       this.file_name = fileData.name;
       this.showProgressBar = false;
-      this.viewShow = "false";
+      this.viewShow = 'false';
       this.viewfinalErr = false;
       if (fileData.size > 25000000) {
-        this.error("File size exceeds the maximum limit 25mb.");
+        this.error('File size exceeds the maximum limit 25mb.');
       } else {
         this.uploadFiles(fileData, this.exist, this.fileExistData);
       }
     } else {
-      this.error("Fill up the above details first.");
+      this.error('Fill up the above details first.');
     }
   }
 
@@ -402,7 +402,7 @@ export class ApplyJobGuestComponent implements OnInit {
     this.showPercentage = 0;
     let formData = new FormData();
 
-    formData.append("file", file, file.name);
+    formData.append('file', file, file.name);
     // //console.log(formData,file.name)
 
     this.service
@@ -417,39 +417,39 @@ export class ApplyJobGuestComponent implements OnInit {
           let result: any = res;
           // //console.log("upload", result)
 
-          this.viewShow = "try";
+          this.viewShow = 'try';
           this.showPercentage = Math.round(
             (100 * result.loaded) / result.total
           );
           if (result.body !== undefined) {
-            if (result.body.message === "success") {
+            if (result.body.message === 'success') {
               this.showProgressBar = false;
-              this.viewShow = "true";
+              this.viewShow = 'true';
               this.viewfinalErr = false;
               // this.success("Resume Uploaded Successfully.");
               this.fileExistData = result.body.user_details.user_id;
               this.user_existance = result.body.user_exist;
               this.status = true;
               this.url =
-                "http://elitemente.com/vcsapi/get/resume/" +
+                'http://elitemente.com/vcsapi/get/resume/' +
                 result.body.user_details.user_id +
-                "/" +
-                sessionStorage.getItem("user_name") +
-                "_resume";
+                '/' +
+                sessionStorage.getItem('user_name') +
+                '_resume';
             }
           } else {
             this.status = false;
-            this.url = "";
+            this.url = '';
             this.viewfinalErr = true;
-            this.viewShow = "false";
+            this.viewShow = 'false';
           }
         },
         (err) => {
           // //console.log(err)
           this.status = false;
-          this.url = "";
+          this.url = '';
           this.viewfinalErr = true;
-          this.viewShow = "false";
+          this.viewShow = 'false';
         }
       );
   }
@@ -461,14 +461,14 @@ export class ApplyJobGuestComponent implements OnInit {
         (res) => {
           //console.log(res);
           let result: any = res;
-          if (result === "delete") {
+          if (result === 'delete') {
             this.applicantForm.reset();
           } else {
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
   }
@@ -491,16 +491,16 @@ export class ApplyJobGuestComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -510,42 +510,42 @@ export class ApplyJobGuestComponent implements OnInit {
   error1(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(["/jobs"]);
+        this.router.navigate(['/jobs']);
       }
     });
   }
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         this.applicantForm.patchValue({
-          message: "",
-          availability: "",
+          message: '',
+          availability: '',
         });
       }
     });
@@ -553,22 +553,22 @@ export class ApplyJobGuestComponent implements OnInit {
   success2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         this.applicantForm.reset();
 
-        this.router.navigate(["/jobs"]);
+        this.router.navigate(['/jobs']);
       }
     });
   }
@@ -576,20 +576,20 @@ export class ApplyJobGuestComponent implements OnInit {
   error2(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.applicantForm.patchValue({ email: "" });
+        this.applicantForm.patchValue({ email: '' });
       }
     });
   }

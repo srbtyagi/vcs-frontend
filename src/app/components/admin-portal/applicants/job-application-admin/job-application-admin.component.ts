@@ -1,37 +1,37 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import { StoreDataService } from "src/app/store-data.service";
+} from '@angular/forms';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import { StoreDataService } from 'src/app/store-data.service';
 
 @Component({
-  selector: "app-job-application-admin",
-  templateUrl: "./job-application-admin.component.html",
-  styleUrls: ["./job-application-admin.component.css"],
+  selector: 'app-job-application-admin',
+  templateUrl: './job-application-admin.component.html',
+  styleUrls: ['./job-application-admin.component.css'],
 })
 export class JobApplicationAdminComponent implements OnInit {
-  @ViewChild("sortListModalClose", { static: false })
+  @ViewChild('sortListModalClose', { static: false })
   private sortListModalClose: ElementRef;
-  @ViewChild("offerModalClose", { static: false })
+  @ViewChild('offerModalClose', { static: false })
   private offerModalClose: ElementRef;
-  @ViewChild("offerRejectModalClose", { static: false })
+  @ViewChild('offerRejectModalClose', { static: false })
   private offerRejectModalClose: ElementRef;
-  @ViewChild("onBoardModalClose", { static: false })
+  @ViewChild('onBoardModalClose', { static: false })
   private onBoardModalClose: ElementRef;
 
   moduleArray: any[];
   clientList: any[];
-  client_id: any = "ALL";
-  job_no: any = "ALL";
-  job_status: any = "open";
+  client_id: any = 'ALL';
+  job_no: any = 'ALL';
+  job_status: any = 'open';
   jobIdList: any[];
   joblists: any = [];
   shortListedAppl: any = [];
@@ -41,7 +41,7 @@ export class JobApplicationAdminComponent implements OnInit {
   application_stage: any;
   modal_header: string;
   application_id: any;
-  remark: any = "";
+  remark: any = '';
   detailsData: any = [];
   dateCond: string;
   recruitee_id: any;
@@ -66,8 +66,8 @@ export class JobApplicationAdminComponent implements OnInit {
   user_id: any;
   details: any;
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM/DD/YYYY",
+    drops: 'down',
+    format: 'MM/DD/YYYY',
   };
   user_id_by: any;
   excelfileName: any;
@@ -75,7 +75,7 @@ export class JobApplicationAdminComponent implements OnInit {
   showNameList: boolean = false;
   clientListShow: boolean = false;
   clientListFilter: any = [];
-  clientName: any = "ALL";
+  clientName: any = 'ALL';
   /*paginate */
   public count: any = 20;
   public page: any = 1;
@@ -91,10 +91,10 @@ export class JobApplicationAdminComponent implements OnInit {
     public fb: UntypedFormBuilder,
     public storeData: StoreDataService
   ) {
-    this.user_id_by = sessionStorage.getItem("user_id");
+    this.user_id_by = sessionStorage.getItem('user_id');
     this.excelfileName =
-      "job_application_report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
-    this.user_type = sessionStorage.getItem("user_type");
+      'job_application_report(' + moment(new Date()).format('MM-DD-YYYY') + ')';
+    this.user_type = sessionStorage.getItem('user_type');
   }
 
   ngOnInit() {
@@ -110,10 +110,10 @@ export class JobApplicationAdminComponent implements OnInit {
     //this.getAllJobId();
     this.getEmployee();
     if (
-      this.client_id === "ALL" &&
-      this.job_no === "ALL" &&
-      this.job_status === "open" &&
-      this.vcs_person === "ALL" &&
+      this.client_id === 'ALL' &&
+      this.job_no === 'ALL' &&
+      this.job_status === 'open' &&
+      this.vcs_person === 'ALL' &&
       this.searchData.length === 0
     ) {
       this.searchJob();
@@ -177,9 +177,9 @@ export class JobApplicationAdminComponent implements OnInit {
   }
   /////////////////////////////////
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -188,34 +188,34 @@ export class JobApplicationAdminComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "APPLICANT": {
-              e.submodule_name_lower = "Applicants";
-              e.routing = "/applicants";
+            case 'APPLICANT': {
+              e.submodule_name_lower = 'Applicants';
+              e.routing = '/applicants';
               break;
             }
-            case "ASSIGN MANAGERS": {
-              e.submodule_name_lower = "Assign Manager";
-              e.routing = "/assign-Manager";
+            case 'ASSIGN MANAGERS': {
+              e.submodule_name_lower = 'Assign Manager';
+              e.routing = '/assign-Manager';
               break;
             }
-            case "JOB APPLICATION": {
-              e.submodule_name_lower = "Job Application";
-              e.routing = "/job-applications_admin";
+            case 'JOB APPLICATION': {
+              e.submodule_name_lower = 'Job Application';
+              e.routing = '/job-applications_admin';
               break;
             }
-            case "ONBOARDING & HIRING": {
-              e.submodule_name_lower = "On Boarding";
-              e.routing = "/onboarding-hiring";
+            case 'ONBOARDING & HIRING': {
+              e.submodule_name_lower = 'On Boarding';
+              e.routing = '/onboarding-hiring';
               break;
             }
-            case "HIRED": {
-              e.submodule_name_lower = "Hired";
-              e.routing = "/hired-applicant";
+            case 'HIRED': {
+              e.submodule_name_lower = 'Hired';
+              e.routing = '/hired-applicant';
               break;
             }
-            case "SKILLSET": {
-              e.submodule_name_lower = "Skill Set";
-              e.routing = "/skill-set-admin";
+            case 'SKILLSET': {
+              e.submodule_name_lower = 'Skill Set';
+              e.routing = '/skill-set-admin';
               break;
             }
             default: {
@@ -228,7 +228,7 @@ export class JobApplicationAdminComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive202").className = "active";
+      document.getElementById('clsActive202').className = 'active';
     }, 200);
   }
 
@@ -291,8 +291,8 @@ export class JobApplicationAdminComponent implements OnInit {
   findJobId(ev) {
     //console.log(this.job_no)
     this.jobIdList = [];
-    if (this.job_no.toLowerCase() === "all") {
-      this.job_no = "ALL";
+    if (this.job_no.toLowerCase() === 'all') {
+      this.job_no = 'ALL';
     } else {
       let data = {
         job_no: this.job_no,
@@ -325,8 +325,8 @@ export class JobApplicationAdminComponent implements OnInit {
     // if (this.clientName.toLowerCase() === "all") {
     //   this.client_id = "ALL";
     // }
-    if (this.vcs_person_name.toLowerCase() === "all") {
-      this.vcs_person = "ALL";
+    if (this.vcs_person_name.toLowerCase() === 'all') {
+      this.vcs_person = 'ALL';
     }
     let data = {
       job_no: this.job_no,
@@ -350,7 +350,7 @@ export class JobApplicationAdminComponent implements OnInit {
         this.joblists = res;
         this.http.spinnerHide();
         if (this.joblists.length === 0) {
-          this.errorMsg("No application found.");
+          this.errorMsg('No application found.');
         }
       },
       (err) => {
@@ -365,7 +365,7 @@ export class JobApplicationAdminComponent implements OnInit {
         special: JSON.stringify(val),
       },
     };
-    this.router.navigate(["/app-summary"], navigationExtras);
+    this.router.navigate(['/app-summary'], navigationExtras);
   }
 
   shortList(val) {
@@ -378,11 +378,11 @@ export class JobApplicationAdminComponent implements OnInit {
       //console.log(res);
       this.shortListedAppl = res;
       if (this.shortListedAppl.length === 0) {
-        this.errorMsg("There are no applicants to shortlist!");
+        this.errorMsg('There are no applicants to shortlist!');
       } else {
         this.shortListedAppl.forEach((e) => {
           e.value = false;
-          if (e.application_stage === "sort_listed") {
+          if (e.application_stage === 'sort_listed') {
             e.value = true;
           }
         });
@@ -401,7 +401,7 @@ export class JobApplicationAdminComponent implements OnInit {
       //console.log(res);
       this.shortListedAppl = res;
       if (this.shortListedAppl.length === 0) {
-        this.errorMsg("There are no shortlisted applicants to offer!");
+        this.errorMsg('There are no shortlisted applicants to offer!');
       } else {
       }
     });
@@ -422,16 +422,16 @@ export class JobApplicationAdminComponent implements OnInit {
     let data = {
       job_id: this.job_id,
       application_id: this.appl_id,
-      application_stage: "sort_listed",
+      application_stage: 'sort_listed',
     };
     this.http.shortlistingCandidate(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
-          this.job_id = "";
+        if (res === 'success') {
+          this.job_id = '';
           this.appl_id = [];
           this.sortListModalClose.nativeElement.click();
-          this.successMsg("Candidates submitted successfully.");
+          this.successMsg('Candidates submitted successfully.');
         } else {
           this.viewfinalErr = true;
         }
@@ -443,23 +443,23 @@ export class JobApplicationAdminComponent implements OnInit {
   }
 
   openOffer(val) {
-    this.modal_header = "";
+    this.modal_header = '';
     this.application_stage = val.application_stage;
     this.application_id = val.application_id;
     this.recruitee_id = val.recruitee_id;
     this.details = val;
-    if (val.application_status === "underreview") {
-      this.modal_header = "Offer/Reject";
-    } else if (val.application_status === "rejected") {
-      this.modal_header = "Change Decision";
+    if (val.application_status === 'underreview') {
+      this.modal_header = 'Offer/Reject';
+    } else if (val.application_status === 'rejected') {
+      this.modal_header = 'Change Decision';
     }
   }
 
   changepayRate(e) {
     var t = e.target.value;
     e.target.value =
-      t.indexOf(".") >= 0
-        ? t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)
+      t.indexOf('.') >= 0
+        ? t.substr(0, t.indexOf('.')) + t.substr(t.indexOf('.'), 3)
         : t;
 
     ///// Restrict negative by typing
@@ -483,24 +483,25 @@ export class JobApplicationAdminComponent implements OnInit {
       application_stage: this.application_stage,
       recruitee_id: this.recruitee_id,
       proposed_start_date: moment(
-        this.onBoardForm.controls.pstart_date.value
-      ).format("MM/DD/YYYY"),
+        this.onBoardForm.controls['pstart_date'].value
+      ).format('MM/DD/YYYY'),
       proposed_end_date: moment(
-        this.onBoardForm.controls.pend_date.value
-      ).format("MM/DD/YYYY"),
-      onb_regular_bill_rate: this.onBoardForm.controls.Rbill_rate.value,
-      onb_ot_bill_rate: this.onBoardForm.controls.OTbill_rate.value,
-      onb_holiday_bill_rate: this.onBoardForm.controls.Hbill_rate.value,
-      onb_regular_pay_rate: this.onBoardForm.controls.Rpay_rate.value,
-      onb_ot_pay_rate: this.onBoardForm.controls.OTpay_rate.value,
-      onb_holiday_pay_rate: this.onBoardForm.controls.Hpay_rate.value,
-      per_dieum_wk: this.onBoardForm.controls.per_diem.value,
-      ot_starts_after_wk: this.onBoardForm.controls.after_hour.value,
-      pay_package_remarks: this.onBoardForm.controls.pay_package.value,
-      total_shift_hr: this.onBoardForm.controls.shift_hour.value,
-      shift_details: this.onBoardForm.controls.shift_details.value,
-      rto: this.onBoardForm.controls.rto.value,
-      contract_duration_wk: this.onBoardForm.controls.contract_duration.value,
+        this.onBoardForm.controls['pend_date'].value
+      ).format('MM/DD/YYYY'),
+      onb_regular_bill_rate: this.onBoardForm.controls['Rbill_rate'].value,
+      onb_ot_bill_rate: this.onBoardForm.controls['OTbill_rate'].value,
+      onb_holiday_bill_rate: this.onBoardForm.controls['Hbill_rate'].value,
+      onb_regular_pay_rate: this.onBoardForm.controls['Rpay_rate'].value,
+      onb_ot_pay_rate: this.onBoardForm.controls['OTpay_rate'].value,
+      onb_holiday_pay_rate: this.onBoardForm.controls['Hpay_rate'].value,
+      per_dieum_wk: this.onBoardForm.controls['per_diem'].value,
+      ot_starts_after_wk: this.onBoardForm.controls['after_hour'].value,
+      pay_package_remarks: this.onBoardForm.controls['pay_package'].value,
+      total_shift_hr: this.onBoardForm.controls['shift_hour'].value,
+      shift_details: this.onBoardForm.controls['shift_details'].value,
+      rto: this.onBoardForm.controls['rto'].value,
+      contract_duration_wk:
+        this.onBoardForm.controls['contract_duration'].value,
     };
 
     //console.log(data)
@@ -514,40 +515,40 @@ export class JobApplicationAdminComponent implements OnInit {
     this.http.offerreject(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
-          if (this.remark !== "") {
+        if (res === 'success') {
+          if (this.remark !== '') {
             this.http.InsertRemark(data1).subscribe(
               (res: any) => {
                 //console.log(res);
-                if (res === "success") {
+                if (res === 'success') {
                   this.offerModalClose.nativeElement.click();
                   this.onBoardModalClose.nativeElement.click();
                   //this.offerRejectModalClose.nativeElement.click();
-                  this.successMsg2("Request successful.");
+                  this.successMsg2('Request successful.');
                 } else {
                   this.viewfinalErr = true;
-                  this.errorMsg("Something went wrong,please try again!");
+                  this.errorMsg('Something went wrong,please try again!');
                 }
               },
               (err) => {
                 this.viewfinalErr = true;
-                this.errorMsg("Something went wrong,please try again!");
+                this.errorMsg('Something went wrong,please try again!');
               }
             );
           } else {
             this.offerModalClose.nativeElement.click();
             this.onBoardModalClose.nativeElement.click();
             //this.offerRejectModalClose.nativeElement.click();
-            this.successMsg2("Request successful.");
+            this.successMsg2('Request successful.');
           }
         } else {
           this.viewfinalErr = true;
-          this.errorMsg("Something went wrong,please try again!");
+          this.errorMsg('Something went wrong,please try again!');
         }
       },
       (err) => {
         this.viewfinalErr = true;
-        this.errorMsg("Something went wrong,please try again!");
+        this.errorMsg('Something went wrong,please try again!');
       }
     );
   }
@@ -558,40 +559,40 @@ export class JobApplicationAdminComponent implements OnInit {
         special: btoa(unescape(encodeURIComponent(JSON.stringify(val)))),
       },
     };
-    this.router.navigate(["/add-applicant-admin"], navigationExtras);
+    this.router.navigate(['/add-applicant-admin'], navigationExtras);
   }
 
   openDetailsModal(val, dis) {
     //console.log(val, dis)
-    this.modal_header = "";
-    this.dateCond = "";
+    this.modal_header = '';
+    this.dateCond = '';
     this.detailsData = [];
-    if (dis === "new_appl") {
+    if (dis === 'new_appl') {
       this.detailsData = val.applied_no_details;
-      this.modal_header = "New Application";
-      this.dateCond = "new_appl";
-    } else if (dis === "applied") {
+      this.modal_header = 'New Application';
+      this.dateCond = 'new_appl';
+    } else if (dis === 'applied') {
       this.detailsData = val.applied_yes_details;
-      this.modal_header = "Applied";
-      this.dateCond = "applied";
-    } else if (dis === "shortlisted") {
+      this.modal_header = 'Applied';
+      this.dateCond = 'applied';
+    } else if (dis === 'shortlisted') {
       this.detailsData = val.sortlisted_details;
-      this.modal_header = "Submitted";
-      this.dateCond = "shortlisted";
-    } else if (dis === "offered") {
+      this.modal_header = 'Submitted';
+      this.dateCond = 'shortlisted';
+    } else if (dis === 'offered') {
       this.detailsData = val.offered_details;
-      this.modal_header = "Offered";
-      this.dateCond = "offered";
-    } else if (dis === "accepted") {
+      this.modal_header = 'Offered';
+      this.dateCond = 'offered';
+    } else if (dis === 'accepted') {
       this.detailsData = val.apl_acc_details;
-      this.modal_header = "Accepted";
-      this.dateCond = "accepted";
+      this.modal_header = 'Accepted';
+      this.dateCond = 'accepted';
     }
   }
 
   offerRejectNext() {
     //console.log(this.details)
-    if (this.application_stage === "offered") {
+    if (this.application_stage === 'offered') {
       this.user_id = this.details.user_id;
       //this.pstart_date = moment(this.details.proposed_start_date).format("MM/DD/YYYY");
       //this.pend_date = moment(this.details.proposed_end_date).format("MM/DD/YYYY");
@@ -601,28 +602,28 @@ export class JobApplicationAdminComponent implements OnInit {
       this.Rpay_rate = this.details.blended_pay_rate;
       this.OTpay_rate = this.details.ot_holiday_pay_rate_traveller;
       this.Hpay_rate = this.details.ot_holiday_pay_rate_traveller;
-      this.per_diem = "";
-      this.after_hour = "40";
-      this.pay_package = "";
+      this.per_diem = '';
+      this.after_hour = '40';
+      this.pay_package = '';
       this.shift_hour = this.details.confirm_hr;
       this.shift_details = this.details.shift;
-      this.rto = "";
+      this.rto = '';
       this.contract_duration = this.details.duration;
-      this.due_date = moment(this.details.due_date).format("MM/DD/YYYY");
-      this.comment = "";
-    } else if (this.application_stage === "rejected") {
+      this.due_date = moment(this.details.due_date).format('MM/DD/YYYY');
+      this.comment = '';
+    } else if (this.application_stage === 'rejected') {
       Swal.fire({
-        title: "Do you want to reject this job application ?",
-        icon: "warning",
+        title: 'Do you want to reject this job application ?',
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#4C96D7",
-        confirmButtonText: "Yes",
+        confirmButtonColor: '#4C96D7',
+        confirmButtonText: 'Yes',
         allowOutsideClick: false,
         showClass: {
-          popup: "animate__animated animate__fadeInDown",
+          popup: 'animate__animated animate__fadeInDown',
         },
         hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
+          popup: 'animate__animated animate__fadeOutUp',
         },
       }).then((result) => {
         if (result.isConfirmed) {
@@ -641,38 +642,38 @@ export class JobApplicationAdminComponent implements OnInit {
           this.http.offerreject(data).subscribe(
             (res: any) => {
               //console.log(res);
-              if (res === "success") {
-                if (this.remark !== "") {
+              if (res === 'success') {
+                if (this.remark !== '') {
                   this.http.InsertRemark(data1).subscribe(
                     (res: any) => {
                       //console.log(res);
-                      if (res === "success") {
+                      if (res === 'success') {
                         this.offerModalClose.nativeElement.click();
                         //this.offerRejectModalClose.nativeElement.click();
-                        this.successMsg2("Request successful.");
+                        this.successMsg2('Request successful.');
                       } else {
                         this.viewfinalErr = true;
-                        this.errorMsg("Something went wrong,please try again!");
+                        this.errorMsg('Something went wrong,please try again!');
                       }
                     },
                     (err) => {
                       this.viewfinalErr = true;
-                      this.errorMsg("Something went wrong,please try again!");
+                      this.errorMsg('Something went wrong,please try again!');
                     }
                   );
                 } else {
                   this.offerModalClose.nativeElement.click();
                   //this.offerRejectModalClose.nativeElement.click();
-                  this.successMsg2("Request successful.");
+                  this.successMsg2('Request successful.');
                 }
               } else {
                 this.viewfinalErr = true;
-                this.errorMsg("Something went wrong,please try again!");
+                this.errorMsg('Something went wrong,please try again!');
               }
             },
             (err) => {
               this.viewfinalErr = true;
-              this.errorMsg("Something went wrong,please try again!");
+              this.errorMsg('Something went wrong,please try again!');
             }
           );
         }
@@ -683,8 +684,8 @@ export class JobApplicationAdminComponent implements OnInit {
   employeeList: any = [];
   empListFilter: any = [];
   empListShow: boolean = false;
-  vcs_person: any = "ALL";
-  vcs_person_name: any = "ALL";
+  vcs_person: any = 'ALL';
+  vcs_person_name: any = 'ALL';
   getEmployee() {
     this.http.getAllEmployee().subscribe((res: any) => {
       //console.log(res)
@@ -702,12 +703,12 @@ export class JobApplicationAdminComponent implements OnInit {
     if (val.user_middle_name) {
       this.vcs_person_name =
         val.user_first_name +
-        " " +
+        ' ' +
         val.user_middle_name +
-        " " +
+        ' ' +
         val.user_last_name;
     } else {
-      this.vcs_person_name = val.user_first_name + " " + val.user_last_name;
+      this.vcs_person_name = val.user_first_name + ' ' + val.user_last_name;
     }
     this.empListShow = false;
   }
@@ -734,16 +735,16 @@ export class JobApplicationAdminComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -754,16 +755,16 @@ export class JobApplicationAdminComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -776,16 +777,16 @@ export class JobApplicationAdminComponent implements OnInit {
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -798,7 +799,7 @@ export class JobApplicationAdminComponent implements OnInit {
           //console.log(res);
           this.shortListedAppl = res;
           if (this.shortListedAppl.length === 0) {
-            this.errorMsg("There are no more shortlisted applicants to offer!");
+            this.errorMsg('There are no more shortlisted applicants to offer!');
           } else {
           }
         });

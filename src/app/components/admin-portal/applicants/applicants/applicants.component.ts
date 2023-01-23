@@ -1,33 +1,33 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import { StoreDataService } from "src/app/store-data.service";
+} from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/admin.service';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import { StoreDataService } from 'src/app/store-data.service';
 
 @Component({
-  selector: "app-applicants",
-  templateUrl: "./applicants.component.html",
-  styleUrls: ["./applicants.component.css"],
+  selector: 'app-applicants',
+  templateUrl: './applicants.component.html',
+  styleUrls: ['./applicants.component.css'],
 })
 export class ApplicantsComponent implements OnInit {
-  @ViewChild("closeEdit", { static: false }) private closeEdit: ElementRef;
-  @ViewChild("closeUserStatus", { static: false })
+  @ViewChild('closeEdit', { static: false }) private closeEdit: ElementRef;
+  @ViewChild('closeUserStatus', { static: false })
   private closeUserStatus: ElementRef;
-  @ViewChild("closeApplyStatus", { static: false })
+  @ViewChild('closeApplyStatus', { static: false })
   private closeApplyStatus: ElementRef;
-  @ViewChild("changePasswordModal", { static: false })
+  @ViewChild('changePasswordModal', { static: false })
   private changePasswordModal: ElementRef;
-  @ViewChild("changePasscodeModal", { static: false })
+  @ViewChild('changePasscodeModal', { static: false })
   private changePasscodeModal: ElementRef;
-  @ViewChild("uploadDocModal", { static: false })
+  @ViewChild('uploadDocModal', { static: false })
   private uploadDocModal: ElementRef;
   /*paginate */
   public count: any = 20;
@@ -44,7 +44,7 @@ export class ApplicantsComponent implements OnInit {
   profession: any = [];
   speciality: any = [];
   ssn_4digit: any;
-  dob: any = "";
+  dob: any = '';
   profession_id: any;
   speciality_id: any;
   editApplicant: UntypedFormGroup;
@@ -53,13 +53,13 @@ export class ApplicantsComponent implements OnInit {
   apply_status: any;
   user_id: any;
   docType: any;
-  doc_name: any = "";
+  doc_name: any = '';
   showSecInput: boolean = false;
 
   fileToUpload: any | null = null;
-  file_name: any = "";
-  doc_id: any = "";
-  viewShow: any = "";
+  file_name: any = '';
+  doc_id: any = '';
+  viewShow: any = '';
   showPercentage: number = 0;
   showProgressBar: boolean = false;
   uploaded_data: any;
@@ -67,25 +67,25 @@ export class ApplicantsComponent implements OnInit {
   docs: any;
   remark: any;
 
-  recruitment_status: any = "all";
-  position_type: any = "ALL";
-  profession_type: any = "ALL";
-  prefered_location: any = "ALL";
+  recruitment_status: any = 'all';
+  position_type: any = 'ALL';
+  profession_type: any = 'ALL';
+  prefered_location: any = 'ALL';
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "up",
-    format: "MM/DD/YYYY",
+    drops: 'up',
+    format: 'MM/DD/YYYY',
   };
-  from_date: any = moment(new Date()).format("MM-DD-YYYY");
-  to_date: any = moment(new Date()).format("MM-DD-YYYY");
+  from_date: any = moment(new Date()).format('MM-DD-YYYY');
+  to_date: any = moment(new Date()).format('MM-DD-YYYY');
   datePickerConfig2 = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM-DD-YYYY",
+    drops: 'down',
+    format: 'MM-DD-YYYY',
     max: this.to_date,
   };
   datePickerConfig3 = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM-DD-YYYY",
+    drops: 'down',
+    format: 'MM-DD-YYYY',
     min: this.from_date,
   };
 
@@ -97,7 +97,7 @@ export class ApplicantsComponent implements OnInit {
 
   conf_doc_name: any;
   ConffileToUpload: any | null = null;
-  conf_file_name: any = "";
+  conf_file_name: any = '';
   conf_doc_list: any = [];
   assignment_data: any = [];
   user_id_by: any;
@@ -125,10 +125,10 @@ export class ApplicantsComponent implements OnInit {
     public fb: UntypedFormBuilder,
     public storeData: StoreDataService
   ) {
-    this.user_id_by = sessionStorage.getItem("user_id");
+    this.user_id_by = sessionStorage.getItem('user_id');
     this.excelfileName =
-      "applicants_report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
-    this.user_type = sessionStorage.getItem("user_type");
+      'applicants_report(' + moment(new Date()).format('MM-DD-YYYY') + ')';
+    this.user_type = sessionStorage.getItem('user_type');
   }
 
   ngOnInit() {
@@ -151,11 +151,11 @@ export class ApplicantsComponent implements OnInit {
     this.getPreferedLocation();
     this.getPositionType();
     if (
-      this.recruitment_status === "all" &&
+      this.recruitment_status === 'all' &&
       this.searchData2.length === 0 &&
-      this.prefered_location === "ALL" &&
-      this.profession_type === "ALL" &&
-      this.position_type === "ALL"
+      this.prefered_location === 'ALL' &&
+      this.profession_type === 'ALL' &&
+      this.position_type === 'ALL'
     ) {
       this.searchAppl();
     } else if (this.searchData2.length !== 0) {
@@ -204,9 +204,9 @@ export class ApplicantsComponent implements OnInit {
   }
   /////////////////////////////////
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -215,34 +215,34 @@ export class ApplicantsComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "APPLICANT": {
-              e.submodule_name_lower = "Applicants";
-              e.routing = "/applicants";
+            case 'APPLICANT': {
+              e.submodule_name_lower = 'Applicants';
+              e.routing = '/applicants';
               break;
             }
-            case "JOB APPLICATION": {
-              e.submodule_name_lower = "Job Application";
-              e.routing = "/job-applications_admin";
+            case 'JOB APPLICATION': {
+              e.submodule_name_lower = 'Job Application';
+              e.routing = '/job-applications_admin';
               break;
             }
-            case "ONBOARDING & HIRING": {
-              e.submodule_name_lower = "On Boarding";
-              e.routing = "/onboarding-hiring";
+            case 'ONBOARDING & HIRING': {
+              e.submodule_name_lower = 'On Boarding';
+              e.routing = '/onboarding-hiring';
               break;
             }
-            case "HIRED": {
-              e.submodule_name_lower = "Hired";
-              e.routing = "/hired-applicant";
+            case 'HIRED': {
+              e.submodule_name_lower = 'Hired';
+              e.routing = '/hired-applicant';
               break;
             }
-            case "ASSIGN MANAGERS": {
-              e.submodule_name_lower = "Assign Manager";
-              e.routing = "/assign-Manager";
+            case 'ASSIGN MANAGERS': {
+              e.submodule_name_lower = 'Assign Manager';
+              e.routing = '/assign-Manager';
               break;
             }
-            case "SKILLSET": {
-              e.submodule_name_lower = "Skill Set";
-              e.routing = "/skill-set-admin";
+            case 'SKILLSET': {
+              e.submodule_name_lower = 'Skill Set';
+              e.routing = '/skill-set-admin';
               break;
             }
             default: {
@@ -255,7 +255,7 @@ export class ApplicantsComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive201").className = "active";
+      document.getElementById('clsActive201').className = 'active';
     }, 200);
   }
 
@@ -269,19 +269,19 @@ export class ApplicantsComponent implements OnInit {
   }
 
   focusFunction() {
-    document.getElementById("mbody").style.height = "300px";
+    document.getElementById('mbody').style.height = '300px';
   }
 
   focusOutFunction() {
-    document.getElementById("mbody").style.height = "138px";
+    document.getElementById('mbody').style.height = '138px';
     this.datePickerConfig2 = <IDayCalendarConfig>{
-      drops: "down",
-      format: "MM-DD-YYYY",
+      drops: 'down',
+      format: 'MM-DD-YYYY',
       max: this.to_date,
     };
     this.datePickerConfig3 = <IDayCalendarConfig>{
-      drops: "down",
-      format: "MM-DD-YYYY",
+      drops: 'down',
+      format: 'MM-DD-YYYY',
       min: this.from_date,
     };
   }
@@ -313,7 +313,7 @@ export class ApplicantsComponent implements OnInit {
     this.positiontype = [];
     this.http.getAllPositionType().subscribe((res: any) => {
       res.forEach((e) => {
-        if (e.position_type_status === "active") {
+        if (e.position_type_status === 'active') {
           this.positiontype.push(e);
         }
       });
@@ -349,17 +349,17 @@ export class ApplicantsComponent implements OnInit {
         } else {
           this.http.spinnerHide();
           Swal.fire({
-            title: "No search result found!",
-            icon: "error",
+            title: 'No search result found!',
+            icon: 'error',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
@@ -370,17 +370,17 @@ export class ApplicantsComponent implements OnInit {
       (err) => {
         this.http.spinnerHide();
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -413,7 +413,7 @@ export class ApplicantsComponent implements OnInit {
 
   EditApp(val) {
     //console.log(val)
-    this.details = "";
+    this.details = '';
     this.details = val;
     this.recruitee_id = this.details.user_id;
     this.first_name = this.details.user_first_name;
@@ -427,20 +427,20 @@ export class ApplicantsComponent implements OnInit {
     if (this.details.user_middle_name !== null) {
       this.middle_name = this.details.user_middle_name;
     }
-    if (this.details.dob === "") {
-      this.dob = "";
-    } else if (this.details.dob === "Invalid date") {
-      this.dob = "";
+    if (this.details.dob === '') {
+      this.dob = '';
+    } else if (this.details.dob === 'Invalid date') {
+      this.dob = '';
     } else {
-      this.dob = moment(this.details.dob).format("MM/DD/YYYY");
+      this.dob = moment(this.details.dob).format('MM/DD/YYYY');
     }
     //console.log(this.details)
   }
 
   clickOpen(val) {
-    this.details = "";
+    this.details = '';
     this.viewfinalErr = false;
-    this.viewShow = "";
+    this.viewShow = '';
     this.details = val;
     //console.log(this.details)
     this.recruitee_id = this.details.recruitee_id;
@@ -450,7 +450,7 @@ export class ApplicantsComponent implements OnInit {
   }
 
   clickOpenAppl(val) {
-    this.details = "";
+    this.details = '';
     this.details = val;
     this.recruitee_id = this.details.recruitee_id;
     this.user_id = this.details.user_id;
@@ -458,7 +458,7 @@ export class ApplicantsComponent implements OnInit {
   }
 
   clickOpenASSign(val) {
-    this.details = "";
+    this.details = '';
     this.assignment_data = [];
     this.details = val;
     this.recruitee_id = this.details.recruitee_id;
@@ -467,7 +467,7 @@ export class ApplicantsComponent implements OnInit {
   }
 
   clickOpenDoc(val) {
-    this.details = "";
+    this.details = '';
     this.details = val;
     this.recruitee_id = this.details.recruitee_id;
     this.user_status = this.details.user_status;
@@ -480,41 +480,43 @@ export class ApplicantsComponent implements OnInit {
     this.http.spinnerShow();
     let DOB: any;
     if (this.dob) {
-      DOB = moment(this.editApplicant.controls.dob.value).format("MM/DD/YYYY");
+      DOB = moment(this.editApplicant.controls['dob'].value).format(
+        'MM/DD/YYYY'
+      );
     } else {
-      DOB = "";
+      DOB = '';
     }
     let data = {
       user_id: this.recruitee_id,
-      user_first_name: this.editApplicant.controls.first_name.value,
-      user_middle_name: this.editApplicant.controls.middle_name.value,
-      user_last_name: this.editApplicant.controls.last_name.value,
-      phone: this.editApplicant.controls.phone_no.value,
-      email: this.editApplicant.controls.email.value,
+      user_first_name: this.editApplicant.controls['first_name'].value,
+      user_middle_name: this.editApplicant.controls['middle_name'].value,
+      user_last_name: this.editApplicant.controls['last_name'].value,
+      phone: this.editApplicant.controls['phone_no'].value,
+      email: this.editApplicant.controls['email'].value,
       dob: DOB,
-      profession: this.editApplicant.controls.profession_id.value,
-      speciality: this.editApplicant.controls.speciality_id.value,
-      ssn_4digit: this.editApplicant.controls.ssn_4digit.value,
+      profession: this.editApplicant.controls['profession_id'].value,
+      speciality: this.editApplicant.controls['speciality_id'].value,
+      ssn_4digit: this.editApplicant.controls['ssn_4digit'].value,
     };
     //console.log(data)
     this.http.updateApplicant(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           this.closeEdit.nativeElement.click();
           Swal.fire({
-            title: "Applicant updated successfully.",
-            icon: "success",
+            title: 'Applicant updated successfully.',
+            icon: 'success',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
@@ -527,17 +529,17 @@ export class ApplicantsComponent implements OnInit {
           this.http.spinnerHide();
           this.closeEdit.nativeElement.click();
           Swal.fire({
-            title: "Something went wrong,please try again.",
-            icon: "error",
+            title: 'Something went wrong,please try again.',
+            icon: 'error',
             showCancelButton: false,
-            confirmButtonColor: "#4C96D7",
-            confirmButtonText: "Ok",
+            confirmButtonColor: '#4C96D7',
+            confirmButtonText: 'Ok',
             allowOutsideClick: false,
             showClass: {
-              popup: "animate__animated animate__fadeInDown",
+              popup: 'animate__animated animate__fadeInDown',
             },
             hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
+              popup: 'animate__animated animate__fadeOutUp',
             },
           }).then((result) => {
             if (result.isConfirmed) {
@@ -549,17 +551,17 @@ export class ApplicantsComponent implements OnInit {
         this.http.spinnerHide();
         this.closeEdit.nativeElement.click();
         Swal.fire({
-          title: "Something went wrong,please try again.",
-          icon: "error",
+          title: 'Something went wrong,please try again.',
+          icon: 'error',
           showCancelButton: false,
-          confirmButtonColor: "#4C96D7",
-          confirmButtonText: "Ok",
+          confirmButtonColor: '#4C96D7',
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           showClass: {
-            popup: "animate__animated animate__fadeInDown",
+            popup: 'animate__animated animate__fadeInDown',
           },
           hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
+            popup: 'animate__animated animate__fadeOutUp',
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -578,20 +580,20 @@ export class ApplicantsComponent implements OnInit {
     this.http.changeUserStatus(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           this.closeUserStatus.nativeElement.click();
-          this.successMsg("Status changed successfully.");
+          this.successMsg('Status changed successfully.');
         } else {
           this.http.spinnerHide();
           this.closeUserStatus.nativeElement.click();
-          this.errorMsg("Something went wrong,please try again.");
+          this.errorMsg('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.http.spinnerHide();
         this.closeUserStatus.nativeElement.click();
-        this.errorMsg("Something went wrong,please try again.");
+        this.errorMsg('Something went wrong,please try again.');
       }
     );
   }
@@ -605,20 +607,20 @@ export class ApplicantsComponent implements OnInit {
     this.http.changeApplyStatus(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           this.closeApplyStatus.nativeElement.click();
-          this.successMsg("Status changed successfully.");
+          this.successMsg('Status changed successfully.');
         } else {
           this.http.spinnerHide();
           this.closeApplyStatus.nativeElement.click();
-          this.errorMsg("Something went wrong,please try again.");
+          this.errorMsg('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.http.spinnerHide();
         this.closeApplyStatus.nativeElement.click();
-        this.errorMsg("Something went wrong,please try again.");
+        this.errorMsg('Something went wrong,please try again.');
       }
     );
   }
@@ -631,20 +633,20 @@ export class ApplicantsComponent implements OnInit {
     this.http.changePassword(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           this.changePasswordModal.nativeElement.click();
-          this.successMsg2("Password changed successfully.");
+          this.successMsg2('Password changed successfully.');
         } else {
           this.http.spinnerHide();
           this.changePasswordModal.nativeElement.click();
-          this.errorMsg("Something went wrong,please try again.");
+          this.errorMsg('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.http.spinnerHide();
         this.changePasswordModal.nativeElement.click();
-        this.errorMsg("Something went wrong,please try again.");
+        this.errorMsg('Something went wrong,please try again.');
       }
     );
   }
@@ -657,20 +659,20 @@ export class ApplicantsComponent implements OnInit {
     this.http.changePasscode(data).subscribe(
       (res: any) => {
         //console.log(res);
-        if (res === "success") {
+        if (res === 'success') {
           this.http.spinnerHide();
           this.changePasscodeModal.nativeElement.click();
-          this.successMsg2("Passcode changed successfully.");
+          this.successMsg2('Passcode changed successfully.');
         } else {
           this.http.spinnerHide();
           this.changePasscodeModal.nativeElement.click();
-          this.errorMsg("Something went wrong,please try again.");
+          this.errorMsg('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.http.spinnerHide();
         this.changePasscodeModal.nativeElement.click();
-        this.errorMsg("Something went wrong,please try again.");
+        this.errorMsg('Something went wrong,please try again.');
       }
     );
   }
@@ -690,12 +692,12 @@ export class ApplicantsComponent implements OnInit {
         this.doc_name = e.doc_name;
         this.doc_id = val;
 
-        if (this.doc_name === "other") {
+        if (this.doc_name === 'other') {
           this.showSecInput = true;
-          this.doc_name = "";
-        } else if (this.doc_name === "facility_spec") {
+          this.doc_name = '';
+        } else if (this.doc_name === 'facility_spec') {
           this.showSecInput = true;
-          this.doc_name = "";
+          this.doc_name = '';
         } else {
           this.showSecInput = false;
         }
@@ -717,39 +719,39 @@ export class ApplicantsComponent implements OnInit {
     this.showProgressBar = true;
     this.showPercentage = 0;
     let formData = new FormData();
-    formData.append("file", this.fileToUpload, this.fileToUpload.name);
+    formData.append('file', this.fileToUpload, this.fileToUpload.name);
     this.http
       .uploadDoc(
         formData,
         this.user_id,
         this.doc_id,
         this.doc_name,
-        moment(this.doc_expiry_date).format("MM-DD-YYYY")
+        moment(this.doc_expiry_date).format('MM-DD-YYYY')
       )
       .subscribe(
         (res: any) => {
           //console.log(res)
           this.showPercentage = Math.round((100 * res.loaded) / res.total);
           if (res.body !== undefined) {
-            if (res.body.message === "success") {
-              this.fileToUpload = "";
-              this.file_name = "";
-              this.doc_name = "";
-              this.doc_id = "";
+            if (res.body.message === 'success') {
+              this.fileToUpload = '';
+              this.file_name = '';
+              this.doc_name = '';
+              this.doc_id = '';
               this.showProgressBar = false;
-              this.viewShow = "true";
+              this.viewShow = 'true';
               this.uploadDocModal.nativeElement.click();
-              this.successMsg2("File uploaded successfully.");
+              this.successMsg2('File uploaded successfully.');
             }
-          } else if (res === "doc not uploaded") {
+          } else if (res === 'doc not uploaded') {
             this.viewfinalErr = true;
-            this.viewShow = "false";
+            this.viewShow = 'false';
             //this.errorMsg('Something went wrong,please try again.');
           }
         },
         (err) => {
           this.viewfinalErr = true;
-          this.viewShow = "false";
+          this.viewShow = 'false';
           //this.errorMsg('Something went wrong,please try again.');
         }
       );
@@ -789,7 +791,7 @@ export class ApplicantsComponent implements OnInit {
       },
     };
     ////console.log(navigationExtras)
-    this.router.navigate(["/applicant-details"], navigationExtras);
+    this.router.navigate(['/applicant-details'], navigationExtras);
   }
 
   getAllDocs() {
@@ -798,17 +800,17 @@ export class ApplicantsComponent implements OnInit {
       //console.log(res);
       this.docs = res;
       if (this.docs.length === 0) {
-        this.errorMsg("No document uploaded yet!");
+        this.errorMsg('No document uploaded yet!');
       } else {
         this.docs.forEach((e) => {
-          let cDate = moment(new Date()).format("MM/DD/YYYY");
+          let cDate = moment(new Date()).format('MM/DD/YYYY');
           if (
             new Date(cDate).getTime() > new Date(e.expiry_date).getTime() &&
             e.expiry_date
           ) {
-            e.expirystatus = "expired";
+            e.expirystatus = 'expired';
           } else {
-            e.expirystatus = "current";
+            e.expirystatus = 'current';
           }
         });
       }
@@ -838,12 +840,12 @@ export class ApplicantsComponent implements OnInit {
   }
 
   clickOpenConfDoc(val) {
-    this.details = "";
-    this.ConffileToUpload = "";
-    this.conf_file_name = "";
-    this.conf_doc_name = "";
+    this.details = '';
+    this.ConffileToUpload = '';
+    this.conf_file_name = '';
+    this.conf_doc_name = '';
     this.viewfinalErr = false;
-    this.viewShow = "";
+    this.viewShow = '';
     this.details = val;
     //console.log(this.details)
     this.recruitee_id = this.details.recruitee_id;
@@ -857,12 +859,12 @@ export class ApplicantsComponent implements OnInit {
     this.showProgressBar = true;
     this.showPercentage = 0;
     let formData = new FormData();
-    formData.append("file", this.ConffileToUpload, this.ConffileToUpload.name);
+    formData.append('file', this.ConffileToUpload, this.ConffileToUpload.name);
     this.http
       .uploadConfDoc(
         formData,
         this.conf_doc_name,
-        sessionStorage.getItem("user_id"),
+        sessionStorage.getItem('user_id'),
         this.recruitee_id
       )
       .subscribe(
@@ -870,24 +872,24 @@ export class ApplicantsComponent implements OnInit {
           //console.log(res)
           this.showPercentage = Math.round((100 * res.loaded) / res.total);
           if (res.body !== undefined) {
-            if (res.body === "success") {
-              this.ConffileToUpload = "";
-              this.conf_file_name = "";
-              this.conf_doc_name = "";
+            if (res.body === 'success') {
+              this.ConffileToUpload = '';
+              this.conf_file_name = '';
+              this.conf_doc_name = '';
               this.showProgressBar = false;
-              this.viewShow = "true";
-              this.successMsg2("Document uploaded successfully.");
+              this.viewShow = 'true';
+              this.successMsg2('Document uploaded successfully.');
               this.getConfDFiles(this.recruitee_id);
             }
-          } else if (res === "error") {
+          } else if (res === 'error') {
             this.viewfinalErr = true;
-            this.viewShow = "false";
+            this.viewShow = 'false';
             //this.errorMsg('Something went wrong,please try again.');
           }
         },
         (err) => {
           this.viewfinalErr = true;
-          this.viewShow = "false";
+          this.viewShow = 'false';
           //this.errorMsg('Something went wrong,please try again.');
         }
       );
@@ -904,7 +906,7 @@ export class ApplicantsComponent implements OnInit {
   }
 
   clickOpenReqDoc(val) {
-    this.details = "";
+    this.details = '';
     this.details = val;
     this.recruitee_id = this.details.recruitee_id;
     this.user_status = this.details.user_status;
@@ -929,7 +931,7 @@ export class ApplicantsComponent implements OnInit {
     } else {
       let body = {
         recruitee_id: this.recruitee_id,
-        req_doc_type: "standard",
+        req_doc_type: 'standard',
         req_doc_name: ev.doc_name,
         doc_id: ev.doc_id,
       };
@@ -949,7 +951,7 @@ export class ApplicantsComponent implements OnInit {
     } else {
       let body = {
         recruitee_id: this.recruitee_id,
-        req_doc_type: "facility_spec",
+        req_doc_type: 'facility_spec',
         req_doc_name: ev.rec_doc_name,
         doc_id: 0,
       };
@@ -968,7 +970,7 @@ export class ApplicantsComponent implements OnInit {
     } else {
       let body = {
         recruitee_id: this.recruitee_id,
-        req_doc_type: "other",
+        req_doc_type: 'other',
         req_doc_name: ev.rec_doc_name,
         doc_id: 0,
       };
@@ -987,13 +989,13 @@ export class ApplicantsComponent implements OnInit {
     } else {
       let val = {
         rec_doc_name: this.doc_name_spec,
-        availability: "Unavailable",
+        availability: 'Unavailable',
         value: true,
-        rec_doc_status: "not_current",
+        rec_doc_status: 'not_current',
       };
       let body = {
         recruitee_id: this.recruitee_id,
-        req_doc_type: "facility_spec",
+        req_doc_type: 'facility_spec',
         req_doc_name: this.doc_name_spec,
         doc_id: 0,
       };
@@ -1014,12 +1016,12 @@ export class ApplicantsComponent implements OnInit {
     } else {
       let val = {
         rec_doc_name: this.doc_name_Other,
-        availability: "Unavailable",
+        availability: 'Unavailable',
         value: true,
       };
       let body = {
         recruitee_id: this.recruitee_id,
-        req_doc_type: "other",
+        req_doc_type: 'other',
         req_doc_name: this.doc_name_Other,
         doc_id: 0,
       };
@@ -1037,14 +1039,14 @@ export class ApplicantsComponent implements OnInit {
     this.http.insertRequestDoc(body).subscribe(
       (res: any) => {
         //console.log(res)
-        if (res === "success") {
-          this.successMsg2("Request sent successfully.");
+        if (res === 'success') {
+          this.successMsg2('Request sent successfully.');
         } else {
-          this.errorMsg("Something went wrong,please try again!");
+          this.errorMsg('Something went wrong,please try again!');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong,please try again!");
+        this.errorMsg('Something went wrong,please try again!');
       }
     );
   }
@@ -1074,18 +1076,18 @@ export class ApplicantsComponent implements OnInit {
 
   deleteSelectedApplicants() {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Yes, delete it!',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -1095,16 +1097,16 @@ export class ApplicantsComponent implements OnInit {
         this.http.deleteMultipleApplicant(data).subscribe(
           (res: any) => {
             //console.log(res)
-            if (res === "success") {
-              this.successMsg("Applicants deteted successfully.");
+            if (res === 'success') {
+              this.successMsg('Applicants deteted successfully.');
               this.applicant_id_list = [];
             } else {
-              this.errorMsg("Something went wrong,please try again!");
+              this.errorMsg('Something went wrong,please try again!');
             }
           },
           (err) => {
             //console.log(err)
-            this.errorMsg("Something went wrong,please try again!");
+            this.errorMsg('Something went wrong,please try again!');
           }
         );
       }
@@ -1116,16 +1118,16 @@ export class ApplicantsComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -1136,16 +1138,16 @@ export class ApplicantsComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -1158,16 +1160,16 @@ export class ApplicantsComponent implements OnInit {
   successMsg2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
