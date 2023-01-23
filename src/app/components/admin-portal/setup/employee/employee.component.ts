@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { IDayCalendarConfig } from 'ng2-date-picker';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/services/admin.service';
 import Swal from 'sweetalert2';
 import { EmployeeServiceService } from './employee-service.service';
 import * as moment from 'moment';

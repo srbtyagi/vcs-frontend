@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { NavigationStart, Router, NavigationEnd } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
-import { AdminService } from './admin.service';
+import { AdminService } from './services/admin.service';
 import { filter } from 'rxjs/operators';
 declare const gtag: Function;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  template: `<app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>`,
 })
 export class AppComponent {
   showHead: boolean = false;

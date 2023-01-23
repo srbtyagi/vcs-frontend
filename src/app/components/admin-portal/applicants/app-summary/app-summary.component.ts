@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import jspdf from "jspdf";
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";

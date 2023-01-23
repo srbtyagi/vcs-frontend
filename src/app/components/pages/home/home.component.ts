@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import { RecruiteeService } from "src/app/recruitee.service";
 import { Title, Meta } from "@angular/platform-browser";
 

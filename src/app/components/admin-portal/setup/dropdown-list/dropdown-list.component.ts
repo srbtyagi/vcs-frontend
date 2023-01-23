@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/services/admin.service';
 import Swal from 'sweetalert2';
 import { DropdownServiceService } from './dropdown-service.service';
 

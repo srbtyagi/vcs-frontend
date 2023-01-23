@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import Swal from "sweetalert2";
 import * as moment from "moment";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import { IDayCalendarConfig } from "ng2-date-picker";
 
 @Component({

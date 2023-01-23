@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/services/admin.service';
 import { RecruiteeService } from 'src/app/recruitee.service';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { UntypedFormBuilder } from "@angular/forms";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import Swal from "sweetalert2";
 import * as moment from "moment";
 

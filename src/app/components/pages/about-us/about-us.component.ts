@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import { Title, Meta } from "@angular/platform-browser";
 
 @Component({

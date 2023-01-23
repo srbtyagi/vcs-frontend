@@ -8,7 +8,7 @@ import {
 } from "@angular/forms";
 import { RecruiteeService } from "src/app/recruitee.service";
 import Swal from "sweetalert2";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 import * as moment from "moment";
 import { IDayCalendarConfig } from "ng2-date-picker";
 

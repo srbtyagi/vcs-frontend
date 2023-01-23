@@ -9,7 +9,7 @@ import {
 import { RecruiteeService } from "src/app/recruitee.service";
 import Swal from "sweetalert2";
 import { Title, Meta } from "@angular/platform-browser";
-import { AdminService } from "src/app/admin.service";
+import { AdminService } from "src/app/services/admin.service";
 
 @Component({
   selector: "app-jobs",

@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-company',
