@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { Observable } from "rxjs";
-import { map, shareReplay } from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -19,68 +19,68 @@ export class NavbarComponent implements OnInit {
 
   navbarItems: any = [
     {
-      label: "Home",
-      link: "/home",
+      label: 'Home',
+      link: '/',
     },
     {
-      label: "About Us",
-      link: "/about-us",
+      label: 'About Us',
+      link: '/about-us',
     },
     {
-      label: "Clients & Partners",
-      link: "/client-partners",
+      label: 'Clients & Partners',
+      link: '/clients',
     },
     {
-      label: "Industrial & Admin Services",
-      link: "",
+      label: 'Industrial & Admin Services',
+      link: '',
       children: [
         {
-          label: "Industrial & Administrative Services",
-          link: "/ip-services",
+          label: 'Industrial & Administrative Services',
+          link: '/ip-services',
         },
         {
-          label: "Research",
-          link: "/research",
+          label: 'Research',
+          link: '/research',
         },
         {
-          label: "FAQ",
-          link: "/faq",
+          label: 'FAQ',
+          link: '/faq',
         },
         {
-          label: "Blog",
-          link: "/blog",
+          label: 'Blog',
+          link: '/blog',
         },
       ],
     },
     {
-      label: "IT Services",
-      link: "",
+      label: 'IT Services',
+      link: '',
       children: [
         {
-          label: "Our IT Services",
-          link: "/it-services",
+          label: 'Our IT Services',
+          link: '/it-services',
         },
         {
-          label: "Case Study",
-          link: "/case-study",
+          label: 'Case Study',
+          link: '/case-study',
         },
         // {
         //   label: 'Resources',
         //   link: '/resources',
         // },
         {
-          label: "Blog",
-          link: "/it-blog",
+          label: 'Blog',
+          link: '/it-blog',
         },
       ],
     },
     {
-      label: "Jobs",
-      link: "/jobs",
+      label: 'Jobs',
+      link: '/jobs',
     },
     {
-      label: "Contact Us",
-      link: "/contact-us",
+      label: 'Contact Us',
+      link: '/contact-us',
     },
   ];
 
@@ -94,93 +94,93 @@ export class NavbarComponent implements OnInit {
     public router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.user_id = sessionStorage.getItem("user_id");
-    this.user_name = sessionStorage.getItem("user_name");
+    this.user_id = sessionStorage.getItem('user_id');
+    this.user_name = sessionStorage.getItem('user_name');
   }
 
   changeCss() {
-    var classname = document.getElementById("navbarNavDropdown").className;
+    var classname = document.getElementById('navbarNavDropdown').className;
     ////console.log(classname);
     if (
       classname ===
-        "header-nav navbar-collapse justify-content-start collapse show" &&
+        'header-nav navbar-collapse justify-content-start collapse show' &&
       this.navStatus === false
     ) {
       //document.getElementById('navbarNavDropdown').className = "header-nav navbar-collapse justify-content-start collapse";
       this.navStatus = true;
       setTimeout(() => {
-        document.getElementById("navbarNavDropdown").style.display = "none";
+        document.getElementById('navbarNavDropdown').style.display = 'none';
       }, 100);
     } else {
       this.navStatus = false;
       //document.getElementById('navbarNavDropdown').className = "header-nav navbar-collapse justify-content-start collapse";
-      document.getElementById("navbarNavDropdown").style.display = "block";
+      document.getElementById('navbarNavDropdown').style.display = 'block';
     }
   }
 
   hideMenu() {
     this.navStatus = true;
-    document.getElementById("navbarNavDropdown").style.display = "none";
-    document.getElementById("menuBtn").className =
-      "navbar-toggler collapsed navicon justify-content-end";
+    document.getElementById('navbarNavDropdown').style.display = 'none';
+    document.getElementById('menuBtn').className =
+      'navbar-toggler collapsed navicon justify-content-end';
   }
 
   ngOnInit() {
     this.functionassignAccess();
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
   }
 
   functionassignAccess() {
-    if (sessionStorage.getItem("user_id")) {
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+    if (sessionStorage.getItem('user_id')) {
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       //console.log(arr)
       const ids = arr.map((o) => o.module_id);
       this.moduleArray = arr.filter(
         ({ module_id }, index) => !ids.includes(module_id, index + 1)
       );
       this.moduleArray.forEach((e) => {
-        if (e.module_name === "JOBS") {
-          e.module_name_lower = "Jobs";
+        if (e.module_name === 'JOBS') {
+          e.module_name_lower = 'Jobs';
           //e.route = "/job-dashboard";
-          e.route = "/manage-jobs";
+          e.route = '/manage-jobs';
         }
         if (
-          e.module_name === "MY JOBS" &&
-          sessionStorage.getItem("user_type") === "recruitee"
+          e.module_name === 'MY JOBS' &&
+          sessionStorage.getItem('user_type') === 'recruitee'
         ) {
-          e.module_name_lower = "My Jobs";
+          e.module_name_lower = 'My Jobs';
           //e.route = "/myjobs-dashboard";
-          e.route = "/job-applications";
+          e.route = '/job-applications';
         }
-        if (e.module_name === "MY JOBS") {
-          e.module_name_lower = "My Jobs";
+        if (e.module_name === 'MY JOBS') {
+          e.module_name_lower = 'My Jobs';
           //e.route = "/myjobs-dashboard";
-          e.route = "/job-applications";
+          e.route = '/job-applications';
         }
-        if (e.module_name === "SETUP") {
-          e.module_name_lower = "Setup";
+        if (e.module_name === 'SETUP') {
+          e.module_name_lower = 'Setup';
           //e.route = "/setup-dashboard";
-          e.route = "/company";
+          e.route = '/company';
         }
-        if (e.module_name === "APPLICANT") {
-          e.module_name_lower = "Applicants";
+        if (e.module_name === 'APPLICANT') {
+          e.module_name_lower = 'Applicants';
           //e.route = "/applicant-dashboard";
-          e.route = "/applicants";
+          e.route = '/applicants';
         }
-        if (e.module_name === "FINANCE") {
-          e.module_name_lower = "Finance";
+        if (e.module_name === 'FINANCE') {
+          e.module_name_lower = 'Finance';
           //e.route = "/finance-dashboard";
-          e.route = "/payroll-processing";
+          e.route = '/payroll-processing';
         }
-        if (e.module_name === "ASSIGNMENT") {
-          e.module_name_lower = "Assignment";
-          e.route = "/company";
+        if (e.module_name === 'ASSIGNMENT') {
+          e.module_name_lower = 'Assignment';
+          e.route = '/company';
         }
-        if (e.module_name === "PROFILE") {
-          e.module_name_lower = "Profile";
-          e.route = "/company";
+        if (e.module_name === 'PROFILE') {
+          e.module_name_lower = 'Profile';
+          e.route = '/company';
         }
       });
       //console.log(arr, this.moduleArray)
@@ -188,11 +188,11 @@ export class NavbarComponent implements OnInit {
   }
 
   navigateToRecruitee() {
-    this.router.navigate(["current-assignment"]);
+    this.router.navigate(['current-assignment']);
   }
 
   navigateToProfile() {
-    this.router.navigate(["candi-profile"]);
+    this.router.navigate(['candi-profile']);
   }
 
   navigateTo(val) {
@@ -206,7 +206,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     sessionStorage.clear();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
     setTimeout(() => {
       window.location.reload();
     }, 200);

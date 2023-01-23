@@ -78,6 +78,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ButtonsModule } from './components/common/buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -169,6 +172,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     MatSidenavModule,
     MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    ButtonsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [NgxSpinnerService, StoreDataService],

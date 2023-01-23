@@ -1,0 +1,23 @@
+.cards-grid-3-container {
+  @apply mx-auto grid max-w-lg gap-5 md:max-w-[100rem] md:grid-cols-3;
+}
+
+.image-card {
+  @apply flex flex-col overflow-hidden rounded-lg shadow-lg;
+
+  .image {
+    @apply h-48 w-full object-cover;
+  }
+
+  .body {
+    @apply flex flex-1 flex-col justify-between bg-white p-6;
+
+    .title {
+      @apply text-base font-bold text-gray-900 uppercase;
+    }
+
+    .content {
+      @apply mt-3 text-base text-gray-600;
+    }
+  }
+}

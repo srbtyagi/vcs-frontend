@@ -1,88 +1,152 @@
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="footer-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
-          <div class="widget">
+<footer class="footer-container" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="top">
+    <div class="space-y-4 xl:col-span-1">
+      <ul
+        role="list"
+        class="mt-3 grid grid-cols-1 gap-x-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2"
+      >
+        <li class="col-span-1 flex rounded-md shadow-sm">
+          <div
+            class="flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+          >
             <img
-              src="../assets/images/logo.png"
-              width="180"
-              class="m-b15"
-              alt=""
+              class="h-16"
+              src="../../../../assets/web-images/logos/logo_icon.png"
+              alt="Elite Mente llc"
             />
-            <p class="text-capitalize m-b20">
-              The fastest growing Recruitment and Staffing partner in USA.
-            </p>
-            <!-- <div class="subscribe-form m-b20">
-                            <form class="dzSubscribe" action="script/mailchamp.php" method="post">
-                                <div class="dzSubscribeMsg"></div>
-                                <div class="input-group">
-                                    <input name="dzEmail" required="required" class="form-control"
-                                        placeholder="Your Email Address" type="email">
-                                    <span class="input-group-btn">
-                                        <button name="submit" value="Submit" type="submit"
-                                            class="site-button radius-xl">Subscribe</button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div> -->
-            <!-- <ul class="list-inline m-a0">
-                            <li><a href="javascript:void(0);" class="site-button white facebook circle "><i
-                                        class="fa fa-facebook"></i></a></li>
-                            <li><a href="javascript:void(0);" class="site-button white google-plus circle "><i
-                                        class="fa fa-google-plus"></i></a></li>
-                            <li><a href="javascript:void(0);" class="site-button white linkedin circle "><i
-                                        class="fa fa-linkedin"></i></a></li>
-                            <li><a href="javascript:void(0);" class="site-button white instagram circle "><i
-                                        class="fa fa-instagram"></i></a></li>
-                            <li><a href="javascript:void(0);" class="site-button white twitter circle "><i
-                                        class="fa fa-twitter"></i></a></li>
-                        </ul> -->
           </div>
+          <div
+            class="flex flex-none w-14 ml-6 items-center justify-between truncate rounded-r-md"
+          >
+            <img
+              class="h-10"
+              src="../../../../assets/web-images/logos/NMSDC_logo.png.png"
+              alt="National Minority Supplier Development Council"
+            />
+          </div>
+          <div
+            class="flex flex-1 ml-6 items-center justify-between truncate rounded-r-md"
+          >
+            <img
+              class="h-10"
+              src="../../../../assets/web-images/logos/everify.png"
+              alt="E-Verify"
+            />
+          </div>
+        </li>
+      </ul>
+
+      <div class="w-full">
+        <p class="text-gray-300">
+          <strong class="text-lg uppercase">Elite Mente llc.</strong><br />
+          <span class="text-sm"
+            >The fastest growing Recruitment and Staffing partner in USA.</span
+          >
+        </p>
+      </div>
+
+      <div class="flex space-x-4">
+        <a
+          href="https://www.facebook.com/VishConsultingServicesInc/"
+          target="_blank"
+          class="text-gray-400 hover:text-gray-500"
+        >
+          <span class="sr-only">Facebook</span>
+          <svg
+            class="h-6 w-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"
+            />
+          </svg>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/company/vish-consulting-services-inc"
+          target="_blank"
+          class="text-gray-400 hover:text-gray-500"
+        >
+          <span class="sr-only">Instagram</span>
+          <svg
+            class="h-6 w-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="w-full">
+      <div class="middle">
+        <div class="column">
+          <h3 class="title">Professional</h3>
+          <ul role="list" class="mt-4 space-y-4">
+            <li>
+              <a routerLink="ip-services" class="footer-font-items"
+                >Industrial/Professional Services</a
+              >
+            </li>
+
+            <li>
+              <a routerLink="/it-services" class="footer-font-items"
+                >IT Services</a
+              >
+            </li>
+
+            <li>
+              <a routerLink="/client-partners" class="footer-font-items"
+                >Client & Partners</a
+              >
+            </li>
+            <li>
+              <a routerLink="/jobs" class="footer-font-items">Jobs</a>
+            </li>
+          </ul>
         </div>
-        <div class="col-xl-5 col-lg-5 col-md-8 col-sm-8 col-12">
-          <div class="widget border-0">
-            <h5 class="m-b30 text-white">COMPANY AND PROFESSIONAL</h5>
-            <ul class="list-2 list-line">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about-us">About Us</a></li>
-              <li><a href="/healthcare-blogs">Blog</a></li>
-              <li><a href="/contact-us">Contact Us</a></li>
-              <li>
-                <a href="/healthcare-staffing">Our Healthcare Services</a>
-              </li>
-              <li><a href="/clients">Clients & Partners</a></li>
-              <li><a href="/jobs">Jobs</a></li>
-              <li><a href="/IT_services">Our IT Services</a></li>
-            </ul>
-          </div>
+        <div class="column">
+          <h3 class="title">Company</h3>
+          <ul role="list" class="mt-4 space-y-4">
+            <li>
+              <a routerLink="/" class="footer-font-items">Home</a>
+            </li>
+
+            <li>
+              <a routerLink="/about-us" class="footer-font-items">About Us</a>
+            </li>
+
+            <li>
+              <a routerLink="/blog" class="footer-font-items">Blog</a>
+            </li>
+          </ul>
         </div>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-12">
-          <div class="widget border-0">
-            <h5 class="m-b30 text-white">LEGAL</h5>
-            <ul class="list-2 w10 list-line">
-              <li><a href="/terms-of-service">Terms of Service</a></li>
-              <li><a href="/privacy-policy">Privacy Policy</a></li>
-            </ul>
-          </div>
+        <div class="column">
+          <h3 class="title">Legal</h3>
+          <ul role="list" class="mt-4 space-y-4">
+            <li>
+              <a routerLink="/privacy-policy" class="footer-font-items"
+                >Privacy</a
+              >
+            </li>
+
+            <li>
+              <a routerLink="/terms-of-service" class="footer-font-items"
+                >Terms</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-  <!-- footer bottom part -->
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <span>
-            © Copyright 2021 by
-            <a href="" target="_blank">Vish Consulting Services, Inc, </a> All
-            rights reserved.</span
-          >
-        </div>
-      </div>
-    </div>
+  <div class="bottom">
+    &copy; {{ todayYear | date : "YYYY" }} Elite Mente llc. All rights reserved.
   </div>
 </footer>
-<!-- Footer END -->

@@ -1,0 +1,23 @@
+.all-buttons {
+  @apply relative inline-flex items-center rounded-sm border border-transparent text-sm font-bold focus:outline-none uppercase transition-colors duration-300;
+
+  &.button-primary {
+    @apply bg-sky-600 text-white hover:bg-sky-700 shadow-sm;
+  }
+
+  &.button-secondary {
+    @apply bg-white text-gray-700 hover:bg-gray-600 hover:text-white shadow-sm;
+  }
+
+  &.button-transparent {
+    @apply bg-white text-gray-700 hover:bg-sky-700 hover:text-white;
+  }
+
+  &.size-normal {
+    @apply px-4 py-2;
+  }
+
+  &.size-lg {
+    @apply px-8 py-3;
+  }
+}

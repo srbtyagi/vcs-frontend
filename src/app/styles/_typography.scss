@@ -1,0 +1,11 @@
+.tyopg_h1 {
+  @apply text-4xl md:text-6xl text-left md:text-center font-bold tracking-tight;
+}
+
+.typog_h2 {
+  @apply text-2xl font-bold tracking-normal md:text-4xl;
+}
+
+.typog_h3 {
+  @apply text-xl md:text-2xl font-bold tracking-normal;
+}

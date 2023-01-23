@@ -4,6 +4,10 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
 
+@import "./app/styles/pages";
+@import "./app/styles/typography";
+@import "./app/styles/cards";
+
 /* OLD CODE */
 
 /* You can add global styles to this file, and also import other style files */
@@ -23,6 +27,60 @@ body {
 .font-google {
   font-family: "Nunito Sans", sans-serif;
 }
+
+.text-shadow-local {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
+}
+
+.mat-menu-panel.mat-top-menu {
+  @apply bg-white w-auto min-w-[300px];
+
+  .mat-menu-item {
+    @apply text-gray-900 uppercase text-[12px] font-bold font-google;
+
+    &:hover {
+      @apply bg-sky-600 text-gray-100;
+    }
+  }
+}
+
+.mat-menu-panel.mobile-drop-menu {
+  @apply bg-gray-100 min-w-[400px];
+
+  .mat-menu-item {
+    @apply text-gray-900 uppercase text-[12px] font-bold font-google border-b border-gray-500;
+
+    &:hover {
+      @apply bg-sky-600 text-gray-100;
+    }
+  }
+}
+
+.mat-menu-panel.mobile-drop-menu-small {
+  @apply bg-gray-100 min-w-[200px];
+
+  .mat-menu-item {
+    @apply text-gray-900 uppercase text-[12px] font-bold font-google border-b border-gray-500;
+
+    &:hover {
+      @apply bg-sky-600 text-gray-100;
+    }
+  }
+}
+
+.menu-bar {
+  @apply hidden md:ml-10 md:flex md:items-center md:space-x-4;
+
+  .links {
+    @apply bg-transparent inline-flex items-center text-gray-900 hover:text-white transition-colors duration-300 hover:bg-sky-600 px-3 py-2 rounded-sm text-xs font-bold font-google uppercase;
+
+    &.selected {
+      @apply text-sky-600 hover:text-white;
+    }
+  }
+}
+
+/* OLD CODE */
 
 body {
   min-width: 100% !important;

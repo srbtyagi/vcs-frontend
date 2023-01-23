@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="all-buttons"
+  [ngClass]="{
+    'size-normal': size === 'normal',
+    'size-lg': size === 'lg',
+    'button-primary': buttonType === 'primary',
+    'button-secondary': buttonType === 'secondary',
+    'button-transparent': buttonType === 'transparent'
+  }"
+>
+  <mat-icon
+    class="-ml-1 mr-2 text-base"
+    *ngIf="hasIcon && iconLocation === 'left'"
+    >{{ iconType }}</mat-icon
+  >
+
+  <span>{{ label }}</span>
+</button>

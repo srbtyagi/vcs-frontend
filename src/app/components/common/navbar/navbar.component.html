@@ -42,7 +42,7 @@
             </ng-container>
           </mat-menu>
         </div>
-        <div class="logo" routerLink="/home">
+        <div class="logo" routerLink="/">
           <img
             class="mobile"
             src="../../assets/web-images/logos/elite_logo_big.png"
@@ -76,7 +76,9 @@
                 aria-current="page"
               >
                 {{ item.label }}
-                <mat-icon class="text-base ml-2">keyboard_arrow_down</mat-icon>
+                <mat-icon class="text-base ml-1 md:ml-2"
+                  >keyboard_arrow_down</mat-icon
+                >
               </button>
               <mat-menu #subMenu="matMenu" class="mat-top-menu">
                 <button
@@ -100,6 +102,7 @@
                 iconLocation="left"
                 [hasIcon]="true"
                 size="normal"
+                routerLink="login"
                 buttonType="transparent"
                 iconType="lock"
               ></app-buttons>
