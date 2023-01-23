@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://3.142.114.192:8000/sitemap.xml
+Sitemap: http://elitemente.com/sitemap.xml

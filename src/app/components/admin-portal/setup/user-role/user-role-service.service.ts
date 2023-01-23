@@ -20,7 +20,7 @@ export class UserRoleServiceService {
 
   getUserRoleDetails() {
     return this.http
-      .get("http://3.142.114.192:8000/vcsapi/get/api/user_roles", {
+      .get("http://elitemente.com/vcsapi/get/api/user_roles", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -29,7 +29,7 @@ export class UserRoleServiceService {
   addUserRole(details) {
     return this.http
       .post(
-        "http://3.142.114.192:8000/vcsapi/add/api/tbl/role/user_role",
+        "http://elitemente.com/vcsapi/add/api/tbl/role/user_role",
         details,
         { headers: this.header }
       )
@@ -39,7 +39,7 @@ export class UserRoleServiceService {
   updateUserRole(details) {
     return this.http
       .post(
-        "http://3.142.114.192:8000/vcsapi/edit/api/change/role_name",
+        "http://elitemente.com/vcsapi/edit/api/change/role_name",
         details,
         { headers: this.header }
       )
@@ -49,7 +49,7 @@ export class UserRoleServiceService {
   changeStatusUserRole(details) {
     return this.http
       .post(
-        "http://3.142.114.192:8000/vcsapi/edit/api/change/role_status",
+        "http://elitemente.com/vcsapi/edit/api/change/role_status",
         details,
         { headers: this.header }
       )
@@ -58,7 +58,7 @@ export class UserRoleServiceService {
 
   moduleSubModuleShow() {
     return this.http
-      .get("http://3.142.114.192:8000/vcsapi/get/api/user/access", {
+      .get("http://elitemente.com/vcsapi/get/api/user/access", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -67,7 +67,7 @@ export class UserRoleServiceService {
   getDefaultRoleData(details) {
     return this.http
       .post(
-        "http://3.142.114.192:8000/vcsapi/get/api/module/accesses/by/role_id",
+        "http://elitemente.com/vcsapi/get/api/module/accesses/by/role_id",
         details,
         { headers: this.header }
       )
@@ -77,7 +77,7 @@ export class UserRoleServiceService {
   postAccessRole(details) {
     return this.http
       .post(
-        "http://3.142.114.192:8000/vcsapi/api/post/insert/role_id",
+        "http://elitemente.com/vcsapi/api/post/insert/role_id",
         details,
         { headers: this.header }
       )
@@ -86,7 +86,7 @@ export class UserRoleServiceService {
 
   duplicateRoleCheck(details) {
     return this.http
-      .post("http://3.142.114.192:8000/vcsapi/api/check_post_role", details, {
+      .post("http://elitemente.com/vcsapi/api/check_post_role", details, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
