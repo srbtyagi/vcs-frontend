@@ -10,12 +10,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { IDayCalendarConfig } from 'ng2-date-picker';
-import { StoreDataService } from 'src/app/store-data.service';
+import { StoreDataService } from 'src/app/services/store-data.service';
 
 @Component({
   selector: 'app-job-application-admin',
   templateUrl: './job-application-admin.component.html',
-  styleUrls: ['./job-application-admin.component.css'],
+  styleUrls: ['./job-application-admin.component.scss'],
 })
 export class JobApplicationAdminComponent implements OnInit {
   @ViewChild('sortListModalClose', { static: false })

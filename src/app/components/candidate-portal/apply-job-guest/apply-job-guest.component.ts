@@ -6,14 +6,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { RecruiteeService } from 'src/app/recruitee.service';
 import Swal from 'sweetalert2';
 import { Country, State, City } from 'country-state-city';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
   selector: 'app-apply-job-guest',
   templateUrl: './apply-job-guest.component.html',
-  styleUrls: ['./apply-job-guest.component.css'],
+  styleUrls: ['./apply-job-guest.component.scss'],
   //template: '<div [innerHTML]="jsonLD"></div>'
 })
 export class ApplyJobGuestComponent implements OnInit {

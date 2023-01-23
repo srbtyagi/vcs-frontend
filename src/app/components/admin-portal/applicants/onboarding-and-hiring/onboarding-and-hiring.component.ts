@@ -15,7 +15,7 @@ import { Country, State, City } from 'country-state-city';
 @Component({
   selector: 'app-onboarding-and-hiring',
   templateUrl: './onboarding-and-hiring.component.html',
-  styleUrls: ['./onboarding-and-hiring.component.css'],
+  styleUrls: ['./onboarding-and-hiring.component.scss'],
 })
 export class OnboardingAndHiringComponent implements OnInit {
   @ViewChild('hireClose', { static: false }) private hireClose: ElementRef;

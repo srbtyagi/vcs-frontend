@@ -10,12 +10,12 @@ import { AdminService } from 'src/app/services/admin.service';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { IDayCalendarConfig } from 'ng2-date-picker';
-import { StoreDataService } from 'src/app/store-data.service';
+import { StoreDataService } from 'src/app/services/store-data.service';
 
 @Component({
   selector: 'app-applicants',
   templateUrl: './applicants.component.html',
-  styleUrls: ['./applicants.component.css'],
+  styleUrls: ['./applicants.component.scss'],
 })
 export class ApplicantsComponent implements OnInit {
   @ViewChild('closeEdit', { static: false }) private closeEdit: ElementRef;

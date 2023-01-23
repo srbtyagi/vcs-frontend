@@ -5,7 +5,7 @@ import { AdminService } from "src/app/services/admin.service";
 @Component({
   selector: "app-applicants-details",
   templateUrl: "./applicants-details.component.html",
-  styleUrls: ["./applicants-details.component.css"],
+  styleUrls: ["./applicants-details.component.scss"],
 })
 export class ApplicantsDetailsComponent implements OnInit {
   user_id: any;

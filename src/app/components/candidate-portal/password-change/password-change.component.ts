@@ -1,28 +1,28 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-password-change",
-  templateUrl: "./password-change.component.html",
-  styleUrls: ["./password-change.component.css"],
+  selector: 'app-password-change',
+  templateUrl: './password-change.component.html',
+  styleUrls: ['./password-change.component.scss'],
 })
 export class PasswordChangeComponent implements OnInit {
   checkUserType: boolean = false;
   passwordForm: UntypedFormGroup;
   passcodeForm: UntypedFormGroup;
   passwordPatterRegex =
-    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+    '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   old_password: boolean = false;
   old_passcode: boolean = false;
-  passcodePattern = "[0-9]*";
+  passcodePattern = '[0-9]*';
   badge: Number;
 
   constructor(
@@ -53,7 +53,7 @@ export class PasswordChangeComponent implements OnInit {
       retype_passcode: new UntypedFormControl(null, [Validators.required]),
     });
 
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
     this.getBadge();
@@ -61,7 +61,7 @@ export class PasswordChangeComponent implements OnInit {
 
   getBadge() {
     this.service
-      .getCurrentReqDocs(sessionStorage.getItem("user_id"))
+      .getCurrentReqDocs(sessionStorage.getItem('user_id'))
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
@@ -75,12 +75,12 @@ export class PasswordChangeComponent implements OnInit {
     this.service
       .check_old_password({
         password: this.passwordForm.value.old_password,
-        user_id: sessionStorage.getItem("user_id"),
+        user_id: sessionStorage.getItem('user_id'),
       })
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "password not matched") {
+        if (result === 'password not matched') {
           this.old_password = false;
         } else {
           this.old_password = true;
@@ -92,12 +92,12 @@ export class PasswordChangeComponent implements OnInit {
     this.service
       .check_old_passcode({
         passcode: this.passcodeForm.value.old_passcode,
-        user_id: sessionStorage.getItem("user_id"),
+        user_id: sessionStorage.getItem('user_id'),
       })
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "passcode not matched") {
+        if (result === 'passcode not matched') {
           this.old_passcode = false;
         } else {
           this.old_passcode = true;
@@ -107,12 +107,12 @@ export class PasswordChangeComponent implements OnInit {
 
   reset_retype_pass() {
     this.passwordForm.patchValue({
-      retype_password: "",
+      retype_password: '',
     });
   }
   reset_retype_passcode() {
     this.passcodeForm.patchValue({
-      retype_passcode: "",
+      retype_passcode: '',
     });
   }
 
@@ -126,30 +126,30 @@ export class PasswordChangeComponent implements OnInit {
         this.service
           .change_password({
             password: this.passwordForm.value.password,
-            user_id: sessionStorage.getItem("user_id"),
+            user_id: sessionStorage.getItem('user_id'),
           })
           .subscribe((res) => {
             //console.log(res);
             let result: any = res;
-            if (result === "success") {
+            if (result === 'success') {
               this.service.spinnerHide();
-              this.success("Password updated successfully.");
+              this.success('Password updated successfully.');
             } else {
               this.service.spinnerHide();
-              this.error("Something went wrong, please try again.");
+              this.error('Something went wrong, please try again.');
             }
           });
         this.passwordForm.reset();
       } else {
         this.service.spinnerHide();
-        this.error("Password And Confirmed Password does not match.");
+        this.error('Password And Confirmed Password does not match.');
         this.reset_retype_pass();
       }
     } else {
       this.service.spinnerHide();
-      this.error("Old Password does not match.");
+      this.error('Old Password does not match.');
       this.passwordForm.patchValue({
-        old_password: "",
+        old_password: '',
       });
     }
   }
@@ -163,26 +163,26 @@ export class PasswordChangeComponent implements OnInit {
         this.service
           .change_passcode({
             passcode: this.passcodeForm.value.passcode,
-            user_id: sessionStorage.getItem("user_id"),
+            user_id: sessionStorage.getItem('user_id'),
           })
           .subscribe((res) => {
             //console.log(res);
             let result: any = res;
-            if (result === "success") {
-              this.success("Passcode updated successfully.");
+            if (result === 'success') {
+              this.success('Passcode updated successfully.');
             } else {
-              this.error("Something went wrong, please try again.");
+              this.error('Something went wrong, please try again.');
             }
           });
         this.passcodeForm.reset();
       } else {
-        this.error("Passcode And Confirmed Passcode does not match.");
+        this.error('Passcode And Confirmed Passcode does not match.');
         this.reset_retype_passcode();
       }
     } else {
-      this.error("Old Passcode does not match.");
+      this.error('Old Passcode does not match.');
       this.passcodeForm.patchValue({
-        old_passcode: "",
+        old_passcode: '',
       });
     }
   }
@@ -190,16 +190,16 @@ export class PasswordChangeComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -210,16 +210,16 @@ export class PasswordChangeComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

@@ -16,7 +16,7 @@ import { IDayCalendarConfig } from "ng2-date-picker";
 @Component({
   selector: "app-app-summary",
   templateUrl: "./app-summary.component.html",
-  styleUrls: ["./app-summary.component.css"],
+  styleUrls: ["./app-summary.component.scss"],
 })
 export class AppSummaryComponent implements OnInit {
   @ViewChild("closeStatusModal", { static: false })

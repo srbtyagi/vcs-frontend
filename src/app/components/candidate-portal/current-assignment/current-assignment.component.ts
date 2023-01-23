@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
 import * as moment from "moment";
 import {
   UntypedFormBuilder,
@@ -11,11 +10,12 @@ import {
 import Swal from "sweetalert2";
 import html2canvas from "html2canvas";
 import jspdf from "jspdf";
+import { RecruiteeService } from "src/app/services/recruitee.service";
 
 @Component({
   selector: "app-current-assignment",
   templateUrl: "./current-assignment.component.html",
-  styleUrls: ["./current-assignment.component.css"],
+  styleUrls: ["./current-assignment.component.scss"],
 })
 export class CurrentAssignmentComponent implements OnInit {
   @ViewChild("workModalClose", { static: false })

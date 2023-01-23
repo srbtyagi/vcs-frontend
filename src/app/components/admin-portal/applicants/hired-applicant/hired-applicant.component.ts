@@ -10,7 +10,7 @@ import * as moment from "moment";
 @Component({
   selector: "app-hired-applicant",
   templateUrl: "./hired-applicant.component.html",
-  styleUrls: ["./hired-applicant.component.css"],
+  styleUrls: ["./hired-applicant.component.scss"],
 })
 export class HiredApplicantComponent implements OnInit {
   @ViewChild("changeStatusclose", { static: false })

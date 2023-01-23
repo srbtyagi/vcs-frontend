@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-my-documents",
-  templateUrl: "./my-documents.component.html",
-  styleUrls: ["./my-documents.component.css"],
+  selector: 'app-my-documents',
+  templateUrl: './my-documents.component.html',
+  styleUrls: ['./my-documents.component.scss'],
 })
 export class MyDocumentsComponent implements OnInit {
-  @ViewChild("uploadDoc", { static: false }) private uploadDoc: ElementRef;
+  @ViewChild('uploadDoc', { static: false }) private uploadDoc: ElementRef;
   constructor(public service: RecruiteeService) {}
 
   checkUserType: boolean = false;
@@ -21,7 +21,7 @@ export class MyDocumentsComponent implements OnInit {
   facilityDoc: any = [];
   othersDoc: any = [];
   fileToUpload: any | null = null;
-  file_name: any = "";
+  file_name: any = '';
 
   ngOnInit() {
     this.service.spinnerShow();
@@ -29,10 +29,10 @@ export class MyDocumentsComponent implements OnInit {
       this.service.spinnerHide();
     }, 900);
 
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
-    this.user_id = sessionStorage.getItem("user_id");
+    this.user_id = sessionStorage.getItem('user_id');
 
     this.getAllDocuments();
     this.getBadge();
@@ -41,7 +41,7 @@ export class MyDocumentsComponent implements OnInit {
   getBadge() {
     this.badge = 0;
     this.service
-      .getCurrentReqDocs(sessionStorage.getItem("user_id"))
+      .getCurrentReqDocs(sessionStorage.getItem('user_id'))
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
@@ -53,26 +53,26 @@ export class MyDocumentsComponent implements OnInit {
   }
 
   getAllDocuments() {
-    this.service.getAllDocuments(sessionStorage.getItem("user_id")).subscribe(
+    this.service.getAllDocuments(sessionStorage.getItem('user_id')).subscribe(
       (res) => {
         //console.log("result",res);
         let result: any = res;
         if (result.length > 0) {
           this.documentData = result;
           for (let i = 0; i < this.documentData.length; i++) {
-            if (this.documentData[i]["rec_doc_type"] === "facility_spec") {
-              this.documentData[i]["rec_doc_type"] = "Facility Specific";
+            if (this.documentData[i]['rec_doc_type'] === 'facility_spec') {
+              this.documentData[i]['rec_doc_type'] = 'Facility Specific';
             }
-            this.documentData[i]["update_date_time"] = moment(
-              this.documentData[i]["update_date_time"]
-            ).format("MM/DD/YYYY");
+            this.documentData[i]['update_date_time'] = moment(
+              this.documentData[i]['update_date_time']
+            ).format('MM/DD/YYYY');
           }
         } else {
-          this.error("No Data.");
+          this.error('No Data.');
         }
       },
       (err) => {
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
 
         // //console.log(this.applicationData)
       }
@@ -86,7 +86,7 @@ export class MyDocumentsComponent implements OnInit {
     this.othersDoc = [];
     //console.log(this.details);
     for (let i = 0; i < this.details.length; i++) {
-      if (this.details[i].req_doc_type === "standard") {
+      if (this.details[i].req_doc_type === 'standard') {
         this.service
           .getStandardDocbyIdDetails({
             doc_id: this.details[i].doc_id,
@@ -101,33 +101,33 @@ export class MyDocumentsComponent implements OnInit {
                 expiry_date: result[0].expiry_date,
                 doc_name: result[0].doc_name,
                 rec_doc_id: result[0].rec_doc_id,
-                exist: "true",
+                exist: 'true',
                 doc_id: result[0].doc_id,
-                type: "standard",
+                type: 'standard',
                 showProgressBar: false,
                 showPercentage: 0,
                 viewfinalErr: false,
-                viewShow: "no",
+                viewShow: 'no',
               });
             } else {
               this.standardDoc.push({
                 req_doc_id: this.details[i].req_doc_id,
-                expiry_date: "",
+                expiry_date: '',
                 doc_name: this.details[i].req_doc_name,
-                exist: "false",
-                type: "standard",
+                exist: 'false',
+                type: 'standard',
                 doc_id: this.details[i].doc_id,
                 showProgressBar: false,
                 showPercentage: 0,
                 viewfinalErr: false,
-                viewShow: "no",
+                viewShow: 'no',
               });
             }
           });
-      } else if (this.details[i].req_doc_type === "facility_spec") {
+      } else if (this.details[i].req_doc_type === 'facility_spec') {
         let doc_id = 0;
         this.service
-          .getdocBydoc_name({ doc_name: "facility_spec" })
+          .getdocBydoc_name({ doc_name: 'facility_spec' })
           .subscribe((res2) => {
             //console.log("res2",res2)
             let result2: any = res2;
@@ -147,26 +147,26 @@ export class MyDocumentsComponent implements OnInit {
                     expiry_date: result[0].expiry_date,
                     doc_name: this.details[i].req_doc_name,
                     rec_doc_id: result[0].rec_doc_id,
-                    exist: "true",
+                    exist: 'true',
                     doc_id: doc_id,
-                    type: "facility_spec",
+                    type: 'facility_spec',
                     showProgressBar: false,
                     showPercentage: 0,
                     viewfinalErr: false,
-                    viewShow: "no",
+                    viewShow: 'no',
                   });
                 } else {
                   this.facilityDoc.push({
                     req_doc_id: this.details[i].req_doc_id,
-                    expiry_date: "",
+                    expiry_date: '',
                     doc_name: this.details[i].req_doc_name,
-                    exist: "false",
-                    type: "facility_spec",
+                    exist: 'false',
+                    type: 'facility_spec',
                     doc_id: doc_id,
                     showProgressBar: false,
                     showPercentage: 0,
                     viewfinalErr: false,
-                    viewShow: "no",
+                    viewShow: 'no',
                   });
                 }
               });
@@ -174,7 +174,7 @@ export class MyDocumentsComponent implements OnInit {
       } else {
         let doc_id = 0;
         this.service
-          .getdocBydoc_name({ doc_name: "other" })
+          .getdocBydoc_name({ doc_name: 'other' })
           .subscribe((res2) => {
             let result2: any = res2;
             if (result2.length) {
@@ -194,26 +194,26 @@ export class MyDocumentsComponent implements OnInit {
                     expiry_date: result1[0].expiry_date,
                     doc_name: this.details[i].req_doc_name,
                     rec_doc_id: result1[0].rec_doc_id,
-                    exist: "true",
+                    exist: 'true',
                     doc_id: doc_id,
-                    type: "other",
+                    type: 'other',
                     showProgressBar: false,
                     showPercentage: 0,
                     viewfinalErr: false,
-                    viewShow: "no",
+                    viewShow: 'no',
                   });
                 } else {
                   this.othersDoc.push({
                     req_doc_id: this.details[i].req_doc_id,
-                    expiry_date: "",
+                    expiry_date: '',
                     doc_name: this.details[i].req_doc_name,
-                    exist: "false",
-                    type: "other",
+                    exist: 'false',
+                    type: 'other',
                     doc_id: doc_id,
                     showProgressBar: false,
                     showPercentage: 0,
                     viewfinalErr: false,
-                    viewShow: "no",
+                    viewShow: 'no',
                   });
                 }
               });
@@ -227,13 +227,13 @@ export class MyDocumentsComponent implements OnInit {
     this.service.updateReqDocStatus({ req_doc_id: data }).subscribe((res) => {
       //console.log(res);
       let result: any = res;
-      if (result === "success") {
+      if (result === 'success') {
         this.getBadge();
         this.getAllDocuments();
       } else {
         this.uploadDoc.nativeElement.click();
 
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     });
   }
@@ -244,7 +244,7 @@ export class MyDocumentsComponent implements OnInit {
 
     this.file_name = this.fileToUpload.name;
     let index;
-    if (data.type === "standard") {
+    if (data.type === 'standard') {
       index = this.standardDoc
         .map(function (e) {
           return e.doc_id;
@@ -253,18 +253,18 @@ export class MyDocumentsComponent implements OnInit {
       // if(data.expiry_date==undefined)
       // {
       if (this.fileToUpload.size > 25000000) {
-        this.standardDoc[index]["viewShow"] = "fileSizeError";
+        this.standardDoc[index]['viewShow'] = 'fileSizeError';
       }
       //   else{
       //   this.details["standard_doc"][index]["viewShow"]="expire";
       //   }
       // }
       else {
-        this.standardDoc[index]["file_name"] = this.fileToUpload.name;
+        this.standardDoc[index]['file_name'] = this.fileToUpload.name;
         this.uploadFileToActivity(data);
       }
     }
-    if (data.type === "facility_spec") {
+    if (data.type === 'facility_spec') {
       index = this.facilityDoc
         .map(function (e) {
           return e.doc_name;
@@ -273,18 +273,18 @@ export class MyDocumentsComponent implements OnInit {
       // if(data.expiry_date==undefined)
       // {
       if (this.fileToUpload.size > 25000000) {
-        this.facilityDoc[index]["viewShow"] = "fileSizeError";
+        this.facilityDoc[index]['viewShow'] = 'fileSizeError';
       }
       // else{
       // this.details["facility_doc"][index]["viewShow"]="expire";
       // }
       // }
       else {
-        this.facilityDoc[index]["file_name"] = this.fileToUpload.name;
+        this.facilityDoc[index]['file_name'] = this.fileToUpload.name;
         this.uploadFileToActivity(data);
       }
     }
-    if (data.type === "other") {
+    if (data.type === 'other') {
       index = this.othersDoc
         .map(function (e) {
           return e.doc_name;
@@ -293,14 +293,14 @@ export class MyDocumentsComponent implements OnInit {
       // if(data.expiry_date==undefined)
       // {
       if (this.fileToUpload.size > 25000000) {
-        this.othersDoc[index]["viewShow"] = "fileSizeError";
+        this.othersDoc[index]['viewShow'] = 'fileSizeError';
       }
       //   else{
       //   this.details["other_doc"][index]["viewShow"]="expire";
       //   }
       // }
       else {
-        this.othersDoc[index]["file_name"] = this.fileToUpload.name;
+        this.othersDoc[index]['file_name'] = this.fileToUpload.name;
         this.uploadFileToActivity(data);
       }
     }
@@ -310,37 +310,37 @@ export class MyDocumentsComponent implements OnInit {
     // //console.log(this.fileToUpload)
 
     let index;
-    if (data.type === "standard") {
+    if (data.type === 'standard') {
       index = this.standardDoc
         .map(function (e) {
           return e.doc_id;
         })
         .indexOf(data.doc_id);
 
-      this.standardDoc[index]["showProgressBar"] = true;
-      this.standardDoc[index]["showPercentage"] = 0;
-      this.standardDoc[index]["exist"] = "false";
-      this.standardDoc[index]["viewShow"] = "try";
+      this.standardDoc[index]['showProgressBar'] = true;
+      this.standardDoc[index]['showPercentage'] = 0;
+      this.standardDoc[index]['exist'] = 'false';
+      this.standardDoc[index]['viewShow'] = 'try';
 
       let formData = new FormData();
-      formData.append("file", this.fileToUpload, this.fileToUpload.name);
+      formData.append('file', this.fileToUpload, this.fileToUpload.name);
       // this.service.uploadDoc(formData, this.user_id, data.doc_id, data.doc_name,moment(new Date(data.expiry_date)).format("MM-DD-YYYY")).subscribe((res: any) => {
       this.service
-        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, "0")
+        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, '0')
         .subscribe(
           (res: any) => {
             //console.log(res)
-            this.standardDoc[index]["showPercentage"] = Math.round(
+            this.standardDoc[index]['showPercentage'] = Math.round(
               (100 * res.loaded) / res.total
             );
             if (res.body !== undefined) {
-              if (res.body.message === "success") {
-                this.fileToUpload = "";
-                this.file_name = "";
-                this.standardDoc[index]["showProgressBar"] = false;
-                this.standardDoc[index]["viewShow"] = "true";
-                this.standardDoc[index]["exist"] = "true";
-                this.standardDoc[index]["rec_doc_id"] =
+              if (res.body.message === 'success') {
+                this.fileToUpload = '';
+                this.file_name = '';
+                this.standardDoc[index]['showProgressBar'] = false;
+                this.standardDoc[index]['viewShow'] = 'true';
+                this.standardDoc[index]['exist'] = 'true';
+                this.standardDoc[index]['rec_doc_id'] =
                   res.body.rec_doc_details.rec_doc_id;
                 this.updateRequestDocStatus(data.req_doc_id);
 
@@ -348,112 +348,112 @@ export class MyDocumentsComponent implements OnInit {
                 // this.uploadDocModal.nativeElement.click();
                 // this.successMsg2('File uploaded successfully.');
               }
-            } else if (res === "doc not uploaded") {
-              this.standardDoc[index]["viewShow"] = "error";
-              this.standardDoc[index]["viewfinalErr"] = true;
+            } else if (res === 'doc not uploaded') {
+              this.standardDoc[index]['viewShow'] = 'error';
+              this.standardDoc[index]['viewfinalErr'] = true;
               //this.errorMsg('Something went wrong,please try again.');
             }
           },
           (err) => {
-            this.standardDoc[index]["viewShow"] = "error";
-            this.standardDoc[index]["viewfinalErr"] = true;
+            this.standardDoc[index]['viewShow'] = 'error';
+            this.standardDoc[index]['viewfinalErr'] = true;
             //this.errorMsg('Something went wrong,please try again.');
           }
         );
-    } else if (data.type === "facility_spec") {
+    } else if (data.type === 'facility_spec') {
       index = this.facilityDoc
         .map(function (e) {
           return e.doc_name;
         })
         .indexOf(data.doc_name);
 
-      this.facilityDoc[index]["showProgressBar"] = true;
-      this.facilityDoc[index]["showPercentage"] = 0;
-      this.facilityDoc[index]["exist"] = "false";
-      this.facilityDoc[index]["viewShow"] = "try";
+      this.facilityDoc[index]['showProgressBar'] = true;
+      this.facilityDoc[index]['showPercentage'] = 0;
+      this.facilityDoc[index]['exist'] = 'false';
+      this.facilityDoc[index]['viewShow'] = 'try';
       let formData = new FormData();
-      formData.append("file", this.fileToUpload, this.fileToUpload.name);
+      formData.append('file', this.fileToUpload, this.fileToUpload.name);
       // this.service.uploadDoc(formData, this.user_id, data.doc_id, data.doc_name,moment(new Date(data.expiry_date)).format("MM-DD-YYYY")).subscribe((res: any) => {
       this.service
-        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, "0")
+        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, '0')
         .subscribe(
           (res: any) => {
             //console.log(res)
-            this.facilityDoc[index]["showPercentage"] = Math.round(
+            this.facilityDoc[index]['showPercentage'] = Math.round(
               (100 * res.loaded) / res.total
             );
             if (res.body !== undefined) {
-              if (res.body.message === "success") {
-                this.fileToUpload = "";
-                this.file_name = "";
+              if (res.body.message === 'success') {
+                this.fileToUpload = '';
+                this.file_name = '';
 
-                this.facilityDoc[index]["showProgressBar"] = false;
-                this.facilityDoc[index]["viewShow"] = "true";
-                this.facilityDoc[index]["exist"] = "true";
-                this.facilityDoc[index]["rec_doc_id"] =
+                this.facilityDoc[index]['showProgressBar'] = false;
+                this.facilityDoc[index]['viewShow'] = 'true';
+                this.facilityDoc[index]['exist'] = 'true';
+                this.facilityDoc[index]['rec_doc_id'] =
                   res.body.rec_doc_details.rec_doc_id;
                 this.updateRequestDocStatus(data.req_doc_id);
 
                 // this.uploadDocModal.nativeElement.click();
                 // this.successMsg2('File uploaded successfully.');
               }
-            } else if (res === "doc not uploaded") {
-              this.facilityDoc[index]["viewShow"] = "error";
-              this.facilityDoc[index]["viewfinalErr"] = true;
+            } else if (res === 'doc not uploaded') {
+              this.facilityDoc[index]['viewShow'] = 'error';
+              this.facilityDoc[index]['viewfinalErr'] = true;
               //this.errorMsg('Something went wrong,please try again.');
             }
           },
           (err) => {
-            this.facilityDoc[index]["viewShow"] = "error";
-            this.facilityDoc[index]["viewfinalErr"] = true;
+            this.facilityDoc[index]['viewShow'] = 'error';
+            this.facilityDoc[index]['viewfinalErr'] = true;
             //this.errorMsg('Something went wrong,please try again.');
           }
         );
-    } else if (data.type === "other") {
+    } else if (data.type === 'other') {
       index = this.othersDoc
         .map(function (e) {
           return e.doc_name;
         })
         .indexOf(data.doc_name);
 
-      this.othersDoc[index]["showProgressBar"] = true;
-      this.othersDoc[index]["showPercentage"] = 0;
-      this.othersDoc[index]["exist"] = "false";
-      this.othersDoc[index]["viewShow"] = "try";
+      this.othersDoc[index]['showProgressBar'] = true;
+      this.othersDoc[index]['showPercentage'] = 0;
+      this.othersDoc[index]['exist'] = 'false';
+      this.othersDoc[index]['viewShow'] = 'try';
       let formData = new FormData();
-      formData.append("file", this.fileToUpload, this.fileToUpload.name);
+      formData.append('file', this.fileToUpload, this.fileToUpload.name);
       // this.service.uploadDoc(formData, this.user_id, data.doc_id, data.doc_name,moment(new Date(data.expiry_date)).format("MM-DD-YYYY")).subscribe((res: any) => {
       this.service
-        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, "0")
+        .uploadDoc(formData, this.user_id, data.doc_id, data.doc_name, '0')
         .subscribe(
           (res: any) => {
             //console.log(res)
-            this.othersDoc[index]["showPercentage"] = Math.round(
+            this.othersDoc[index]['showPercentage'] = Math.round(
               (100 * res.loaded) / res.total
             );
             if (res.body !== undefined) {
-              if (res.body.message === "success") {
-                this.fileToUpload = "";
-                this.file_name = "";
-                this.othersDoc[index]["showProgressBar"] = false;
-                this.othersDoc[index]["viewShow"] = "true";
-                this.othersDoc[index]["exist"] = "true";
-                this.othersDoc[index]["rec_doc_id"] =
+              if (res.body.message === 'success') {
+                this.fileToUpload = '';
+                this.file_name = '';
+                this.othersDoc[index]['showProgressBar'] = false;
+                this.othersDoc[index]['viewShow'] = 'true';
+                this.othersDoc[index]['exist'] = 'true';
+                this.othersDoc[index]['rec_doc_id'] =
                   res.body.rec_doc_details.rec_doc_id;
                 this.updateRequestDocStatus(data.req_doc_id);
 
                 // this.uploadDocModal.nativeElement.click();
                 // this.successMsg2('File uploaded successfully.');
               }
-            } else if (res === "doc not uploaded") {
-              this.othersDoc[index]["viewShow"] = "error";
-              this.othersDoc[index]["viewfinalErr"] = true;
+            } else if (res === 'doc not uploaded') {
+              this.othersDoc[index]['viewShow'] = 'error';
+              this.othersDoc[index]['viewfinalErr'] = true;
               //this.errorMsg('Something went wrong,please try again.');
             }
           },
           (err) => {
-            this.othersDoc[index]["viewShow"] = "error";
-            this.othersDoc[index]["viewfinalErr"] = true;
+            this.othersDoc[index]['viewShow'] = 'error';
+            this.othersDoc[index]['viewfinalErr'] = true;
             //this.errorMsg('Something went wrong,please try again.');
           }
         );
@@ -463,16 +463,16 @@ export class MyDocumentsComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

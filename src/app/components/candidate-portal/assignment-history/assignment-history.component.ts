@@ -1,32 +1,32 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { Router } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
-import * as moment from "moment";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
 import {
   UntypedFormBuilder,
   Validators,
   FormGroup,
   FormControl,
-} from "@angular/forms";
-import Swal from "sweetalert2";
-import html2canvas from "html2canvas";
-import jspdf from "jspdf";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-assignment-history",
-  templateUrl: "./assignment-history.component.html",
-  styleUrls: ["./assignment-history.component.css"],
+  selector: 'app-assignment-history',
+  templateUrl: './assignment-history.component.html',
+  styleUrls: ['./assignment-history.component.scss'],
 })
 export class AssignmentHistoryComponent implements OnInit {
-  @ViewChild("workModalClose", { static: false })
+  @ViewChild('workModalClose', { static: false })
   private workModalClose: ElementRef;
-  @ViewChild("workNextModalClose", { static: false })
+  @ViewChild('workNextModalClose', { static: false })
   private workNextModalClose: ElementRef;
 
   checkUserType: boolean = false;
-  client_id: any = "ALL";
-  year: any = "ALL";
-  month: any = "ALL";
+  client_id: any = 'ALL';
+  year: any = 'ALL';
+  month: any = 'ALL';
   clientList: any = [];
   yearList: any = [];
   monthList: any = [];
@@ -35,7 +35,7 @@ export class AssignmentHistoryComponent implements OnInit {
   standard_doc: any = [];
   fac_specc_doc: any = [];
   others_doc: any = [];
-  user_id: any = sessionStorage.getItem("user_id");
+  user_id: any = sessionStorage.getItem('user_id');
   showDivPdf: boolean = false;
   showDivPdf2: boolean = false;
 
@@ -46,7 +46,7 @@ export class AssignmentHistoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
 
@@ -57,11 +57,11 @@ export class AssignmentHistoryComponent implements OnInit {
 
   getCurrentDate() {
     let date = new Date();
-    let strTime = date.toLocaleString("en-US", {
-      timeZone: "America/Los_Angeles",
+    let strTime = date.toLocaleString('en-US', {
+      timeZone: 'America/Los_Angeles',
     });
-    let currentYear = moment(new Date(strTime)).format("YYYY");
-    let currentMonth = moment(new Date(strTime)).format("MMM");
+    let currentYear = moment(new Date(strTime)).format('YYYY');
+    let currentMonth = moment(new Date(strTime)).format('MMM');
     //console.log(currentYear,currentMonth);
 
     this.year = currentYear;
@@ -76,11 +76,11 @@ export class AssignmentHistoryComponent implements OnInit {
     this.service.getAllDocs(user_id).subscribe((res: any) => {
       //console.log(res);
       for (let a of res) {
-        if (a.rec_doc_type === "standard") {
+        if (a.rec_doc_type === 'standard') {
           this.standard_doc.push(a);
-        } else if (a.rec_doc_type === "facility_spec") {
+        } else if (a.rec_doc_type === 'facility_spec') {
           this.fac_specc_doc.push(a);
-        } else if (a.rec_doc_type === "other") {
+        } else if (a.rec_doc_type === 'other') {
           this.others_doc.push(a);
         }
       }
@@ -96,11 +96,11 @@ export class AssignmentHistoryComponent implements OnInit {
         if (result.length > 0) {
           this.clientList = result;
         } else {
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -118,16 +118,16 @@ export class AssignmentHistoryComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -148,7 +148,7 @@ export class AssignmentHistoryComponent implements OnInit {
           })
           .indexOf(this.month);
         if (index === -1) {
-          this.month = "ALL";
+          this.month = 'ALL';
         }
         this.searchAssignments();
       }
@@ -160,7 +160,7 @@ export class AssignmentHistoryComponent implements OnInit {
       client_id: this.client_id,
       year: this.year,
       month: this.month,
-      user_id: sessionStorage.getItem("user_id"),
+      user_id: sessionStorage.getItem('user_id'),
     };
     // //console.log(obj)
     this.service.getAssignmentPayrollDetails(obj).subscribe(
@@ -171,11 +171,11 @@ export class AssignmentHistoryComponent implements OnInit {
           this.assignmentList = result;
           //console.log(this.assignmentList)
         } else {
-          this.error("No Data.");
+          this.error('No Data.');
         }
       },
       (err) => {
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -183,13 +183,13 @@ export class AssignmentHistoryComponent implements OnInit {
   onClickPaySlip(a) {
     this.details = a;
     if (a.user_middle_name) {
-      this.details["name"] =
-        a.user_first_name + " " + a.user_middle_name + " " + a.user_last_name;
+      this.details['name'] =
+        a.user_first_name + ' ' + a.user_middle_name + ' ' + a.user_last_name;
     } else {
-      this.details["name"] = a.user_first_name + " " + a.user_last_name;
+      this.details['name'] = a.user_first_name + ' ' + a.user_last_name;
     }
 
-    this.details["total_wk_hr"] = (
+    this.details['total_wk_hr'] = (
       parseFloat(a.reg_hr) +
       parseFloat(a.ot_hr) +
       parseFloat(a.holiday_hr)
@@ -199,38 +199,38 @@ export class AssignmentHistoryComponent implements OnInit {
   onClickAssignment(a) {
     this.details = a;
     if (a.user_middle_name) {
-      this.details["name"] =
-        a.user_first_name + " " + a.user_middle_name + " " + a.user_last_name;
+      this.details['name'] =
+        a.user_first_name + ' ' + a.user_middle_name + ' ' + a.user_last_name;
     } else {
-      this.details["name"] = a.user_first_name + " " + a.user_last_name;
+      this.details['name'] = a.user_first_name + ' ' + a.user_last_name;
     }
 
-    this.details["total_wk_hr"] = (
+    this.details['total_wk_hr'] = (
       parseFloat(a.reg_hr) +
       parseFloat(a.ot_hr) +
       parseFloat(a.holiday_hr)
     ).toFixed(2);
 
-    this.getAllDocs(sessionStorage.getItem("user_id"));
+    this.getAllDocs(sessionStorage.getItem('user_id'));
   }
   downloadApplForm() {
     this.showDivPdf = true;
     setTimeout(() => {
-      let data = document.getElementById("assignFormFDiv");
+      let data = document.getElementById('assignFormFDiv');
       //console.log(data)
       html2canvas(data).then((canvas) => {
         var imgWidth = 22;
         var pageHeight = 295;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
         var heightLeft = imgHeight;
-        const contentDataURL = canvas.toDataURL("image/png");
+        const contentDataURL = canvas.toDataURL('image/png');
         //let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-        let pdf = new jspdf("p", "cm", "a4"); //Generates PDF in portrait mode
+        let pdf = new jspdf('p', 'cm', 'a4'); //Generates PDF in portrait mode
         var position = 0;
-        pdf.setFont("helvetica");
+        pdf.setFont('helvetica');
         pdf.setFontSize(20);
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
-        pdf.save("AssignmentDetails.pdf");
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.save('AssignmentDetails.pdf');
       });
     }, 100);
 
@@ -242,21 +242,21 @@ export class AssignmentHistoryComponent implements OnInit {
   downloadPayslip() {
     this.showDivPdf2 = true;
     setTimeout(() => {
-      let data = document.getElementById("payslipDiv");
+      let data = document.getElementById('payslipDiv');
       //console.log(data)
       html2canvas(data).then((canvas) => {
         var imgWidth = 22;
         var pageHeight = 295;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
         var heightLeft = imgHeight;
-        const contentDataURL = canvas.toDataURL("image/png");
+        const contentDataURL = canvas.toDataURL('image/png');
         //let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-        let pdf = new jspdf("p", "cm", "a4"); //Generates PDF in portrait mode
+        let pdf = new jspdf('p', 'cm', 'a4'); //Generates PDF in portrait mode
         var position = 0;
-        pdf.setFont("helvetica");
+        pdf.setFont('helvetica');
         pdf.setFontSize(20);
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
-        pdf.save("payslip.pdf");
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.save('payslip.pdf');
       });
     }, 100);
 

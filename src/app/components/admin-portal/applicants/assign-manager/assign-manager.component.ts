@@ -8,7 +8,7 @@ import * as moment from "moment";
 @Component({
   selector: "app-assign-manager",
   templateUrl: "./assign-manager.component.html",
-  styleUrls: ["./assign-manager.component.css"],
+  styleUrls: ["./assign-manager.component.scss"],
 })
 export class AssignManagerComponent implements OnInit {
   @ViewChild("assignRecClose", { static: false })

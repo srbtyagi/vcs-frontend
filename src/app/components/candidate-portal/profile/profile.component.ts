@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
-import { IDayCalendarConfig } from "ng2-date-picker";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   constructor(
@@ -25,35 +25,35 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   checkUserType: boolean = false;
-  file_name = "";
-  current_date = "";
+  file_name = '';
+  current_date = '';
   registerForm: UntypedFormGroup;
-  fileData = "";
+  fileData = '';
   professionData = [];
   specialityData = [];
   passwordPatterRegex =
-    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+    '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   checkEmail: boolean = false;
-  viewShow: any = "no";
+  viewShow: any = 'no';
   showPercentage: number = 0;
   showProgressBar: boolean = false;
   viewfinalErr: boolean = false;
   status = false;
-  url = "";
-  codePattern = "[+]?[0-9]*";
-  phonePattern = "[0-9]*";
+  url = '';
+  codePattern = '[+]?[0-9]*';
+  phonePattern = '[0-9]*';
   emp_preference: any = [
-    { type: "Permanent" },
-    { type: "Travel" },
-    { type: "Per Diem" },
+    { type: 'Permanent' },
+    { type: 'Travel' },
+    { type: 'Per Diem' },
   ];
   emp_data: any = [];
   old_email: any;
   badge: Number;
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM/DD/YYYY",
+    drops: 'down',
+    format: 'MM/DD/YYYY',
   };
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit {
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       phone_no: new UntypedFormControl(null, [
         Validators.required,
@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
       resume: new UntypedFormControl(null, []),
     });
 
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
 
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
 
   getBadge() {
     this.service
-      .getCurrentReqDocs(sessionStorage.getItem("user_id"))
+      .getCurrentReqDocs(sessionStorage.getItem('user_id'))
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
@@ -122,58 +122,58 @@ export class ProfileComponent implements OnInit {
 
     //console.log(this.registerForm.value)
     let data = this.registerForm.value;
-    let m_name = "";
+    let m_name = '';
     if (data.middle_name) {
       m_name = data.middle_name;
     }
     let obj = {
-      user_id: sessionStorage.getItem("user_id"),
+      user_id: sessionStorage.getItem('user_id'),
       user_first_name: data.first_name,
       user_middle_name: m_name,
       user_last_name: data.last_name,
       phone: data.phone_no,
       email: data.email,
-      dob: moment(data.dob).format("MM/DD/YYYY"),
+      dob: moment(data.dob).format('MM/DD/YYYY'),
       ssn_4digit: data.ssn,
       profession: data.profession,
       speciality: data.speciality,
       current_location: data.current_loc,
       desired_location_1: data.desired_loc1,
       desired_location_2: data.desired_loc2,
-      employement_preference: this.emp_data.join(","),
+      employement_preference: this.emp_data.join(','),
     };
     //console.log(obj)
     this.service.updateUserData(obj).subscribe(
       (res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "success") {
+        if (result === 'success') {
           this.service.spinnerHide();
-          this.success("Updated successfully.");
+          this.success('Updated successfully.');
           this.getUser();
-        } else if (result === "user exists") {
+        } else if (result === 'user exists') {
           this.service.spinnerHide();
-          this.error("Already registered with this email address.");
+          this.error('Already registered with this email address.');
         }
       },
       (err) => {
         this.service.spinnerHide();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
 
   getUser() {
     this.service
-      .getUserRecruiteeById(sessionStorage.getItem("user_id"))
+      .getUserRecruiteeById(sessionStorage.getItem('user_id'))
       .subscribe(
         (res) => {
           //console.log(res);
           let result: any = res;
           if (result.length) {
-            let DOB = "";
-            if (result[0].dob !== "") {
-              DOB = moment(result[0].dob).format("MM/DD/YYYY");
+            let DOB = '';
+            if (result[0].dob !== '') {
+              DOB = moment(result[0].dob).format('MM/DD/YYYY');
             }
             this.registerForm.patchValue({
               first_name: result[0].user_first_name,
@@ -195,21 +195,21 @@ export class ProfileComponent implements OnInit {
 
             var array = [];
             if (result[0].employement_preference) {
-              array = result[0].employement_preference.split(",");
+              array = result[0].employement_preference.split(',');
             }
             for (var i in this.emp_preference) {
-              this.emp_preference[i]["value"] = false;
-              if (array.indexOf(this.emp_preference[i]["type"]) > -1) {
-                this.emp_data.push(this.emp_preference[i]["type"]);
-                this.emp_preference[i]["value"] = true;
+              this.emp_preference[i]['value'] = false;
+              if (array.indexOf(this.emp_preference[i]['type']) > -1) {
+                this.emp_data.push(this.emp_preference[i]['type']);
+                this.emp_preference[i]['value'] = true;
               }
             }
           } else {
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
   }
@@ -224,7 +224,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "exist") {
+        if (result === 'exist') {
           this.checkEmail = true;
 
           // this.error3("Already registered with this email address.");
@@ -236,35 +236,35 @@ export class ProfileComponent implements OnInit {
 
   checkResume() {
     this.service
-      .check_resume({ user_id: sessionStorage.getItem("user_id") })
+      .check_resume({ user_id: sessionStorage.getItem('user_id') })
       .subscribe((res) => {
         let result: any = res;
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            "http://elitemente.com/vcsapi/get/resume/" +
-            sessionStorage.getItem("user_id") +
-            "/" +
-            sessionStorage.getItem("user_name") +
-            "_resume";
+            'http://elitemente.com/vcsapi/get/resume/' +
+            sessionStorage.getItem('user_id') +
+            '/' +
+            sessionStorage.getItem('user_name') +
+            '_resume';
         } else {
           this.status = false;
-          this.url = "";
+          this.url = '';
         }
       });
   }
 
   fileUpload(files: FileList) {
     let fileInput: any = <HTMLInputElement>(
-      document.getElementById("customFile")
+      document.getElementById('customFile')
     );
     let fileData = files[0];
     this.file_name = fileData.name;
     this.showProgressBar = false;
-    this.viewShow = "false";
+    this.viewShow = 'false';
     this.viewfinalErr = false;
     if (fileData.size > 25000000) {
-      this.error("File size exceeds the maximum limit 25mb.");
+      this.error('File size exceeds the maximum limit 25mb.');
     } else {
       this.uploadFiles(fileData);
     }
@@ -276,45 +276,45 @@ export class ProfileComponent implements OnInit {
     this.showPercentage = 0;
     let formData = new FormData();
 
-    formData.append("file", file, file.name);
+    formData.append('file', file, file.name);
     // //console.log(formData,file.name)
 
     this.service
-      .uploadFile(formData, sessionStorage.getItem("user_id"))
+      .uploadFile(formData, sessionStorage.getItem('user_id'))
       .subscribe(
         (res) => {
           let result: any = res;
           //console.log("upload", result)
 
-          this.viewShow = "try";
+          this.viewShow = 'try';
           this.showPercentage = Math.round(
             (100 * result.loaded) / result.total
           );
           if (result.body !== undefined) {
-            if (result.body === "success") {
+            if (result.body === 'success') {
               this.showProgressBar = false;
-              this.viewShow = "true";
+              this.viewShow = 'true';
               this.viewfinalErr = false;
               this.status = true;
               this.url =
-                "http://elitemente.com/vcsapi/get/resume/" +
-                sessionStorage.getItem("user_id") +
-                "/" +
-                sessionStorage.getItem("user_name") +
-                "_resume";
+                'http://elitemente.com/vcsapi/get/resume/' +
+                sessionStorage.getItem('user_id') +
+                '/' +
+                sessionStorage.getItem('user_name') +
+                '_resume';
             }
           } else {
             this.status = false;
-            this.url = "";
+            this.url = '';
             this.viewfinalErr = true;
-            this.viewShow = "false";
+            this.viewShow = 'false';
           }
         },
         (err) => {
           this.status = false;
-          this.url = "";
+          this.url = '';
           this.viewfinalErr = true;
-          this.viewShow = "false";
+          this.viewShow = 'false';
         }
       );
   }
@@ -352,16 +352,16 @@ export class ProfileComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -372,20 +372,20 @@ export class ProfileComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(["/candi-profile"]);
+        this.router.navigate(['/candi-profile']);
       }
     });
   }

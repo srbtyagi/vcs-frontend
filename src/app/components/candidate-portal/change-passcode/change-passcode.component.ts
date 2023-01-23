@@ -1,27 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { Router } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-change-passcode",
-  templateUrl: "./change-passcode.component.html",
-  styleUrls: ["./change-passcode.component.css"],
+  selector: 'app-change-passcode',
+  templateUrl: './change-passcode.component.html',
+  styleUrls: ['./change-passcode.component.scss'],
 })
 export class ChangePasscodeComponent implements OnInit {
   checkUserType: boolean = false;
   passcodeForm: UntypedFormGroup;
   passwordPatterRegex =
-    "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+    '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   old_password: boolean = false;
   old_passcode: boolean = false;
-  passcodePattern = "[0-9]*";
+  passcodePattern = '[0-9]*';
   badge: Number;
 
   constructor(
@@ -31,7 +31,7 @@ export class ChangePasscodeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
     this.passcodeForm = this.fb.group({
@@ -49,7 +49,7 @@ export class ChangePasscodeComponent implements OnInit {
 
   getBadge() {
     this.service
-      .getCurrentReqDocs(sessionStorage.getItem("user_id"))
+      .getCurrentReqDocs(sessionStorage.getItem('user_id'))
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
@@ -63,12 +63,12 @@ export class ChangePasscodeComponent implements OnInit {
     this.service
       .check_old_passcode({
         passcode: this.passcodeForm.value.old_passcode,
-        user_id: sessionStorage.getItem("user_id"),
+        user_id: sessionStorage.getItem('user_id'),
       })
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "passcode not matched") {
+        if (result === 'passcode not matched') {
           this.old_passcode = false;
         } else {
           this.old_passcode = true;
@@ -78,7 +78,7 @@ export class ChangePasscodeComponent implements OnInit {
 
   reset_retype_passcode() {
     this.passcodeForm.patchValue({
-      retype_passcode: "",
+      retype_passcode: '',
     });
   }
 
@@ -92,30 +92,30 @@ export class ChangePasscodeComponent implements OnInit {
         this.service
           .change_passcode({
             passcode: this.passcodeForm.value.passcode,
-            user_id: sessionStorage.getItem("user_id"),
+            user_id: sessionStorage.getItem('user_id'),
           })
           .subscribe((res) => {
             //console.log(res);
             let result: any = res;
-            if (result === "success") {
+            if (result === 'success') {
               this.service.spinnerHide();
-              this.success("Passcode updated successfully.");
+              this.success('Passcode updated successfully.');
             } else {
               this.service.spinnerHide();
-              this.error("Something went wrong, please try again.");
+              this.error('Something went wrong, please try again.');
             }
           });
         this.passcodeForm.reset();
       } else {
         this.service.spinnerHide();
-        this.error("Passcode And Confirmed Passcode does not match.");
+        this.error('Passcode And Confirmed Passcode does not match.');
         this.reset_retype_passcode();
       }
     } else {
       this.service.spinnerHide();
-      this.error("Old Passcode does not match.");
+      this.error('Old Passcode does not match.');
       this.passcodeForm.patchValue({
-        old_passcode: "",
+        old_passcode: '',
       });
     }
   }
@@ -123,16 +123,16 @@ export class ChangePasscodeComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -143,16 +143,16 @@ export class ChangePasscodeComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

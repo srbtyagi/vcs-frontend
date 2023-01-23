@@ -7,14 +7,13 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
-import { RecruiteeService } from 'src/app/recruitee.service';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-applicant-admin',
   templateUrl: './add-applicant-admin.component.html',
-  styleUrls: ['./add-applicant-admin.component.css'],
+  styleUrls: ['./add-applicant-admin.component.scss'],
 })
 export class AddApplicantAdminComponent implements OnInit {
   data: any;

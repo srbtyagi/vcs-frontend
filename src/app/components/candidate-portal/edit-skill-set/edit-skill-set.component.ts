@@ -1,26 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
   UntypedFormControl,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import * as moment from "moment";
-import jspdf from "jspdf";
-import html2canvas from "html2canvas";
-import * as $ from "jquery";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import * as moment from 'moment';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as $ from 'jquery';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: "app-edit-skill-set",
-  templateUrl: "./edit-skill-set.component.html",
-  styleUrls: ["./edit-skill-set.component.css"],
+  selector: 'app-edit-skill-set',
+  templateUrl: './edit-skill-set.component.html',
+  styleUrls: ['./edit-skill-set.component.scss'],
 })
 export class EditSkillSetComponent implements OnInit {
   checkUserType: boolean = false;
@@ -34,8 +34,8 @@ export class EditSkillSetComponent implements OnInit {
 
   jobDomain: any = [];
   candidateForm: UntypedFormGroup;
-  codePattern = "[+]?[0-9]*";
-  phonePattern = "[0-9]*";
+  codePattern = '[+]?[0-9]*';
+  phonePattern = '[0-9]*';
   checkEmail: boolean = false;
   editStatus: boolean = false;
   details: any = {};
@@ -46,12 +46,12 @@ export class EditSkillSetComponent implements OnInit {
   showDivPdf: boolean = false;
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM/DD/YYYY",
+    drops: 'down',
+    format: 'MM/DD/YYYY',
   };
 
   ngOnInit() {
-    if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
     }
 
@@ -66,7 +66,7 @@ export class EditSkillSetComponent implements OnInit {
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       edit_date: new UntypedFormControl(null, [Validators.required]),
       // phone_no: new FormControl(null, [Validators.required,,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(this.phonePattern)]),
@@ -76,7 +76,7 @@ export class EditSkillSetComponent implements OnInit {
 
   getBadge() {
     this.service
-      .getCurrentReqDocs(sessionStorage.getItem("user_id"))
+      .getCurrentReqDocs(sessionStorage.getItem('user_id'))
       .subscribe((res) => {
         //console.log(res);
         let result: any = res;
@@ -88,15 +88,15 @@ export class EditSkillSetComponent implements OnInit {
 
   skillCheck() {
     if (!this.show) {
-      this.error1("Skill Set not added yet.");
+      this.error1('Skill Set not added yet.');
     }
   }
 
   skillRateChange(k, i, data) {
     if (data !== undefined) {
-      this.jobDomain[k]["skillset"][i]["date_of_completion"] = moment(
+      this.jobDomain[k]['skillset'][i]['date_of_completion'] = moment(
         new Date(data)
-      ).format("MM/DD/YYYY");
+      ).format('MM/DD/YYYY');
     }
   }
 
@@ -105,7 +105,7 @@ export class EditSkillSetComponent implements OnInit {
     if (data !== undefined) {
       // //console.log(k,i,this.dateComplete,moment(this.dateComplete).format("MM/DD/YYYY"))
       this.candidateForm.patchValue({
-        edit_date: moment(new Date(data.date)).format("MM/DD/YYYY"),
+        edit_date: moment(new Date(data.date)).format('MM/DD/YYYY'),
       });
     }
     //console.log(this.candidateForm.value)
@@ -116,20 +116,20 @@ export class EditSkillSetComponent implements OnInit {
   }
 
   getUser() {
-    let user = "0";
-    if (sessionStorage.getItem("user_id")) {
-      user = sessionStorage.getItem("user_id");
+    let user = '0';
+    if (sessionStorage.getItem('user_id')) {
+      user = sessionStorage.getItem('user_id');
     }
     this.service.getCandidateByUserId({ user_id: user }).subscribe(
       (res) => {
         // //console.log(res,"RESULT");
         let result: any = res;
         if (result.length > 0) {
-          let edit_date = moment(new Date()).format("MM/DD/YYYY");
+          let edit_date = moment(new Date()).format('MM/DD/YYYY');
           if (
             result[0].edit_date !== undefined ||
             result[0].edit_date !== null ||
-            result[0].edit_date !== ""
+            result[0].edit_date !== ''
           ) {
             edit_date = result[0].edit_date;
           }
@@ -142,7 +142,7 @@ export class EditSkillSetComponent implements OnInit {
 
           this.details = this.candidateForm.value;
         } else {
-          let edit_date = moment(new Date()).format("MM/DD/YYYY");
+          let edit_date = moment(new Date()).format('MM/DD/YYYY');
           this.candidateForm.patchValue({
             edit_date: edit_date,
           });
@@ -152,15 +152,15 @@ export class EditSkillSetComponent implements OnInit {
         // }
       },
       (err) => {
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
 
   getJObSkillDomain() {
-    let user = "0";
-    if (sessionStorage.getItem("user_id")) {
-      user = sessionStorage.getItem("user_id");
+    let user = '0';
+    if (sessionStorage.getItem('user_id')) {
+      user = sessionStorage.getItem('user_id');
     }
     this.service
       .geAllSkillCategoryByuserId({ user_id: user })
@@ -171,9 +171,9 @@ export class EditSkillSetComponent implements OnInit {
           this.show = true;
           this.skillCheck();
           this.category_name = result[0].skill_category_name;
-          this.area_name = result[0]["area"][0].skill_area_name;
+          this.area_name = result[0]['area'][0].skill_area_name;
           //console.log(this.area_name)
-          this.jobDomain = result[0]["area"][0]["domain"];
+          this.jobDomain = result[0]['area'][0]['domain'];
         } else {
           this.show = false;
           this.skillCheck();
@@ -192,18 +192,18 @@ export class EditSkillSetComponent implements OnInit {
       (res) => {
         //console.log(res,"RESULT");
         let result: any = res;
-        if (result === "success") {
+        if (result === 'success') {
           this.service.spinnerHide();
           this.details = this.candidateForm.value;
-          this.success("Updated successfully.");
+          this.success('Updated successfully.');
         } else {
           this.service.spinnerHide();
-          this.error("Something went wrong,please try again.");
+          this.error('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.service.spinnerHide();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -212,8 +212,8 @@ export class EditSkillSetComponent implements OnInit {
     this.showDivPdf = true;
 
     setTimeout(() => {
-      var HTML_Width = $(".canvas_div_pdf").width();
-      var HTML_Height = $(".canvas_div_pdf").height();
+      var HTML_Width = $('.canvas_div_pdf').width();
+      var HTML_Height = $('.canvas_div_pdf').height();
       var top_left_margin = 15;
       var PDF_Width = HTML_Width + top_left_margin * 2;
       var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
@@ -222,15 +222,15 @@ export class EditSkillSetComponent implements OnInit {
 
       var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
 
-      html2canvas($(".canvas_div_pdf")[0], { allowTaint: true }).then(function (
+      html2canvas($('.canvas_div_pdf')[0], { allowTaint: true }).then(function (
         canvas
       ) {
-        canvas.getContext("2d");
+        canvas.getContext('2d');
 
         //console.log(canvas.height + "  " + canvas.width);
 
-        var imgData = canvas.toDataURL("image/png", 1.0);
-        var pdf: any = new jspdf("p", "pt", [PDF_Width, PDF_Height]);
+        var imgData = canvas.toDataURL('image/png', 1.0);
+        var pdf: any = new jspdf('p', 'pt', [PDF_Width, PDF_Height]);
         pdf.page = 1; // use this as a counter.
 
         // function footer() {
@@ -239,7 +239,7 @@ export class EditSkillSetComponent implements OnInit {
         // };
         pdf.addImage(
           imgData,
-          "PNG",
+          'PNG',
           top_left_margin,
           top_left_margin,
           canvas_image_width,
@@ -251,7 +251,7 @@ export class EditSkillSetComponent implements OnInit {
           //footer();
           pdf.addImage(
             imgData,
-            "PNG",
+            'PNG',
             top_left_margin,
             -(PDF_Height * i) + top_left_margin * 4,
             canvas_image_width,
@@ -259,7 +259,7 @@ export class EditSkillSetComponent implements OnInit {
           );
         }
 
-        pdf.save("Skill_Checklist.pdf");
+        pdf.save('Skill_Checklist.pdf');
       });
     }, 100);
 
@@ -271,16 +271,16 @@ export class EditSkillSetComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -293,16 +293,16 @@ export class EditSkillSetComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -312,20 +312,20 @@ export class EditSkillSetComponent implements OnInit {
   error1(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(["/skill-checklist"]);
+        this.router.navigate(['/skill-checklist']);
       }
     });
   }
