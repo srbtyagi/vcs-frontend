@@ -7,7 +7,7 @@ import * as moment from "moment";
 @Component({
   selector: "app-payroll-processing",
   templateUrl: "./payroll-processing.component.html",
-  styleUrls: ["./payroll-processing.component.css"],
+  styleUrls: ["./payroll-processing.component.scss"],
 })
 export class PayrollProcessingComponent implements OnInit {
   @ViewChild("process1Close", { static: false })

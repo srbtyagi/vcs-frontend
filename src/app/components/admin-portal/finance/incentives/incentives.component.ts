@@ -8,7 +8,7 @@ import { IDayCalendarConfig } from "ng2-date-picker";
 @Component({
   selector: "app-incentives",
   templateUrl: "./incentives.component.html",
-  styleUrls: ["./incentives.component.css"],
+  styleUrls: ["./incentives.component.scss"],
 })
 export class IncentivesComponent implements OnInit {
   @ViewChild("processIncentiveClose", { static: false })

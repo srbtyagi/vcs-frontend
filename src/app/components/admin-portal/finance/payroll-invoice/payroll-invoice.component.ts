@@ -9,7 +9,7 @@ import * as moment from "moment";
 @Component({
   selector: "app-payroll-invoice",
   templateUrl: "./payroll-invoice.component.html",
-  styleUrls: ["./payroll-invoice.component.css"],
+  styleUrls: ["./payroll-invoice.component.scss"],
 })
 export class PayrollInvoiceComponent implements OnInit {
   moduleArray: any = [];

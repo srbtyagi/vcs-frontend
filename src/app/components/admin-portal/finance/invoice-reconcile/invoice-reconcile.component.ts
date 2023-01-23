@@ -8,7 +8,7 @@ import { IDayCalendarConfig } from "ng2-date-picker";
 @Component({
   selector: "app-invoice-reconcile",
   templateUrl: "./invoice-reconcile.component.html",
-  styleUrls: ["./invoice-reconcile.component.css"],
+  styleUrls: ["./invoice-reconcile.component.scss"],
 })
 export class InvoiceReconcileComponent implements OnInit {
   @ViewChild("processSecondClose", { static: false })

@@ -13,7 +13,7 @@ import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
-  styleUrls: ['./user-role.component.css'],
+  styleUrls: ['./user-role.component.scss'],
 })
 export class UserRoleComponent implements OnInit {
   allUserRole: any;

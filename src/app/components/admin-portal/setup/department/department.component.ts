@@ -13,7 +13,7 @@ import { AdminService } from 'src/app/services/admin.service';
 @Component({
   selector: 'app-department',
   templateUrl: './department.component.html',
-  styleUrls: ['./department.component.css'],
+  styleUrls: ['./department.component.scss'],
 })
 export class DepartmentComponent implements OnInit {
   addDeptForm: UntypedFormGroup;

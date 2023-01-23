@@ -15,7 +15,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css'],
+  styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
   defaultStatus = 'active';
