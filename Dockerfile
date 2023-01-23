@@ -6,5 +6,5 @@ RUN npm install
 RUN npm i -g @angular/cli
 RUN ng build
 FROM nginx:alpine
-COPY --from=node /front-app/dist/vishusaWeb /usr/share/nginx/html
+COPY /front-app/dist/vishusaWeb /usr/share/nginx/html
 EXPOSE 80
