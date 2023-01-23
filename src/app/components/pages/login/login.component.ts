@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   constructor(
@@ -23,31 +23,31 @@ export class LoginComponent implements OnInit {
 
   loginForm: UntypedFormGroup;
   forgotPassForm: UntypedFormGroup;
-  title = "Login To You Now";
+  title = 'Login To You Now';
   titleDetails =
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.";
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.';
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: new UntypedFormControl(null, [
         Validators.required,
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       password: new UntypedFormControl(null, [Validators.required]),
     });
     this.forgotPassForm = this.fb.group({
       email: new UntypedFormControl(null, [
         Validators.required,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
     });
   }
 
   onClickForgotPass() {
-    this.title = "Forgot Password";
+    this.title = 'Forgot Password';
     this.titleDetails =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.";
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.';
   }
 
   login() {
@@ -58,22 +58,22 @@ export class LoginComponent implements OnInit {
       (res) => {
         //console.log("result",res);
         let result: any = res;
-        if (result === "username and password is not matched") {
+        if (result === 'username and password is not matched') {
           this.service.spinnerHide();
-          this.error2("Wrong Password. Try Again!!!");
+          this.error2('Wrong Password. Try Again!!!');
         } else if (
-          result === "No username in database please signup first" ||
-          result === "unregistered"
+          result === 'No username in database please signup first' ||
+          result === 'unregistered'
         ) {
           this.service.spinnerHide();
-          this.error3("Invalid Email. Please Signup!!!");
-        } else if (result.message === "You are login" && result !== null) {
+          this.error3('Invalid Email. Please Signup!!!');
+        } else if (result.message === 'You are login' && result !== null) {
           this.service.spinnerHide();
-          sessionStorage.setItem("user_id", result.user_id);
-          sessionStorage.setItem("user_name", result.username);
+          sessionStorage.setItem('user_id', result.user_id);
+          sessionStorage.setItem('user_name', result.username);
           //console.log(result)
           if (result.u_access.length) {
-            sessionStorage.setItem("user_type", result.u_access[0].user_type);
+            sessionStorage.setItem('user_type', result.u_access[0].user_type);
 
             result.u_access.forEach((e) => {
               let data = {
@@ -86,12 +86,12 @@ export class LoginComponent implements OnInit {
               };
               modulearray.push(data);
             });
-            sessionStorage.setItem("moduleArray", JSON.stringify(modulearray));
+            sessionStorage.setItem('moduleArray', JSON.stringify(modulearray));
           }
-          if (sessionStorage.getItem("user_type") === "recruitee") {
-            this.router.navigate(["/candi-profile"]);
+          if (sessionStorage.getItem('user_type') === 'recruitee') {
+            this.router.navigate(['/candi-profile']);
           } else {
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
           }
 
           setTimeout(() => {
@@ -100,12 +100,12 @@ export class LoginComponent implements OnInit {
           // this.success("Logged in successfully.");
         } else if (result === null) {
           this.service.spinnerHide();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
         this.service.spinnerHide();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -117,41 +117,41 @@ export class LoginComponent implements OnInit {
       (res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "success") {
+        if (result === 'success') {
           this.service.spinnerHide();
-          this.success2("New Password sent to the registered email address.");
-        } else if (result === "invalid email") {
+          this.success2('New Password sent to the registered email address.');
+        } else if (result === 'invalid email') {
           this.service.spinnerHide();
-          this.error("Email Do Not Exist. Please Signup!!!");
+          this.error('Email Do Not Exist. Please Signup!!!');
         } else {
           this.service.spinnerHide();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
         this.service.spinnerHide();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
 
   createAccountCheck() {
-    sessionStorage.setItem("registerModel", "no-apply");
+    sessionStorage.setItem('registerModel', 'no-apply');
   }
 
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -163,20 +163,20 @@ export class LoginComponent implements OnInit {
   error2(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.loginForm.patchValue({ password: "" });
+        this.loginForm.patchValue({ password: '' });
       }
     });
   }
@@ -184,16 +184,16 @@ export class LoginComponent implements OnInit {
   error3(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -204,16 +204,16 @@ export class LoginComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -224,16 +224,16 @@ export class LoginComponent implements OnInit {
   success2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

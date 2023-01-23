@@ -1,26 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
   UntypedFormControl,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
-import { IDayCalendarConfig } from "ng2-date-picker";
-import * as moment from "moment";
-import jspdf from "jspdf";
-import html2canvas from "html2canvas";
-import * as $ from "jquery";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { IDayCalendarConfig } from 'ng2-date-picker';
+import * as moment from 'moment';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as $ from 'jquery';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: "app-skill-set",
-  templateUrl: "./skill-set.component.html",
-  styleUrls: ["./skill-set.component.css"],
+  selector: 'app-skill-set',
+  templateUrl: './skill-set.component.html',
+  styleUrls: ['./skill-set.component.scss'],
 })
 export class SkillSetComponent implements OnInit {
   constructor(
@@ -31,10 +31,10 @@ export class SkillSetComponent implements OnInit {
   ) {}
 
   jobDomain: any = [];
-  skillSectorName: any = "";
+  skillSectorName: any = '';
   candidateForm: UntypedFormGroup;
-  codePattern = "[+]?[0-9]*";
-  phonePattern = "[0-9]*";
+  codePattern = '[+]?[0-9]*';
+  phonePattern = '[0-9]*';
   checkEmail: boolean = false;
   showDivPdf: boolean = false;
   user: any;
@@ -43,14 +43,14 @@ export class SkillSetComponent implements OnInit {
   area_name: any;
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM/DD/YYYY",
+    drops: 'down',
+    format: 'MM/DD/YYYY',
   };
 
   ngOnInit() {
-    this.user = "N";
-    if (sessionStorage.getItem("user_id")) {
-      this.user = sessionStorage.getItem("user_id");
+    this.user = 'N';
+    if (sessionStorage.getItem('user_id')) {
+      this.user = sessionStorage.getItem('user_id');
     }
 
     this.getJObSkillDomain();
@@ -64,7 +64,7 @@ export class SkillSetComponent implements OnInit {
         Validators.required,
         Validators.maxLength(60),
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       edit_date: new UntypedFormControl(null, [Validators.required]),
       // phone_no: new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern(this.phonePattern)]),
@@ -77,11 +77,11 @@ export class SkillSetComponent implements OnInit {
         //console.log(res,"RESULT");
         let result: any = res;
         if (result.length > 0) {
-          let edit_date = moment(new Date()).format("MM/DD/YYYY");
+          let edit_date = moment(new Date()).format('MM/DD/YYYY');
           if (
             result[0].edit_date !== undefined ||
             result[0].edit_date !== null ||
-            result[0].edit_date !== ""
+            result[0].edit_date !== ''
           ) {
             edit_date = result[0].edit_date;
           }
@@ -94,14 +94,14 @@ export class SkillSetComponent implements OnInit {
           });
           this.details = this.candidateForm.value;
         } else {
-          let edit_date = moment(new Date()).format("MM/DD/YYYY");
+          let edit_date = moment(new Date()).format('MM/DD/YYYY');
           this.candidateForm.patchValue({
             edit_date: edit_date,
           });
         }
       },
       (err) => {
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -124,13 +124,13 @@ export class SkillSetComponent implements OnInit {
               this.skillSectorName = result[0].skill_area_name;
               this.jobDomain = result;
               this.category_name = result[0].skill_category_name;
-              this.area_name = result[0]["area"][0].skill_area_name;
+              this.area_name = result[0]['area'][0].skill_area_name;
             } else {
-              this.error("No Data.");
+              this.error('No Data.');
             }
           },
           (err) => {
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         );
     });
@@ -140,9 +140,9 @@ export class SkillSetComponent implements OnInit {
     // //console.log("DATA",data);
     if (data !== undefined) {
       // //console.log(k,i,this.dateComplete,moment(this.dateComplete).format("MM/DD/YYYY"))
-      this.jobDomain[k]["skillset"][i]["date_of_completion"] = moment(
+      this.jobDomain[k]['skillset'][i]['date_of_completion'] = moment(
         new Date(data)
-      ).format("MM/DD/YYYY");
+      ).format('MM/DD/YYYY');
     }
     // //console.log(this.jobDomain[k]["skillset"][i]["date_of_completion"])
   }
@@ -152,7 +152,7 @@ export class SkillSetComponent implements OnInit {
     if (data !== undefined) {
       // //console.log(k,i,this.dateComplete,moment(this.dateComplete).format("MM/DD/YYYY"))
       this.candidateForm.patchValue({
-        edit_date: moment(new Date(data.date)).format("MM/DD/YYYY"),
+        edit_date: moment(new Date(data.date)).format('MM/DD/YYYY'),
       });
     }
     //console.log(this.candidateForm.value)
@@ -169,10 +169,10 @@ export class SkillSetComponent implements OnInit {
       (res) => {
         // //console.log(res,"RESULT");
         let result: any = res;
-        if (result === "success") {
+        if (result === 'success') {
           this.service.spinnerHide();
           this.details = this.candidateForm.value;
-          this.success("Updated successfully.");
+          this.success('Updated successfully.');
         }
         // else if(result==="not_allowed")
         // {
@@ -181,12 +181,12 @@ export class SkillSetComponent implements OnInit {
         // }
         else {
           this.service.spinnerHide();
-          this.error("Something went wrong,please try again.");
+          this.error('Something went wrong,please try again.');
         }
       },
       (err) => {
         this.service.spinnerHide();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -195,8 +195,8 @@ export class SkillSetComponent implements OnInit {
     this.showDivPdf = true;
 
     setTimeout(() => {
-      var HTML_Width = $(".canvas_div_pdf").width();
-      var HTML_Height = $(".canvas_div_pdf").height();
+      var HTML_Width = $('.canvas_div_pdf').width();
+      var HTML_Height = $('.canvas_div_pdf').height();
       var top_left_margin = 15;
       var PDF_Width = HTML_Width + top_left_margin * 2;
       var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
@@ -205,15 +205,15 @@ export class SkillSetComponent implements OnInit {
 
       var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
 
-      html2canvas($(".canvas_div_pdf")[0], { allowTaint: true }).then(function (
+      html2canvas($('.canvas_div_pdf')[0], { allowTaint: true }).then(function (
         canvas
       ) {
-        canvas.getContext("2d");
+        canvas.getContext('2d');
 
         //console.log(canvas.height + "  " + canvas.width);
 
-        var imgData = canvas.toDataURL("image/png", 1.0);
-        var pdf: any = new jspdf("p", "pt", [PDF_Width, PDF_Height]);
+        var imgData = canvas.toDataURL('image/png', 1.0);
+        var pdf: any = new jspdf('p', 'pt', [PDF_Width, PDF_Height]);
         pdf.page = 1; // use this as a counter.
 
         // function footer() {
@@ -222,7 +222,7 @@ export class SkillSetComponent implements OnInit {
         // };
         pdf.addImage(
           imgData,
-          "PNG",
+          'PNG',
           top_left_margin,
           top_left_margin,
           canvas_image_width,
@@ -234,7 +234,7 @@ export class SkillSetComponent implements OnInit {
           //footer();
           pdf.addImage(
             imgData,
-            "PNG",
+            'PNG',
             top_left_margin,
             -(PDF_Height * i) + top_left_margin * 4,
             canvas_image_width,
@@ -242,7 +242,7 @@ export class SkillSetComponent implements OnInit {
           );
         }
 
-        pdf.save("Skill_Checklist.pdf");
+        pdf.save('Skill_Checklist.pdf');
       });
     }, 100);
 
@@ -254,16 +254,16 @@ export class SkillSetComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -274,16 +274,16 @@ export class SkillSetComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

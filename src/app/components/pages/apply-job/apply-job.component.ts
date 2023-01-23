@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import { RecruiteeService } from "src/app/recruitee.service";
-import Swal from "sweetalert2";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-apply-job",
-  templateUrl: "./apply-job.component.html",
-  styleUrls: ["./apply-job.component.css"],
+  selector: 'app-apply-job',
+  templateUrl: './apply-job.component.html',
+  styleUrls: ['./apply-job.component.scss'],
 })
 export class ApplyJobComponent implements OnInit {
   constructor(
@@ -24,15 +24,15 @@ export class ApplyJobComponent implements OnInit {
 
   applicantForm: UntypedFormGroup;
   details: any = {};
-  file_name = "";
+  file_name = '';
   status = false;
-  url = "";
-  viewShow: any = "";
+  url = '';
+  viewShow: any = '';
   showPercentage: number = 0;
   showProgressBar: boolean = false;
   viewfinalErr: boolean = false;
-  codePattern = "[+]?[0-9]*";
-  phonePattern = "[0-9]*";
+  codePattern = '[+]?[0-9]*';
+  phonePattern = '[0-9]*';
   name: any;
   email: any;
 
@@ -59,7 +59,7 @@ export class ApplyJobComponent implements OnInit {
 
   getUserByID() {
     this.service
-      .getUserById({ user_id: sessionStorage.getItem("user_id") })
+      .getUserById({ user_id: sessionStorage.getItem('user_id') })
       .subscribe(
         (res) => {
           //console.log(res);
@@ -68,13 +68,13 @@ export class ApplyJobComponent implements OnInit {
             if (result[0].user_middle_name !== null) {
               this.name =
                 result[0].user_first_name +
-                " " +
+                ' ' +
                 result[0].user_middle_name +
-                " " +
+                ' ' +
                 result[0].user_last_name;
             } else {
               this.name =
-                result[0].user_first_name + " " + result[0].user_last_name;
+                result[0].user_first_name + ' ' + result[0].user_last_name;
             }
 
             this.email = result[0].email;
@@ -83,31 +83,31 @@ export class ApplyJobComponent implements OnInit {
               phone_no: result[0].phone,
             });
           } else {
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
   }
 
   checkResume() {
     this.service
-      .check_resume({ user_id: sessionStorage.getItem("user_id") })
+      .check_resume({ user_id: sessionStorage.getItem('user_id') })
       .subscribe((res) => {
         let result: any = res;
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            "http://elitemente.com/vcsapi/get/resume/" +
-            sessionStorage.getItem("user_id") +
-            "/" +
-            sessionStorage.getItem("user_name") +
-            "_resume";
+            'http://elitemente.com/vcsapi/get/resume/' +
+            sessionStorage.getItem('user_id') +
+            '/' +
+            sessionStorage.getItem('user_name') +
+            '_resume';
         } else {
           this.status = false;
-          this.url = "";
+          this.url = '';
         }
       });
   }
@@ -123,52 +123,52 @@ export class ApplyJobComponent implements OnInit {
         email: data.email,
         message: data.message,
         availability: data.availability,
-        user_id: sessionStorage.getItem("user_id"),
-        job_id: this.details["job_id"],
-        applied_by: "own",
+        user_id: sessionStorage.getItem('user_id'),
+        job_id: this.details['job_id'],
+        applied_by: 'own',
         recruiter_id: 0,
-        job_no: this.details["job_no"],
-        prefered_state: this.details["state"],
-        prefered_city: this.details["city"],
+        job_no: this.details['job_no'],
+        prefered_state: this.details['state'],
+        prefered_city: this.details['city'],
       };
       //console.log(obj)
       this.service.add_applicant(obj).subscribe(
         (res) => {
           //console.log(res);
           let result: any = res;
-          if (result === "success") {
+          if (result === 'success') {
             this.service.spinnerHide();
-            this.success2("Applied Successfully.");
+            this.success2('Applied Successfully.');
           }
-          if (result === "ERROR") {
+          if (result === 'ERROR') {
             this.service.spinnerHide();
-            this.error("Something went wrong. Please Try Again.");
+            this.error('Something went wrong. Please Try Again.');
           }
         },
         (err) => {
           this.service.spinnerHide();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       );
     } else {
       this.service.spinnerHide();
-      this.error("Upload Resume.");
+      this.error('Upload Resume.');
     }
   }
 
   fileUpload(files: FileList) {
     //console.log(files)
     let fileInput: any = <HTMLInputElement>(
-      document.getElementById("customFile")
+      document.getElementById('customFile')
     );
     let file = files[0];
     // //console.log("filesss",file)
     this.file_name = file.name;
 
     if (file.size > 25000000) {
-      this.error("File size exceeds the maximum limit 25mb.");
+      this.error('File size exceeds the maximum limit 25mb.');
     } else {
-      this.uploadFiles(file, sessionStorage.getItem("user_id"));
+      this.uploadFiles(file, sessionStorage.getItem('user_id'));
     }
   }
 
@@ -178,7 +178,7 @@ export class ApplyJobComponent implements OnInit {
     this.showPercentage = 0;
     let formData = new FormData();
 
-    formData.append("file", file, file.name);
+    formData.append('file', file, file.name);
     // //console.log(formData,file.name)
 
     this.service.uploadFile(formData, user).subscribe(
@@ -186,28 +186,28 @@ export class ApplyJobComponent implements OnInit {
         let result: any = res;
         //console.log(result)
         this.showPercentage = Math.round((100 * result.loaded) / result.total);
-        if (result.body === "success") {
+        if (result.body === 'success') {
           this.showProgressBar = false;
-          this.viewShow = "true";
+          this.viewShow = 'true';
           this.viewfinalErr = false;
           // this.success("Resume Uploaded Successfully.");
           this.status = true;
           this.url =
-            "http://elitemente.com/vcsapi/get/resume/" +
-            sessionStorage.getItem("user_id") +
-            "/" +
-            sessionStorage.getItem("user_name") +
-            "_resume";
+            'http://elitemente.com/vcsapi/get/resume/' +
+            sessionStorage.getItem('user_id') +
+            '/' +
+            sessionStorage.getItem('user_name') +
+            '_resume';
         } else {
           this.status = false;
-          this.url = "";
+          this.url = '';
           this.viewfinalErr = true;
-          this.viewShow = "false";
+          this.viewShow = 'false';
         }
       },
       (err) => {
         this.viewfinalErr = true;
-        this.viewShow = "false";
+        this.viewShow = 'false';
       }
     );
   }
@@ -215,16 +215,16 @@ export class ApplyJobComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -234,22 +234,22 @@ export class ApplyJobComponent implements OnInit {
   success(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         this.applicantForm.patchValue({
-          message: "",
-          availability: "",
+          message: '',
+          availability: '',
         });
       }
     });
@@ -257,22 +257,22 @@ export class ApplyJobComponent implements OnInit {
   success2(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         this.applicantForm.patchValue({
-          message: "",
-          availability: "",
+          message: '',
+          availability: '',
         });
         let navigationExtras: NavigationExtras = {
           queryParams: {
@@ -280,7 +280,7 @@ export class ApplyJobComponent implements OnInit {
           },
         };
 
-        this.router.navigate(["/job-applications"], navigationExtras);
+        this.router.navigate(['/job-applications'], navigationExtras);
       }
     });
   }

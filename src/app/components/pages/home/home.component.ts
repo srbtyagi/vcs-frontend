@@ -1,20 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/services/admin.service";
-import { RecruiteeService } from "src/app/recruitee.service";
-import { Title, Meta } from "@angular/platform-browser";
+import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
+import { Title, Meta } from '@angular/platform-browser';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  title = "Vish Consulting Services";
+  title = 'Vish Consulting Services';
 
-  search1: any = "";
-  search2: any = "";
-  search3: any = "";
+  search1: any = '';
+  search2: any = '';
+  search3: any = '';
   allJobs = [];
 
   constructor(
@@ -29,8 +28,8 @@ export class HomeComponent implements OnInit {
     this.getAllJobs();
     this.titleService.setTitle(this.title);
     this.metaTagService.updateTag({
-      name: "description",
-      content: "happy Registered Nurses",
+      name: 'description',
+      content: 'happy Registered Nurses',
     });
   }
 
@@ -46,9 +45,9 @@ export class HomeComponent implements OnInit {
       let result: any = res;
       if (result.length > 0) {
         for (let i = 0; i < 5; i++) {
-          if (result[i].job_status === "open") {
-            result[i]["regular_pay"] = Math.trunc(result[i].regular_pay_rate);
-            result[i]["blended_pay"] = Math.trunc(result[i].blended_pay_rate);
+          if (result[i].job_status === 'open') {
+            result[i]['regular_pay'] = Math.trunc(result[i].regular_pay_rate);
+            result[i]['blended_pay'] = Math.trunc(result[i].blended_pay_rate);
             this.allJobs.push(result[i]);
           }
         }
@@ -61,9 +60,9 @@ export class HomeComponent implements OnInit {
       queryParams: {
         special: btoa(unescape(encodeURIComponent(JSON.stringify(data)))),
         skipLocationChange: false,
-        fragment: "top",
+        fragment: 'top',
       },
     };
-    this.router.navigate(["/job-details"], navigationExtras);
+    this.router.navigate(['/job-details'], navigationExtras);
   }
 }

@@ -5,27 +5,27 @@ import {
   ElementRef,
   Renderer2,
   Inject,
-} from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
-import { RecruiteeService } from "src/app/recruitee.service";
+} from '@angular/core';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
-import Swal from "sweetalert2";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { DOCUMENT } from "@angular/common";
-import { Title, Meta } from "@angular/platform-browser";
+} from '@angular/forms';
+import Swal from 'sweetalert2';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
+import { RecruiteeService } from 'src/app/services/recruitee.service';
 
 @Component({
-  selector: "app-jobdetails",
-  templateUrl: "./jobdetails.component.html",
-  styleUrls: ["./jobdetails.component.css"],
+  selector: 'app-jobdetails',
+  templateUrl: './jobdetails.component.html',
+  styleUrls: ['./jobdetails.component.scss'],
 })
 export class JobdetailsComponent implements OnInit {
-  @ViewChild("closeModal", { static: false }) private closeModal: ElementRef;
+  @ViewChild('closeModal', { static: false }) private closeModal: ElementRef;
   jsonLD2: SafeHtml;
 
   constructor(
@@ -123,7 +123,7 @@ export class JobdetailsComponent implements OnInit {
 
     this.getRecData();
 
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.checkLoggedIn = true;
     }
     //console.log(this.checkLoggedIn)
@@ -132,13 +132,13 @@ export class JobdetailsComponent implements OnInit {
       email: new UntypedFormControl(null, [
         Validators.required,
         Validators.email,
-        Validators.pattern("[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"),
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
       ]),
       password: new UntypedFormControl(null, [Validators.required]),
     });
 
-    if (sessionStorage.getItem("user_type")) {
-      if (sessionStorage.getItem("user_type") === "recruitee") {
+    if (sessionStorage.getItem('user_type')) {
+      if (sessionStorage.getItem('user_type') === 'recruitee') {
         this.checkUserType = true;
       }
     }
@@ -147,22 +147,22 @@ export class JobdetailsComponent implements OnInit {
   getSafeHTML(value: {}) {
     // If value convert to JSON and escape / to prevent script tag in JSON
     const json = value
-      ? JSON.stringify(value, null, 2).replace(/\//g, "/")
-      : "";
+      ? JSON.stringify(value, null, 2).replace(/\//g, '/')
+      : '';
     const html = `${json}`;
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   getRecData() {
-    let user_ = "0";
-    if (sessionStorage.getItem("user_id")) {
-      user_ = sessionStorage.getItem("user_id");
+    let user_ = '0';
+    if (sessionStorage.getItem('user_id')) {
+      user_ = sessionStorage.getItem('user_id');
     }
     this.service.getRecruiteeStatus({ user_id: user_ }).subscribe((res) => {
       //console.log(res);
       let result: any = res;
       if (result.length > 0) {
-        if (result[0].apply_status !== "regular") {
+        if (result[0].apply_status !== 'regular') {
           this.applyStatus = false;
         }
       }
@@ -170,7 +170,7 @@ export class JobdetailsComponent implements OnInit {
   }
 
   applyStatusFalse() {
-    this.error("You are restricted to apply.");
+    this.error('You are restricted to apply.');
   }
 
   loginGuest() {
@@ -182,7 +182,7 @@ export class JobdetailsComponent implements OnInit {
       },
     };
     this.closeModal.nativeElement.click();
-    this.router.navigate(["/apply-job-guest"], navigationExtras);
+    this.router.navigate(['/apply-job-guest'], navigationExtras);
   }
 
   createAccountCheck() {
@@ -194,8 +194,8 @@ export class JobdetailsComponent implements OnInit {
       },
     };
 
-    sessionStorage.setItem("registerModel", "apply");
-    this.router.navigate(["/register"], navigationExtras);
+    sessionStorage.setItem('registerModel', 'apply');
+    this.router.navigate(['/register'], navigationExtras);
   }
 
   createAccountCheck2() {
@@ -209,8 +209,8 @@ export class JobdetailsComponent implements OnInit {
     };
     this.closeModal.nativeElement.click();
 
-    sessionStorage.setItem("registerModel", "apply");
-    this.router.navigate(["/register"], navigationExtras);
+    sessionStorage.setItem('registerModel', 'apply');
+    this.router.navigate(['/register'], navigationExtras);
   }
 
   toApplicant() {
@@ -218,13 +218,13 @@ export class JobdetailsComponent implements OnInit {
       this.service
         .getAlreadyAppliedStatus({
           job_id: this.details.job_id,
-          user_id: sessionStorage.getItem("user_id"),
+          user_id: sessionStorage.getItem('user_id'),
         })
         .subscribe((res) => {
           //console.log(res);
           let result: any = res;
           if (result.length > 0) {
-            this.error("You have already applied.");
+            this.error('You have already applied.');
           } else {
             let navigationExtras: NavigationExtras = {
               queryParams: {
@@ -234,7 +234,7 @@ export class JobdetailsComponent implements OnInit {
               },
             };
             this.closeModal.nativeElement.click();
-            this.router.navigate(["/apply-job"], navigationExtras);
+            this.router.navigate(['/apply-job'], navigationExtras);
           }
         });
     }
@@ -247,18 +247,18 @@ export class JobdetailsComponent implements OnInit {
       (res) => {
         //console.log(res);
         let result: any = res;
-        if (result === "username and password is not matched") {
-          this.error1("Wrong Password. Try Again!!!");
+        if (result === 'username and password is not matched') {
+          this.error1('Wrong Password. Try Again!!!');
         } else if (
-          result === "No username in database please signup first" ||
-          result === "unregistered"
+          result === 'No username in database please signup first' ||
+          result === 'unregistered'
         ) {
-          this.error2("Invalid Email. Please Signup!!!");
-        } else if (result.message === "You are login") {
-          sessionStorage.setItem("user_id", result.user_id);
-          sessionStorage.setItem("user_name", result.username);
+          this.error2('Invalid Email. Please Signup!!!');
+        } else if (result.message === 'You are login') {
+          sessionStorage.setItem('user_id', result.user_id);
+          sessionStorage.setItem('user_name', result.username);
           if (result.u_access.length) {
-            sessionStorage.setItem("user_type", result.u_access[0].user_type);
+            sessionStorage.setItem('user_type', result.u_access[0].user_type);
 
             result.u_access.forEach((e) => {
               let data = {
@@ -271,7 +271,7 @@ export class JobdetailsComponent implements OnInit {
               };
               modulearray.push(data);
             });
-            sessionStorage.setItem("moduleArray", JSON.stringify(modulearray));
+            sessionStorage.setItem('moduleArray', JSON.stringify(modulearray));
           }
 
           let navigationExtras: NavigationExtras = {
@@ -282,19 +282,19 @@ export class JobdetailsComponent implements OnInit {
             },
           };
           this.closeModal.nativeElement.click();
-          this.router.navigate(["/apply-job"], navigationExtras);
+          this.router.navigate(['/apply-job'], navigationExtras);
           setTimeout(() => {
             window.location.reload();
           }, 200);
           // this.success("Logged in successfully.");
         } else {
           this.closeModal.nativeElement.click();
-          this.error("Something went wrong. Please Try Again.");
+          this.error('Something went wrong. Please Try Again.');
         }
       },
       (err) => {
         this.closeModal.nativeElement.click();
-        this.error("Something went wrong. Please Try Again.");
+        this.error('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -302,16 +302,16 @@ export class JobdetailsComponent implements OnInit {
   error(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -322,21 +322,21 @@ export class JobdetailsComponent implements OnInit {
   error1(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
         this.loginForm.patchValue({
-          password: "",
+          password: '',
         });
       }
     });
@@ -345,16 +345,16 @@ export class JobdetailsComponent implements OnInit {
   error2(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {

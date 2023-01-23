@@ -14,7 +14,7 @@ import { Country, State, City } from 'country-state-city';
 @Component({
   selector: 'app-post-job',
   templateUrl: './post-job.component.html',
-  styleUrls: ['./post-job.component.css'],
+  styleUrls: ['./post-job.component.scss'],
 })
 export class PostJobComponent implements OnInit {
   // cities = {

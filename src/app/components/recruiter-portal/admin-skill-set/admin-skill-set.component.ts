@@ -15,7 +15,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: "app-admin-skill-set",
   templateUrl: "./admin-skill-set.component.html",
-  styleUrls: ["./admin-skill-set.component.css"],
+  styleUrls: ["./admin-skill-set.component.scss"],
 })
 export class AdminSkillSetComponent implements OnInit {
   /*paginate */

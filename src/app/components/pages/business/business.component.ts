@@ -5,7 +5,7 @@ import { Title, Meta } from "@angular/platform-browser";
 @Component({
   selector: "app-business",
   templateUrl: "./business.component.html",
-  styleUrls: ["./business.component.css"],
+  styleUrls: ["./business.component.scss"],
 })
 export class BusinessComponent implements OnInit {
   title = "Serving Healthcare and IT Clients";

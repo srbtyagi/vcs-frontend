@@ -1,25 +1,24 @@
-import { Component, OnInit } from "@angular/core";
-import { Title, Meta } from "@angular/platform-browser";
+import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
-  selector: "app-it-blog",
-  templateUrl: "./it-blog.component.html",
-  styleUrls: ["./it-blog.component.css"],
+  selector: 'app-it-blog',
+  templateUrl: './it-blog.component.html',
 })
 export class ITBlogComponent implements OnInit {
-  title = "IT Blogs";
+  title = 'IT Blogs';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
     this.metaTagService.updateTag({
-      name: "keywords",
-      content: "AI, Big data, LOT, Java, .Net",
+      name: 'keywords',
+      content: 'AI, Big data, LOT, Java, .Net',
     });
     this.metaTagService.updateTag({
-      name: "description",
-      content: "Digital system and cybercrime",
+      name: 'description',
+      content: 'Digital system and cybercrime',
     });
   }
 }

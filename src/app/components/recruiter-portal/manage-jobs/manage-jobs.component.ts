@@ -15,7 +15,7 @@ import { IDayCalendarConfig } from "ng2-date-picker";
 @Component({
   selector: "app-manage-jobs",
   templateUrl: "./manage-jobs.component.html",
-  styleUrls: ["./manage-jobs.component.css"],
+  styleUrls: ["./manage-jobs.component.scss"],
 })
 export class ManageJobsComponent implements OnInit {
   @ViewChild("closeEdit", { static: false }) private closeEdit: ElementRef;
