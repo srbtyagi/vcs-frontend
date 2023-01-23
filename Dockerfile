@@ -1,4 +1,4 @@
-FROM node:12 as node
+FROM node
 WORKDIR /front-app
 COPY . .
 RUN npm cache clean --force
