@@ -1,16 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
-@import "css/style.css";
-@import "css/animate.css";
-@import "css/animate.min.css";
-@import "css/plugins.css";
-@import "css/skin/skin-1.css";
-/* @import "css/style.min.css"; */
-@import "css/templete.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* @font-face {
-	font-family: "roboto",sans-serif;
-	font-style: normal;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* OLD CODE */
+
+/* You can add global styles to this file, and also import other style files */
+@import "./css/style.css";
+@import "./css/animate.css";
+@import "./css/animate.min.css";
+@import "./css/plugins.css";
+@import "./css/skin/skin-1.css";
+/* @import "css/style.min.css"; */
+@import "./css/templete.css";
+
+html,
+body {
+  @apply font-google;
+}
+
+.font-google {
+  font-family: "Nunito Sans", sans-serif;
+}
 
 body {
   min-width: 100% !important;

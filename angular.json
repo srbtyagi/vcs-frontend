@@ -36,8 +36,9 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/js/custom.js",
-              "src/assets/js/dz.carousel.js",
               "src/assets/js/dz.ajax.js"
             ],
             "vendorChunk": true,
