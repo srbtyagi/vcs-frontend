@@ -2,9 +2,9 @@ FROM node:12 as node
 WORKDIR /front-app
 COPY . .
 RUN npm cache clean --force
-RUN npm install --force
-RUN npm i -g @angular/cli@8
-RUN ng build --prod
+RUN npm install
+RUN npm i -g @angular/cli
+RUN ng build --configuration production
 FROM nginx:alpine
 COPY --from=node /front-app/dist/vishusaWeb /usr/share/nginx/html
 EXPOSE 80
