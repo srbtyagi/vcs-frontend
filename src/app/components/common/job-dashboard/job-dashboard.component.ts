@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 @Component({
   selector: "app-job-dashboard",
   templateUrl: "./job-dashboard.component.html",
-  styleUrls: ["./job-dashboard.component.css"],
+  styleUrls: ["./job-dashboard.component.scss"],
 })
 export class JobDashboardComponent implements OnInit {
   data: any;

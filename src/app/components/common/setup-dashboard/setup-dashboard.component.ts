@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 @Component({
   selector: "app-setup-dashboard",
   templateUrl: "./setup-dashboard.component.html",
-  styleUrls: ["./setup-dashboard.component.css"],
+  styleUrls: ["./setup-dashboard.component.scss"],
 })
 export class SetupDashboardComponent implements OnInit {
   data: any;

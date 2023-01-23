@@ -1,10 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
-  selector: "app-finance-dashboard",
-  templateUrl: "./finance-dashboard.component.html",
-  styleUrls: ["./finance-dashboard.component.css"],
+  selector: 'app-finance-dashboard',
+  templateUrl: './finance-dashboard.component.html',
 })
 export class FinanceDashboardComponent implements OnInit {
   data: any;
@@ -21,9 +20,9 @@ export class FinanceDashboardComponent implements OnInit {
   }
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -32,19 +31,19 @@ export class FinanceDashboardComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "PAYROLL PROCESSING": {
-              e.submodule_name_lower = "Payroll Process";
-              e.routing = "/payroll-processing";
+            case 'PAYROLL PROCESSING': {
+              e.submodule_name_lower = 'Payroll Process';
+              e.routing = '/payroll-processing';
               break;
             }
-            case "PAYROLL APPROVAL": {
-              e.submodule_name_lower = "Payroll Approval";
-              e.routing = "/payroll-approval";
+            case 'PAYROLL APPROVAL': {
+              e.submodule_name_lower = 'Payroll Approval';
+              e.routing = '/payroll-approval';
               break;
             }
-            case "PAYROLL & INVOICE": {
-              e.submodule_name_lower = "Payroll & Invoice";
-              e.routing = "/payroll-invoice";
+            case 'PAYROLL & INVOICE': {
+              e.submodule_name_lower = 'Payroll & Invoice';
+              e.routing = '/payroll-invoice';
               break;
             }
             // case "INCENTIVE PROCESSING": {
@@ -57,14 +56,14 @@ export class FinanceDashboardComponent implements OnInit {
             //   e.routing = "/";
             //   break;
             // }
-            case "INCENTIVES": {
-              e.submodule_name_lower = "Incentives";
-              e.routing = "/incentives";
+            case 'INCENTIVES': {
+              e.submodule_name_lower = 'Incentives';
+              e.routing = '/incentives';
               break;
             }
-            case "INVOICE RECON": {
-              e.submodule_name_lower = "Invoice Reconcile";
-              e.routing = "/invoice-reconcile";
+            case 'INVOICE RECON': {
+              e.submodule_name_lower = 'Invoice Reconcile';
+              e.routing = '/invoice-reconcile';
               break;
             }
             default: {
