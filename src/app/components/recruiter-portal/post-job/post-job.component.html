@@ -827,19 +827,11 @@
                     </div>
                     <button
                       type="button"
-                      class="site-button m-b30"
+                      type="submit"
                       (click)="submit()"
-                      [disabled]="
-                        !postJobForm.valid || shit_details.length === 0
-                      "
-                      [ngStyle]="{
-                        cursor:
-                          !postJobForm.valid || shit_details.length === 0
-                            ? 'not-allowed'
-                            : 'pointer'
-                      }"
+                      class="relative inline-flex items-center rounded-sm border border-transparent bg-sky-600 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800 uppercase transition-colors duration-300"
                     >
-                      Post Job
+                      <span>Post Job</span>
                     </button>
                   </form>
                 </div>

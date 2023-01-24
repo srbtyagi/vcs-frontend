@@ -32,10 +32,10 @@ body {
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
 }
 
-.mat-menu-panel.mat-top-menu {
+.mat-mdc-menu-panel.mat-mdc-top-menu {
   @apply bg-white w-auto min-w-[300px];
 
-  .mat-menu-item {
+  .mat-mdc-menu-item {
     @apply text-gray-900 uppercase text-[12px] font-bold font-google;
 
     &:hover {
@@ -44,10 +44,10 @@ body {
   }
 }
 
-.mat-menu-panel.mobile-drop-menu {
+.mat-mdc-menu-panel.mobile-drop-menu {
   @apply bg-gray-100 min-w-[400px];
 
-  .mat-menu-item {
+  .mat-mdc-menu-item {
     @apply text-gray-900 uppercase text-[12px] font-bold font-google border-b border-gray-500;
 
     &:hover {
@@ -56,10 +56,10 @@ body {
   }
 }
 
-.mat-menu-panel.mobile-drop-menu-small {
+.mat-mdc-menu-panel.mobile-drop-menu-small {
   @apply bg-gray-100 min-w-[200px];
 
-  .mat-menu-item {
+  .mat-mdc-menu-item {
     @apply text-gray-900 uppercase text-[12px] font-bold font-google border-b border-gray-500;
 
     &:hover {

@@ -97,7 +97,7 @@
       <div class="flex items-center">
         <div class="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
           <div class="relative ml-3">
-            <div>
+            <div *ngIf="!user_id">
               <app-buttons
                 label="Sign In"
                 iconLocation="left"
@@ -107,6 +107,50 @@
                 buttonType="transparent"
                 iconType="lock"
               ></app-buttons>
+            </div>
+            <div *ngIf="user_id">
+              <app-buttons
+                [label]="user_name"
+                iconLocation="left"
+                [hasIcon]="true"
+                size="normal"
+                buttonType="transparent"
+                [matMenuTriggerFor]="profileMenu"
+                iconType="badge"
+              ></app-buttons>
+              <mat-menu #profileMenu="matMenu" class="mat-top-menu">
+                <button
+                  *ngIf="checkUserType"
+                  (click)="navigateToProfile()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Profile
+                </button>
+                <button
+                  *ngFor="let a of moduleArray"
+                  mat-menu-item
+                  (click)="navigateTo(a)"
+                  class="font-google text-xs"
+                >
+                  {{ a.module_name_lower }}
+                </button>
+                <button
+                  *ngIf="checkUserType"
+                  (click)="navigateToRecruitee()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Assignments
+                </button>
+                <button
+                  (click)="logout()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Logout
+                </button>
+              </mat-menu>
             </div>
           </div>
         </div>

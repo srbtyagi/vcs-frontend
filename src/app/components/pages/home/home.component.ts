@@ -9,7 +9,7 @@ import { RecruiteeService } from 'src/app/services/recruitee.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  title = 'Vish Consulting Services';
+  title = 'Elite Mente LLC';
 
   search1: any = '';
   search2: any = '';

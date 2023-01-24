@@ -54,7 +54,7 @@ body {
       font-size: 16px;
       border: none;
       font-family: "Montserrat",sans-serif;
-  
+
     } */
 
 .dropdown {
@@ -101,6 +101,7 @@ body {
   font-size: 15px;
   display: inline-block;
   outline: none;
+  background-color: #0369a1 !important;
   cursor: pointer;
   outline: none;
   border-width: 0;
@@ -112,6 +113,13 @@ body {
   text-align: center;
   white-space: pre;
   font-family: "roboto", sans-serif !important;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  background-color: #0369a1 !important;
 }
 
 .site-button2 {
