@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './faq.component.html',
 })
 export class FaqComponent implements OnInit {
-  title = 'Nursing Resources';
+  title = 'Industrial Resources';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 

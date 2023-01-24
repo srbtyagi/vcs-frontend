@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './it-service.component.html',
 })
 export class ITServiceComponent implements OnInit {
-  title = 'Our IT Services';
+  title = 'Industrial & Admin Services';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 
@@ -18,7 +18,7 @@ export class ITServiceComponent implements OnInit {
     });
     this.metaTagService.updateTag({
       name: 'description',
-      content: 'Our IT employment services',
+      content: 'Industrial & Admin Services',
     });
   }
 }

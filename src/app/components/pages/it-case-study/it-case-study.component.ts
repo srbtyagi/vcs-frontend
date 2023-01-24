@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './it-case-study.component.html',
 })
 export class ITCaseStudyComponent implements OnInit {
-  title = 'IT Case Studies';
+  title = 'Research';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 

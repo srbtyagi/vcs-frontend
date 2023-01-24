@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './hs-case-study.component.html',
 })
 export class HsCaseStudyComponent implements OnInit {
-  title = 'Clinical Studies';
+  title = 'IT Services';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 

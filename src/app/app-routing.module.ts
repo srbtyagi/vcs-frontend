@@ -65,6 +65,7 @@ import { PostJobComponent } from './components/recruiter-portal/post-job/post-jo
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -107,7 +108,7 @@ const routes: Routes = [
   { path: 'payroll-invoice', component: PayrollInvoiceComponent },
   { path: 'apply-job-guest', component: ApplyJobGuestComponent },
   { path: 'incentives', component: IncentivesComponent },
-  { path: 'skill-checklist', component: SkillChecklistComponent },
+  { path: 'case-study', component: SkillChecklistComponent },
   { path: 'skill-set', component: SkillSetComponent },
   { path: 'clients', component: BusinessComponent },
   { path: 'healthcare-staffing', component: HealthcareStaffingComponent },
@@ -121,10 +122,10 @@ const routes: Routes = [
   { path: 'healthcare-blogs', component: HealthcareBlogsComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'my-documents', component: MyDocumentsComponent },
-  { path: 'IT_case_study', component: ITCaseStudyComponent },
-  { path: 'IT_blogs', component: ITBlogComponent },
-  { path: 'IT_services', component: ITServiceComponent },
-  { path: 'HS_case_study', component: HsCaseStudyComponent },
+  { path: 'research', component: ITCaseStudyComponent },
+  { path: 'blog', component: ITBlogComponent },
+  { path: 'ip-services', component: ITServiceComponent },
+  { path: 'it-services', component: HsCaseStudyComponent },
   { path: 'terms-of-service', component: TermsOfServiceComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];
