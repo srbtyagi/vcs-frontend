@@ -91,12 +91,9 @@ export class LoginComponent implements OnInit {
           if (sessionStorage.getItem('user_type') === 'recruitee') {
             this.router.navigate(['/candi-profile']);
           } else {
-            this.router.navigate(['/']);
+            window.location.href = '/';
           }
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 100);
           // this.success("Logged in successfully.");
         } else if (result === null) {
           this.service.spinnerHide();

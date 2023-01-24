@@ -10,13 +10,6 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
-
   navbarItems: any = [
     {
       label: 'Home',
@@ -93,10 +86,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public router: Router,
     private breakpointObserver: BreakpointObserver
-  ) {
-    this.user_id = sessionStorage.getItem('user_id');
-    this.user_name = sessionStorage.getItem('user_name');
-  }
+  ) {}
 
   changeCss() {
     var classname = document.getElementById('navbarNavDropdown').className;
@@ -126,6 +116,8 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user_id = sessionStorage.getItem('user_id');
+    this.user_name = sessionStorage.getItem('user_name');
     this.functionassignAccess();
     if (sessionStorage.getItem('user_type') === 'recruitee') {
       this.checkUserType = true;
@@ -207,8 +199,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     sessionStorage.clear();
     this.router.navigateByUrl('/');
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    this.user_id = null;
   }
 }

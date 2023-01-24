@@ -7,3 +7,4 @@ docker rm $(docker ps --filter status=exited -q)
     docker stop $(docker ps -a -q)
     docker rm $(docker ps -a -q)
 
+docker rmi $(docker images -a -q)

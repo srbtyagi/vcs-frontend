@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
       s3: this.search3,
     };
     this.service.getAllJob(obj).subscribe((res) => {
-      //console.log(res);
       let result: any = res;
       if (result.length > 0) {
         for (let i = 0; i < 5; i++) {
