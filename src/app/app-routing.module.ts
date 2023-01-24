@@ -65,8 +65,7 @@ import { PostJobComponent } from './components/recruiter-portal/post-job/post-jo
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, title: 'Elite Mente' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'candi-profile', component: CandidateProfileComponent },
@@ -119,7 +118,7 @@ const routes: Routes = [
   { path: 'invoice-reconcile', component: InvoiceReconcileComponent },
   { path: 'change-passcode', component: ChangePasscodeComponent },
   { path: 'skill-set-admin', component: AdminSkillSetComponent },
-  { path: 'healthcare-blogs', component: HealthcareBlogsComponent },
+  { path: 'it-blog', component: HealthcareBlogsComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'my-documents', component: MyDocumentsComponent },
   { path: 'research', component: ITCaseStudyComponent },

@@ -5,7 +5,7 @@ const obj = {
 };
 
 fetch(
-  "http://elitemente.com/vcsapi/get/api/tbl/job/search_job/with/filter",
+  "http://3.142.114.192:8000/vcsapi/get/api/tbl/job/search_job/with/filter",
   {
     method: "POST",
     body: JSON.stringify(obj),
@@ -36,7 +36,7 @@ fetch(
         "@type": "JobPosting",
         title: details.job_title,
         url:
-          "http://elitemente.com/job-details?special=" +
+          "http://3.142.114.192:8000/job-details?special=" +
           details.job_id +
           "",
         description: details.job_description,
@@ -53,7 +53,7 @@ fetch(
         hiringOrganization: {
           "@type": "Organization",
           name: "Vish Consulting Services",
-          sameAs: "http://elitemente.com",
+          sameAs: "http://3.142.114.192:8000",
         },
         jobLocation: {
           "@type": "Place",

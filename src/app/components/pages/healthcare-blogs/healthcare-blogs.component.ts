@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
   templateUrl: './healthcare-blogs.component.html',
 })
 export class HealthcareBlogsComponent implements OnInit {
-  title = 'Nurse Blog';
+  title = ' Blog';
 
   constructor(private titleService: Title, private metaTagService: Meta) {}
 
