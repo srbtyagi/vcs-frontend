@@ -1500,7 +1500,7 @@ export class ManageJobsComponent implements OnInit {
         this.shiftArry[i].value = true;
       }
     }
-    //console.log(this.shit_details, this.shiftArry)
+    console.log(this.shit_details, this.shiftArry)
   }
 
   checkBoxSelect(value) {
