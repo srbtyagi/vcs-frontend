@@ -10,7 +10,7 @@
   }
 
   &.button-transparent {
-    @apply bg-white text-gray-700 hover:bg-sky-700 hover:text-white;
+    @apply bg-transparent text-gray-700 hover:bg-sky-700 hover:text-white;
   }
 
   &.size-normal {
