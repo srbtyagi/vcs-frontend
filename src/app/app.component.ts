@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router, NavigationEnd } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { AdminService } from './services/admin.service';
@@ -11,7 +11,7 @@ declare const gtag: Function;
     <router-outlet></router-outlet>
     <app-footer></app-footer>`,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   showHead: boolean = false;
 
   constructor(

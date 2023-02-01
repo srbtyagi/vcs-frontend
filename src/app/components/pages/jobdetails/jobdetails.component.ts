@@ -87,7 +87,7 @@ export class JobdetailsComponent implements OnInit {
           //   "hiringOrganization": {
           //     "@type": "Organization",
           //     "name": "Vish Consulting Services",
-          //     "sameAs": "http://3.142.114.192:8000/"
+          //     "sameAs": "http://3.95.196.197:8000/"
           //   },
           //   "jobLocation": {
           //     "@type": "Place",

@@ -317,12 +317,12 @@ var JobBoard = (function () {
     });
 
     /*
-		
-		var currentTallest = 0, 
-			currentRowStart = 0, 
-			rowDivs = new Array(), 
+
+		var currentTallest = 0,
+			currentRowStart = 0,
+			rowDivs = new Array(),
 			$el, topPosition = 0;
-			
+
 		$(container).each(function() {
 			$el = $(this);
 			$($el).height('auto')
@@ -344,7 +344,7 @@ var JobBoard = (function () {
 				rowDivs[currentDiv].height(currentTallest);
 			}
 		});
-		
+
 		*/
   };
 
@@ -675,7 +675,7 @@ var JobBoard = (function () {
       dialog = modal.find(".modal-dialog");
     modal.css("display", "block");
 
-    /* Dividing by two centers the modal exactly, but dividing by three 
+    /* Dividing by two centers the modal exactly, but dividing by three
 		 or four works better for larger screens.  */
     dialog.css(
       "margin-top",

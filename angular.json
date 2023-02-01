@@ -33,16 +33,18 @@
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/plugins/magnific-popup/magnific-popup.css",
               "src/styles.scss"
             ],
             "scripts": [
+              "src/assets/js/custom.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
               "./node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js",
-              "./node_modules/magnific-popup/dist/jquery.magnific-popup.min.js",
-              "src/assets/js/custom.js",
-              "src/assets/js/dz.ajax.js"
+              "src/assets/plugins/magnific-popup/magnific-popup.js",
+              "src/assets/js/dz.ajax.js",
+              "src/assets/js/jobPost.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

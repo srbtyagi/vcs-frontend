@@ -57,7 +57,7 @@ export class CandidateProfileComponent implements OnInit {
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            'http://3.142.114.192:8000/vcsapi/get/resume/' +
+            'http://3.95.196.197:8000/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +
