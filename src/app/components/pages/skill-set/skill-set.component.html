@@ -68,9 +68,9 @@
                             />
                             <div
                               *ngIf="
-                                candidateForm.controls.name.invalid &&
-                                (candidateForm.controls.name.dirty ||
-                                  candidateForm.controls.name.touched)
+                                candidateForm.controls['name'].invalid &&
+                                (candidateForm.controls['name'].dirty ||
+                                  candidateForm.controls['name'].touched)
                               "
                               class="alert alert-danger"
                               style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -106,9 +106,9 @@
                             />
                             <div
                               *ngIf="
-                                candidateForm.controls.email.invalid &&
-                                (candidateForm.controls.email.dirty ||
-                                  candidateForm.controls.email.touched)
+                                candidateForm.controls['email'].invalid &&
+                                (candidateForm.controls['email'].dirty ||
+                                  candidateForm.controls['email'].touched)
                               "
                               class="alert alert-danger"
                               style="
@@ -140,8 +140,8 @@
                             </div>
                             <div
                               *ngIf="
-                                (candidateForm.controls.email.dirty ||
-                                  candidateForm.controls.email.touched) &&
+                                (candidateForm.controls['email'].dirty ||
+                                  candidateForm.controls['email'].touched) &&
                                 checkEmail
                               "
                               class="alert alert-danger"
@@ -170,9 +170,9 @@
                             </dp-date-picker>
                             <div
                               *ngIf="
-                                candidateForm.controls.edit_date.invalid &&
-                                (candidateForm.controls.edit_date.dirty ||
-                                  candidateForm.controls.edit_date.touched)
+                                candidateForm.controls['edit_date'].invalid &&
+                                (candidateForm.controls['edit_date'].dirty ||
+                                  candidateForm.controls['edit_date'].touched)
                               "
                               class="alert alert-danger"
                               style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -199,7 +199,7 @@
                                                 <div style="display: flex;">
                                                 <input class="form-control" style="margin-right: 0px;" formControlName="phone_no"
                                                      type="text" placeholder="Enter Phone No.">
-                                                     
+
                                                      </div>
                                                      <div
                                                      *ngIf="candidateForm.controls.phone_no.invalid && (candidateForm.controls.phone_no.dirty || candidateForm.controls.phone_no.touched)"
@@ -308,16 +308,16 @@
                                     </td>
                                     <!-- <td *ngIf="b.date_flag===1">
                                                                     <dp-date-picker dir="ltr" theme="dp-material"
-                                                                        placeholder="MM/DD/YYYY" required="true" 
+                                                                        placeholder="MM/DD/YYYY" required="true"
                                                                         [(ngModel)]="b.date_of_completion" [ngModelOptions]="{standalone: true}"
                                                                         (ngModelChange)="skillRateChange(k,i,$event)"
-                                                                         
-                                                                          
+
+
                                                                         [config]="datePickerConfig">
                                                                     </dp-date-picker>
                                                                         </td>
                                                                         <td *ngIf="b.date_flag===0">
-                                                                            
+
                                                                                 </td> -->
                                   </tr>
                                 </tbody>

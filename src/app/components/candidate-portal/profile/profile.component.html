@@ -130,9 +130,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.first_name.invalid &&
-                              (registerForm.controls.first_name.dirty ||
-                                registerForm.controls.first_name.touched)
+                              registerForm.controls['first_name'].invalid &&
+                              (registerForm.controls['first_name'].dirty ||
+                                registerForm.controls['first_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -166,9 +166,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.middle_name.invalid &&
-                              (registerForm.controls.middle_name.dirty ||
-                                registerForm.controls.middle_name.touched)
+                              registerForm.controls['middle_name'].invalid &&
+                              (registerForm.controls['middle_name'].dirty ||
+                                registerForm.controls['middle_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -198,9 +198,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.last_name.invalid &&
-                              (registerForm.controls.last_name.dirty ||
-                                registerForm.controls.last_name.touched)
+                              registerForm.controls['last_name'].invalid &&
+                              (registerForm.controls['last_name'].dirty ||
+                                registerForm.controls['last_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -239,9 +239,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.email.invalid &&
-                              (registerForm.controls.email.dirty ||
-                                registerForm.controls.email.touched)
+                              registerForm.controls['email'].invalid &&
+                              (registerForm.controls['email'].dirty ||
+                                registerForm.controls['email'].touched)
                             "
                             class="alert alert-danger"
                             style="
@@ -273,8 +273,8 @@
                           </div>
                           <div
                             *ngIf="
-                              (registerForm.controls.email.dirty ||
-                                registerForm.controls.email.touched) &&
+                              (registerForm.controls['email'].dirty ||
+                                registerForm.controls['email'].touched) &&
                               checkEmail
                             "
                             class="alert alert-danger"
@@ -301,9 +301,9 @@
                           </div>
                           <div
                             *ngIf="
-                              registerForm.controls.phone_no.invalid &&
-                              (registerForm.controls.phone_no.dirty ||
-                                registerForm.controls.phone_no.touched)
+                              registerForm.controls['phone_no'].invalid &&
+                              (registerForm.controls['phone_no'].dirty ||
+                                registerForm.controls['phone_no'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -409,9 +409,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.current_loc.invalid &&
-                              (registerForm.controls.current_loc.dirty ||
-                                registerForm.controls.current_loc.touched)
+                              registerForm.controls['current_loc'].invalid &&
+                              (registerForm.controls['current_loc'].dirty ||
+                                registerForm.controls['current_loc'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -446,9 +446,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.desired_loc1.invalid &&
-                              (registerForm.controls.desired_loc1.dirty ||
-                                registerForm.controls.desired_loc1.touched)
+                              registerForm.controls['desired_loc1'].invalid &&
+                              (registerForm.controls['desired_loc1'].dirty ||
+                                registerForm.controls['desired_loc1'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -475,9 +475,9 @@
                           />
                           <div
                             *ngIf="
-                              registerForm.controls.desired_loc2.invalid &&
-                              (registerForm.controls.desired_loc2.dirty ||
-                                registerForm.controls.desired_loc2.touched)
+                              registerForm.controls['desired_loc2'].invalid &&
+                              (registerForm.controls['desired_loc2'].dirty ||
+                                registerForm.controls['desired_loc2'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"

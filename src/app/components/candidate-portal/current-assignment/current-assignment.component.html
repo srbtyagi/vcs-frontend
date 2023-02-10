@@ -269,9 +269,9 @@
                           </select>
                           <div
                             *ngIf="
-                              assignmentForm.controls.job_id.invalid &&
-                              (assignmentForm.controls.job_id.dirty ||
-                                assignmentForm.controls.job_id.touched)
+                              assignmentForm.controls['job_id'].invalid &&
+                              (assignmentForm.controls['job_id'].dirty ||
+                                assignmentForm.controls['job_id'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -319,9 +319,9 @@
                           </select>
                           <div
                             *ngIf="
-                              assignmentForm.controls.week_id.invalid &&
-                              (assignmentForm.controls.week_id.dirty ||
-                                assignmentForm.controls.week_id.touched)
+                              assignmentForm.controls['week_id'].invalid &&
+                              (assignmentForm.controls['week_id'].dirty ||
+                                assignmentForm.controls['week_id'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -351,9 +351,9 @@
                         />
                         <div
                           *ngIf="
-                            assignmentForm.controls.reg_ot_hr.invalid &&
-                            (assignmentForm.controls.reg_ot_hr.dirty ||
-                              assignmentForm.controls.reg_ot_hr.touched)
+                            assignmentForm.controls['reg_ot_hr'].invalid &&
+                            (assignmentForm.controls['reg_ot_hr'].dirty ||
+                              assignmentForm.controls['reg_ot_hr'].touched)
                           "
                           class="alert alert-danger"
                           style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -382,9 +382,9 @@
                         />
                         <div
                           *ngIf="
-                            assignmentForm.controls.holiday_wk_hr.invalid &&
-                            (assignmentForm.controls.holiday_wk_hr.dirty ||
-                              assignmentForm.controls.holiday_wk_hr.touched)
+                            assignmentForm.controls['holiday_wk_hr'].invalid &&
+                            (assignmentForm.controls['holiday_wk_hr'].dirty ||
+                              assignmentForm.controls['holiday_wk_hr'].touched)
                           "
                           class="alert alert-danger"
                           style="font-size: 12px; padding: 0.5rem 1.25rem"

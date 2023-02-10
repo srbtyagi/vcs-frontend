@@ -133,9 +133,9 @@
                         />
                         <div
                           *ngIf="
-                            passcodeForm.controls.old_passcode.invalid &&
-                            (passcodeForm.controls.old_passcode.dirty ||
-                              passcodeForm.controls.old_passcode.touched)
+                            passcodeForm.controls['old_passcode'].invalid &&
+                            (passcodeForm.controls['old_passcode'].dirty ||
+                              passcodeForm.controls['old_passcode'].touched)
                           "
                           class="alert alert-danger"
                           style="
@@ -155,8 +155,8 @@
                         </div>
                         <div
                           *ngIf="
-                            (passcodeForm.controls.old_passcode.dirty ||
-                              passcodeForm.controls.old_passcode.touched) &&
+                            (passcodeForm.controls['old_passcode'].dirty ||
+                              passcodeForm.controls['old_passcode'].touched) &&
                             !old_passcode
                           "
                           class="alert alert-danger"
@@ -181,9 +181,9 @@
                         />
                         <div
                           *ngIf="
-                            passcodeForm.controls.passcode.invalid &&
-                            (passcodeForm.controls.passcode.dirty ||
-                              passcodeForm.controls.passcode.touched)
+                            passcodeForm.controls['passcode'].invalid &&
+                            (passcodeForm.controls['passcode'].dirty ||
+                              passcodeForm.controls['passcode'].touched)
                           "
                           class="alert alert-danger"
                           style="
@@ -224,9 +224,9 @@
 
                         <div
                           *ngIf="
-                            passcodeForm.controls.retype_passcode.invalid &&
-                            (passcodeForm.controls.retype_passcode.dirty ||
-                              passcodeForm.controls.retype_passcode.touched)
+                            passcodeForm.controls['retype_passcode'].invalid &&
+                            (passcodeForm.controls['retype_passcode'].dirty ||
+                              passcodeForm.controls['retype_passcode'].touched)
                           "
                           class="alert alert-danger"
                           style="
@@ -246,10 +246,10 @@
                         </div>
                         <div
                           *ngIf="
-                            passcodeForm.controls.retype_passcode.value !==
-                              passcodeForm.controls.passcode.value &&
-                            (passcodeForm.controls.retype_passcode.dirty ||
-                              passcodeForm.controls.retype_passcode.touched)
+                            passcodeForm.controls['retype_passcode'].value !==
+                              passcodeForm.controls['passcode'].value &&
+                            (passcodeForm.controls['retype_passcode'].dirty ||
+                              passcodeForm.controls['retype_passcode'].touched)
                           "
                           class="alert alert-danger"
                           style="
@@ -270,9 +270,9 @@
 
                         <div
                           *ngIf="
-                            !passcodeForm.controls.passcode.value &&
-                            (passcodeForm.controls.retype_passcode.dirty ||
-                              passcodeForm.controls.retype_passcode.touched)
+                            !passcodeForm.controls['passcode'].value &&
+                            (passcodeForm.controls['retype_passcode'].dirty ||
+                              passcodeForm.controls['retype_passcode'].touched)
                           "
                           class="alert alert-danger"
                           style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -290,8 +290,8 @@
                         style="margin-left: 1%"
                         [disabled]="
                           passcodeForm.invalid &&
-                          passcodeForm.controls.retype_passcode.value !==
-                            passcodeForm.controls.passcode.value
+                          passcodeForm.controls['retype_passcode'].value !==
+                            passcodeForm.controls['passcode'].value
                         "
                         [ngStyle]="{
                           cursor: !passcodeForm.valid

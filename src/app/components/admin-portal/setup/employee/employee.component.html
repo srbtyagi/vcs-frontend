@@ -162,13 +162,13 @@
                         <td
                           class="expired pending"
                           style="color: green"
-                          *ngIf="d.user_status == 'active'"
+                          *ngIf="d.user_status === 'active'"
                         >
                           Active
                         </td>
                         <td
                           class="expired pending"
-                          *ngIf="d.user_status == 'inactive'"
+                          *ngIf="d.user_status === 'inactive'"
                         >
                           Inactive
                         </td>
@@ -302,11 +302,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.first_name
+                                      employeeAddFrom.controls['first_name']
                                         .invalid &&
-                                      (employeeAddFrom.controls.first_name
+                                      (employeeAddFrom.controls['first_name']
                                         .dirty ||
-                                        employeeAddFrom.controls.first_name
+                                        employeeAddFrom.controls['first_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -346,11 +346,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.middle_name
+                                      employeeAddFrom.controls['middle_name']
                                         .invalid &&
-                                      (employeeAddFrom.controls.middle_name
+                                      (employeeAddFrom.controls['middle_name']
                                         .dirty ||
-                                        employeeAddFrom.controls.middle_name
+                                        employeeAddFrom.controls['middle_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -386,11 +386,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.last_name
+                                      employeeAddFrom.controls['last_name']
                                         .invalid &&
-                                      (employeeAddFrom.controls.last_name
+                                      (employeeAddFrom.controls['last_name']
                                         .dirty ||
-                                        employeeAddFrom.controls.last_name
+                                        employeeAddFrom.controls['last_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -430,12 +430,13 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.employee_code
+                                      employeeAddFrom.controls['employee_code']
                                         .invalid &&
-                                      (employeeAddFrom.controls.employee_code
+                                      (employeeAddFrom.controls['employee_code']
                                         .dirty ||
-                                        employeeAddFrom.controls.employee_code
-                                          .touched)
+                                        employeeAddFrom.controls[
+                                          'employee_code'
+                                        ].touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -481,11 +482,11 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.designation
+                                      employeeAddFrom.controls['designation']
                                         .invalid &&
-                                      (employeeAddFrom.controls.designation
+                                      (employeeAddFrom.controls['designation']
                                         .dirty ||
-                                        employeeAddFrom.controls.designation
+                                        employeeAddFrom.controls['designation']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -538,9 +539,11 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.role.invalid &&
-                                      (employeeAddFrom.controls.role.dirty ||
-                                        employeeAddFrom.controls.role.touched)
+                                      employeeAddFrom.controls['role']
+                                        .invalid &&
+                                      (employeeAddFrom.controls['role'].dirty ||
+                                        employeeAddFrom.controls['role']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -584,11 +587,11 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.department
+                                      employeeAddFrom.controls['department']
                                         .invalid &&
-                                      (employeeAddFrom.controls.department
+                                      (employeeAddFrom.controls['department']
                                         .dirty ||
-                                        employeeAddFrom.controls.department
+                                        employeeAddFrom.controls['department']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -626,9 +629,12 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.email.invalid &&
-                                      (employeeAddFrom.controls.email.dirty ||
-                                        employeeAddFrom.controls.email.touched)
+                                      employeeAddFrom.controls['email']
+                                        .invalid &&
+                                      (employeeAddFrom.controls['email']
+                                        .dirty ||
+                                        employeeAddFrom.controls['email']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -685,11 +691,11 @@
 
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.phoneCode
+                                      employeeAddFrom.controls['phoneCode']
                                         .invalid &&
-                                      (employeeAddFrom.controls.phoneCode
+                                      (employeeAddFrom.controls['phoneCode']
                                         .dirty ||
-                                        employeeAddFrom.controls.phoneCode
+                                        employeeAddFrom.controls['phoneCode']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -718,9 +724,12 @@
 
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.phone.invalid &&
-                                      (employeeAddFrom.controls.phone.dirty ||
-                                        employeeAddFrom.controls.phone.touched)
+                                      employeeAddFrom.controls['phone']
+                                        .invalid &&
+                                      (employeeAddFrom.controls['phone']
+                                        .dirty ||
+                                        employeeAddFrom.controls['phone']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -836,12 +845,14 @@
 
                                   <div
                                     *ngIf="
-                                      employeeAddFrom.controls.supervisorName
+                                      employeeAddFrom.controls['supervisorName']
                                         .invalid &&
-                                      (employeeAddFrom.controls.supervisorName
-                                        .dirty ||
-                                        employeeAddFrom.controls.supervisorName
-                                          .touched)
+                                      (employeeAddFrom.controls[
+                                        'supervisorName'
+                                      ].dirty ||
+                                        employeeAddFrom.controls[
+                                          'supervisorName'
+                                        ].touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -994,11 +1005,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.first_name
+                                      employeeEditFrom.controls['first_name']
                                         .invalid &&
-                                      (employeeEditFrom.controls.first_name
+                                      (employeeEditFrom.controls['first_name']
                                         .dirty ||
-                                        employeeEditFrom.controls.first_name
+                                        employeeEditFrom.controls['first_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1038,11 +1049,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.middle_name
+                                      employeeEditFrom.controls['middle_name']
                                         .invalid &&
-                                      (employeeEditFrom.controls.middle_name
+                                      (employeeEditFrom.controls['middle_name']
                                         .dirty ||
-                                        employeeEditFrom.controls.middle_name
+                                        employeeEditFrom.controls['middle_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1078,11 +1089,11 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.last_name
+                                      employeeEditFrom.controls['last_name']
                                         .invalid &&
-                                      (employeeEditFrom.controls.last_name
+                                      (employeeEditFrom.controls['last_name']
                                         .dirty ||
-                                        employeeEditFrom.controls.last_name
+                                        employeeEditFrom.controls['last_name']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1122,12 +1133,14 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.employee_code
+                                      employeeEditFrom.controls['employee_code']
                                         .invalid &&
-                                      (employeeEditFrom.controls.employee_code
-                                        .dirty ||
-                                        employeeEditFrom.controls.employee_code
-                                          .touched)
+                                      (employeeEditFrom.controls[
+                                        'employee_code'
+                                      ].dirty ||
+                                        employeeEditFrom.controls[
+                                          'employee_code'
+                                        ].touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -1170,11 +1183,11 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.designation
+                                      employeeEditFrom.controls['designation']
                                         .invalid &&
-                                      (employeeEditFrom.controls.designation
+                                      (employeeEditFrom.controls['designation']
                                         .dirty ||
-                                        employeeEditFrom.controls.designation
+                                        employeeEditFrom.controls['designation']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1227,9 +1240,12 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.role.invalid &&
-                                      (employeeEditFrom.controls.role.dirty ||
-                                        employeeEditFrom.controls.role.touched)
+                                      employeeEditFrom.controls['role']
+                                        .invalid &&
+                                      (employeeEditFrom.controls['role']
+                                        .dirty ||
+                                        employeeEditFrom.controls['role']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -1273,11 +1289,11 @@
                                   </select>
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.department
+                                      employeeEditFrom.controls['department']
                                         .invalid &&
-                                      (employeeEditFrom.controls.department
+                                      (employeeEditFrom.controls['department']
                                         .dirty ||
-                                        employeeEditFrom.controls.department
+                                        employeeEditFrom.controls['department']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1315,9 +1331,12 @@
                                   />
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.email.invalid &&
-                                      (employeeEditFrom.controls.email.dirty ||
-                                        employeeEditFrom.controls.email.touched)
+                                      employeeEditFrom.controls['email']
+                                        .invalid &&
+                                      (employeeEditFrom.controls['email']
+                                        .dirty ||
+                                        employeeEditFrom.controls['email']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -1374,11 +1393,11 @@
 
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.phoneCode
+                                      employeeEditFrom.controls['phoneCode']
                                         .invalid &&
-                                      (employeeEditFrom.controls.phoneCode
+                                      (employeeEditFrom.controls['phoneCode']
                                         .dirty ||
-                                        employeeEditFrom.controls.phoneCode
+                                        employeeEditFrom.controls['phoneCode']
                                           .touched)
                                     "
                                     class="alert alert-danger"
@@ -1407,9 +1426,12 @@
 
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.phone.invalid &&
-                                      (employeeEditFrom.controls.phone.dirty ||
-                                        employeeEditFrom.controls.phone.touched)
+                                      employeeEditFrom.controls['phone']
+                                        .invalid &&
+                                      (employeeEditFrom.controls['phone']
+                                        .dirty ||
+                                        employeeEditFrom.controls['phone']
+                                          .touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -1526,12 +1548,15 @@
 
                                   <div
                                     *ngIf="
-                                      employeeEditFrom.controls.supervisorName
-                                        .invalid &&
-                                      (employeeEditFrom.controls.supervisorName
-                                        .dirty ||
-                                        employeeEditFrom.controls.supervisorName
-                                          .touched)
+                                      employeeEditFrom.controls[
+                                        'supervisorName'
+                                      ].invalid &&
+                                      (employeeEditFrom.controls[
+                                        'supervisorName'
+                                      ].dirty ||
+                                        employeeEditFrom.controls[
+                                          'supervisorName'
+                                        ].touched)
                                     "
                                     class="alert alert-danger"
                                     style="
@@ -1935,7 +1960,7 @@
                                       <div class="row">
                                         <div *ngFor="let k of accessWebAllData">
                                           <div
-                                            *ngIf="k.module_id == d"
+                                            *ngIf="k.module_id === d"
                                             style="width: 220px"
                                           >
                                             <div
@@ -1977,10 +2002,10 @@
                             type="button"
                             class="site-button"
                             data-dismiss="modal"
-                            [disabled]="assignAccessCheckBoxList.length == 0"
+                            [disabled]="assignAccessCheckBoxList.length === 0"
                             [ngStyle]="{
                               cursor:
-                                assignAccessCheckBoxList.length == 0
+                                assignAccessCheckBoxList.length === 0
                                   ? 'not-allowed'
                                   : 'pointer'
                             }"

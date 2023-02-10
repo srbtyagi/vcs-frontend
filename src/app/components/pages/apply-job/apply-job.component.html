@@ -161,9 +161,9 @@
                           </div>
                           <div
                             *ngIf="
-                              applicantForm.controls.phone_no.invalid &&
-                              (applicantForm.controls.phone_no.dirty ||
-                                applicantForm.controls.phone_no.touched)
+                              applicantForm.controls['phone_no'].invalid &&
+                              (applicantForm.controls['phone_no'].dirty ||
+                                applicantForm.controls['phone_no'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -195,9 +195,9 @@
                           ></textarea>
                           <div
                             *ngIf="
-                              applicantForm.controls.message.invalid &&
-                              (applicantForm.controls.message.dirty ||
-                                applicantForm.controls.message.touched)
+                              applicantForm.controls['message'].invalid &&
+                              (applicantForm.controls['message'].dirty ||
+                                applicantForm.controls['message'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -223,9 +223,9 @@
                           ></textarea>
                           <div
                             *ngIf="
-                              applicantForm.controls.availability.invalid &&
-                              (applicantForm.controls.availability.dirty ||
-                                applicantForm.controls.availability.touched)
+                              applicantForm.controls['availability'].invalid &&
+                              (applicantForm.controls['availability'].dirty ||
+                                applicantForm.controls['availability'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"

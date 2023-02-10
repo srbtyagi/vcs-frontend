@@ -43,9 +43,9 @@
 
                       <div
                         *ngIf="
-                          loginForm.controls.email.invalid &&
-                          (loginForm.controls.email.dirty ||
-                            loginForm.controls.email.touched)
+                          loginForm.controls['email'].invalid &&
+                          (loginForm.controls['email'].dirty ||
+                            loginForm.controls['email'].touched)
                         "
                         class="alert alert-danger"
                         style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -76,9 +76,9 @@
 
                       <div
                         *ngIf="
-                          loginForm.controls.password.invalid &&
-                          (loginForm.controls.password.dirty ||
-                            loginForm.controls.password.touched)
+                          loginForm.controls['password'].invalid &&
+                          (loginForm.controls['password'].dirty ||
+                            loginForm.controls['password'].touched)
                         "
                         class="alert alert-danger"
                         style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -145,9 +145,9 @@
                       </div>
                       <div
                         *ngIf="
-                          forgotPassForm.controls.email.invalid &&
-                          (forgotPassForm.controls.email.dirty ||
-                            forgotPassForm.controls.email.touched)
+                          forgotPassForm.controls['email'].invalid &&
+                          (forgotPassForm.controls['email'].dirty ||
+                            forgotPassForm.controls['email'].touched)
                         "
                         class="alert alert-danger"
                         style="font-size: 12px; padding: 0.5rem 1.25rem"

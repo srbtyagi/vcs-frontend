@@ -75,23 +75,23 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.job_id.invalid &&
-                              (postJobForm.controls.job_id.dirty ||
-                                postJobForm.controls.job_id.touched)
+                              postJobForm.controls['job_id'].invalid &&
+                              (postJobForm.controls['job_id'].dirty ||
+                                postJobForm.controls['job_id'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.job_id.errors?.required
+                                postJobForm.controls['job_id'].errors?.required
                               "
                             >
                               Job ID is required.
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.job_id.errors?.maxlength
+                                postJobForm.controls['job_id'].errors?.maxlength
                               "
                             >
                               Job ID must be at-most 20 characters long.
@@ -141,16 +141,16 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.state.invalid &&
-                              (postJobForm.controls.state.dirty ||
-                                postJobForm.controls.state.touched)
+                              postJobForm.controls['state'].invalid &&
+                              (postJobForm.controls['state'].dirty ||
+                                postJobForm.controls['state'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.state.errors?.required
+                                postJobForm.controls['state'].errors?.required
                               "
                             >
                               State is required.
@@ -198,15 +198,17 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.city.invalid &&
-                              (postJobForm.controls.city.dirty ||
-                                postJobForm.controls.city.touched)
+                              postJobForm.controls['city'].invalid &&
+                              (postJobForm.controls['city'].dirty ||
+                                postJobForm.controls['city'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
-                              *ngIf="postJobForm.controls.city.errors?.required"
+                              *ngIf="
+                                postJobForm.controls['city'].errors?.required
+                              "
                             >
                               City is required.
                             </div>
@@ -227,23 +229,25 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.job_title.invalid &&
-                              (postJobForm.controls.job_title.dirty ||
-                                postJobForm.controls.job_title.touched)
+                              postJobForm.controls['job_title'].invalid &&
+                              (postJobForm.controls['job_title'].dirty ||
+                                postJobForm.controls['job_title'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.job_title.errors?.required
+                                postJobForm.controls['job_title'].errors
+                                  ?.required
                               "
                             >
                               Job title is required.
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.job_title.errors?.maxlength
+                                postJobForm.controls['job_title'].errors
+                                  ?.maxlength
                               "
                             >
                               Job title must be at-most 100 characters long.
@@ -273,22 +277,25 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.bill_rate.invalid &&
-                              (postJobForm.controls.bill_rate.dirty ||
-                                postJobForm.controls.bill_rate.touched)
+                              postJobForm.controls['bill_rate'].invalid &&
+                              (postJobForm.controls['bill_rate'].dirty ||
+                                postJobForm.controls['bill_rate'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.bill_rate.errors?.required
+                                postJobForm.controls['bill_rate'].errors
+                                  ?.required
                               "
                             >
                               Bill rate is required.
                             </div>
                             <div
-                              *ngIf="postJobForm.controls.bill_rate.errors?.max"
+                              *ngIf="
+                                postJobForm.controls['bill_rate'].errors?.max
+                              "
                             >
                               Bill rate must be at-most 30 characters long.
                             </div>
@@ -352,16 +359,16 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.ot_holiday_rate.invalid &&
-                              (postJobForm.controls.ot_holiday_rate.dirty ||
-                                postJobForm.controls.ot_holiday_rate.touched)
+                              postJobForm.controls['ot_holiday_rate'].invalid &&
+                              (postJobForm.controls['ot_holiday_rate'].dirty ||
+                                postJobForm.controls['ot_holiday_rate'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.ot_holiday_rate.errors
+                                postJobForm.controls['ot_holiday_rate'].errors
                                   ?.required
                               "
                             >
@@ -369,7 +376,8 @@
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.ot_holiday_rate.errors?.max
+                                postJobForm.controls['ot_holiday_rate'].errors
+                                  ?.max
                               "
                             >
                               OT/Holiday rate must be at-most 30 characters
@@ -435,9 +443,9 @@
                           </select>
                           <div
                             *ngIf="
-                              postJobForm.controls.position.invalid &&
-                              (postJobForm.controls.position.dirty ||
-                                postJobForm.controls.position.touched)
+                              postJobForm.controls['position'].invalid &&
+                              (postJobForm.controls['position'].dirty ||
+                                postJobForm.controls['position'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -493,9 +501,9 @@
                             </select>
                             <div
                               *ngIf="
-                                postJobForm.controls.job_sector.invalid &&
-                                (postJobForm.controls.job_sector.dirty ||
-                                  postJobForm.controls.job_sector.touched)
+                                postJobForm.controls['job_sector'].invalid &&
+                                (postJobForm.controls['job_sector'].dirty ||
+                                  postJobForm.controls['job_sector'].touched)
                               "
                               class="alert alert-danger"
                               style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -533,9 +541,9 @@
                             </select>
                             <div
                               *ngIf="
-                                postJobForm.controls.client_name.invalid &&
-                                (postJobForm.controls.client_name.dirty ||
-                                  postJobForm.controls.client_name.touched)
+                                postJobForm.controls['client_name'].invalid &&
+                                (postJobForm.controls['client_name'].dirty ||
+                                  postJobForm.controls['client_name'].touched)
                               "
                               class="alert alert-danger"
                               style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -573,9 +581,9 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.system_name.invalid &&
-                              (postJobForm.controls.system_name.dirty ||
-                                postJobForm.controls.system_name.touched)
+                              postJobForm.controls['system_name'].invalid &&
+                              (postJobForm.controls['system_name'].dirty ||
+                                postJobForm.controls['system_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -612,16 +620,16 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.job_duration.invalid &&
-                              (postJobForm.controls.job_duration.dirty ||
-                                postJobForm.controls.job_duration.touched)
+                              postJobForm.controls['job_duration'].invalid &&
+                              (postJobForm.controls['job_duration'].dirty ||
+                                postJobForm.controls['job_duration'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.job_duration.errors
+                                postJobForm.controls['job_duration'].errors
                                   ?.required
                               "
                             >
@@ -629,7 +637,7 @@
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.job_duration.errors
+                                postJobForm.controls['job_duration'].errors
                                   ?.maxlength
                               "
                             >
@@ -721,16 +729,16 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.confirmed_hr.invalid &&
-                              (postJobForm.controls.confirmed_hr.dirty ||
-                                postJobForm.controls.confirmed_hr.touched)
+                              postJobForm.controls['confirmed_hr'].invalid &&
+                              (postJobForm.controls['confirmed_hr'].dirty ||
+                                postJobForm.controls['confirmed_hr'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.confirmed_hr.errors
+                                postJobForm.controls['confirmed_hr'].errors
                                   ?.required
                               "
                             >
@@ -738,7 +746,7 @@
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.confirmed_hr.errors
+                                postJobForm.controls['confirmed_hr'].errors
                                   ?.maxlength
                               "
                             >
@@ -763,16 +771,17 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.req_inf.invalid &&
-                              (postJobForm.controls.req_inf.dirty ||
-                                postJobForm.controls.req_inf.touched)
+                              postJobForm.controls['req_inf'].invalid &&
+                              (postJobForm.controls['req_inf'].dirty ||
+                                postJobForm.controls['req_inf'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.req_inf.errors?.maxlength
+                                postJobForm.controls['req_inf'].errors
+                                  ?.maxlength
                               "
                             >
                               Required Information must be at-most 1000
@@ -799,23 +808,25 @@
 
                           <div
                             *ngIf="
-                              postJobForm.controls.job_desc.invalid &&
-                              (postJobForm.controls.job_desc.dirty ||
-                                postJobForm.controls.job_desc.touched)
+                              postJobForm.controls['job_desc'].invalid &&
+                              (postJobForm.controls['job_desc'].dirty ||
+                                postJobForm.controls['job_desc'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
                           >
                             <div
                               *ngIf="
-                                postJobForm.controls.job_desc.errors?.required
+                                postJobForm.controls['job_desc'].errors
+                                  ?.required
                               "
                             >
                               Job description is required.
                             </div>
                             <div
                               *ngIf="
-                                postJobForm.controls.job_desc.errors?.maxlength
+                                postJobForm.controls['job_desc'].errors
+                                  ?.maxlength
                               "
                             >
                               Job description must be at-most 1000 characters

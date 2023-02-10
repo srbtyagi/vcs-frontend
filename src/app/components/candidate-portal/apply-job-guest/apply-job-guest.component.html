@@ -141,9 +141,9 @@
 
                           <div
                             *ngIf="
-                              applicantForm.controls.first_name.invalid &&
-                              (applicantForm.controls.first_name.dirty ||
-                                applicantForm.controls.first_name.touched)
+                              applicantForm.controls['first_name'].invalid &&
+                              (applicantForm.controls['first_name'].dirty ||
+                                applicantForm.controls['first_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -198,9 +198,9 @@
                           />
                           <div
                             *ngIf="
-                              applicantForm.controls.last_name.invalid &&
-                              (applicantForm.controls.last_name.dirty ||
-                                applicantForm.controls.last_name.touched)
+                              applicantForm.controls['last_name'].invalid &&
+                              (applicantForm.controls['last_name'].dirty ||
+                                applicantForm.controls['last_name'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -240,9 +240,9 @@
                           />
                           <div
                             *ngIf="
-                              applicantForm.controls.email.invalid &&
-                              (applicantForm.controls.email.dirty ||
-                                applicantForm.controls.email.touched)
+                              applicantForm.controls['email'].invalid &&
+                              (applicantForm.controls['email'].dirty ||
+                                applicantForm.controls['email'].touched)
                             "
                             class="alert alert-danger"
                             style="
@@ -295,9 +295,9 @@
                           </div>
                           <div
                             *ngIf="
-                              applicantForm.controls.phone_no.invalid &&
-                              (applicantForm.controls.phone_no.dirty ||
-                                applicantForm.controls.phone_no.touched)
+                              applicantForm.controls['phone_no'].invalid &&
+                              (applicantForm.controls['phone_no'].dirty ||
+                                applicantForm.controls['phone_no'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
@@ -376,9 +376,9 @@
                           ></textarea>
                           <div
                             *ngIf="
-                              applicantForm.controls.message.invalid &&
-                              (applicantForm.controls.message.dirty ||
-                                applicantForm.controls.message.touched)
+                              applicantForm.controls['message'].invalid &&
+                              (applicantForm.controls['message'].dirty ||
+                                applicantForm.controls['message'].touched)
                             "
                             class="alert alert-danger"
                             style="font-size: 12px; padding: 0.5rem 1.25rem"
