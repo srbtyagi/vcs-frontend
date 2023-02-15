@@ -472,3 +472,51 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.site-button {
+  background: #4c96d7;
+}
+
+.site-button,
+.site-button-secondry {
+  color: #fff;
+  padding: 6px 6px;
+  font-size: 15px;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  outline: none;
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  line-height: 1.42857;
+  border-radius: 3px;
+  font-weight: 400;
+  text-align: center;
+  white-space: pre;
+  font-family: "roboto", sans-serif !important;
+}
+
+.site-button2 {
+  color: #fff;
+  font-size: 17px;
+  /* display: contents; */
+  outline: none;
+  cursor: pointer;
+  outline: none;
+  border-width: 0;
+  border-style: solid;
+  border-color: transparent;
+  line-height: 1.42857;
+  border-radius: 3px;
+  font-weight: 400;
+  text-align: center;
+  white-space: pre;
+  font-family: "roboto", sans-serif;
+  margin-left: 12px;
+  height: 40px;
+  width: 80px;
+  padding: 8px;
+  margin-top: 6px;
+  background-color: #4c96d7;
+}
