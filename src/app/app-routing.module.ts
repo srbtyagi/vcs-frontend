@@ -71,7 +71,7 @@ import { PostJobComponent } from './components/recruiter-portal/post-job/post-jo
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, title: 'Elite Mente' },
+  { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'candi-profile', component: CandidateProfileComponent },
