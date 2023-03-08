@@ -9,7 +9,7 @@ import { RecruiteeService } from 'src/app/services/recruitee.service';
   templateUrl: './skill-checklist.component.html',
 })
 export class SkillChecklistComponent implements OnInit {
-  title = 'Case Study';
+  title = 'Healthcare Skills Checklist';
 
   constructor(
     public router: Router,
@@ -21,6 +21,7 @@ export class SkillChecklistComponent implements OnInit {
   jobCategory: any = [];
 
   ngOnInit() {
+    this.getAllCategory();
     this.titleService.setTitle(this.title);
     this.metaTagService.updateTag({
       name: 'keywords',
@@ -32,5 +33,50 @@ export class SkillChecklistComponent implements OnInit {
       content:
         'ICU, Med/Surg, Telemetry, Emergency, Operation, Psych, Correction, LMSW',
     });
+  }
+
+  getAllCategory() {
+    this.service.geAllJobCategory_Area().subscribe(
+      (res) => {
+        //console.log(res);
+        let result: any = res;
+        if (result.length > 0) {
+          this.jobCategory = result;
+        } else {
+          this.error('No Data.');
+        }
+      },
+      (err) => {
+        this.error('Something went wrong. Please Try Again.');
+      }
+    );
+  }
+  error(msg) {
+    Swal.fire({
+      title: msg,
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
+      allowOutsideClick: false,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+      }
+    });
+  }
+
+  getJobSector(data) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(data.skill_area_id),
+      },
+    };
+    this.router.navigate(['skill-set'], navigationExtras);
   }
 }

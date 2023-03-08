@@ -1,216 +1,60 @@
-<app-page-header heading="Case Study" subheading=""></app-page-header>
-<div class="w-full text-center mt-16">
-  <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-    Healthcare Cybersecurity Case Study: Ireland's Health Service
-  </h2>
-</div>
-<div class="bg-white">
-  <div
-    class="mx-auto max-w-[100rem] divide-y-2 divide-gray-200 py-16 px-4 sm:py-24 sm:px-6 lg:px-8"
-  >
-    <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-      Executive Ransomware attack
-    </h2>
-    <div class="mt-6 pt-10">
-      <dl
-        class="space-y-10 md:grid md:grid-cols-1 md:gap-x-8 md:gap-y-12 md:space-y-0"
-      >
-        <div>
-          <dd class="mt-2 text-base text-gray-600">
-            <p>
-              The Covid-19 pandemic has spurred the growth of telemedicine and
-              other digital care services, which is anticipated to continue.
-              While the pandemic inspired incredible demonstrations of
-              cooperation and compassion, evil actors used the situation for
-              personal gain, as with every disaster. Despite the desperate
-              effort by hospital employees of setting up field hospitals in
-              parking lots and clinicians risking their lives to combat the
-              terrifying virus, hackers, ransomware gangs, and financial con
-              artists redoubled their efforts to steal sensitive patient
-              information.
-            </p>
-            <p class="mt-6">
-              According to the Forbes study, the number of reported hacking
-              incidents in healthcare increased for the fifth year in a row in
-              2020, increasing 42%. In 2019, hacking events accounted for more
-              than half of all patient data breaches (62%).
-            </p>
-            <p class="mt-6">
-              Cybersecurity is a significant concern for healthcare businesses
-              all over the world. As cyber- attacks and patient data breaches
-              become more widespread, hospitals and other care facilities need
-              to invest enough in the patients' privacy security. Cyber-hackers
-              regard the healthcare industry as an easy target compared to the
-              financial, industrial, and retail sectors.
-            </p>
-            <p class="mt-6">
-              On May 14, 2021, a ransomware attack hit Ireland's Department of
-              Health and Health Service Executive (HSE). On the Department of
-              Health's network, malicious cyber activity was discovered. Several
-              HSE systems were significantly harmed, and the majority of the
-              company's other systems had to be shut down, affecting essential
-              health services.
-            </p>
-            <p class="mt-6">
-              A ransomware attack occurs when a criminal group uses software to
-              access a system, encrypts essential data, and then demands payment
-              to decrypt it. The May attack in Ireland was unprecedented in
-              Irish history, hitting nearly every aspect of the country's
-              healthcare system, which had already been battered by more than a
-              year of fighting Covid-19.
-            </p>
-            <p class="mt-6">
-              According to cyberlaw, a criminal gang known as Wizard Spider was
-              identified as the perpetrators, and they are believed to be based
-              in Saint Petersburg, Russia. Since a similar digital letter was
-              left on the Department of Health and the Health Service Executive
-              computers, both events are thought to be the work of the same
-              cybercrime organization.
-            </p>
-            <p class="mt-6">
-              A remote access tool known as Cobalt Strike Beacon was discovered
-              on the affected devices, implying that it was used to move
-              laterally within the environment before executing the Conti
-              ransomware payload. The assault began when a single computer
-              failed, prompting the user (an HSE employee) to seek assistance by
-              clicking on an infected link.
-            </p>
-            <p class="mt-6">
-              The HSE decided to turn off its IT systems as a precaution to
-              minimize the attack's impact. For the general public and the HSE,
-              this has had far-reaching consequences. Services that rely on
-              computerized processes, such as scans, referrals, and diagnostic
-              services, had to be operated manually, which caused delays. The
-              cyberattack brought cyber security risks to the attention of Irish
-              businesses, the media, and the general public.
-            </p>
-            <p class="mt-6">
-              The assailants were most likely pursuing monetary gain because
-              they demanded the HSE for $20 million (£14 million) to restore
-              services following the incident. However, the Irish government
-              stated that it did not and would not compensate the hackers. The
-              incident impacted several Irish hospitals. It forced the
-              cancellation of many outpatient clinics and healthcare services
-              since the HSE's national and local networks were nearly completely
-              shut down.
-            </p>
-            <p class="mt-6">
-              While the HSE hack targeted a large organization, cyber risk
-              affects all healthcare organizations, regardless of size or brand.
-              Healthcare organizations must guarantee that cybersecurity is
-              prioritized as a board-level problem, as it is in most other
-              industries.
-            </p>
-            <p class="mt-6">
-              The Irish cyberattack served as a reminder of the cyber threat
-              that healthcare organizations face today. The strike was the most
-              severe attack on essential infrastructure in Irish history,
-              causing treatment delays and non-emergency procedures to be
-              canceled. Similar events have been recorded across Europe, where
-              the failure to protect health systems and data has put patients'
-              data under security threat.
-            </p>
-            <p class="mt-6">
-              The lack of cyber security has already been demonstrated to be one
-              of the leading causes of healthcare service disruptions, but the
-              need for cyber security extends far beyond that. As health
-              services become more reliant on information technology, attackers'
-              interest in health organizations and data develops. Terrorists,
-              fraudsters, and other attackers can abuse data privacy, the
-              availability of health services, or even the lives of patients.
-            </p>
-            <p class="mt-6">
-              HSE CEO Paul Reid termed the incident as "quite a sophisticated."
-              He warned that the hospital information technology systems and the
-              healthcare data stored on central servers are constantly being
-              targeted.
-            </p>
-            <p class="mt-6">
-              In conclusion, health care institutions remain the most vulnerable
-              and on target by cyberattackers. Healthcare database systems are
-              known to hold so much information of significant monetary and
-              intelligence value to cybercriminals. Primary healthcare
-              providers, specialists, community and aged care providers,
-              diagnostic service providers, government health departments,
-              research and academic organizations, and healthcare consultancies
-              are vulnerable to cybercrimes in the healthcare sector.
-            </p>
-          </dd>
+<body id="bg">
+  <div class="page-wraper">
+    <!-- Content -->
+    <div class="page-content">
+      <app-page-header
+        heading="Skills Checklist"
+        subheading=""
+      ></app-page-header>
+      <!-- contact area -->
+      <div class="content-block">
+        <!-- Browse Jobs -->
+        <div class="section-full content-inner jobs-category-bx">
+          <div class="container">
+            <div class="row" *ngIf="jobCategory">
+              <div class="col-lg-12 m-b30" *ngFor="let a of jobCategory">
+                <div class="job-bx bg-white">
+                  <div class="job-bx-title clearfix">
+                    <h6 class="text-uppercase">
+                      {{ a.skill_category_name }}
+                      <!-- <a href="javascript:void(0);" class="float-right font-12 text-primary">View
+                                              All</a> -->
+                    </h6>
+                  </div>
+                  <div class="row" *ngIf="a.skillArea">
+                    <div
+                      class="col-lg-4 col-sm-12"
+                      *ngFor="let b of a.skillArea"
+                    >
+                      <ul class="category-list category-bx">
+                        <li>
+                          <a
+                            href="javascript:void(0);"
+                            (click)="getJobSector(b)"
+                          >
+                            <div class="logo">
+                              <img
+                                src="../assets/images/logo/logo18.png"
+                                alt=""
+                              />
+                              <!-- <i class="fa fa-angle-double-right"></i> -->
+                            </div>
+                            <span>{{ b.skill_area_name }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </dl>
+        <!-- Browse Jobs END -->
+      </div>
     </div>
+    <!-- Content END-->
+
+    <button class="scroltop fa fa-chevron-up"></button>
   </div>
-</div>
-<div class="bg-white">
-  <div
-    class="mx-auto max-w-[100rem] divide-y-2 divide-gray-200 px-4 sm:px-6 lg:px-8 mb-20"
-  >
-    <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-      The Coca-Cola Amatil - Digitization &amp; Analytics
-    </h2>
-    <div class="mt-6 pt-10">
-      <dl
-        class="space-y-10 md:grid md:grid-cols-1 md:gap-x-8 md:gap-y-12 md:space-y-0"
-      >
-        <div>
-          <dd class="mt-2 text-base text-gray-600">
-            <p>
-              Coca-Cola Amatil is the largest bottler and distributor of
-              non-alcoholic bottled beverages in the Asia Pacific and one of the
-              region’s largest bottlers of Coca-Cola products. Since its
-              inception in 1904, the companies had made numerous strides in
-              market penetration in the Asia Pacific market before being
-              replaced by Euro pacific partners to handle products in the same
-              line .
-            </p>
-            <p class="mt-6">
-              Despite its meteoric growth, the company greatly struggled in its
-              retail inventory control as it didn’t pose any formidable criteria
-              for automated store management systems. Most of its inventory
-              control was limited to manual measurements of products which were
-              slow and sluggish due to delays in analogy data processing of
-              phone conversation . Evidently, Coca-Cola Amatil also relied
-              heavily on the productivity and ability of their extensive network
-              of sales representatives to distribute and sell products. With a
-              great need for sales automation, Coca-Cola Amatil sale
-              representatives proposed using Trax Retail Execution image; an
-              automated image recognition technology platform that uses computer
-              vision solutions to analyse analogue signals. Trax technology
-              enabled Coca-Cola Amatil store keepers to take pictures of store
-              shelves with their mobile devices and send the images to the Trax
-              Cloud . The images are then analysed and returned with actionable
-              reports within minutes to sales reps and provide more detailed
-              online management assessments. This way, Trax supported
-              Coca-Cola’s lifeline, the sales representatives and call centre
-              agents across the Asia-Pacific region by providing market ,store
-              and supply chain situations .By utilizing Trax technology that
-              allows them to get detailed reports and analyse current and future
-              trends and issues ,Coca-Cola Amatil’s front-line teams become more
-              productive and were able to improve the company’s revenue.
-              Real-time images of stock allowed sales reps to quickly identify
-              performance gaps and apply corrective actions in store. Reports on
-              shelf share and competitive insights also allowed reps to
-              strategize on opportunities in store and over the phone with store
-              managers. This led to Coca-Cola Amatil gaining 1.3% market share
-              in the Asia Pacific region within five months.
-            </p>
-            <p class="mt-6">
-              Trax was essential in ensuring that Coca-Cola Amatil transitioned
-              from ineffective traditional manual verification systems into more
-              effective ones. Traditional manual verification systems were
-              rendered outdated as they were costly and timely, and resulted in
-              a decrease in productivity and sales as representatives spent a
-              lot of time auditing rather than marketing and selling products.
-              Overall, in the fast-paced world, this had a negative impact on
-              the company’s market share price. On the contrary, a new
-              combination of digitization (image procession by computer vision)
-              and data analytics (image processing to make intelligent
-              recommendations) proved great.
-            </p>
-          </dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-</div>
-<app-cta></app-cta>
+</body>

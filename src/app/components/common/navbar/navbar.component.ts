@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
         },
         {
           label: 'Skills Checklist',
-          link: '/skills-checklist',
+          link: '/skill-checklist',
         },
       ],
     },

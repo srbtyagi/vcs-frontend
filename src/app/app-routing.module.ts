@@ -139,6 +139,7 @@ const routes: Routes = [
   { path: 'it-services', component: HsCaseStudyComponent },
   { path: 'terms-of-service', component: TermsOfServiceComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'skill-checklist', component: SkillChecklistComponent },
 ];
 
 @NgModule({
