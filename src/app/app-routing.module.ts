@@ -39,6 +39,7 @@ import { SetupDashboardComponent } from './components/common/setup-dashboard/set
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { ApplyJobComponent } from './components/pages/apply-job/apply-job.component';
 import { BusinessComponent } from './components/pages/business/business.component';
+import { ClientPartnersComponent } from './components/pages/client-partners/client-partners.component';
 import { ContactUsComponent } from './components/pages/contact-us/contact-us.component';
 import { FaqComponent } from './components/pages/faq/faq.component';
 import { HealthcareBlogsComponent } from './components/pages/healthcare-blogs/healthcare-blogs.component';
@@ -72,6 +73,7 @@ const routes: Routes = [
   { path: 'applied-jobs', component: AppliedJobsComponent },
   { path: 'manage-jobs', component: ManageJobsComponent },
   { path: 'post-jobs', component: PostJobComponent },
+  { path: 'client-partners', component: ClientPartnersComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'browse-candidate', component: BrowseCandidateComponent },

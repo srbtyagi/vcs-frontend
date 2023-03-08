@@ -42,16 +42,16 @@
             </ng-container>
           </mat-menu>
         </div>
-        <div class="logo" routerLink="/home">
+        <div class="logo" routerLink="/">
           <img
             class="mobile"
             src="../../../../assets/images/logo/logo.png"
-            alt="Vish Consulting Services"
+            alt="Elite Mente"
           />
           <img
             class="desktop"
             src="../../../../assets/images/logo/logo.png"
-            alt="Vish Consulting Services"
+            alt="Elite Mente"
           />
         </div>
         <div class="menu-bar">
@@ -76,13 +76,16 @@
                 aria-current="page"
               >
                 {{ item.label }}
-                <mat-icon class="text-base ml-2">keyboard_arrow_down</mat-icon>
+                <mat-icon class="text-base ml-1 md:ml-2 order-2 -mt-[6px]"
+                  >keyboard_arrow_down</mat-icon
+                >
               </button>
               <mat-menu #subMenu="matMenu" class="mat-top-menu">
                 <button
                   mat-menu-item
                   *ngFor="let child of item.children"
                   [routerLink]="child.link"
+                  class="font-google text-xs"
                 >
                   {{ child.label }}
                 </button>
@@ -94,15 +97,60 @@
       <div class="flex items-center">
         <div class="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
           <div class="relative ml-3">
-            <div>
-              <a
-                class="all-buttons button-transparent py-3 px-6"
-                href="https://vishusa.com/login"
-                size="lg"
-                ><mat-icon class="-ml-1 mr-2 text-base">lock</mat-icon>
-
-                <span>Sign in</span></a
-              >
+            <div *ngIf="!user_id">
+              <app-buttons
+                label="Sign In"
+                iconLocation="left"
+                [hasIcon]="true"
+                size="normal"
+                routerLink="login"
+                buttonType="transparent"
+                iconType="lock"
+              ></app-buttons>
+            </div>
+            <div *ngIf="user_id">
+              <app-buttons
+                [label]="user_name"
+                iconLocation="left"
+                [hasIcon]="true"
+                size="normal"
+                buttonType="transparent"
+                [matMenuTriggerFor]="profileMenu"
+                iconType="badge"
+              ></app-buttons>
+              <mat-menu #profileMenu="matMenu" class="mat-top-menu">
+                <button
+                  *ngIf="checkUserType"
+                  (click)="navigateToProfile()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Profile
+                </button>
+                <button
+                  *ngFor="let a of moduleArray"
+                  mat-menu-item
+                  (click)="navigateTo(a)"
+                  class="font-google text-xs"
+                >
+                  {{ a.module_name_lower }}
+                </button>
+                <button
+                  *ngIf="checkUserType"
+                  (click)="navigateToRecruitee()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Assignments
+                </button>
+                <button
+                  (click)="logout()"
+                  mat-menu-item
+                  class="font-google text-xs"
+                >
+                  Logout
+                </button>
+              </mat-menu>
             </div>
           </div>
         </div>

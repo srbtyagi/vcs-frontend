@@ -3,19 +3,17 @@
     <div class="image-container">
       <img
         class="image"
-        src="../../../../assets/web-images/main/vcs_main_image.jpg"
+        src="../../assets/images/main/vcs_main_image_3.png"
         alt="Elite Mente"
       />
-      <div class="image-tint"></div>
     </div>
     <div class="text-container">
       <h1 class="tyopg_h1">
-        <span class="title">Elite Mente LLC.</span>
-        <span class="subtitle">A Vish Consulting Services Company</span>
+        <span class="title">Vish Consulting Services</span>
+        <span class="subtitle"
+          >Leading Provider of Staffing and Recruitment Services
+        </span>
       </h1>
-      <p class="subtitle-2">
-        Leading Provider of Staffing & Recruitment Services
-      </p>
       <div class="action-button">
         <app-buttons
           label="View All Jobs"
@@ -34,19 +32,17 @@
           <div class="flex-shrink-0">
             <img
               class="image"
-              src="../../../../assets/web-images/main/staffing_work_img.jpg"
+              src="../../assets/images/main/senior-Nursing-Care.jpeg"
               alt=""
             />
           </div>
           <div class="body">
             <div class="flex-1">
-              <p class="title">Our Expertise</p>
+              <p class="title">OUR HEALTHCARE SERVICES</p>
               <p class="content">
-                Focusing on manufacturing organizations we provide your
-                workforce with the skilled labor and office/administrative roles
-                that are crucial to your business. Navigate through staffing
-                peaks with ease as we connect you with hard to find seasonal
-                workers.
+                Providing outstanding staffing services to our healthcare
+                clients is our top priority. Treating our healthcare
+                professionals like the heroes they are, is an honor.
               </p>
             </div>
           </div>
@@ -56,13 +52,13 @@
           <div class="flex-shrink-0">
             <img
               class="image"
-              src="../../../../assets/web-images/main/business_main_page.jpg"
+              src="../../assets/images/main/business_main_page.jpg"
               alt=""
             />
           </div>
           <div class="body">
             <div class="flex-1">
-              <p class="title">Clients &amp; Partners</p>
+              <p class="title">CLIENTS &amp; PARTNERS</p>
               <p class="content">
                 By offering an array of services working within our clients
                 budgets, we are able to provide top candidates and incredible
@@ -76,7 +72,7 @@
           <div class="flex-shrink-0">
             <img
               class="image"
-              src="../../assets/web-images/main/job-seeker.jpg"
+              src="../../assets/images/main/job-seeker.jpg"
               alt=""
             />
           </div>
@@ -84,8 +80,7 @@
             <div class="flex-1">
               <p class="title">Jobs</p>
               <p class="content">
-                Enhance your career with Elite Mente!  Check out our latest
-                jobs.
+                Enhance your career with Vish! Check out our latest jobs.
               </p>
             </div>
           </div>
@@ -93,94 +88,83 @@
       </div>
     </div>
   </section>
-  <section class="mb-12">
+  <section class="relative px-6 md:px-8 py-2">
     <div class="relative mx-auto">
-      <div class="mx-auto md:max-w-[100rem]">
-        <div class="d-flex job-title-bx section-head">
-          <div class="mr-auto">
-            <h2 class="typog_h3">Recent Jobs</h2>
-            <h6 class="text-gray-600">20+ recently added jobs</h6>
-          </div>
-          <div class="align-self-end">
-            <app-buttons
-              label="Browser all jobs"
-              iconLocation="right"
-              [hasIcon]="true"
-              size="normal"
-              routerLink="jobs"
-              buttonType="transparent"
-              iconType="chevron_right"
-            ></app-buttons>
-          </div>
+      <div class="md:flex md:items-center md:justify-between pb-4">
+        <div class="min-w-0 flex-1">
+          <h2 class="typog_h3">Recent Jobs</h2>
         </div>
-        <div class="row">
-          <ng-container *ngIf="allJobs.length === 0">
-            <div class="relative pb-16 text-gray-500">
-              No jobs are listed currently
-            </div>
-          </ng-container>
-          <ng-container *ngIf="allJobs.length">
-            <div class="w-full">
-              <ul class="post-job-bx browse-job">
-                <li *ngFor="let data of allJobs; index as i">
-                  <div class="post-bx">
-                    <div class="d-flex m-b30">
-                      <div class="job-post-company">
-                        <span
-                          ><img
-                            alt=""
-                            src="../../assets/images/logo/icon1.png"
-                        /></span>
-                      </div>
-                      <div class="job-post-info">
-                        <h4>
-                          <a href="javascript:void(0);" (click)="goTo(data)">{{
-                            data.job_title
-                          }}</a>
-                        </h4>
-                        <ul>
-                          <li>
-                            <i class="fa fa-map-marker"></i> {{ data.city }},
-                            {{ data.state }}
-                          </li>
-                          <li *ngIf="data.position_type_name">
-                            <i class="fa fa-bookmark-o"></i>
-                            {{ data.position_type_name }}
-                          </li>
-                          <li>
-                            <i class="fa fa-clock-o"></i> Published
-                            {{ data.job_post_date }}
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="d-flex">
-                      <div class="job-time mr-auto" *ngIf="data.job_type_name">
-                        <a href="javascript:void(0);"
-                          ><span>{{ data.job_type_name }}</span></a
-                        >
-                      </div>
-                      <div class="mr-auto" *ngIf="!data.job_type_name">
-                        <span></span>
-                      </div>
+        <div class="mt-4 flex md:mt-0 md:ml-4">
+          <app-buttons
+            label="View all jobs"
+            iconLocation="right"
+            [hasIcon]="true"
+            size="normal"
+            buttonType="transparent"
+            iconType="keyboard_arrow_right"
+            routerLink="/jobs"
+          ></app-buttons>
+        </div>
+      </div>
 
-                      <div class="salary-bx">
-                        <span
-                          >${{ data.regular_pay }} - ${{
-                            data.blended_pay
-                          }}
-                          /hr</span
-                        >
-                      </div>
-                    </div>
+      <div class="overflow-hidden bg-gray-100 shadow sm:rounded-md">
+        <ul role="list" class="divide-y divide-gray-300">
+          <li *ngFor="let job of allJobs.slice(0, 5)">
+            <a href="#" class="block hover:bg-gray-50">
+              <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <p class="truncate text-base font-bold text-gray-800">
+                    {{ job.job_title }}
+                  </p>
+                  <div class="ml-2 flex flex-shrink-0">
+                    <p
+                      class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800"
+                    >
+                      {{ job.job_type_name }}
+                    </p>
                   </div>
-                </li>
-              </ul>
-            </div>
-          </ng-container>
-        </div>
+                </div>
+                <div class="mt-2 sm:flex sm:justify-between">
+                  <div class="sm:flex">
+                    <p class="flex items-center text-sm text-gray-500">
+                      <mat-icon
+                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                        >work</mat-icon
+                      >
+                      {{ job.position_type_name }}
+                    </p>
+                    <p
+                      class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6"
+                    >
+                      <mat-icon
+                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                      >
+                        location_on</mat-icon
+                      >
+
+                      {{ job.city + ", " ?? "" }} {{ job.state ?? "" }}
+                    </p>
+                  </div>
+                  <div
+                    class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0"
+                  >
+                    <mat-icon class="h-5 w-5 flex-shrink-0 text-gray-400">
+                      attach_money</mat-icon
+                    >
+                    <p>
+                      {{ job.regular_pay_rate | number : "1.0-0" }}-{{
+                        job.blended_pay_rate | number : "1.0-0"
+                      }}/hr
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
+  <section class="section-container-min">&nbsp;</section>
   <app-cta></app-cta>
 </main>
