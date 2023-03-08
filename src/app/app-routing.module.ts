@@ -46,6 +46,11 @@ import { HealthcareBlogsComponent } from './components/pages/healthcare-blogs/he
 import { HealthcareStaffingComponent } from './components/pages/healthcare-staffing/healthcare-staffing.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { HsCaseStudyComponent } from './components/pages/hs-case-study/hs-case-study.component';
+import { IaBlogComponent } from './components/pages/ia-blog/ia-blog.component';
+import { IaFaqComponent } from './components/pages/ia-faq/ia-faq.component';
+import { IaResearchComponent } from './components/pages/ia-research/ia-research.component';
+import { IaServicesComponent } from './components/pages/ia-services/ia-services.component';
+import { IpServicesComponent } from './components/pages/ip-services/ip-services.component';
 import { ITBlogComponent } from './components/pages/it-blog/it-blog.component';
 import { ITCaseStudyComponent } from './components/pages/it-case-study/it-case-study.component';
 import { ITServiceComponent } from './components/pages/it-service/it-service.component';
@@ -73,6 +78,7 @@ const routes: Routes = [
   { path: 'applied-jobs', component: AppliedJobsComponent },
   { path: 'manage-jobs', component: ManageJobsComponent },
   { path: 'post-jobs', component: PostJobComponent },
+  { path: 'healthcare-services', component: IpServicesComponent },
   { path: 'client-partners', component: ClientPartnersComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'contact-us', component: ContactUsComponent },
@@ -112,6 +118,10 @@ const routes: Routes = [
   { path: 'case-study', component: SkillChecklistComponent },
   { path: 'skill-set', component: SkillSetComponent },
   { path: 'clients', component: BusinessComponent },
+  { path: 'ia-blog', component: IaBlogComponent },
+  { path: 'ia-services', component: IaServicesComponent },
+  { path: 'ia-faq', component: IaFaqComponent },
+  { path: 'ia-research', component: IaResearchComponent },
   { path: 'healthcare-staffing', component: HealthcareStaffingComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'profile', component: ProfileComponent },

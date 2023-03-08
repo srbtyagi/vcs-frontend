@@ -84,6 +84,11 @@ import { ButtonsModule } from './components/common/buttons/buttons.module';
 import { CtaComponent } from './components/common/cta/cta.component';
 import { PageHeaderComponent } from './components/common/page-header/page-header.component';
 import { ClientPartnersComponent } from './components/pages/client-partners/client-partners.component';
+import { IpServicesComponent } from './components/pages/ip-services/ip-services.component';
+import { IaServicesComponent } from './components/pages/ia-services/ia-services.component';
+import { IaResearchComponent } from './components/pages/ia-research/ia-research.component';
+import { IaFaqComponent } from './components/pages/ia-faq/ia-faq.component';
+import { IaBlogComponent } from './components/pages/ia-blog/ia-blog.component';
 
 @NgModule({
   declarations: [
@@ -155,6 +160,11 @@ import { ClientPartnersComponent } from './components/pages/client-partners/clie
     CtaComponent,
     PageHeaderComponent,
     ClientPartnersComponent,
+    IpServicesComponent,
+    IaServicesComponent,
+    IaResearchComponent,
+    IaFaqComponent,
+    IaBlogComponent,
   ],
   imports: [
     BrowserModule,
