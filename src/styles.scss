@@ -8,6 +8,15 @@
 @import "./app/styles/typography";
 @import "./app/styles/cards";
 
+html,
+body {
+  @apply font-google;
+}
+
+.font-google {
+  font-family: "Nunito Sans", sans-serif;
+}
+
 /* OLD CODE */
 
 /* You can add global styles to this file, and also import other style files */
@@ -18,15 +27,6 @@
 @import "./css/skin/skin-1.css";
 /* @import "css/style.min.css"; */
 @import "./css/templete.css";
-
-html,
-body {
-  @apply font-google;
-}
-
-.font-google {
-  font-family: "Nunito Sans", sans-serif;
-}
 
 .text-shadow-local {
   text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
@@ -519,4 +519,29 @@ body {
   padding: 8px;
   margin-top: 6px;
   background-color: #4c96d7;
+}
+.header-1 {
+  @apply bg-white shadow md:px-6;
+
+  .page-container {
+    .inner-container {
+      @apply h-16 md:h-24 flex justify-between;
+
+      .mobile-menu-icon {
+        @apply mr-2 px-4 flex items-center md:hidden;
+      }
+
+      .logo {
+        @apply flex flex-shrink-0 items-center cursor-pointer;
+
+        .mobile {
+          @apply block h-10 w-auto lg:hidden;
+        }
+
+        .desktop {
+          @apply hidden h-10 w-auto lg:block;
+        }
+      }
+    }
+  }
 }

@@ -21,15 +21,15 @@ export class NavbarComponent implements OnInit {
     },
     {
       label: 'Clients & Partners',
-      link: '/clients',
+      link: '/client-partners',
     },
     {
-      label: 'Industrial & Admin Services',
+      label: 'Healthcare Services',
       link: '',
       children: [
         {
-          label: 'Industrial & Administrative Services',
-          link: '/ip-services',
+          label: 'Our Healthcare Services',
+          link: '/healthcare-services',
         },
         {
           label: 'Research',
@@ -40,8 +40,30 @@ export class NavbarComponent implements OnInit {
           link: '/faq',
         },
         {
+          label: 'Skills Checklist',
+          link: '/skills-checklist',
+        },
+      ],
+    },
+    {
+      label: 'Industrial & Admin Services',
+      link: '',
+      children: [
+        {
+          label: 'Industrial & Administrative Services',
+          link: '/ia-services',
+        },
+        {
+          label: 'Research',
+          link: '/ia-research',
+        },
+        {
+          label: 'FAQ',
+          link: '/ia-faq',
+        },
+        {
           label: 'Blog',
-          link: '/blog',
+          link: '/ia-blog',
         },
       ],
     },
