@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://54.81.163.239:8000/sitemap.xml
+Sitemap: https://54.81.163.239:8000/sitemap.xml

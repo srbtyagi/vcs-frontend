@@ -39,6 +39,7 @@ import { SetupDashboardComponent } from './components/common/setup-dashboard/set
 import { AboutUsComponent } from './components/pages/about-us/about-us.component';
 import { ApplyJobComponent } from './components/pages/apply-job/apply-job.component';
 import { BusinessComponent } from './components/pages/business/business.component';
+import { CaseStudyComponent } from './components/pages/case-study/case-study.component';
 import { ClientPartnersComponent } from './components/pages/client-partners/client-partners.component';
 import { ContactUsComponent } from './components/pages/contact-us/contact-us.component';
 import { FaqComponent } from './components/pages/faq/faq.component';
@@ -115,7 +116,7 @@ const routes: Routes = [
   { path: 'payroll-invoice', component: PayrollInvoiceComponent },
   { path: 'apply-job-guest', component: ApplyJobGuestComponent },
   { path: 'incentives', component: IncentivesComponent },
-  { path: 'case-study', component: SkillChecklistComponent },
+  { path: 'case-study', component: CaseStudyComponent },
   { path: 'skill-set', component: SkillSetComponent },
   { path: 'clients', component: BusinessComponent },
   { path: 'ia-blog', component: IaBlogComponent },

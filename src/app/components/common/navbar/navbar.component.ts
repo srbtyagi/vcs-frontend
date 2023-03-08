@@ -46,11 +46,11 @@ export class NavbarComponent implements OnInit {
       ],
     },
     {
-      label: 'Industrial & Admin Services',
+      label: 'Industrial & Commercial Services',
       link: '',
       children: [
         {
-          label: 'Industrial & Administrative Services',
+          label: 'Industrial & Commercial Services',
           link: '/ia-services',
         },
         {

@@ -242,7 +242,7 @@ export class ProfileComponent implements OnInit {
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            'http://54.81.163.239:8000/vcsapi/get/resume/' +
+            'https://54.81.163.239:8000/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +
@@ -297,7 +297,7 @@ export class ProfileComponent implements OnInit {
               this.viewfinalErr = false;
               this.status = true;
               this.url =
-                'http://54.81.163.239:8000/vcsapi/get/resume/' +
+                'https://54.81.163.239:8000/vcsapi/get/resume/' +
                 sessionStorage.getItem('user_id') +
                 '/' +
                 sessionStorage.getItem('user_name') +

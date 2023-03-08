@@ -89,6 +89,7 @@ import { IaServicesComponent } from './components/pages/ia-services/ia-services.
 import { IaResearchComponent } from './components/pages/ia-research/ia-research.component';
 import { IaFaqComponent } from './components/pages/ia-faq/ia-faq.component';
 import { IaBlogComponent } from './components/pages/ia-blog/ia-blog.component';
+import { CaseStudyComponent } from './components/pages/case-study/case-study.component';
 
 @NgModule({
   declarations: [
@@ -165,6 +166,7 @@ import { IaBlogComponent } from './components/pages/ia-blog/ia-blog.component';
     IaResearchComponent,
     IaFaqComponent,
     IaBlogComponent,
+    CaseStudyComponent,
   ],
   imports: [
     BrowserModule,
