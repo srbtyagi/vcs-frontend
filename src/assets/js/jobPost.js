@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('http://54.81.163.239:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://44.213.224.159:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {
