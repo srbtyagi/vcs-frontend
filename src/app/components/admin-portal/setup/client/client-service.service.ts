@@ -21,7 +21,7 @@ export class ClientServiceService {
 
   getClientsDetails() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/all/clients", {
+      .get("http://54.81.163.239:8000/vcsapi/get/all/clients", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -30,7 +30,7 @@ export class ClientServiceService {
   addClient(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/client/client_name",
+        "http://54.81.163.239:8000/vcsapi/add/api/client/client_name",
         details,
         { headers: this.header }
       )
@@ -40,7 +40,7 @@ export class ClientServiceService {
   updateClient(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/client_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/client_name",
         details,
         { headers: this.header }
       )
@@ -50,7 +50,7 @@ export class ClientServiceService {
   changeStatusClient(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/edit/api/change_status/client",
+        "http://54.81.163.239:8000/vcsapi/edit/api/change_status/client",
         details,
         { headers: this.header }
       )

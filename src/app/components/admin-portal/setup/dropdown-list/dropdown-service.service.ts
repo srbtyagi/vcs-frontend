@@ -21,7 +21,7 @@ export class DropdownServiceService {
 
   getApiProfession() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/profession", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/profession", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -29,7 +29,7 @@ export class DropdownServiceService {
 
   getApiSpeciality() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/speciality", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/speciality", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -37,7 +37,7 @@ export class DropdownServiceService {
 
   getApiJobSector() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/job_sector", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/job_sector", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -45,7 +45,7 @@ export class DropdownServiceService {
 
   getApiPositionType() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/position_type", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/position_type", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -53,7 +53,7 @@ export class DropdownServiceService {
 
   getApiJobType() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/job_type", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/job_type", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -61,7 +61,7 @@ export class DropdownServiceService {
 
   getApiSystemName() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/system_name/all", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/system_name/all", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -69,7 +69,7 @@ export class DropdownServiceService {
 
   getApiDesignation() {
     return this.http
-      .get("https://54.81.163.239:8000/vcsapi/get/api/tbl/designation/all", {
+      .get("http://54.81.163.239:8000/vcsapi/get/api/tbl/designation/all", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -78,7 +78,7 @@ export class DropdownServiceService {
   getApiStandardDocument() {
     return this.http
       .get(
-        "https://54.81.163.239:8000/vcsapi/get/api/tbl/standard_document/all",
+        "http://54.81.163.239:8000/vcsapi/get/api/tbl/standard_document/all",
         { headers: this.header }
       )
       .pipe(retry(1), catchError(this.handleError));
@@ -89,7 +89,7 @@ export class DropdownServiceService {
   addApiProfession(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/tbl/profession",
+        "http://54.81.163.239:8000/vcsapi/add/api/tbl/profession",
         details,
         { headers: this.header }
       )
@@ -99,7 +99,7 @@ export class DropdownServiceService {
   addApiSpeciality(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/tbl/speciality",
+        "http://54.81.163.239:8000/vcsapi/add/api/tbl/speciality",
         details,
         { headers: this.header }
       )
@@ -109,7 +109,7 @@ export class DropdownServiceService {
   addApiJobSector(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/tbl/job_sector",
+        "http://54.81.163.239:8000/vcsapi/add/api/tbl/job_sector",
         details,
         { headers: this.header }
       )
@@ -119,7 +119,7 @@ export class DropdownServiceService {
   addApiPositionType(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/tbl/position_type",
+        "http://54.81.163.239:8000/vcsapi/add/api/tbl/position_type",
         details,
         { headers: this.header }
       )
@@ -128,7 +128,7 @@ export class DropdownServiceService {
 
   addApiJobType(details) {
     return this.http
-      .post("https://54.81.163.239:8000/vcsapi/add/api/tbl/job_type", details, {
+      .post("http://54.81.163.239:8000/vcsapi/add/api/tbl/job_type", details, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -137,7 +137,7 @@ export class DropdownServiceService {
   addApiSystemName(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/name/tbl/system_name",
+        "http://54.81.163.239:8000/vcsapi/add/api/name/tbl/system_name",
         details,
         { headers: this.header }
       )
@@ -147,7 +147,7 @@ export class DropdownServiceService {
   addApiDocumentName(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/name/tbl/standard_document",
+        "http://54.81.163.239:8000/vcsapi/add/api/name/tbl/standard_document",
         details,
         { headers: this.header }
       )
@@ -157,7 +157,7 @@ export class DropdownServiceService {
   addApiDesignationName(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/add/api/tbl/designation",
+        "http://54.81.163.239:8000/vcsapi/add/api/tbl/designation",
         details,
         { headers: this.header }
       )
@@ -169,7 +169,7 @@ export class DropdownServiceService {
   editApiProfession(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/profession_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/profession_name",
         details,
         { headers: this.header }
       )
@@ -179,7 +179,7 @@ export class DropdownServiceService {
   editApiSpeciality(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/speciality_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/speciality_name",
         details,
         { headers: this.header }
       )
@@ -189,7 +189,7 @@ export class DropdownServiceService {
   editApiJobSector(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/job_sector_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/job_sector_name",
         details,
         { headers: this.header }
       )
@@ -199,7 +199,7 @@ export class DropdownServiceService {
   editApiPositionType(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/position_type_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/position_type_name",
         details,
         { headers: this.header }
       )
@@ -209,7 +209,7 @@ export class DropdownServiceService {
   editApiJobType(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/job_type_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/job_type_name",
         details,
         { headers: this.header }
       )
@@ -219,7 +219,7 @@ export class DropdownServiceService {
   editApiSystemName(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/name/tbl/system_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/name/tbl/system_name",
         details,
         { headers: this.header }
       )
@@ -229,7 +229,7 @@ export class DropdownServiceService {
   editApiStandardDocument(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/name/tbl/standard_document",
+        "http://54.81.163.239:8000/vcsapi/update/api/name/tbl/standard_document",
         details,
         { headers: this.header }
       )
@@ -239,7 +239,7 @@ export class DropdownServiceService {
   editApiDesignation(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/designation_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/designation_name",
         details,
         { headers: this.header }
       )
@@ -251,7 +251,7 @@ export class DropdownServiceService {
   statusApiProfession(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/profession_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/profession_status",
         details,
         { headers: this.header }
       )
@@ -261,7 +261,7 @@ export class DropdownServiceService {
   statusApiSpeciality(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/speciality_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/speciality_status",
         details,
         { headers: this.header }
       )
@@ -271,7 +271,7 @@ export class DropdownServiceService {
   statusApiJobSector(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/job_sector_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/job_sector_status",
         details,
         { headers: this.header }
       )
@@ -281,7 +281,7 @@ export class DropdownServiceService {
   statusApiPositionType(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/position_type_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/position_type_status",
         details,
         { headers: this.header }
       )
@@ -291,7 +291,7 @@ export class DropdownServiceService {
   statusApiJobType(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/job_type_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/job_type_status",
         details,
         { headers: this.header }
       )
@@ -301,7 +301,7 @@ export class DropdownServiceService {
   statusApiSystemName(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/status/tbl/system_name",
+        "http://54.81.163.239:8000/vcsapi/update/api/status/tbl/system_name",
         details,
         { headers: this.header }
       )
@@ -311,7 +311,7 @@ export class DropdownServiceService {
   statusApiStandardDocument(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/status/tbl/standard_document",
+        "http://54.81.163.239:8000/vcsapi/update/api/status/tbl/standard_document",
         details,
         { headers: this.header }
       )
@@ -321,7 +321,7 @@ export class DropdownServiceService {
   statusApiDesignation(details) {
     return this.http
       .post(
-        "https://54.81.163.239:8000/vcsapi/update/api/designation_status",
+        "http://54.81.163.239:8000/vcsapi/update/api/designation_status",
         details,
         { headers: this.header }
       )
@@ -331,7 +331,7 @@ export class DropdownServiceService {
   checkUniqueDesignation(desg) {
     return this.http
       .get(
-        `https://54.81.163.239:8000/vcsapi/checkIfExists/designation/${desg}`,
+        `http://54.81.163.239:8000/vcsapi/checkIfExists/designation/${desg}`,
         { headers: this.header }
       )
       .pipe(retry(1), catchError(this.handleError));

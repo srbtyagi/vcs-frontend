@@ -5,7 +5,7 @@ const obj = {
 };
 
 fetch(
-  "https://54.81.163.239:8000/vcsapi/get/api/tbl/job/search_job/with/filter",
+  "http://54.81.163.239:8000/vcsapi/get/api/tbl/job/search_job/with/filter",
   {
     method: "POST",
     body: JSON.stringify(obj),
@@ -44,7 +44,7 @@ fetch(
         hiringOrganization: {
           "@type": "Organization",
           name: "Vish Consulting Services",
-          sameAs: "https://54.81.163.239:8000/",
+          sameAs: "http://54.81.163.239:8000/",
         },
         jobLocation: {
           "@type": "Place",
