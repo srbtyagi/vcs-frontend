@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://api.vishusa.com/sitemap.xml
+Sitemap: http://52.23.72.29:8000/sitemap.xml
