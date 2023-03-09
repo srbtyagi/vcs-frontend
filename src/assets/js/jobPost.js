@@ -4,7 +4,7 @@ const obj = {
   s3: ''
 };
 
-fetch('http://44.213.224.159:8000/vcsapi/get/api/tbl/job/search_job/with/filter', {
+fetch('http://api.vishusa.com/vcsapi/get/api/tbl/job/search_job/with/filter', {
   method: 'POST',
   body: JSON.stringify(obj),
   headers: {

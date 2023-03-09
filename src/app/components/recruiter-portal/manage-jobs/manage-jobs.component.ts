@@ -1864,7 +1864,7 @@ export class ManageJobsComponent implements OnInit {
   }
 
   generateReport() {
-    const reportUrl = `http://44.213.224.159:8000/vcsapi/api/generate/excel/manage/jobPost/${this.user_id}/${this.excelfileName}`;
+    const reportUrl = `http://api.vishusa.com/vcsapi/api/generate/excel/manage/jobPost/${this.user_id}/${this.excelfileName}`;
     window.location.href = reportUrl;
   }
 }

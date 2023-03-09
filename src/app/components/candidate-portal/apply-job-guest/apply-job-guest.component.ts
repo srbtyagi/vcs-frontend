@@ -196,7 +196,7 @@ export class ApplyJobGuestComponent implements OnInit {
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            'http://44.213.224.159:8000/vcsapi/get/resume/' +
+            'http://api.vishusa.com/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +
@@ -431,7 +431,7 @@ export class ApplyJobGuestComponent implements OnInit {
               this.user_existance = result.body.user_exist;
               this.status = true;
               this.url =
-                'http://44.213.224.159:8000/vcsapi/get/resume/' +
+                'http://api.vishusa.com/vcsapi/get/resume/' +
                 result.body.user_details.user_id +
                 '/' +
                 sessionStorage.getItem('user_name') +
