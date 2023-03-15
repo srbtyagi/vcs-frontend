@@ -1,6 +1,6 @@
 /*
 ======================================
-  * CSS TABLE CONTENT *  
+  * CSS TABLE CONTENT *
 ======================================
 
 1. GENERAL
@@ -14,7 +14,7 @@
 5. BOX SPACING (inner & outer)
 	>padding
 	>marging
-	
+
 6. BOX MAX-WIDTH CSS
 
 7. POSITIONS ( absolute & relative & statice & z-index )
@@ -33,17 +33,17 @@
 	 >image-side-pan
 	 >image-vertical-pan
 	 >image-fade-in
-	 >image-fade-out 
+	 >image-fade-out
 	 >image-rotate
 	 >image-sepia
 	 >image-blurr
 	 >image-blurr-invert
 	 >image off color
 	 >image on color
- 
+
 
 11. CONTENT SHOW ON IMAGE BOX
- 
+
 12. FORM ELEMENTS
 
 13. WP DEFAULT
@@ -60,31 +60,31 @@
 	>mena-menu
 	>mobile-menu
 	>footer-menu
-	
+
 19. BANNER
 
 20. SLIDER
 	>rs slider
 	>owl slider
-	
+
 21. BLOG
-	
+
 22. WIDGETS
 
 23. CUSTOMIZE CSS
 	>set-radius
 	>transition
 	>float-clearfix
-	
-24. SORTCODES 
+
+24. SORTCODES
 	>Buttons
-	>Title separators		
-	>Deviders	
-	>Lists & bullets	
+	>Title separators
+	>Deviders
+	>Lists & bullets
 	>Tabs
-	>Accordians		
-	>Carousels	
-	>Testimonials	
+	>Accordians
+	>Carousels
+	>Testimonials
 	>Pricing table
 	>Alert box
 	>Modal pop
@@ -108,7 +108,7 @@
 31. SHOPPING
 
 ======================================
-  * END TABLE CONTENT *  
+  * END TABLE CONTENT *
 ======================================
 */
 /*--------------------------------------------------------------
@@ -1776,7 +1776,7 @@ dl dd {
 	 >image-side-pan
 	 >image-vertical-pan
 	 >image-fade-in
-	 >image-fade-out 
+	 >image-fade-out
 	 >image-rotate
 	 >image-sepia
 	 >image-blurr
@@ -6353,24 +6353,24 @@ a,
   border-color: #3c763d !important;
 }
 /*---------------------------------------------------------------
-24. SORTCODES 
+24. SORTCODES
 	>Buttons
-	>Title separators		
-	>Deviders	
-	>Lists & bullets	
+	>Title separators
+	>Deviders
+	>Lists & bullets
 	>Tabs
-	>Accordians		
+	>Accordians
 	>Carousels
-	>Testimonials	
+	>Testimonials
 	>Pricing table
-	>Alert box	
+	>Alert box
 	>Modal pop
 	>Social icons
 	>Breadcrumb
 	>Tables
 	>Image effects
 	>Icon boxes
-	>Box New Style 
+	>Box New Style
 ---------------------------------------------------------------*/
 /*==== Shortcode Css ====*/
 .sort-title {
@@ -6481,7 +6481,7 @@ a,
   color: #ffffff;
 }
 .btn-secondary {
-  background-color: #ffffff;
+  background-color: #4c96d7 !important;
   border-color: #cccccc;
   color: #292b2c;
 }
@@ -10273,10 +10273,10 @@ ul[class*="list-"] {
 .overlay-black-middle:after,
 .overlay-black-dark:after {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#192665+0,09123f+49,222845+100 */
-  /* background: rgb(25,38,101); 
-	background: -moz-radial-gradient(center, ellipse cover, rgba(25,38,101,1) 0%, rgba(9,18,63,1) 49%, rgba(34,40,69,1) 100%); 
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(25,38,101,1) 0%,rgba(9,18,63,1) 49%,rgba(34,40,69,1) 100%); 
-	background: radial-gradient(ellipse at center, rgba(25,38,101,1) 0%,rgba(9,18,63,1) 49%,rgba(34,40,69,1) 100%); 
+  /* background: rgb(25,38,101);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(25,38,101,1) 0%, rgba(9,18,63,1) 49%, rgba(34,40,69,1) 100%);
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(25,38,101,1) 0%,rgba(9,18,63,1) 49%,rgba(34,40,69,1) 100%);
+	background: radial-gradient(ellipse at center, rgba(25,38,101,1) 0%,rgba(9,18,63,1) 49%,rgba(34,40,69,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#192665', endColorstr='#222845',GradientType=1 );  */
 }
 .overlay-gradient-light:after,
@@ -12338,9 +12338,9 @@ ol.commentlist li .star-rating {
 /* ------------------------------------------------
 31. SHOPPING
 ------------------------------------------------ */
-/* 
-	1.0 Checkout 
-	
+/*
+	1.0 Checkout
+
 */
 
 /*===== 1.0 Checkout =====*/
@@ -12841,7 +12841,7 @@ ol.commentlist li .star-rating {
   margin-right: 10px;
 }
 /* =============================
-	Spacing End Alignment	
+	Spacing End Alignment
 ============================= */
 .site-footer .widget_getintuch {
   padding-top: 0;
@@ -13360,7 +13360,7 @@ ol.commentlist li .star-rating {
   }
 }
 
-/* 	Hover Effects 
+/* 	Hover Effects
 	> Box Shadow Hover
 
 */

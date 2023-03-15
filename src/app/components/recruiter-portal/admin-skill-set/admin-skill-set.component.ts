@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder } from "@angular/forms";
-import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { AdminService } from "src/app/services/admin.service";
-import Swal from "sweetalert2";
-import * as moment from "moment";
-import jspdf from "jspdf";
-import html2canvas from "html2canvas";
-import * as $ from "jquery";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import { IDayCalendarConfig } from "ng2-date-picker";
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as $ from 'jquery';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { IDayCalendarConfig } from 'ng2-date-picker';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  selector: "app-admin-skill-set",
-  templateUrl: "./admin-skill-set.component.html",
-  styleUrls: ["./admin-skill-set.component.scss"],
+  selector: 'app-admin-skill-set',
+  templateUrl: './admin-skill-set.component.html',
+  styleUrls: ['./admin-skill-set.component.scss'],
 })
 export class AdminSkillSetComponent implements OnInit {
   /*paginate */
@@ -35,8 +35,8 @@ export class AdminSkillSetComponent implements OnInit {
   showDivPdf: boolean = false;
 
   datePickerConfig = <IDayCalendarConfig>{
-    drops: "down",
-    format: "MM/DD/YYYY",
+    drops: 'down',
+    format: 'MM/DD/YYYY',
   };
   user_type: any;
 
@@ -46,10 +46,10 @@ export class AdminSkillSetComponent implements OnInit {
     public router: Router,
     public fb: UntypedFormBuilder
   ) {
-    this.user_id = sessionStorage.getItem("user_id");
+    this.user_id = sessionStorage.getItem('user_id');
     this.excelfileName =
-      "skill_set_report(" + moment(new Date()).format("MM-DD-YYYY") + ")";
-    this.user_type = sessionStorage.getItem("user_type");
+      'skill_set_report(' + moment(new Date()).format('MM-DD-YYYY') + ')';
+    this.user_type = sessionStorage.getItem('user_type');
   }
 
   ngOnInit() {
@@ -74,9 +74,9 @@ export class AdminSkillSetComponent implements OnInit {
   ///////////////////
 
   getAssignaccess(val) {
-    if (sessionStorage.getItem("user_id")) {
+    if (sessionStorage.getItem('user_id')) {
       this.moduleArray = [];
-      const arr = JSON.parse(sessionStorage.getItem("moduleArray"));
+      const arr = JSON.parse(sessionStorage.getItem('moduleArray'));
       const ids = arr.map((o) => o.submodule_id);
       const arry = arr.filter(
         ({ submodule_id }, index) => !ids.includes(submodule_id, index + 1)
@@ -85,34 +85,34 @@ export class AdminSkillSetComponent implements OnInit {
         if (e.module_id === val) {
           this.moduleArray.push(e);
           switch (e.submodule_name) {
-            case "APPLICANT": {
-              e.submodule_name_lower = "Applicants";
-              e.routing = "/applicants";
+            case 'APPLICANT': {
+              e.submodule_name_lower = 'Applicants';
+              e.routing = '/applicants';
               break;
             }
-            case "JOB APPLICATION": {
-              e.submodule_name_lower = "Job Application";
-              e.routing = "/job-applications_admin";
+            case 'JOB APPLICATION': {
+              e.submodule_name_lower = 'Job Application';
+              e.routing = '/job-applications_admin';
               break;
             }
-            case "ONBOARDING & HIRING": {
-              e.submodule_name_lower = "On Boarding";
-              e.routing = "/onboarding-hiring";
+            case 'ONBOARDING & HIRING': {
+              e.submodule_name_lower = 'On Boarding';
+              e.routing = '/onboarding-hiring';
               break;
             }
-            case "HIRED": {
-              e.submodule_name_lower = "Hired";
-              e.routing = "/hired-applicant";
+            case 'HIRED': {
+              e.submodule_name_lower = 'Hired';
+              e.routing = '/hired-applicant';
               break;
             }
-            case "ASSIGN MANAGERS": {
-              e.submodule_name_lower = "Assign Manager";
-              e.routing = "/assign-Manager";
+            case 'ASSIGN MANAGERS': {
+              e.submodule_name_lower = 'Assign Manager';
+              e.routing = '/assign-Manager';
               break;
             }
-            case "SKILLSET": {
-              e.submodule_name_lower = "Skill Set";
-              e.routing = "/skill-set-admin";
+            case 'SKILLSET': {
+              e.submodule_name_lower = 'Skill Set';
+              e.routing = '/skill-set-admin';
               break;
             }
             default: {
@@ -125,7 +125,7 @@ export class AdminSkillSetComponent implements OnInit {
     }
     //console.log(this.moduleArray)
     setTimeout(() => {
-      document.getElementById("clsActive206").className = "active";
+      document.getElementById('clsActive206').className = 'active';
     }, 200);
   }
 
@@ -149,11 +149,11 @@ export class AdminSkillSetComponent implements OnInit {
           this.candiSkillSetList = res;
           this.filterArray = res;
         } else {
-          this.errorMsg("No search result found.");
+          this.errorMsg('No search result found.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -192,16 +192,16 @@ export class AdminSkillSetComponent implements OnInit {
         let result: any = res;
         if (result.length > 0) {
           this.category_name = result[0].skill_category_name;
-          this.area_name = result[0]["area"][0].skill_area_name;
+          this.area_name = result[0]['area'][0].skill_area_name;
           //console.log(this.area_name)
-          this.jobDomain = result[0]["area"][0]["domain"];
+          this.jobDomain = result[0]['area'][0]['domain'];
           //console.log(this.jobDomain)
         } else {
-          this.errorMsg("Skill checklist not added yet.");
+          this.errorMsg('Skill checklist not added yet.');
         }
       },
       (err) => {
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -210,22 +210,22 @@ export class AdminSkillSetComponent implements OnInit {
   deleteSkillset() {
     this.http.spinnerShow();
     let data = {
-      skillset_delete_date: moment(this.delete_date).format("MM/DD/YYYY"),
+      skillset_delete_date: moment(this.delete_date).format('MM/DD/YYYY'),
     };
     this.http.deleteMultipleSkillset(data).subscribe(
       (res: any) => {
         //console.log(res)
         this.http.spinnerHide();
-        if (res === "success") {
+        if (res === 'success') {
           this.getskillsetCandidate();
-          this.successMsg("Skillsets deleted successfully.");
-        } else if (res === "no skillset found") {
-          this.errorMsg("No skillset found.");
+          this.successMsg('Skillsets deleted successfully.');
+        } else if (res === 'no skillset found') {
+          this.errorMsg('No skillset found.');
         }
       },
       (err) => {
         this.http.spinnerHide();
-        this.errorMsg("Something went wrong. Please Try Again.");
+        this.errorMsg('Something went wrong. Please Try Again.');
       }
     );
   }
@@ -233,8 +233,8 @@ export class AdminSkillSetComponent implements OnInit {
   downloadPDF() {
     this.showDivPdf = true;
     setTimeout(() => {
-      var HTML_Width = $(".canvas_div_pdf").width();
-      var HTML_Height = $(".canvas_div_pdf").height();
+      var HTML_Width = $('.canvas_div_pdf').width();
+      var HTML_Height = $('.canvas_div_pdf').height();
       var top_left_margin = 10;
       var PDF_Width = HTML_Width + top_left_margin * 2;
       var PDF_Height = PDF_Width * 1.5 + top_left_margin * 2;
@@ -245,15 +245,15 @@ export class AdminSkillSetComponent implements OnInit {
 
       var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
 
-      html2canvas($(".canvas_div_pdf")[0], { allowTaint: true }).then(function (
+      html2canvas($('.canvas_div_pdf')[0], { allowTaint: true }).then(function (
         canvas
       ) {
-        canvas.getContext("2d");
+        canvas.getContext('2d');
 
         //console.log(canvas.height + "  " + canvas.width);
 
-        var imgData = canvas.toDataURL("image/jpeg", 1.0);
-        var pdf: any = new jspdf("p", "pt", [PDF_Width, PDF_Height]);
+        var imgData = canvas.toDataURL('image/jpeg', 1.0);
+        var pdf: any = new jspdf('p', 'pt', [PDF_Width, PDF_Height]);
         pdf.page = 1; // use this as a counter.
         var position = 0;
 
@@ -263,7 +263,7 @@ export class AdminSkillSetComponent implements OnInit {
         // };
         pdf.addImage(
           imgData,
-          "JPG",
+          'JPG',
           top_left_margin,
           top_left_margin,
           canvas_image_width,
@@ -276,7 +276,7 @@ export class AdminSkillSetComponent implements OnInit {
           //footer();
           pdf.addImage(
             imgData,
-            "JPG",
+            'JPG',
             top_left_margin,
             -(PDF_Height * i) + top_left_margin * 4,
             canvas_image_width,
@@ -290,10 +290,9 @@ export class AdminSkillSetComponent implements OnInit {
         //   heightLeft -= pageHeight;
         // }
 
-        pdf.save("Skill_Checklist.pdf");
+        pdf.save('Skill_Checklist.pdf');
       });
     }, 100);
-
     setTimeout(() => {
       this.showDivPdf = false;
     }, 100);
@@ -610,16 +609,16 @@ export class AdminSkillSetComponent implements OnInit {
   errorMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "error",
+      icon: 'error',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -630,16 +629,16 @@ export class AdminSkillSetComponent implements OnInit {
   successMsg(msg) {
     Swal.fire({
       title: msg,
-      icon: "success",
+      icon: 'success',
       showCancelButton: false,
-      confirmButtonColor: "#4C96D7",
-      confirmButtonText: "Ok",
+      confirmButtonColor: '#4C96D7',
+      confirmButtonText: 'Ok',
       allowOutsideClick: false,
       showClass: {
-        popup: "animate__animated animate__fadeInDown",
+        popup: 'animate__animated animate__fadeInDown',
       },
       hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
+        popup: 'animate__animated animate__fadeOutUp',
       },
     }).then((result) => {
       if (result.isConfirmed) {
