@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider; ng serve",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider; ng build",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "clean": "npx prettier --write .",
