@@ -57,7 +57,7 @@ export class CandidateProfileComponent implements OnInit {
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            'https://api.vishusa.com/vcsapi/get/resume/' +
+            'https://api.vishusa.com:8000/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +
