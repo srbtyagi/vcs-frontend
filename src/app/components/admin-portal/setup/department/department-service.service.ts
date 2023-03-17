@@ -21,7 +21,7 @@ export class DepartmentServiceService {
 
   getDepartmentDetails() {
     return this.http
-      .get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/department/byCID", {
+      .get("http://localhost:8000/vcsapi/get/api/department/byCID", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -29,7 +29,7 @@ export class DepartmentServiceService {
 
   addDepartment(details) {
     return this.http
-      .post("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/add/api/department", details, {
+      .post("http://localhost:8000/vcsapi/add/api/department", details, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -38,7 +38,7 @@ export class DepartmentServiceService {
   updateDepartment(details) {
     return this.http
       .post(
-        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/department_name",
+        "http://localhost:8000/vcsapi/update/api/department_name",
         details,
         { headers: this.header }
       )
@@ -48,7 +48,7 @@ export class DepartmentServiceService {
   changeStatusDept(details) {
     return this.http
       .post(
-        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change_status/department",
+        "http://localhost:8000/vcsapi/edit/api/change_status/department",
         details,
         { headers: this.header }
       )

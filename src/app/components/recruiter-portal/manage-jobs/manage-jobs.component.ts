@@ -1864,7 +1864,7 @@ export class ManageJobsComponent implements OnInit {
   }
 
   generateReport() {
-    const reportUrl = `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/generate/excel/manage/jobPost/${this.user_id}/${this.excelfileName}`;
+    const reportUrl = `http://localhost:8000/vcsapi/api/generate/excel/manage/jobPost/${this.user_id}/${this.excelfileName}`;
     window.location.href = reportUrl;
   }
 }

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/vcs": {
+      "name": "/vcs",
+      "lambdaFunction": "vcsfrontend54010eea",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

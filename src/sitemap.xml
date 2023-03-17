@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/</loc>
+      <loc>http://localhost:8000/</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/about-us</loc>
+      <loc>http://localhost:8000/about-us</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/clients</loc>
+      <loc>http://localhost:8000/clients</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/healthcare-staffing</loc>
+      <loc>http://localhost:8000/healthcare-staffing</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/HS_case_study</loc>
+      <loc>http://localhost:8000/HS_case_study</loc>
 
    </url>
 
     <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/faq</loc>
+      <loc>http://localhost:8000/faq</loc>
 
    </url>
 
     <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/healthcare-blogs</loc>
+      <loc>http://localhost:8000/healthcare-blogs</loc>
 
    </url>
 
      <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/skill-checklist</loc>
+      <loc>http://localhost:8000/skill-checklist</loc>
 
    </url>
 
     <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_services</loc>
+      <loc>http://localhost:8000/IT_services</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_case_study</loc>
+      <loc>http://localhost:8000/IT_case_study</loc>
 
    </url>
 
    <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_blogs</loc>
+      <loc>http://localhost:8000/IT_blogs</loc>
 
    </url>
 
     <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/jobs</loc>
+      <loc>http://localhost:8000/jobs</loc>
 
    </url>
 
     <url>
 
-      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/contact-us</loc>
+      <loc>http://localhost:8000/contact-us</loc>
 
    </url>
 

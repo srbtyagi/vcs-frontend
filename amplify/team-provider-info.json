@@ -10,6 +10,17 @@
       "StackName": "amplify-vcsfrontend-dev-203652",
       "StackId": "arn:aws:cloudformation:us-east-2:793579287885:stack/amplify-vcsfrontend-dev-203652/324ca190-c464-11ed-99c5-06fe686009bc",
       "AmplifyAppId": "d9523dvoo738x"
+    },
+    "categories": {
+      "function": {
+        "vcsfrontend54010eea": {
+          "deploymentBucketName": "amplify-vcsfrontend-dev-203652-deployment",
+          "s3Key": "amplify-builds/vcsfrontend54010eea-61576f2f546677633846-build.zip"
+        }
+      },
+      "api": {
+        "api1bca6cfd": {}
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import { NavigationStart, Router, NavigationEnd } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { AdminService } from './services/admin.service';
 import { filter } from 'rxjs/operators';
+import { Amplify, API } from 'aws-amplify';
 declare const gtag: Function;
 
 @Component({
@@ -52,5 +53,12 @@ export class AppComponent implements OnInit {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { charset: 'UTF-8' },
     ]);
+    API.get('vcsfrontend54010eea-dev', '/vcs', {})
+      .then((response) => {
+        console.log('Respo', response);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   }
 }

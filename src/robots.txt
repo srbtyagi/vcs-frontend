@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/sitemap.xml
+Sitemap: http://localhost:8000/sitemap.xml

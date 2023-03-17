@@ -14,7 +14,7 @@ export class JobsService {
 
   fetchJobs(datas: any) {
     return this._http.post(
-      'https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/search_job/with/filter',
+      'http://localhost:8000/vcsapi/get/api/tbl/job/search_job/with/filter',
       datas,
       { headers: this.header }
     );

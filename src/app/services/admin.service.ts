@@ -36,7 +36,7 @@ export class AdminService {
   postJob(datas) {
     //console.log(datas)
     return this.http
-      .post("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/job/post", datas, {
+      .post("http://localhost:8000/vcsapi/insert/job/post", datas, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -44,7 +44,7 @@ export class AdminService {
 
   getAllJobs(datas) {
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/jobPost/all",
+      "http://localhost:8000/vcsapi/get/api/jobPost/all",
       datas,
       { headers: this.header }
     );
@@ -54,7 +54,7 @@ export class AdminService {
   changeJobStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/job_status/byjobID",
+      "http://localhost:8000/vcsapi/edit/api/change/job_status/byjobID",
       datas,
       { headers: this.header }
     );
@@ -64,7 +64,7 @@ export class AdminService {
   updateJobDetails(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/edit/desc/n/req_info",
+      "http://localhost:8000/vcsapi/edit/api/edit/desc/n/req_info",
       datas,
       { headers: this.header }
     );
@@ -74,7 +74,7 @@ export class AdminService {
   getApplicants(datas) {
     //console.log(this.header)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/get/applications",
+      "http://localhost:8000/vcsapi/api/get/applications",
       datas,
       { headers: this.header }
     );
@@ -83,7 +83,7 @@ export class AdminService {
 
   getAllProfession() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/profession",
+      "http://localhost:8000/vcsapi/get/api/tbl/profession",
       { headers: this.header }
     );
     return data;
@@ -91,7 +91,7 @@ export class AdminService {
 
   getAllSpeciality() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/speciality",
+      "http://localhost:8000/vcsapi/get/api/tbl/speciality",
       { headers: this.header }
     );
     return data;
@@ -99,7 +99,7 @@ export class AdminService {
 
   getAlljobType() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job_type",
+      "http://localhost:8000/vcsapi/get/api/tbl/job_type",
       { headers: this.header }
     );
     return data;
@@ -107,7 +107,7 @@ export class AdminService {
 
   getAlljobSector() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job_sector",
+      "http://localhost:8000/vcsapi/get/api/tbl/job_sector",
       { headers: this.header }
     );
     return data;
@@ -115,7 +115,7 @@ export class AdminService {
 
   getAllPositionType() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/position_type",
+      "http://localhost:8000/vcsapi/get/api/tbl/position_type",
       { headers: this.header }
     );
     return data;
@@ -124,7 +124,7 @@ export class AdminService {
   updateApplicant(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/application",
+      "http://localhost:8000/vcsapi/edit/api/application",
       datas,
       { headers: this.header }
     );
@@ -134,7 +134,7 @@ export class AdminService {
   changeUserStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change_status/applicant/recruit_status",
+      "http://localhost:8000/vcsapi/edit/api/change_status/applicant/recruit_status",
       datas,
       { headers: this.header }
     );
@@ -144,7 +144,7 @@ export class AdminService {
   changeApplyStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change_status/applicant/apply_status",
+      "http://localhost:8000/vcsapi/edit/api/change_status/applicant/apply_status",
       datas,
       { headers: this.header }
     );
@@ -154,7 +154,7 @@ export class AdminService {
   changePassword(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change_password",
+      "http://localhost:8000/vcsapi/edit/api/change_password",
       datas,
       { headers: this.header }
     );
@@ -164,7 +164,7 @@ export class AdminService {
   changePasscode(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change_passcode",
+      "http://localhost:8000/vcsapi/edit/api/change_passcode",
       datas,
       { headers: this.header }
     );
@@ -173,7 +173,7 @@ export class AdminService {
 
   getDocumentType() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/get/standard/document/data",
+      "http://localhost:8000/vcsapi/api/get/standard/document/data",
       { headers: this.header }
     );
     return data;
@@ -182,7 +182,7 @@ export class AdminService {
   uploadDoc(datas, user, doc_id, doc_name, doc_expiry_date) {
     //console.log(datas, user, doc_id, doc_name)
     let data = this.http.post(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/upload/document/${doc_name}/${user}/${doc_id}/${doc_expiry_date}`,
+      `http://localhost:8000/vcsapi/upload/document/${doc_name}/${user}/${doc_id}/${doc_expiry_date}`,
       datas,
       {
         reportProgress: true,
@@ -196,7 +196,7 @@ export class AdminService {
   uploadDocWithData(datas, rec_doc_id, user, doc_id, doc_name) {
     //console.log(datas, rec_doc_id, user, doc_id, doc_name)
     let data = this.http.post(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/submit/document/details/${rec_doc_id}/${doc_name}/${user}/${doc_id}`,
+      `http://localhost:8000/vcsapi/submit/document/details/${rec_doc_id}/${doc_name}/${user}/${doc_id}`,
       datas,
       {
         headers: this.header,
@@ -208,7 +208,7 @@ export class AdminService {
   uploadConfDoc(datas, doc_name, user_id, recruitee_id) {
     //console.log(datas, doc_name, user_id, recruitee_id)
     let data = this.http.post(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/api/tbl/conf_document/${doc_name}/${user_id}/${recruitee_id}`,
+      `http://localhost:8000/vcsapi/insert/api/tbl/conf_document/${doc_name}/${user_id}/${recruitee_id}`,
       datas,
       {
         reportProgress: true,
@@ -221,7 +221,7 @@ export class AdminService {
 
   getConfDFiles(recruitee_id) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/conf_document/${recruitee_id}`,
+      `http://localhost:8000/vcsapi/get/api/tbl/conf_document/${recruitee_id}`,
       { headers: this.header }
     );
     return data;
@@ -229,7 +229,7 @@ export class AdminService {
 
   getapplicantsProfileData(datas) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/get/applicants/details/${datas}`,
+      `http://localhost:8000/vcsapi/api/get/applicants/details/${datas}`,
       { headers: this.header }
     );
     return data;
@@ -237,7 +237,7 @@ export class AdminService {
 
   getAllDocs(datas) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/uploaded/document/list/${datas}`,
+      `http://localhost:8000/vcsapi/get/uploaded/document/list/${datas}`,
       { headers: this.header }
     );
     return data;
@@ -245,7 +245,7 @@ export class AdminService {
 
   getAllDocsCurrent(datas) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/uploaded/document/list/current/${datas}`,
+      `http://localhost:8000/vcsapi/get/uploaded/document/list/current/${datas}`,
       { headers: this.header }
     );
     return data;
@@ -254,21 +254,21 @@ export class AdminService {
   downloadDoc(user, rec_doc_id) {
     //console.log(user, rec_doc_id)
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/download/${rec_doc_id}/${user}`
+      `http://localhost:8000/vcsapi/download/${rec_doc_id}/${user}`
     );
     return data;
   }
 
   verifyJobId(datas) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/checkIfexists/${datas}`,
+      `http://localhost:8000/vcsapi/get/api/checkIfexists/${datas}`,
       { headers: this.header }
     );
     return data;
   }
 
   getClients() {
-    let data = this.http.get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/clients", {
+    let data = this.http.get("http://localhost:8000/vcsapi/get/clients", {
       headers: this.header,
     });
     return data;
@@ -276,7 +276,7 @@ export class AdminService {
 
   getSystems() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/system_name",
+      "http://localhost:8000/vcsapi/get/api/tbl/system_name",
       { headers: this.header }
     );
     return data;
@@ -284,7 +284,7 @@ export class AdminService {
 
   getClientsExceptStatus() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/all/clients",
+      "http://localhost:8000/vcsapi/get/all/clients",
       { headers: this.header }
     );
     return data;
@@ -292,7 +292,7 @@ export class AdminService {
 
   getJobId() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/JobNo/applicationlist",
+      "http://localhost:8000/vcsapi/get/JobNo/applicationlist",
       { headers: this.header }
     );
     return data;
@@ -301,7 +301,7 @@ export class AdminService {
   getJobIdSearch(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/JobNo/suggestionList",
+      "http://localhost:8000/vcsapi/get/JobNo/suggestionList",
       datas,
       { headers: this.header }
     );
@@ -311,7 +311,7 @@ export class AdminService {
   getAllJobApplication(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/application/searchBar",
+      "http://localhost:8000/vcsapi/get/application/searchBar",
       datas,
       { headers: this.header }
     );
@@ -321,7 +321,7 @@ export class AdminService {
   getjobSummery(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/application/job_id",
+      "http://localhost:8000/vcsapi/get/api/application/job_id",
       datas,
       { headers: this.header }
     );
@@ -331,7 +331,7 @@ export class AdminService {
   changeReviewStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/application/review_status",
+      "http://localhost:8000/vcsapi/get/api/application/review_status",
       datas,
       { headers: this.header }
     );
@@ -341,7 +341,7 @@ export class AdminService {
   getShortlistedCandidate(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/application/job_id/and/application_stage",
+      "http://localhost:8000/vcsapi/get/api/application/job_id/and/application_stage",
       datas,
       { headers: this.header }
     );
@@ -351,7 +351,7 @@ export class AdminService {
   shortlistingCandidate(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/application_stage/byJobID/sort_listed",
+      "http://localhost:8000/vcsapi/update/api/application_stage/byJobID/sort_listed",
       datas,
       { headers: this.header }
     );
@@ -361,7 +361,7 @@ export class AdminService {
   offerreject(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/application_stage/byJobID/offeredORrejected",
+      "http://localhost:8000/vcsapi/update/api/application_stage/byJobID/offeredORrejected",
       datas,
       { headers: this.header }
     );
@@ -371,7 +371,7 @@ export class AdminService {
   InsertRemark(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/add/or/update/api/tbl/application/remarks/and/remarks_date",
+      "http://localhost:8000/vcsapi/add/or/update/api/tbl/application/remarks/and/remarks_date",
       datas,
       { headers: this.header }
     );
@@ -381,7 +381,7 @@ export class AdminService {
   getOfferedShortListCandi(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/application/by/job_id/sort_listed/or/rejected",
+      "http://localhost:8000/vcsapi/get/api/application/by/job_id/sort_listed/or/rejected",
       datas,
       { headers: this.header }
     );
@@ -391,7 +391,7 @@ export class AdminService {
   uploadResumeAppl(datas, user) {
     // //console.log(datas)
     let data = this.http.post(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/upload/resume/${user}`,
+      `http://localhost:8000/vcsapi/upload/resume/${user}`,
       datas,
       { headers: this.header }
     );
@@ -401,7 +401,7 @@ export class AdminService {
   register(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/registration/user",
+      "http://localhost:8000/vcsapi/api/registration/user",
       datas,
       { headers: this.header }
     );
@@ -411,7 +411,7 @@ export class AdminService {
   add_applicant(datas) {
     // //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/api/tbl/application",
+      "http://localhost:8000/vcsapi/insert/api/tbl/application",
       datas,
       { headers: this.header }
     );
@@ -420,7 +420,7 @@ export class AdminService {
 
   getClientOnBoard() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/all/clients",
+      "http://localhost:8000/vcsapi/get/api/tbl/job/all/clients",
       { headers: this.header }
     );
     return data;
@@ -428,7 +428,7 @@ export class AdminService {
 
   getClientHired() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/assignment/and/client/data",
+      "http://localhost:8000/vcsapi/get/api/assignment/and/client/data",
       { headers: this.header }
     );
     return data;
@@ -436,7 +436,7 @@ export class AdminService {
 
   getCountry() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/all/country",
+      "http://localhost:8000/vcsapi/get/api/tbl/job/all/country",
       { headers: this.header }
     );
     return data;
@@ -444,7 +444,7 @@ export class AdminService {
 
   getState() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/all/state",
+      "http://localhost:8000/vcsapi/get/api/tbl/job/all/state",
       { headers: this.header }
     );
     return data;
@@ -452,7 +452,7 @@ export class AdminService {
 
   getCity(datas) {
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/all/city",
+      "http://localhost:8000/vcsapi/get/api/tbl/job/all/city",
       datas,
       { headers: this.header }
     );
@@ -462,7 +462,7 @@ export class AdminService {
   searchonboardAppl(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/all/job/data/onboarding/hired/offer_accepted",
+      "http://localhost:8000/vcsapi/get/api/all/job/data/onboarding/hired/offer_accepted",
       datas,
       { headers: this.header }
     );
@@ -472,7 +472,7 @@ export class AdminService {
   searchHiredAppl(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/all/job/data/hired",
+      "http://localhost:8000/vcsapi/get/api/all/job/data/hired",
       datas,
       { headers: this.header }
     );
@@ -482,7 +482,7 @@ export class AdminService {
   InsertOnboarding(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/payrate_details/process/data",
+      "http://localhost:8000/vcsapi/update/payrate_details/process/data",
       datas,
       { headers: this.header }
     );
@@ -492,7 +492,7 @@ export class AdminService {
   updateOnboarding(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/onboarding_details/onboarding/process",
+      "http://localhost:8000/vcsapi/update/api/onboarding_details/onboarding/process",
       datas,
       { headers: this.header }
     );
@@ -502,7 +502,7 @@ export class AdminService {
   finishOnboarding(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/onboarding_status/completed/onboarding",
+      "http://localhost:8000/vcsapi/update/api/onboarding_status/completed/onboarding",
       datas,
       { headers: this.header }
     );
@@ -512,7 +512,7 @@ export class AdminService {
   cancelOnboarding(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/onboarding_status/cancelled/onboarding",
+      "http://localhost:8000/vcsapi/update/api/onboarding_status/cancelled/onboarding",
       datas,
       { headers: this.header }
     );
@@ -522,7 +522,7 @@ export class AdminService {
   hiring(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/onboarding/hired/accepted",
+      "http://localhost:8000/vcsapi/update/api/onboarding/hired/accepted",
       datas,
       { headers: this.header }
     );
@@ -532,7 +532,7 @@ export class AdminService {
   getAllApplnByUser(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/application/user_id",
+      "http://localhost:8000/vcsapi/get/api/application/user_id",
       datas,
       { headers: this.header }
     );
@@ -542,7 +542,7 @@ export class AdminService {
   getApplicantByClient(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/applicant/by/clientID",
+      "http://localhost:8000/vcsapi/get/applicant/by/clientID",
       datas,
       { headers: this.header }
     );
@@ -552,7 +552,7 @@ export class AdminService {
   getJobByClient(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/job/by/client_id",
+      "http://localhost:8000/vcsapi/get/api/tbl/job/job/by/client_id",
       datas,
       { headers: this.header }
     );
@@ -561,7 +561,7 @@ export class AdminService {
 
   getAllEmployee() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/Recruiter/all",
+      "http://localhost:8000/vcsapi/get/Recruiter/all",
       { headers: this.header }
     );
     return data;
@@ -569,7 +569,7 @@ export class AdminService {
 
   getAllApplicant() {
     let data = this.http.get(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/applicant/by/clientID/ALL/data",
+      "http://localhost:8000/vcsapi/get/applicant/by/clientID/ALL/data",
       { headers: this.header }
     );
     return data;
@@ -578,7 +578,7 @@ export class AdminService {
   assignRecruiter(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/recruiter_id/by/application_id",
+      "http://localhost:8000/vcsapi/update/api/recruiter_id/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -588,7 +588,7 @@ export class AdminService {
   assignOnboardMgr(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/onb_mgr_id/by/application_id",
+      "http://localhost:8000/vcsapi/update/api/onb_mgr_id/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -598,7 +598,7 @@ export class AdminService {
   assignTeamLead(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/teamLead_id/by/application_id",
+      "http://localhost:8000/vcsapi/update/api/teamLead_id/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -608,7 +608,7 @@ export class AdminService {
   assignManager(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/Manager_id/by/application_id",
+      "http://localhost:8000/vcsapi/update/api/Manager_id/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -618,7 +618,7 @@ export class AdminService {
   assignOthers(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/update/api/others/by/application_id",
+      "http://localhost:8000/vcsapi/insert/update/api/others/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -628,7 +628,7 @@ export class AdminService {
   getRolesByApplication(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/roles/by/application_id",
+      "http://localhost:8000/vcsapi/get/api/roles/by/application_id",
       datas,
       { headers: this.header }
     );
@@ -638,7 +638,7 @@ export class AdminService {
   getSearchMgrApplication(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/asign_manager/and/applicant/details",
+      "http://localhost:8000/vcsapi/get/asign_manager/and/applicant/details",
       datas,
       { headers: this.header }
     );
@@ -648,7 +648,7 @@ export class AdminService {
   changeAssignmentStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/assignment_status/tbl/assignment",
+      "http://localhost:8000/vcsapi/update/api/assignment_status/tbl/assignment",
       datas,
       { headers: this.header }
     );
@@ -658,7 +658,7 @@ export class AdminService {
   changeJobApplicantStatus(datas) {
     // //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/application_stage/byJobID/offer/accepted/OR/rejected",
+      "http://localhost:8000/vcsapi/update/api/application_stage/byJobID/offer/accepted/OR/rejected",
       datas,
       { headers: this.header }
     );
@@ -668,7 +668,7 @@ export class AdminService {
   checkEmailApplicant(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/check/user/by/email",
+      "http://localhost:8000/vcsapi/check/user/by/email",
       datas,
       { headers: this.header }
     );
@@ -678,7 +678,7 @@ export class AdminService {
   getRecruiteeStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/recruitee/status/by/user_id",
+      "http://localhost:8000/vcsapi/get/recruitee/status/by/user_id",
       datas,
       { headers: this.header }
     );
@@ -688,7 +688,7 @@ export class AdminService {
   getAlreadyAppliedStatus(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/user/already/applied/job",
+      "http://localhost:8000/vcsapi/get/user/already/applied/job",
       datas,
       { headers: this.header }
     );
@@ -698,7 +698,7 @@ export class AdminService {
   updateRecruitee(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/rec_detailsandudetails",
+      "http://localhost:8000/vcsapi/update/api/rec_detailsandudetails",
       datas,
       { headers: this.header }
     );
@@ -709,7 +709,7 @@ export class AdminService {
 
   getYearByClient() {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/account_file/year`,
+      `http://localhost:8000/vcsapi/get/api/tbl/account_file/year`,
       { headers: this.header }
     );
     return data;
@@ -717,7 +717,7 @@ export class AdminService {
 
   getYearFromClientID(clientId) {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/account_file_data/year/${clientId}`,
+      `http://localhost:8000/vcsapi/get/api/tbl/account_file_data/year/${clientId}`,
       { headers: this.header }
     );
     return data;
@@ -726,7 +726,7 @@ export class AdminService {
   getMonthFromClientIDandYr(clientId, year) {
     //console.log(clientId, year)
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/account_file_data/month/${clientId}/${year}`,
+      `http://localhost:8000/vcsapi/get/api/tbl/account_file_data/month/${clientId}/${year}`,
       { headers: this.header }
     );
     return data;
@@ -735,7 +735,7 @@ export class AdminService {
   getMonthByYear(year) {
     //console.log(year)
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/account_file/month/${year}`,
+      `http://localhost:8000/vcsapi/get/api/tbl/account_file/month/${year}`,
       { headers: this.header }
     );
     return data;
@@ -744,7 +744,7 @@ export class AdminService {
   getWeekByMonth(year, month) {
     //console.log(year, month)
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/account_file/weeks/${year}/${month}`,
+      `http://localhost:8000/vcsapi/get/api/tbl/account_file/weeks/${year}/${month}`,
       { headers: this.header }
     );
     return data;
@@ -753,7 +753,7 @@ export class AdminService {
   getPayrollDataOfSecondModal(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/all/inprocess/accountdatas",
+      "http://localhost:8000/vcsapi/get/api/all/inprocess/accountdatas",
       datas,
       { headers: this.header }
     );
@@ -763,7 +763,7 @@ export class AdminService {
   getPayrollDataByAssignID(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/payrollData/BYassignment",
+      "http://localhost:8000/vcsapi/get/payrollData/BYassignment",
       datas,
       { headers: this.header }
     );
@@ -773,7 +773,7 @@ export class AdminService {
   insertPayrollData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/add/or/update/api/tbl/payroll_invoice/calculate",
+      "http://localhost:8000/vcsapi/add/or/update/api/tbl/payroll_invoice/calculate",
       datas,
       { headers: this.header }
     );
@@ -783,7 +783,7 @@ export class AdminService {
   getPayrollAllData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/all/inprocess/account/details",
+      "http://localhost:8000/vcsapi/get/all/inprocess/account/details",
       datas,
       { headers: this.header }
     );
@@ -793,7 +793,7 @@ export class AdminService {
   getDataByFileID(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/payroll/Byaccountfile",
+      "http://localhost:8000/vcsapi/get/payroll/Byaccountfile",
       datas,
       { headers: this.header }
     );
@@ -803,7 +803,7 @@ export class AdminService {
   submitFile(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/account_status/tbl/account_file",
+      "http://localhost:8000/vcsapi/update/api/account_status/tbl/account_file",
       datas,
       { headers: this.header }
     );
@@ -813,7 +813,7 @@ export class AdminService {
   approvePayroll(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/status/payroll/account_file",
+      "http://localhost:8000/vcsapi/update/status/payroll/account_file",
       datas,
       { headers: this.header }
     );
@@ -823,7 +823,7 @@ export class AdminService {
   getPayrollInvoiceData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/payrollData/recruiteePayroll/filtered",
+      "http://localhost:8000/vcsapi/get/payrollData/recruiteePayroll/filtered",
       datas,
       { headers: this.header }
     );
@@ -833,7 +833,7 @@ export class AdminService {
   getInvoiceDataByFileID(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/approval_status/approved/accountfiledata",
+      "http://localhost:8000/vcsapi/get/api/approval_status/approved/accountfiledata",
       datas,
       { headers: this.header }
     );
@@ -843,7 +843,7 @@ export class AdminService {
   getRecruiteeCodebyName(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/all/recruitee/name/payroll",
+      "http://localhost:8000/vcsapi/get/all/recruitee/name/payroll",
       datas,
       { headers: this.header }
     );
@@ -853,7 +853,7 @@ export class AdminService {
   getRecruiteeNameByCode(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/all/recruitee/code/payroll",
+      "http://localhost:8000/vcsapi/get/all/recruitee/code/payroll",
       datas,
       { headers: this.header }
     );
@@ -863,7 +863,7 @@ export class AdminService {
   seachRecruiteePayroll(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/all/recruitee/payroll/search",
+      "http://localhost:8000/vcsapi/get/all/recruitee/payroll/search",
       datas,
       { headers: this.header }
     );
@@ -873,7 +873,7 @@ export class AdminService {
   getApprovedWeek(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/acc_file/approved/week",
+      "http://localhost:8000/vcsapi/get/acc_file/approved/week",
       datas,
       { headers: this.header }
     );
@@ -883,7 +883,7 @@ export class AdminService {
   generateIncentivesforPayroll(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/generate/incentive",
+      "http://localhost:8000/vcsapi/generate/incentive",
       datas,
       { headers: this.header }
     );
@@ -893,7 +893,7 @@ export class AdminService {
   getIncentiveData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/incentive/file/data",
+      "http://localhost:8000/vcsapi/get/incentive/file/data",
       datas,
       { headers: this.header }
     );
@@ -903,7 +903,7 @@ export class AdminService {
   downloadIncentiveExcel(inc_file_id, user_id) {
     //console.log(inc_file_id, user_id)
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/incentive/file/download/excel/${inc_file_id}/${user_id}`,
+      `http://localhost:8000/vcsapi/get/incentive/file/download/excel/${inc_file_id}/${user_id}`,
       { headers: this.header }
     );
     return data;
@@ -912,7 +912,7 @@ export class AdminService {
   getPayrollReconData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/invoice_recon/Byaccountfile",
+      "http://localhost:8000/vcsapi/get/invoice_recon/Byaccountfile",
       datas,
       { headers: this.header }
     );
@@ -922,7 +922,7 @@ export class AdminService {
   InsertUpdatePayrollReconData(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/payroll_recon/data",
+      "http://localhost:8000/vcsapi/insert/payroll_recon/data",
       datas,
       { headers: this.header }
     );
@@ -932,7 +932,7 @@ export class AdminService {
   getWorkHour(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/rec_work_hr/by/assignmentID/week_id/recruiteeID",
+      "http://localhost:8000/vcsapi/get/api/rec_work_hr/by/assignmentID/week_id/recruiteeID",
       datas,
       { headers: this.header }
     );
@@ -941,7 +941,7 @@ export class AdminService {
 
   getBacklog() {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/inc_data/backlog`,
+      `http://localhost:8000/vcsapi/get/inc_data/backlog`,
       { headers: this.header }
     );
     return data;
@@ -950,7 +950,7 @@ export class AdminService {
   deleteFileIncentive(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/delete/account_file/byID",
+      "http://localhost:8000/vcsapi/delete/account_file/byID",
       datas,
       { headers: this.header }
     );
@@ -960,7 +960,7 @@ export class AdminService {
   generateBacklog(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/generate/incentive/backlog",
+      "http://localhost:8000/vcsapi/generate/incentive/backlog",
       datas,
       { headers: this.header }
     );
@@ -969,7 +969,7 @@ export class AdminService {
 
   getcandiSkillSet() {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/get/candidates`,
+      `http://localhost:8000/vcsapi/api/get/candidates`,
       { headers: this.header }
     );
     return data;
@@ -978,7 +978,7 @@ export class AdminService {
   getSkillsetByCandi(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/skilldata/by/candidate_id",
+      "http://localhost:8000/vcsapi/skilldata/by/candidate_id",
       datas,
       { headers: this.header }
     );
@@ -988,7 +988,7 @@ export class AdminService {
   updateDocExpDate(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/update/expirY_dates/document",
+      "http://localhost:8000/vcsapi/api/update/expirY_dates/document",
       datas,
       { headers: this.header }
     );
@@ -998,7 +998,7 @@ export class AdminService {
   insertRequestDoc(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/insert/req/doc",
+      "http://localhost:8000/vcsapi/insert/req/doc",
       datas,
       { headers: this.header }
     );
@@ -1007,7 +1007,7 @@ export class AdminService {
 
   getCurrentReqDocs(datas) {
     return this.http
-      .get(`https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/required/doc/${datas}`, {
+      .get(`http://localhost:8000/vcsapi/get/required/doc/${datas}`, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -1016,7 +1016,7 @@ export class AdminService {
   getAllDocuments(datas) {
     return this.http
       .get(
-        `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/uploaded/document/list/${datas}`,
+        `http://localhost:8000/vcsapi/get/uploaded/document/list/${datas}`,
         { headers: this.header }
       )
       .pipe(retry(1), catchError(this.handleError));
@@ -1025,7 +1025,7 @@ export class AdminService {
   jobDeleteById(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/job_status/delete/byjobID",
+      "http://localhost:8000/vcsapi/edit/api/change/job_status/delete/byjobID",
       datas,
       { headers: this.header }
     );
@@ -1035,7 +1035,7 @@ export class AdminService {
   jobDeleteByDate(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/job_status/delete/byjobPostDate",
+      "http://localhost:8000/vcsapi/edit/api/change/job_status/delete/byjobPostDate",
       datas,
       { headers: this.header }
     );
@@ -1044,7 +1044,7 @@ export class AdminService {
 
   getPreferedLocation() {
     let data = this.http.get(
-      `https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/get/applications/desiredlocation`,
+      `http://localhost:8000/vcsapi/api/get/applications/desiredlocation`,
       { headers: this.header }
     );
     return data;
@@ -1053,7 +1053,7 @@ export class AdminService {
   deleteMultipleApplicant(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/user_status/delete/byApplicantID",
+      "http://localhost:8000/vcsapi/edit/api/change/user_status/delete/byApplicantID",
       datas,
       { headers: this.header }
     );
@@ -1063,7 +1063,7 @@ export class AdminService {
   deleteMultipleSkillset(datas) {
     //console.log(datas)
     let data = this.http.post(
-      "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/delete/skillset/byDate",
+      "http://localhost:8000/vcsapi/edit/api/delete/skillset/byDate",
       datas,
       { headers: this.header }
     );
@@ -1072,7 +1072,7 @@ export class AdminService {
 
   getUserRoleDetails() {
     return this.http
-      .get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/user_roles", {
+      .get("http://localhost:8000/vcsapi/get/api/user_roles", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
