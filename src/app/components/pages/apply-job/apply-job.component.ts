@@ -100,7 +100,7 @@ export class ApplyJobComponent implements OnInit {
         if (result[0].resume_doc_path) {
           this.status = true;
           this.url =
-            'https://api.vishusa.com/vcsapi/get/resume/' +
+            'https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +
@@ -193,7 +193,7 @@ export class ApplyJobComponent implements OnInit {
           // this.success("Resume Uploaded Successfully.");
           this.status = true;
           this.url =
-            'https://api.vishusa.com/vcsapi/get/resume/' +
+            'https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/resume/' +
             sessionStorage.getItem('user_id') +
             '/' +
             sessionStorage.getItem('user_name') +

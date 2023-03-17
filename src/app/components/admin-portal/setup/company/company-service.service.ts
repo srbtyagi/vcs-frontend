@@ -21,7 +21,7 @@ export class CompanyServiceService {
 
   getCompanyDetails() {
     return this.http
-      .get("https://api.vishusa.com/vcsapi/get/api/tbl/company/details", {
+      .get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/company/details", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -30,7 +30,7 @@ export class CompanyServiceService {
   updateCompanyDetails(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/update/api/tbl/company/details",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/update/api/tbl/company/details",
         details,
         { headers: this.header }
       )

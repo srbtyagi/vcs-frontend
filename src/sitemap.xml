@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
 
-      <loc>https://api.vishusa.com/</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/about-us</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/about-us</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/clients</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/clients</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/healthcare-staffing</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/healthcare-staffing</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/HS_case_study</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/HS_case_study</loc>
 
    </url>
 
     <url>
 
-      <loc>https://api.vishusa.com/faq</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/faq</loc>
 
    </url>
 
     <url>
 
-      <loc>https://api.vishusa.com/healthcare-blogs</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/healthcare-blogs</loc>
 
    </url>
 
      <url>
 
-      <loc>https://api.vishusa.com/skill-checklist</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/skill-checklist</loc>
 
    </url>
 
     <url>
 
-      <loc>https://api.vishusa.com/IT_services</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_services</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/IT_case_study</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_case_study</loc>
 
    </url>
 
    <url>
 
-      <loc>https://api.vishusa.com/IT_blogs</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/IT_blogs</loc>
 
    </url>
 
     <url>
 
-      <loc>https://api.vishusa.com/jobs</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/jobs</loc>
 
    </url>
 
     <url>
 
-      <loc>https://api.vishusa.com/contact-us</loc>
+      <loc>https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/contact-us</loc>
 
    </url>
 

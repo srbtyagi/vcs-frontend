@@ -20,7 +20,7 @@ export class UserRoleServiceService {
 
   getUserRoleDetails() {
     return this.http
-      .get("https://api.vishusa.com/vcsapi/get/api/user_roles", {
+      .get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/user_roles", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -29,7 +29,7 @@ export class UserRoleServiceService {
   addUserRole(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/add/api/tbl/role/user_role",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/add/api/tbl/role/user_role",
         details,
         { headers: this.header }
       )
@@ -39,7 +39,7 @@ export class UserRoleServiceService {
   updateUserRole(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/edit/api/change/role_name",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/role_name",
         details,
         { headers: this.header }
       )
@@ -49,7 +49,7 @@ export class UserRoleServiceService {
   changeStatusUserRole(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/edit/api/change/role_status",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/edit/api/change/role_status",
         details,
         { headers: this.header }
       )
@@ -58,7 +58,7 @@ export class UserRoleServiceService {
 
   moduleSubModuleShow() {
     return this.http
-      .get("https://api.vishusa.com/vcsapi/get/api/user/access", {
+      .get("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/user/access", {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));
@@ -67,7 +67,7 @@ export class UserRoleServiceService {
   getDefaultRoleData(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/get/api/module/accesses/by/role_id",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/module/accesses/by/role_id",
         details,
         { headers: this.header }
       )
@@ -77,7 +77,7 @@ export class UserRoleServiceService {
   postAccessRole(details) {
     return this.http
       .post(
-        "https://api.vishusa.com/vcsapi/api/post/insert/role_id",
+        "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/post/insert/role_id",
         details,
         { headers: this.header }
       )
@@ -86,7 +86,7 @@ export class UserRoleServiceService {
 
   duplicateRoleCheck(details) {
     return this.http
-      .post("https://api.vishusa.com/vcsapi/api/check_post_role", details, {
+      .post("https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/api/check_post_role", details, {
         headers: this.header,
       })
       .pipe(retry(1), catchError(this.handleError));

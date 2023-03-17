@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://api.vishusa.com/sitemap.xml
+Sitemap: https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/sitemap.xml

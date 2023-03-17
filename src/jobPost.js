@@ -5,7 +5,7 @@ const obj = {
 };
 
 fetch(
-  "https://api.vishusa.com/vcsapi/get/api/tbl/job/search_job/with/filter",
+  "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/vcsapi/get/api/tbl/job/search_job/with/filter",
   {
     method: "POST",
     body: JSON.stringify(obj),
@@ -44,7 +44,7 @@ fetch(
         hiringOrganization: {
           "@type": "Organization",
           name: "Vish Consulting Services",
-          sameAs: "https://api.vishusa.com/",
+          sameAs: "https://p3vw3hoyqd.execute-api.us-east-2.amazonaws.com/default/employeeApi-staging/",
         },
         jobLocation: {
           "@type": "Place",
