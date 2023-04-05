@@ -6,7 +6,7 @@
  *
  * 1. Run the server. For example, under Linux you can probably use:
  * /usr/bin/php -S "localhost:8000" "examples/example-captcha.php"
- * 2. Point your browser at https://api.vishusa.com
+ * 2. Point your browser at https://vishusa.com
  * 3. Follow the instructions
  *
  * @copyright Copyright (c) 2015, Google Inc.

@@ -14,7 +14,7 @@ export class JobsService {
 
   fetchJobs(datas: any) {
     return this._http.post(
-      'https://api.vishusa.com/vcsapi/get/api/tbl/job/search_job/with/filter',
+      'https://vishusa.com/vcsapi/get/api/tbl/job/search_job/with/filter',
       datas,
       { headers: this.header }
     );
